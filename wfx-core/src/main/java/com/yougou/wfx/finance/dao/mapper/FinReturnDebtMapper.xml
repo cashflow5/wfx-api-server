@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.finance.dao.FinReturnDebtMapper">
+    <resultMap id="FinReturnDebt" type="com.yougou.wfx.finance.model.FinReturnDebtEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+    	<result property="orderNo" column="order_no" jdbcType="VARCHAR"/>
+    	<result property="orderSubNo" column="order_sub_no" jdbcType="VARCHAR"/>
+    	<result property="backNo" column="back_no" jdbcType="VARCHAR"/>
+    	<result property="applyDate" column="apply_date" jdbcType="TIMESTAMP"/>
+    	<result property="applyStatus" column="apply_status" jdbcType="VARCHAR"/>
+    	<result property="applyAmount" column="apply_amount" jdbcType="DOUBLE"/>
+    	<result property="customerName" column="customer_name" jdbcType="VARCHAR"/>
+    	<result property="customerNo" column="customer_no" jdbcType="VARCHAR"/>
+    	<result property="storeName" column="store_name" jdbcType="VARCHAR"/>
+    	<result property="storeId" column="store_id" jdbcType="VARCHAR"/>
+    	<result property="bankTradeNo" column="bank_trade_no" jdbcType="VARCHAR"/>
+    	<result property="bankNo" column="bank_no" jdbcType="VARCHAR"/>
+    	<result property="bankName" column="bank_name" jdbcType="VARCHAR"/>
+    	<result property="refundType" column="refund_type" jdbcType="VARCHAR"/>
+    	<result property="refundStatus" column="refund_status" jdbcType="INTEGER"/>
+    	<result property="refundDate" column="refund_date" jdbcType="TIMESTAMP"/>
+    	<result property="refundAmount" column="refund_amount" jdbcType="DOUBLE"/>
+    	<result property="refundNote" column="refund_note" jdbcType="VARCHAR"/>
+    	<result property="refundDesc" column="refund_desc" jdbcType="VARCHAR"/>
+    	<result property="operator" column="operator" jdbcType="VARCHAR"/>
+    	<result property="note" column="note" jdbcType="VARCHAR"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,create_date,order_no,order_sub_no,back_no,apply_date,apply_status,apply_amount,customer_name,customer_no,store_name,store_id,bank_trade_no,bank_no,bank_name,refund_type,refund_status,refund_date,refund_amount,refund_note,refund_desc,operator,note,update_time
+    </sql>
+    
+    <sql id="where">
+		<if test="id != null and id != ''">
+       	and id = #{id,jdbcType=VARCHAR}
+        </if>
+		<if test="createDate != null">
+       	and create_date = #{createDate,jdbcType=TIMESTAMP}
+        </if>
+		<if test="orderNo != null and orderNo != '' ">
+       	and order_no like CONCAT(#{orderNo,jdbcType=VARCHAR}, '%') 
+        </if>
+        <if test="orderSubNo != null and orderSubNo != '' ">
+       	and order_sub_no = #{orderSubNo,jdbcType=VARCHAR}
+        </if>
+		<if test="backNo != null and backNo != ''">
+       	and back_no like CONCAT(#{backNo,jdbcType=VARCHAR}, '%')
+        </if>
+		<if test="applyStartTime != null and applyStartTime != '' ">
+       	and apply_date &gt;= STR_TO_DATE(#{applyStartTime, jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="applyEndTime != null and applyEndTime != '' ">
+       	and apply_date &lt;= STR_TO_DATE(#{applyEndTime, jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="applyStatus != null and applyStatus != '' ">
+       	and apply_status = #{applyStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="applyAmount != null">
+       	and apply_amount = #{applyAmount,jdbcType=DOUBLE}
+        </if>
+		<if test="customerName != null and customerName != ''">
+       	and customer_name like CONCAT(#{customerName,jdbcType=VARCHAR}, '%') 
+        </if>
+		<if test="customerNo != null and customerNo != ''">
+       	and customer_no = #{customerNo,jdbcType=VARCHAR}
+        </if>
+		<if test="storeName != null and storeName != ''">
+       	and store_name like CONCAT(#{storeName,jdbcType=VARCHAR}, '%')
+        </if>
+		<if test="storeId != null and storeId != ''">
+       	and store_id = #{storeId,jdbcType=VARCHAR}
+        </if>
+        <if test="tabQueryFlag != null">
+        	<choose>
+        		<when test="tabQueryFlag == 1">
+		       		and refund_type = 'ONLY_REFUND'
+        		</when>
+        		<when test="tabQueryFlag == 2">
+        			and refund_type in ('DELIVERD_REFUND', 'REJECTED_REFUND')
+        		</when>
+        		<otherwise>
+        			<if test="refundType != null and refundType != '' ">
+			       		and refund_type = #{refundType,jdbcType=VARCHAR}
+			        </if>
+        		</otherwise>
+        	</choose>
+        </if>
+        <if test="refundStatus != null">
+       	and refund_status = #{refundStatus,jdbcType=INTEGER}
+        </if>
+		<if test="refundStartTime != null and refundStartTime != '' ">
+       	and refund_date &gt;= STR_TO_DATE(#{refundStartTime, jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="refundEndTime != null and refundEndTime != '' ">
+       	and refund_date &lt;= STR_TO_DATE(#{refundEndTime, jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%s')
+        </if>
+		<if test="refundAmount != null">
+       	and refund_amount = #{refundAmount,jdbcType=DOUBLE}
+        </if>
+		<if test="refundNote != null and refundNote != ''">
+       	and refund_note = #{refundNote,jdbcType=VARCHAR}
+        </if>
+		<if test="operator != null and operator != ''">
+       	and operator = #{operator,jdbcType=VARCHAR}
+        </if>
+		<if test="note != null and note != ''">
+       	and note = #{note,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    
+    <sql id="set">
+		<if test="orderNo != null and orderNo != '' ">
+       	order_no = #{orderNo,jdbcType=VARCHAR},
+        </if>
+		<if test="applyDate != null ">
+       	apply_date = #{applyDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="applyStatus != null and applyStatus != '' ">
+       	apply_status = #{applyStatus,jdbcType=VARCHAR},
+        </if>
+        <if test="applyAmount != null">
+       	apply_amount = #{applyAmount,jdbcType=DOUBLE},
+        </if>
+		<if test="customerName != null and customerName != '' ">
+       	customer_name = #{customerName,jdbcType=VARCHAR},
+        </if>
+		<if test="customerNo != null and customerNo != '' ">
+       	customer_no = #{customerNo,jdbcType=VARCHAR},
+        </if>
+		<if test="storeName != null and storeName != '' ">
+       	store_name = #{storeName,jdbcType=VARCHAR},
+        </if>
+		<if test="storeId != null and storeId != '' ">
+       	store_id = #{storeId,jdbcType=VARCHAR},
+        </if>
+        <if test="bankTradeNo != null and bankTradeNo != ''">
+       	bank_trade_no = #{bankTradeNo,jdbcType=VARCHAR},
+        </if>
+        <if test="bankNo != null and bankNo != ''">
+       	bank_no = #{bankNo,jdbcType=VARCHAR},
+        </if>
+        <if test="bankName != null and bankName != ''">
+       	bank_name = #{bankName,jdbcType=VARCHAR},
+        </if>
+		<if test="refundType != null and refundType != '' ">
+       	refund_type = #{refundType,jdbcType=VARCHAR},
+        </if>
+        <if test="refundStatus != null">
+       	refund_status = #{refundStatus,jdbcType=INTEGER},
+        </if>
+		<if test="refundDate != null ">
+       	refund_date = #{refundDate,jdbcType=TIMESTAMP},
+        </if>
+		<if test="refundAmount != null ">
+       	refund_amount = #{refundAmount,jdbcType=DOUBLE},
+        </if>
+		<if test="refundNote != null and refundNote != '' ">
+       	refund_note = #{refundNote,jdbcType=VARCHAR},
+        </if>
+        <if test="refundDesc != null and refundDesc != '' ">
+       	refund_desc = #{refundDesc,jdbcType=VARCHAR},
+        </if>
+		<if test="operator != null and operator != '' ">
+       	operator = #{operator,jdbcType=VARCHAR},
+        </if>
+		<if test="note != null and note != '' ">
+       	note = #{note,jdbcType=VARCHAR},
+        </if>
+        <if test="updateTime != null ">
+       	update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+    
+    <select id="getById" resultMap="FinReturnDebt" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_fin_return_debt
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="getReturnDebtByBackNo" resultMap="FinReturnDebt" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_fin_return_debt
+        where back_no = #{backNo,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="getReturnDebtByQueryVo" resultMap="FinReturnDebt" parameterType="com.yougou.wfx.finance.model.FinReturnDebtEntity">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_fin_return_debt
+        where back_no = #{backNo,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.finance.model.FinReturnDebtEntity" resultMap="FinReturnDebt">
+        select * from tbl_wfx_fin_return_debt where 1=1 
+        <include refid="where" />
+        order by create_date desc 
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.finance.model.FinReturnDebtEntity" resultType="int">
+        select count(1) from tbl_wfx_fin_return_debt where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryDataList" parameterType="com.yougou.wfx.finance.model.FinReturnDebtEntity" resultMap="FinReturnDebt">
+        select * from tbl_wfx_fin_return_debt where 1=1 
+        <include refid="where" />
+        order by create_date desc 
+    </select>
+    
+    <select id="queryDataListCount" parameterType="com.yougou.wfx.finance.model.FinReturnDebtEntity" resultType="int">
+        select count(1) from tbl_wfx_fin_return_debt where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryRefundedAmountByOrderNo" parameterType="java.lang.String" resultType="java.lang.Double">
+    	select SUM(IFNULL(refund_amount, 0)) from tbl_wfx_fin_return_debt
+    	where order_no = #{orderNo,jdbcType=VARCHAR} and (refund_status = 3 or refund_status = 4)
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.finance.model.FinReturnDebtEntity">
+        insert into tbl_wfx_fin_return_debt (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{orderNo,jdbcType=VARCHAR}, #{orderSubNo,jdbcType=VARCHAR}
+        , #{backNo,jdbcType=VARCHAR}, #{applyDate,jdbcType=TIMESTAMP}, #{applyStatus,jdbcType=VARCHAR}
+        , #{applyAmount,jdbcType=DOUBLE}, #{customerName,jdbcType=VARCHAR}, #{customerNo,jdbcType=VARCHAR}
+        , #{storeName,jdbcType=VARCHAR}, #{storeId,jdbcType=VARCHAR}
+        , #{bankTradeNo,jdbcType=VARCHAR}, #{bankNo,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}
+        , #{refundType,jdbcType=VARCHAR}, #{refundStatus,jdbcType=INTEGER}
+        , #{refundDate,jdbcType=TIMESTAMP},  #{refundAmount,jdbcType=DOUBLE}
+        , #{refundNote,jdbcType=VARCHAR}, #{refundDesc,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR},#{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_fin_return_debt
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.finance.model.FinReturnDebtEntity" >
+        update tbl_wfx_fin_return_debt
+        <trim prefix="SET" suffixOverrides=",">
+      		<include refid="set" />
+        </trim>
+        where id = #{id,jdbcType=VARCHAR} and refund_status != 4
+    </update>
+    
+    <update id="updateDataByBackNo" parameterType="com.yougou.wfx.finance.model.FinReturnDebtEntity" >
+        update tbl_wfx_fin_return_debt
+        <trim prefix="SET" suffixOverrides=",">
+      		<include refid="set" />
+        </trim>
+        where back_no = #{backNo,jdbcType=VARCHAR} and refund_status != 4
+    </update>
+</mapper>

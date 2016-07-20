@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.commodity.dao.CommodityBrandMapper">
+    <resultMap id="CommodityBrand" type="com.yougou.wfx.commodity.model.CommodityBrandEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="brandName" column="brand_name" jdbcType="VARCHAR"/>
+    	<result property="speelingName" column="speeling_name" jdbcType="VARCHAR"/>
+    	<result property="englishName" column="english_name" jdbcType="VARCHAR"/>
+    	<result property="url" column="url" jdbcType="VARCHAR"/>
+    	<result property="brandDesc" column="brand_desc" jdbcType="VARCHAR"/>
+    	<result property="logoSmallUrl" column="logo_small_url" jdbcType="VARCHAR"/>
+    	<result property="logoNameUrl" column="logo_name_url" jdbcType="VARCHAR"/>
+    	<result property="keywords" column="keywords" jdbcType="VARCHAR"/>
+    	<result property="isRecommend" column="is_recommend" jdbcType="INTEGER"/>
+    	<result property="isShow" column="is_show" jdbcType="INTEGER"/>
+    	<result property="metaTitle" column="meta_title" jdbcType="VARCHAR"/>
+    	<result property="seriesId" column="series_id" jdbcType="VARCHAR"/>
+    	<result property="metaKeywords" column="meta_keywords" jdbcType="VARCHAR"/>
+    	<result property="metaDescription" column="meta_description" jdbcType="VARCHAR"/>
+    	<result property="updatePerson" column="update_person" jdbcType="VARCHAR"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    	<result property="deleteflag" column="deleteflag" jdbcType="SMALLINT"/>
+    	<result property="brandNo" column="brand_no" jdbcType="VARCHAR"/>
+    	<result property="isEnabled" column="is_enabled" jdbcType="BIT"/>
+    	<result property="defaultImg" column="default_img" jdbcType="VARCHAR"/>
+    	<result property="updateTimestamp" column="update_timestamp" jdbcType="BIGINT"/>
+    	<result property="channelId" column="channel_id" jdbcType="VARCHAR"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="shopTemplateFlag" column="shop_template_flag" jdbcType="SMALLINT"/>
+    	<result property="sortNo" column="sort_no" jdbcType="SMALLINT"/>
+    	<result property="logoLeastUrl" column="logo_least_url" jdbcType="VARCHAR"/>
+    	<result property="logoMiddleUrl" column="logo_middle_url" jdbcType="VARCHAR"/>
+    	<result property="advertImage" column="advert_image" jdbcType="VARCHAR"/>
+    	<result property="stationImage" column="station_image" jdbcType="VARCHAR"/>
+    	<result property="shipMiddleImage" column="ship_middle_image" jdbcType="VARCHAR"/>
+    	<result property="shipSmallImage" column="ship_small_image" jdbcType="VARCHAR"/>
+    	<result property="seoKeyword" column="seo_keyword" jdbcType="VARCHAR"/>
+    	<result property="seoTitle" column="seo_title" jdbcType="VARCHAR"/>
+    	<result property="seoDescription" column="seo_description" jdbcType="VARCHAR"/>
+    	<result property="mobilePic" column="mobile_pic" jdbcType="VARCHAR"/>
+    	<result property="typeFlag" column="type_flag" jdbcType="SMALLINT"/>
+    	<result property="manager" column="manager" jdbcType="VARCHAR"/>
+    	<result property="hotFlag" column="hot_flag" jdbcType="TINYINT"/>
+    	<result property="hotSn" column="hot_sn" jdbcType="TINYINT"/>
+    	<result property="status" column="status" jdbcType="TINYINT"/>
+    	<result property="useFlag" column="use_flag" jdbcType="TINYINT"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,brand_name,speeling_name,english_name,url,brand_desc,logo_small_url,logo_name_url,keywords,is_recommend,is_show,meta_title,series_id,meta_keywords,meta_description,update_person,update_time,deleteflag,brand_no,is_enabled,default_img,update_timestamp,channel_id,create_time,shop_template_flag,sort_no,logo_least_url,logo_middle_url,advert_image,station_image,ship_middle_image,ship_small_image,seo_keyword,seo_title,seo_description,mobile_pic,type_flag,manager,hot_flag,hot_sn,status,use_flag
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="brandName != null and brandName != ''">
+        	and brand_name like '%${brandName}%'
+	        </if>
+			<if test="speelingName != null and speelingName != ''">
+        	and speeling_name = #{speelingName,jdbcType=VARCHAR}
+	        </if>
+			<if test="englishName != null and englishName != ''">
+        	and english_name like '%${englishName}%'
+	        </if>
+			<if test="url != null and url != ''">
+        	and url = #{url,jdbcType=VARCHAR}
+	        </if>
+			<if test="brandDesc != null and brandDesc != ''">
+        	and brand_desc = #{brandDesc,jdbcType=VARCHAR}
+	        </if>
+			<if test="logoSmallUrl != null and logoSmallUrl != ''">
+        	and logo_small_url = #{logoSmallUrl,jdbcType=VARCHAR}
+	        </if>
+			<if test="logoNameUrl != null and logoNameUrl != ''">
+        	and logo_name_url = #{logoNameUrl,jdbcType=VARCHAR}
+	        </if>
+			<if test="keywords != null and keywords != ''">
+        	and keywords = #{keywords,jdbcType=VARCHAR}
+	        </if>
+			<if test="isRecommend != null and isRecommend !=0">
+        	and is_recommend = #{isRecommend,jdbcType=INTEGER}
+	        </if>
+			<if test="isShow != null and isShow !=0">
+        	and is_show = #{isShow,jdbcType=INTEGER}
+	        </if>
+			<if test="metaTitle != null and metaTitle != ''">
+        	and meta_title = #{metaTitle,jdbcType=VARCHAR}
+	        </if>
+			<if test="seriesId != null and seriesId != ''">
+        	and series_id = #{seriesId,jdbcType=VARCHAR}
+	        </if>
+			<if test="metaKeywords != null and metaKeywords != ''">
+        	and meta_keywords = #{metaKeywords,jdbcType=VARCHAR}
+	        </if>
+			<if test="metaDescription != null and metaDescription != ''">
+        	and meta_description = #{metaDescription,jdbcType=VARCHAR}
+	        </if>
+			<if test="updatePerson != null and updatePerson != ''">
+        	and update_person = #{updatePerson,jdbcType=VARCHAR}
+	        </if>
+			<if test="updateTime != null">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="deleteflag != null and deleteflag !=0">
+        	and deleteflag = #{deleteflag,jdbcType=SMALLINT}
+	        </if>
+			<if test="brandNo != null and brandNo != ''">
+        	and brand_no = #{brandNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="isEnabled != null">
+        	and is_enabled = #{isEnabled,jdbcType=BIT}
+	        </if>
+			<if test="defaultImg != null and defaultImg != ''">
+        	and default_img = #{defaultImg,jdbcType=VARCHAR}
+	        </if>
+			<if test="updateTimestamp != null">
+        	and update_timestamp = #{updateTimestamp,jdbcType=BIGINT}
+	        </if>
+			<if test="channelId != null and channelId != ''">
+        	and channel_id = #{channelId,jdbcType=VARCHAR}
+	        </if>
+			<if test="createTime != null">
+        	and create_time = #{createTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="shopTemplateFlag != null and shopTemplateFlag !=0">
+        	and shop_template_flag = #{shopTemplateFlag,jdbcType=SMALLINT}
+	        </if>
+			<if test="sortNo != null and sortNo !=0">
+        	and sort_no = #{sortNo,jdbcType=SMALLINT}
+	        </if>
+			<if test="logoLeastUrl != null and logoLeastUrl != ''">
+        	and logo_least_url = #{logoLeastUrl,jdbcType=VARCHAR}
+	        </if>
+			<if test="logoMiddleUrl != null and logoMiddleUrl != ''">
+        	and logo_middle_url = #{logoMiddleUrl,jdbcType=VARCHAR}
+	        </if>
+			<if test="advertImage != null and advertImage != ''">
+        	and advert_image = #{advertImage,jdbcType=VARCHAR}
+	        </if>
+			<if test="stationImage != null and stationImage != ''">
+        	and station_image = #{stationImage,jdbcType=VARCHAR}
+	        </if>
+			<if test="shipMiddleImage != null and shipMiddleImage != ''">
+        	and ship_middle_image = #{shipMiddleImage,jdbcType=VARCHAR}
+	        </if>
+			<if test="shipSmallImage != null and shipSmallImage != ''">
+        	and ship_small_image = #{shipSmallImage,jdbcType=VARCHAR}
+	        </if>
+			<if test="seoKeyword != null and seoKeyword != ''">
+        	and seo_keyword = #{seoKeyword,jdbcType=VARCHAR}
+	        </if>
+			<if test="seoTitle != null and seoTitle != ''">
+        	and seo_title = #{seoTitle,jdbcType=VARCHAR}
+	        </if>
+			<if test="seoDescription != null and seoDescription != ''">
+        	and seo_description = #{seoDescription,jdbcType=VARCHAR}
+	        </if>
+			<if test="mobilePic != null and mobilePic != ''">
+        	and mobile_pic = #{mobilePic,jdbcType=VARCHAR}
+	        </if>
+			<if test="typeFlag != null and typeFlag !=0">
+        	and type_flag = #{typeFlag,jdbcType=SMALLINT}
+	        </if>
+			<if test="manager != null and manager != ''">
+        	and manager = #{manager,jdbcType=VARCHAR}
+	        </if>
+			<if test="hotFlag != null and hotFlag !=0">
+        	and hot_flag = #{hotFlag,jdbcType=TINYINT}
+	        </if>
+			<if test="hotSn != null and hotSn !=0">
+        	and hot_sn = #{hotSn,jdbcType=TINYINT}
+	        </if>
+			<if test="status != null and status !=0">
+        	and status = #{status,jdbcType=TINYINT}
+	        </if>
+			<if test="useFlag != null and useFlag !=0">
+        	and use_flag = #{useFlag,jdbcType=TINYINT}
+	        </if>
+    </sql>
+    
+    <sql id="set">
+			<if test="id != null ">
+        	id = #{id,jdbcType=VARCHAR},
+	        </if>
+			<if test="brandName != null ">
+        	brand_name = #{brandName,jdbcType=VARCHAR},
+	        </if>
+			<if test="speelingName != null ">
+        	speeling_name = #{speelingName,jdbcType=VARCHAR},
+	        </if>
+			<if test="englishName != null ">
+        	english_name = #{englishName,jdbcType=VARCHAR},
+	        </if>
+			<if test="url != null ">
+        	url = #{url,jdbcType=VARCHAR},
+	        </if>
+			<if test="brandDesc != null ">
+        	brand_desc = #{brandDesc,jdbcType=VARCHAR},
+	        </if>
+			<if test="logoSmallUrl != null ">
+        	logo_small_url = #{logoSmallUrl,jdbcType=VARCHAR},
+	        </if>
+			<if test="logoNameUrl != null ">
+        	logo_name_url = #{logoNameUrl,jdbcType=VARCHAR},
+	        </if>
+			<if test="keywords != null ">
+        	keywords = #{keywords,jdbcType=VARCHAR},
+	        </if>
+			<if test="isRecommend != null">
+        	is_recommend = #{isRecommend,jdbcType=INTEGER},
+	        </if>
+			<if test="isShow != null ">
+        	is_show = #{isShow,jdbcType=INTEGER},
+	        </if>
+			<if test="metaTitle != null ">
+        	meta_title = #{metaTitle,jdbcType=VARCHAR},
+	        </if>
+			<if test="seriesId != null ">
+        	series_id = #{seriesId,jdbcType=VARCHAR},
+	        </if>
+			<if test="metaKeywords != null ">
+        	meta_keywords = #{metaKeywords,jdbcType=VARCHAR},
+	        </if>
+			<if test="metaDescription != null ">
+        	meta_description = #{metaDescription,jdbcType=VARCHAR},
+	        </if>
+			<if test="updatePerson != null ">
+        	update_person = #{updatePerson,jdbcType=VARCHAR},
+	        </if>
+			<if test="updateTime != null ">
+        	update_time = #{updateTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="deleteflag != null and deleteflag != 0">
+        	deleteflag = #{deleteflag,jdbcType=SMALLINT},
+	        </if>
+			<if test="brandNo != null ">
+        	brand_no = #{brandNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="isEnabled != null ">
+        	is_enabled = #{isEnabled,jdbcType=BIT},
+	        </if>
+			<if test="defaultImg != null ">
+        	default_img = #{defaultImg,jdbcType=VARCHAR},
+	        </if>
+			<if test="updateTimestamp != null ">
+        	update_timestamp = #{updateTimestamp,jdbcType=BIGINT},
+	        </if>
+			<if test="channelId != null ">
+        	channel_id = #{channelId,jdbcType=VARCHAR},
+	        </if>
+			<if test="createTime != null ">
+        	create_time = #{createTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="shopTemplateFlag != null ">
+        	shop_template_flag = #{shopTemplateFlag,jdbcType=SMALLINT},
+	        </if>
+			<if test="sortNo != null and sortNo != 0">
+        	sort_no = #{sortNo,jdbcType=SMALLINT},
+	        </if>
+			<if test="logoLeastUrl != null ">
+        	logo_least_url = #{logoLeastUrl,jdbcType=VARCHAR},
+	        </if>
+			<if test="logoMiddleUrl != null ">
+        	logo_middle_url = #{logoMiddleUrl,jdbcType=VARCHAR},
+	        </if>
+			<if test="advertImage != null ">
+        	advert_image = #{advertImage,jdbcType=VARCHAR},
+	        </if>
+			<if test="stationImage != null ">
+        	station_image = #{stationImage,jdbcType=VARCHAR},
+	        </if>
+			<if test="shipMiddleImage != null ">
+        	ship_middle_image = #{shipMiddleImage,jdbcType=VARCHAR},
+	        </if>
+			<if test="shipSmallImage != null ">
+        	ship_small_image = #{shipSmallImage,jdbcType=VARCHAR},
+	        </if>
+			<if test="seoKeyword != null ">
+        	seo_keyword = #{seoKeyword,jdbcType=VARCHAR},
+	        </if>
+			<if test="seoTitle != null ">
+        	seo_title = #{seoTitle,jdbcType=VARCHAR},
+	        </if>
+			<if test="seoDescription != null ">
+        	seo_description = #{seoDescription,jdbcType=VARCHAR},
+	        </if>
+			<if test="mobilePic != null ">
+        	mobile_pic = #{mobilePic,jdbcType=VARCHAR},
+	        </if>
+			<if test="typeFlag != null ">
+        	type_flag = #{typeFlag,jdbcType=SMALLINT},
+	        </if>
+			<if test="manager != null ">
+        	manager = #{manager,jdbcType=VARCHAR},
+	        </if>
+			<if test="hotFlag != null and hotFlag != 0">
+        	hot_flag = #{hotFlag,jdbcType=TINYINT},
+	        </if>
+			<if test="hotSn != null and hotSn != 0">
+        	hot_sn = #{hotSn,jdbcType=TINYINT},
+	        </if>
+			<if test="status != null and status != 0">
+        	status = #{status,jdbcType=TINYINT}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="CommodityBrand" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_commodity_brand
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.commodity.model.CommodityBrandEntity" resultMap="CommodityBrand">
+        select <include refid="Base_Column_List"/> from tbl_commodity_brand where 1=1 
+        <include refid="where" />
+        order by hot_sn asc
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.commodity.model.CommodityBrandEntity" resultType="int">
+        select count(1) from tbl_commodity_brand where 1=1 
+        <include refid="where" />
+    </select>
+    
+     <select id="findByPage"  resultMap="CommodityBrand">
+        select <include refid="Base_Column_List"/> from tbl_commodity_brand where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.commodity.model.CommodityBrandEntity">
+        insert into tbl_commodity_brand (<include refid="Base_Column_List" />)
+        values (
+        id = #{id,jdbcType=VARCHAR},brand_name = #{brandName,jdbcType=VARCHAR},speeling_name = #{speelingName,jdbcType=VARCHAR},english_name = #{englishName,jdbcType=VARCHAR},url = #{url,jdbcType=VARCHAR},brand_desc = #{brandDesc,jdbcType=VARCHAR},logo_small_url = #{logoSmallUrl,jdbcType=VARCHAR},logo_name_url = #{logoNameUrl,jdbcType=VARCHAR},keywords = #{keywords,jdbcType=VARCHAR},is_recommend = #{isRecommend,jdbcType=INTEGER},is_show = #{isShow,jdbcType=INTEGER},meta_title = #{metaTitle,jdbcType=VARCHAR},series_id = #{seriesId,jdbcType=VARCHAR},meta_keywords = #{metaKeywords,jdbcType=VARCHAR},meta_description = #{metaDescription,jdbcType=VARCHAR},update_person = #{updatePerson,jdbcType=VARCHAR},update_time = #{updateTime,jdbcType=TIMESTAMP},deleteflag = #{deleteflag,jdbcType=SMALLINT},brand_no = #{brandNo,jdbcType=VARCHAR},is_enabled = #{isEnabled,jdbcType=BIT},default_img = #{defaultImg,jdbcType=VARCHAR},update_timestamp = #{updateTimestamp,jdbcType=BIGINT},channel_id = #{channelId,jdbcType=VARCHAR},create_time = #{createTime,jdbcType=TIMESTAMP},shop_template_flag = #{shopTemplateFlag,jdbcType=SMALLINT},sort_no = #{sortNo,jdbcType=SMALLINT},logo_least_url = #{logoLeastUrl,jdbcType=VARCHAR},logo_middle_url = #{logoMiddleUrl,jdbcType=VARCHAR},advert_image = #{advertImage,jdbcType=VARCHAR},station_image = #{stationImage,jdbcType=VARCHAR},ship_middle_image = #{shipMiddleImage,jdbcType=VARCHAR},ship_small_image = #{shipSmallImage,jdbcType=VARCHAR},seo_keyword = #{seoKeyword,jdbcType=VARCHAR},seo_title = #{seoTitle,jdbcType=VARCHAR},seo_description = #{seoDescription,jdbcType=VARCHAR},mobile_pic = #{mobilePic,jdbcType=VARCHAR},type_flag = #{typeFlag,jdbcType=SMALLINT},manager = #{manager,jdbcType=VARCHAR},hot_flag = #{hotFlag,jdbcType=TINYINT},hot_sn = #{hotSn,jdbcType=TINYINT},status = #{status,jdbcType=TINYINT},use_flag = #{useFlag,jdbcType=TINYINT}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_commodity_brand
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.commodity.model.CommodityBrandEntity" >
+        update tbl_commodity_brand
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <select id="getBrandMaxHotSn"  resultType="int">
+        select ifnull(max(hot_sn),0) from tbl_commodity_brand where 
+		hot_flag = 1 and status = 1 and use_flag = 1
+    </select>
+    
+    <select id="queryCommodityBrandByCatId" parameterType="java.lang.String" resultMap="CommodityBrand">
+        SELECT DISTINCT b.*
+		FROM
+			tbl_wfx_commodity_sale_cat cat,
+			tbl_wfx_commodity_sale_cat_rela r,
+			tbl_commodity_brand_catb2c bc,
+			tbl_commodity_brand b
+		WHERE
+			cat.id = r.sale_cat_id
+		AND r.base_cat_id = bc.catb2c_id
+		AND b.id = bc.brand_id
+		AND b.`status` = 1
+		AND cat.delete_flag = 2
+		AND b.use_flag = 1
+		AND cat.parent_id = #{catId,jdbcType=VARCHAR};
+    </select>
+    
+    <update id="batchUpdateBrandUseFlag">
+        update tbl_commodity_brand b, tbl_commodity_style s
+		set b.use_flag = 1
+		where b.brand_no = s.brand_no and s.merchant_code = 'SPYG';
+    </update>
+    <update id="initUpdateBrandUseFlag">
+        update tbl_commodity_brand
+        set use_flag = 2;
+    </update>
+    
+</mapper>

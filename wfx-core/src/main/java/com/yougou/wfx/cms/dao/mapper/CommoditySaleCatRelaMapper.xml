@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.cms.dao.CommoditySaleCatRelaMapper">
+    <resultMap id="CommoditySaleCatRela" type="com.yougou.wfx.cms.model.CommoditySaleCatRelaEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="saleCatId" column="sale_cat_id" jdbcType="VARCHAR"/>
+    	<result property="saleCatNo" column="sale_cat_no" jdbcType="VARCHAR"/>
+    	<result property="baseCatId" column="base_cat_id" jdbcType="VARCHAR"/>
+    	<result property="baseCatNo" column="base_cat_no" jdbcType="VARCHAR"/>
+    	<result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,sale_cat_id,sale_cat_no,base_cat_id,base_cat_no,update_user,update_time
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="saleCatId != null and saleCatId != ''">
+        	and sale_cat_id = #{saleCatId,jdbcType=VARCHAR}
+	        </if>
+			<if test="saleCatNo != null and saleCatNo != ''">
+        	and sale_cat_no = #{saleCatNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="baseCatId != null and baseCatId != ''">
+        	and base_cat_id = #{baseCatId,jdbcType=VARCHAR}
+	        </if>
+			<if test="baseCatNo != null and baseCatNo != ''">
+        	and base_cat_no = #{baseCatNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="updateUser != null and updateUser != ''">
+        	and update_user = #{updateUser,jdbcType=VARCHAR}
+	        </if>
+			<if test="updateTime != null">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+	        </if>
+    </sql>
+    
+    <sql id="set">
+			<if test="id != null">
+        	id = #{id,jdbcType=VARCHAR},
+	        </if>
+			<if test="saleCatId != null">
+        	sale_cat_id = #{saleCatId,jdbcType=VARCHAR},
+	        </if>
+			<if test="saleCatNo != null">
+        	sale_cat_no = #{saleCatNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="baseCatId != null">
+        	base_cat_id = #{baseCatId,jdbcType=VARCHAR},
+	        </if>
+			<if test="baseCatNo != null">
+        	base_cat_no = #{baseCatNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="updateUser != null">
+        	update_user = #{updateUser,jdbcType=VARCHAR},
+	        </if>
+			<if test="updateTime != null">
+        	update_time = #{updateTime,jdbcType=TIMESTAMP}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="CommoditySaleCatRela" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_commodity_sale_cat_rela
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.cms.model.CommoditySaleCatRelaEntity" resultMap="CommoditySaleCatRela">
+        select <include refid="Base_Column_List"/> from tbl_wfx_commodity_sale_cat_rela where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.cms.model.CommoditySaleCatRelaEntity" resultType="int">
+        select count(1) from tbl_wfx_commodity_sale_cat_rela where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryList" parameterType="com.yougou.wfx.cms.model.CommoditySaleCatRelaEntity" resultMap="CommoditySaleCatRela">
+        select <include refid="Base_Column_List"/> from tbl_wfx_commodity_sale_cat_rela where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.cms.model.CommoditySaleCatRelaEntity">
+        insert into tbl_wfx_commodity_sale_cat_rela (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},#{saleCatId,jdbcType=VARCHAR},#{saleCatNo,jdbcType=VARCHAR},#{baseCatId,jdbcType=VARCHAR},#{baseCatNo,jdbcType=VARCHAR},#{updateUser,jdbcType=VARCHAR},#{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_commodity_sale_cat_rela
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.cms.model.CommoditySaleCatRelaEntity" >
+        update tbl_wfx_commodity_sale_cat_rela
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

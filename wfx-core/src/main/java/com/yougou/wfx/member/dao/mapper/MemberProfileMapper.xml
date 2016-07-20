@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.member.dao.MemberProfileMapper">
+    <resultMap id="MemberProfile" type="com.yougou.wfx.member.model.MemberProfileEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<!-- <result property="avatarAddress" column="avatar_address" jdbcType="VARCHAR"/> -->
+    	<result property="memberSex" column="member_sex" jdbcType="SMALLINT"/>
+    	<result property="idCardNum" column="id_card_num" jdbcType="VARCHAR"/>
+    	<result property="headShowImg" column="head_show_img" jdbcType="VARCHAR"/>
+    	<result property="birthday" column="birthday" jdbcType="DATE"/>
+    	<result property="province" column="province" jdbcType="VARCHAR"/>
+    	<result property="city" column="city" jdbcType="VARCHAR"/>
+    	<result property="district" column="district" jdbcType="VARCHAR"/>
+    	<result property="loginaccountId" column="loginaccount_id" jdbcType="VARCHAR"/>
+    	<result property="applySeller" column="apply_seller" jdbcType="VARCHAR"/>
+    	<result property="applySellerTime" column="apply_seller_time" jdbcType="TIMESTAMP"/>
+    	<result property="orderCount" column="order_count" jdbcType="INTEGER"/>
+    	<result property="orderAmount" column="order_amount" jdbcType="DECIMAL"/>
+    </resultMap>
+    
+    <resultMap id="memberOutputDto" type="com.yougou.wfx.member.dto.input.MemberProfilePageInputDto">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="orderCount" column="order_count" jdbcType="INTEGER"/>
+    	<result property="orderAmount" column="order_amount" jdbcType="DECIMAL"/>
+    	<result property="loginName" column="order_amount" jdbcType="DECIMAL"/>
+    	<result property="memberName" column="order_amount" jdbcType="DECIMAL"/>
+    	<result property="lastLoginTime" column="order_amount" jdbcType="DECIMAL"/>
+    	<result property="registerDate" column="order_amount" jdbcType="DECIMAL"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,<!-- avatarAddress, -->member_sex,head_show_img,id_card_num,birthday,province,city,district,loginaccount_id,apply_seller,apply_seller_time,order_count,order_amount
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<!-- <if test="avatarAddress != null and avatarAddress != ''">
+        	and avatar_address = #{avatarAddress,jdbcType=VARCHAR}
+	        </if> -->
+			<if test="memberSex != null and memberSex !=0">
+        	and member_sex = #{memberSex,jdbcType=SMALLINT}
+	        </if>
+			<if test="idCardNum != null and idCardNum != ''">
+        	and id_card_num = #{idCardNum,jdbcType=VARCHAR}
+	        </if>
+			<if test="birthday != null">
+        	and birthday = #{birthday,jdbcType=DATE}
+	        </if>
+			<if test="province != null and province != ''">
+        	and province = #{province,jdbcType=VARCHAR}
+	        </if>
+			<if test="city != null and city != ''">
+        	and city = #{city,jdbcType=VARCHAR}
+	        </if>
+			<if test="district != null and district != ''">
+        	and district = #{district,jdbcType=VARCHAR}
+	        </if>
+			<if test="loginaccountId != null and loginaccountId != ''">
+        	and loginaccount_id = #{loginaccountId,jdbcType=VARCHAR}
+	        </if>
+			<if test="applySeller != null and applySeller != ''">
+        	and apply_seller = #{applySeller,jdbcType=VARCHAR}
+	        </if>
+			<if test="applySellerTime != null">
+        	and apply_seller_time = #{applySellerTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="orderCount != null and orderCount !=0">
+        	and order_count = #{orderCount,jdbcType=INTEGER}
+	        </if>
+			<if test="orderAmount != null">
+        	and order_amount = #{orderAmount,jdbcType=DECIMAL}
+	        </if>
+    </sql>
+    
+    <sql id="set">
+
+			<!-- <if test="avatarAddress != null and avatarAddress != '' ">
+        	avatar_address = #{avatarAddress,jdbcType=VARCHAR},
+	        </if> -->
+			<if test="memberSex != null and memberSex >0 ">
+        	member_sex = #{memberSex,jdbcType=SMALLINT},
+	        </if>
+	        <if test="headShowImg != null and headShowImg != '' ">
+        	head_show_img = #{headShowImg,jdbcType=VARCHAR},
+	        </if>
+			<if test="idCardNum != null and idCardNum !='' ">
+        	id_card_num = #{idCardNum,jdbcType=VARCHAR},
+	        </if>
+			<if test="birthday != null ">
+        	birthday = #{birthday,jdbcType=DATE},
+	        </if>
+			<if test="province != null and province !='' ">
+        	province = #{province,jdbcType=VARCHAR},
+	        </if>
+			<if test="city != null and  city != '' ">
+        	city = #{city,jdbcType=VARCHAR},
+	        </if>
+			<if test="district != null and district != '' ">
+        	district = #{district,jdbcType=VARCHAR},
+	        </if>
+			
+			<if test="applySeller != null and applySeller !=''  ">
+        	apply_seller = #{applySeller,jdbcType=VARCHAR},
+	        </if>
+			<if test="applySellerTime != null ">
+        	apply_seller_time = #{applySellerTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="orderCount != null and orderCount >0 ">
+        	order_count = #{orderCount,jdbcType=INTEGER},
+	        </if>
+			<if test="orderAmount != null and orderAmount >0 ">
+        	order_amount = #{orderAmount,jdbcType=DECIMAL}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="MemberProfile" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_member_profile
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.member.model.MemberProfileEntity" resultMap="MemberProfile">
+        select <include refid="Base_Column_List"/> from tbl_wfx_member_profile where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.member.model.MemberProfileEntity" resultType="int">
+        select count(1) from tbl_wfx_member_profile where 1=1 
+        <include refid="where" />
+    </select>
+    
+     <select id="findByPage"  resultMap="MemberProfile">
+        select <include refid="Base_Column_List"/> from tbl_wfx_member_profile where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.member.model.MemberProfileEntity">
+        insert into tbl_wfx_member_profile (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},<!-- #{avatarAddress,jdbcType=VARCHAR}, -->#{memberSex,jdbcType=SMALLINT},#{headShowImg,jdbcType=VARCHAR},#{idCardNum,jdbcType=VARCHAR},#{birthday,jdbcType=DATE},#{province,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},#{district,jdbcType=VARCHAR},#{loginaccountId,jdbcType=VARCHAR},#{applySeller,jdbcType=VARCHAR},#{applySellerTime,jdbcType=TIMESTAMP},#{orderCount,jdbcType=INTEGER},#{orderAmount,jdbcType=DECIMAL}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_member_profile
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.member.model.MemberProfileEntity" >
+        update tbl_wfx_member_profile
+        <set>
+      	<include refid="set" />
+        </set>
+        where 
+        <if test="id != null and id != ''">	
+        id = #{id,jdbcType=VARCHAR}
+        </if>
+        <if test="loginaccountId != null and loginaccountId != ''">
+        loginaccount_id = #{loginaccountId,jdbcType=VARCHAR}
+        </if>
+        <!-- 默认根据ID修改 -->
+        <if test="(id == null or id == '') and (loginaccountId == null or loginaccountId == '')">
+         id = #{id,jdbcType=VARCHAR}
+        </if>
+    </update>
+    
+    <!-- 根据用户ID 获取用户基本信息 -->
+    <select id="getMemberProfileByMemberId" parameterType="java.lang.String" resultMap="MemberProfile">
+    	 select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_member_profile
+        where loginaccount_id =  #{memberId,jdbcType=VARCHAR}
+    </select>
+    
+    <update id="batchUpdateOrderAmountAndCount" >
+       UPDATE tbl_wfx_member_profile AS t3,
+	   (
+			SELECT
+				t2.id AS loginaccount_id,
+				ifnull(SUM(t1.payment), 0) AS order_amount,
+				COUNT(1) AS order_count
+			FROM
+				tbl_wfx_order t1
+			LEFT JOIN tbl_wfx_member_account t2 ON t1.buyer_id = t2.id
+			WHERE
+				t1. STATUS IN (
+					'WAIT_DELIVER',
+					'PART_DELIVERED',
+					'DELIVERED',
+					'TRADE_SUCCESS'
+				)
+			GROUP BY
+				t1.buyer_id
+			HAVING
+				t2.id IS NOT NULL
+		) AS t4
+		SET t3.order_amount = t4.order_amount,
+		 t3.order_count = t4.order_count
+		WHERE
+			t3.loginaccount_id = t4.loginaccount_id
+    </update>
+</mapper>

@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<oval xmlns="http://oval.sf.net/oval-configuration" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://oval.sf.net/oval-configuration http://oval.sourceforge.net/oval-configuration.xsd">
+
+	<constraintSet id="testPattern">
+		<notNull />
+		<matchPattern message="只允许纯数字组合">
+			<pattern pattern="[0-9]+" flags="0" />
+		</matchPattern>
+	</constraintSet>
+</oval>  

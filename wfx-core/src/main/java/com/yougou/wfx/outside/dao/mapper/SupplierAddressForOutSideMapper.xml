@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.outside.dao.SupplierAddressForOutSideMapper">
+    <resultMap id="SupplierAddress" type="com.yougou.wfx.outside.domain.SupplierAddress">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="supplierCode" column="supplier_code" jdbcType="VARCHAR"/>
+    	<result property="outsideNo" column="outside_no" jdbcType="VARCHAR"/>
+    	<result property="provinceNo" column="province_no" jdbcType="VARCHAR"/>
+    	<result property="province" column="province" jdbcType="VARCHAR"/>
+    	<result property="cityNo" column="city_no" jdbcType="VARCHAR"/>
+    	<result property="city" column="city" jdbcType="VARCHAR"/>
+    	<result property="areaNo" column="area_no" jdbcType="VARCHAR"/>
+    	<result property="area" column="area" jdbcType="VARCHAR"/>
+    	<result property="address" column="address" jdbcType="VARCHAR"/>
+    	<result property="contact" column="contact" jdbcType="VARCHAR"/>
+    	<result property="phone" column="phone" jdbcType="VARCHAR"/>
+    	<result property="remark" column="remark" jdbcType="VARCHAR"/>
+    	<result property="detailAddress" column="detailAddress" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,supplier_code,outside_no,province_no,province,city_no,city,area_no,area,address,contact,phone,remark
+    </sql>
+    
+    <sql id="where">
+			<if test="supplierCode != null and supplierCode != ''">
+        	and supplier_code = #{supplierCode,jdbcType=VARCHAR}
+	        </if>
+    </sql>
+    <select id="queryList" parameterType="com.yougou.wfx.outside.request.SupplierAddressRequest" resultMap="SupplierAddress">
+        select * from tbl_wfx_supplier_address where 1=1 
+        <include refid="where" />
+    </select>
+   
+</mapper>

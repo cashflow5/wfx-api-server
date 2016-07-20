@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.visitor.dao.IVisitorMapper">
+    <resultMap id="VisitorInfo" type="com.yougou.wfx.visitor.model.VisitorEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="shopId" column="shop_id" jdbcType="VARCHAR"/>
+    	<result property="visitorId" column="visitor_id" jdbcType="VARCHAR"/>
+    	<result property="visitorIp" column="visitor_ip" jdbcType="VARCHAR"/>
+    	<result property="sourceType" column="source_type" jdbcType="VARCHAR"/>
+    	<result property="visitTime" column="visit_time" jdbcType="TIMESTAMP"/>
+    	<result property="visitType" column="visit_type" jdbcType="INTEGER"/>
+    	<result property="commodityNo" column="commodity_no" jdbcType="VARCHAR"/>
+    	<result property="headShowImg" column="head_show_img" jdbcType="VARCHAR"/>
+    	<result property="visitorName" column="visitor_name" jdbcType="VARCHAR"/>
+    	
+    </resultMap>
+    
+     <resultMap id="VisitorSourceCount" type="com.yougou.wfx.visitor.dto.output.VisitorCountOutputDto">
+   
+    	<result property="weixinVisitorCount" column="weixinVisitorCount" jdbcType="INTEGER"/>
+    	<result property="otherVisitorCount" column="otherVisitorCount" jdbcType="INTEGER"/>
+
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,shop_id,visitor_id,visitor_ip,source_type,visit_time,visit_type,commodity_no
+    </sql>
+    
+    <!-- 新增访客记录 -->
+    <insert id="insertVisitor" parameterType="com.yougou.wfx.visitor.model.VisitorEntity">
+        insert into tbl_wfx_visitor (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR}, #{shopId,jdbcType=VARCHAR}, #{visitorId,jdbcType=VARCHAR},
+        #{visitorIp,jdbcType=VARCHAR},#{sourceType,jdbcType=VARCHAR}, #{visitTime,jdbcType=TIMESTAMP},
+        #{visitType,jdbcType=INTEGER}, #{commodityNo,jdbcType=VARCHAR}
+        )
+    </insert>
+    
+    <!-- 查询当日店铺访客列表 -->
+    <select id="queryCurDayVisitorList" parameterType="java.util.HashMap" resultMap="VisitorInfo"> 	
+		select v.*,m.head_show_img ,
+			IFNULL(a.platform_username,a.login_name)visitor_name
+		from tbl_wfx_visitor v 
+			INNER JOIN tbl_wfx_member_profile m ON v.visitor_id = m.loginaccount_id
+		  	INNER JOIN tbl_wfx_member_account a on a.id = m.loginaccount_id
+		 where 
+		 	<if test="date == null">
+		 		v.visit_time BETWEEN CURDATE() and CONCAT(CURDATE(),' 23:59:59')
+		 	</if>
+		 	<if test="date != null">
+			    visit_time BETWEEN DATE(#{date,jdbcType=TIMESTAMP}) and CONCAT(DATE(#{date,jdbcType=TIMESTAMP}),' 23:59:59')
+			</if>
+		   and v.source_type = 'weixin'
+		   and shop_id = #{shopId,jdbcType=VARCHAR}
+		   order by v.visit_time asc
+    </select>
+    
+     <!-- 查询当日店铺访客总数 -->
+    <select id="queryCurDayVisitCount" parameterType="java.util.HashMap" resultType="int"> 	
+		select count(*)
+		from tbl_wfx_visitor v 
+			INNER JOIN tbl_wfx_member_profile m ON v.visitor_id = m.loginaccount_id
+			INNER JOIN tbl_wfx_member_account a on a.id = m.loginaccount_id
+		 where 
+			<if test="date == null">
+		 		v.visit_time BETWEEN CURDATE() and CONCAT(CURDATE(),' 23:59:59')
+		 	</if>
+		 	<if test="date != null">
+			    visit_time BETWEEN DATE(#{date,jdbcType=TIMESTAMP}) and CONCAT(DATE(#{date,jdbcType=TIMESTAMP}),' 23:59:59')
+			</if>
+		   and v.source_type = 'weixin'
+		   and shop_id = #{shopId,jdbcType=VARCHAR}
+    </select>
+    
+    <!-- 查询用户当天访问记录数量  -->
+    <select id="queryVisitorCurDayVisitCount" resultType="int" parameterType="com.yougou.wfx.visitor.model.VisitorEntity">
+    	select count(*) from tbl_wfx_visitor v
+    	 where v.shop_id = #{shopId,jdbcType=VARCHAR}
+    	   and v.visitor_id = #{visitorId,jdbcType=VARCHAR}
+    	   <!-- 商品编码 -->
+    	   <!-- <if test="commodityNo != null and commodityNo != '' ">
+    	   	   and v.commodityNo = #{commodityNo,jdbcType=VARCHAR}
+    	   </if> -->
+    	   and v.visit_time BETWEEN CURDATE() and CONCAT(CURDATE(),' 23:59:59')
+    </select>
+    
+    <!-- 查询店铺当天各个来源的访客数量  -->
+    <select id="queryVisitorSourceCount" parameterType="java.util.HashMap" resultMap="VisitorSourceCount">   	
+		select 
+		(select count(*) from tbl_wfx_visitor v
+				INNER JOIN tbl_wfx_member_profile m ON v.visitor_id = m.loginaccount_id
+		  		INNER JOIN tbl_wfx_member_account a on a.id = m.loginaccount_id
+			 where v.shop_id = #{shopId,jdbcType=VARCHAR} 
+			 	<if test="date == null">
+			    and v.visit_time BETWEEN CURDATE() and CONCAT(CURDATE(),' 23:59:59')
+			    </if>
+			    <if test="date != null">
+			    and v.visit_time BETWEEN DATE(#{date,jdbcType=TIMESTAMP}) and CONCAT(DATE(#{date,jdbcType=TIMESTAMP}),' 23:59:59')
+			    </if>
+			 	and v.source_type = 'weixin')weixinVisitorCount,
+		
+		(select count(*) from tbl_wfx_visitor v
+				INNER JOIN tbl_wfx_member_profile m ON v.visitor_id = m.loginaccount_id
+		  		INNER JOIN tbl_wfx_member_account a on a.id = m.loginaccount_id
+			 where v.shop_id = #{shopId,jdbcType=VARCHAR} 
+			 	<if test="date == null">
+			 	and v.visit_time BETWEEN CURDATE() and CONCAT(CURDATE(),' 23:59:59')
+			 	 </if>
+			 	 <if test="date != null">
+			    and v.visit_time BETWEEN DATE(#{date,jdbcType=TIMESTAMP}) and CONCAT(DATE(#{date,jdbcType=TIMESTAMP}),' 23:59:59')
+			    </if>
+			    and v.source_type = 'other')otherVisitorCount
+		from dual
+    </select>
+    
+    <resultMap type="java.util.HashMap" id="visitorCountMap">
+    	<result property="visitTime" column="visitTime" jdbcType="VARCHAR"/>
+    	<result property="visitorCount" column="visitorCount" jdbcType="INTEGER" javaType="Integer"/>
+    </resultMap>
+    
+    <!-- 查询最近7天店铺每天的访客数量 -->
+    <select id="query7DaysVisitorCount" parameterType="string" resultMap="visitorCountMap">
+    	
+		select DATE_FORMAT(visit_time,'%Y-%m-%d') visitTime ,
+			count(*) visitorCount 
+		from tbl_wfx_visitor v
+			INNER JOIN tbl_wfx_member_profile m ON v.visitor_id = m.loginaccount_id
+		  	INNER JOIN tbl_wfx_member_account a on a.id = m.loginaccount_id
+		where v.visit_time BETWEEN ADDDATE(CURDATE(),-6)  and  NOW()
+			and v.shop_id = #{shopId,jdbcType=VARCHAR} 
+		  GROUP BY DATE_FORMAT(v.visit_time,'%Y-%m-%d')
+    </select>
+    
+     <!-- 查询店铺当天访问记录总数  -->
+    <select id="queryShopCurDayVisitCount" resultType="int" parameterType="string">
+    	select count(*) from tbl_wfx_visitor v
+    		INNER JOIN tbl_wfx_member_profile m ON v.visitor_id = m.loginaccount_id
+		  	INNER JOIN tbl_wfx_member_account a on a.id = m.loginaccount_id
+    	 where v.shop_id = #{shopId,jdbcType=VARCHAR} 
+    	   and v.visit_time BETWEEN CURDATE() and CONCAT(CURDATE(),' 23:59:59')
+    </select>
+    
+</mapper>

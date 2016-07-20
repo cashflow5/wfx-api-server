@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.commodity.dao.CommodityCortexMapper">
+    <resultMap id="CommodityCortex" type="com.yougou.wfx.commodity.model.CommodityCortexEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="name" column="name" jdbcType="VARCHAR"/>
+    	<result property="no" column="no" jdbcType="VARCHAR"/>
+    	<result property="isNotDescription" column="is_not_description" jdbcType="TINYINT"/>
+    	<result property="description" column="description" jdbcType="VARCHAR"/>
+    	<result property="lastOperateUser" column="last_operate_user" jdbcType="VARCHAR"/>
+    	<result property="lastOperateTime" column="last_operate_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,name,no,is_not_description,description,last_operate_user,last_operate_time
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="name != null and name != ''">
+        	and name = #{name,jdbcType=VARCHAR}
+	        </if>
+	        <if test="no != null and no != ''">
+        	and no = #{no,jdbcType=VARCHAR}
+	        </if>
+			<if test="isNotDescription != null and isNotDescription != 0">
+        	and is_not_description = #{isNotDescription,jdbcType=TINYINT}
+	        </if>
+			<if test="description != null">
+        	and description = #{description,jdbcType=VARCHAR}
+	        </if>
+			<if test="lastOperateUser != null and lastOperateUser != ''">
+        	and last_operate_user = #{lastOperateUser,jdbcType=VARCHAR}
+	        </if>
+			<if test="lastOperateTime != null">
+        	and last_operate_time = #{lastOperateTime,jdbcType=TIMESTAMP}
+	        </if>
+    </sql>
+    
+    <sql id="set">
+			<if test="id != null">
+        	id = #{id,jdbcType=VARCHAR},
+	        </if>
+			<if test="name != null">
+        	name = #{name,jdbcType=VARCHAR},
+	        </if>
+	        <if test="no != null">
+        	no = #{no,jdbcType=VARCHAR},
+	        </if>
+			<if test="isNotDescription != null and isNotDescription != 0">
+        	is_not_description = #{isNotDescription,jdbcType=TINYINT},
+	        </if>
+			<if test="description != null">
+        	description = #{description,jdbcType=VARCHAR},
+	        </if>
+			<if test="lastOperateUser != null">
+        	last_operate_user = #{lastOperateUser,jdbcType=VARCHAR},
+	        </if>
+			<if test="lastOperateTime != null">
+        	last_operate_time = #{lastOperateTime,jdbcType=TIMESTAMP}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="CommodityCortex" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_commodity_cortex
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.commodity.model.CommodityCortexEntity" resultMap="CommodityCortex">
+        select <include refid="Base_Column_List"/> from tbl_wfx_commodity_cortex where 1=1 
+        <include refid="where" />
+        ORDER BY last_operate_user ,last_operate_time desc
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.commodity.model.CommodityCortexEntity" resultType="int">
+        select count(1) from tbl_wfx_commodity_cortex where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryList" parameterType="com.yougou.wfx.commodity.model.CommodityCortexEntity" resultMap="CommodityCortex">
+        select <include refid="Base_Column_List"/> from tbl_wfx_commodity_cortex where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.commodity.model.CommodityCortexEntity">
+        insert into tbl_wfx_commodity_cortex (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{no,jdbcType=VARCHAR},#{isNotDescription,jdbcType=TINYINT},#{description,jdbcType=VARCHAR},#{lastOperateUser,jdbcType=VARCHAR},#{lastOperateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_commodity_cortex
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+     <update id="update" parameterType="com.yougou.wfx.commodity.model.CommodityCortexEntity" >
+        update tbl_wfx_commodity_cortex
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateCommodityCortex" >
+        INSERT INTO tbl_wfx_commodity_cortex (id, NAME, NO)(
+			SELECT
+				REPLACE (UUID(), '-', ''),
+				t1.prop_value,
+				prop_value_no
+			FROM
+				(
+					SELECT
+						prop_value,
+						prop_value_no
+					FROM
+						tbl_commodity_extend_prop
+					WHERE
+						prop_item_no = 'HaR06'
+					GROUP BY
+						prop_value_no
+				) t1
+			WHERE
+				t1.prop_value_no NOT IN (
+					SELECT
+						NO
+					FROM
+						tbl_wfx_commodity_cortex
+				)
+		)
+    </update>
+</mapper>

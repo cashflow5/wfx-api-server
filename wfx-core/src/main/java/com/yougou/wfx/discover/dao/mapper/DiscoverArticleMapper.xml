@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.discover.dao.DiscoverArticleMapper">
+    <resultMap id="DiscoverArticle" type="com.yougou.wfx.discover.model.DiscoverArticleEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="no" column="no" jdbcType="INTEGER"/>
+    	<result property="title" column="title" jdbcType="VARCHAR"/>
+    	<result property="authorType" column="author_type" jdbcType="TINYINT"/>
+    	<result property="authorAccount" column="author_account" jdbcType="VARCHAR"/>
+    	<result property="channelId" column="channel_id" jdbcType="VARCHAR"/>
+    	<result property="publishStatus" column="publish_status" jdbcType="TINYINT"/>
+    	<result property="recommendFlag" column="recommend_flag" jdbcType="TINYINT"/>
+    	<result property="deleteFlag" column="delete_flag" jdbcType="TINYINT"/>
+    	<result property="content" column="content" jdbcType="VARCHAR"/>
+    	<result property="picCover" column="pic_cover" jdbcType="VARCHAR"/>
+    	<result property="sortNo" column="sort_no" jdbcType="INTEGER"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="operUser" column="oper_user" jdbcType="VARCHAR"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <resultMap id="ArticleInfo" type="com.yougou.wfx.discover.model.ArticleInfoEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="no" column="no" jdbcType="INTEGER"/>
+    	<result property="title" column="title" jdbcType="VARCHAR"/>
+    	<result property="authorType" column="author_type" jdbcType="TINYINT"/>
+    	<result property="authorAccount" column="author_account" jdbcType="VARCHAR"/>
+    	<result property="channelId" column="channel_id" jdbcType="VARCHAR"/>
+    	<result property="channelName" column="channel_name" jdbcType="VARCHAR"/>
+    	<result property="publishStatus" column="publish_status" jdbcType="TINYINT"/>
+    	<result property="recommendFlag" column="recommend_flag" jdbcType="TINYINT"/>
+    	<result property="deleteFlag" column="delete_flag" jdbcType="TINYINT"/>
+    	<result property="content" column="content" jdbcType="VARCHAR"/>
+    	<result property="picCover" column="pic_cover" jdbcType="VARCHAR"/>
+    	<result property="sortNo" column="sort_no" jdbcType="INTEGER"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="operUser" column="oper_user" jdbcType="VARCHAR"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,no,title,author_type,author_account,channel_id,publish_status,recommend_flag,delete_flag,content,pic_cover,sort_no,create_time,oper_user,update_time
+    </sql>
+    
+    <sql id="BaseInfo_Column_List" >
+		a.id,a.no,a.title,a.author_type,a.author_account,a.channel_id,c.channel_name,a.publish_status,
+		a.delete_flag,a.content,a.pic_cover,a.sort_no,a.create_time,a.oper_user,a.update_time,a.recommend_flag
+    </sql>
+    
+    <sql id="where">
+		<if test="id != null and id != ''">
+       	and id = #{id,jdbcType=VARCHAR}
+        </if>
+		<if test="no != null and no != 0">
+       	and no = #{no,jdbcType=INTEGER}
+        </if>
+		<if test="title != null and title != ''">
+       	and title = #{title,jdbcType=VARCHAR}
+        </if>
+		<if test="authorType != null and authorType != 0">
+       	and author_type = #{authorType,jdbcType=TINYINT}
+        </if>
+		<if test="authorAccount != null and authorAccount != ''">
+       	and author_account = #{authorAccount,jdbcType=VARCHAR}
+        </if>
+		<if test="channelId != null and channelId != ''">
+       	and channel_id = #{channelId,jdbcType=VARCHAR}
+        </if>
+		<if test="publishStatus != null and publishStatus != 0">
+       	and publish_status = #{publishStatus,jdbcType=TINYINT}
+        </if>
+		<if test="recommendFlag != null and recommendFlag != 0">
+       	and recommend_flag = #{recommendFlag,jdbcType=TINYINT}
+        </if>
+		<if test="deleteFlag != null and deleteFlag != 0">
+       	and delete_flag = #{deleteFlag,jdbcType=TINYINT}
+        </if>
+		<if test="content != null and content !=''">
+       	and content = #{content,jdbcType=VARCHAR}
+        </if>
+		<if test="picCover != null and picCover != ''">
+       	and pic_cover = #{picCover,jdbcType=VARCHAR}
+        </if>
+		<if test="sortNo != null and sortNo != 0">
+       	and sort_no = #{sortNo,jdbcType=INTEGER}
+        </if>
+		<if test="createTime != null">
+       	and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+		<if test="operUser != null and operUser != ''">
+       	and oper_user = #{operUser,jdbcType=VARCHAR}
+        </if>
+		<if test="updateTime != null">
+       	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+    
+    <sql id="infoWhere">
+		<if test="id != null and id != ''">
+       	and a.id = #{id,jdbcType=VARCHAR}
+        </if>
+		<if test="no != null and no != 0">
+       	and a.no = #{no,jdbcType=INTEGER}
+        </if>
+		<if test="title != null and title != ''">
+       	and a.title like CONCAT('%',#{title,jdbcType=VARCHAR},'%')
+        </if>
+		<if test="authorType != null and authorType != 0">
+       	and a.author_type = #{authorType,jdbcType=TINYINT}
+        </if>
+		<if test="authorAccount != null and authorAccount != ''">
+       	and a.author_account = #{authorAccount,jdbcType=VARCHAR}
+        </if>
+		<if test="channelId != null and channelId != ''">
+       	and a.channel_id = #{channelId,jdbcType=VARCHAR}
+        </if>
+		<if test="publishStatus != null and publishStatus != 0">
+       	and a.publish_status = #{publishStatus,jdbcType=TINYINT}
+        </if>
+		<if test="recommendFlag != null and recommendFlag != 0">
+       	and a.recommend_flag = #{recommendFlag,jdbcType=TINYINT}
+        </if>
+		<if test="deleteFlag != null and deleteFlag != 0">
+       	and a.delete_flag = #{deleteFlag,jdbcType=TINYINT}
+        </if>
+		<if test="content != null">
+       	and a.content = #{content,jdbcType=VARCHAR}
+        </if>
+		<if test="picCover != null and picCover != ''">
+       	and a.pic_cover = #{picCover,jdbcType=VARCHAR}
+        </if>
+		<if test="sortNo != null and sortNo != 0">
+       	and a.sort_no = #{sortNo,jdbcType=INTEGER}
+        </if>
+		<if test="createTime != null">
+       	and a.create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+		<if test="operUser != null and operUser != ''">
+       	and a.oper_user = #{operUser,jdbcType=VARCHAR}
+        </if>
+		<if test="updateTime != null">
+       	and a.update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+		<if test="updateTimeStart != null">
+       	and a.update_time &gt;= #{updateTimeStart,jdbcType=TIMESTAMP}
+        </if>
+		<if test="updateTimeEnd != null">
+       	and a.update_time &lt;= #{updateTimeEnd,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+    
+    <sql id="set">
+		<if test="id != null">
+       	id = #{id,jdbcType=VARCHAR},
+        </if>
+		<if test="no != null and no != 0">
+       	no = #{no,jdbcType=INTEGER},
+        </if>
+		<if test="title != null">
+       	title = #{title,jdbcType=VARCHAR},
+        </if>
+		<if test="authorType != null and authorType != 0">
+       	author_type = #{authorType,jdbcType=TINYINT},
+        </if>
+		<if test="authorAccount != null">
+       	author_account = #{authorAccount,jdbcType=VARCHAR},
+        </if>
+		<if test="channelId != null">
+       	channel_id = #{channelId,jdbcType=VARCHAR},
+        </if>
+		<if test="publishStatus != null and publishStatus != 0">
+       	publish_status = #{publishStatus,jdbcType=TINYINT},
+        </if>
+		<if test="recommendFlag != null and recommendFlag != 0">
+       	recommend_flag = #{recommendFlag,jdbcType=TINYINT},
+        </if>
+		<if test="deleteFlag != null and deleteFlag != 0">
+       	delete_flag = #{deleteFlag,jdbcType=TINYINT},
+        </if>
+		<if test="content != null">
+       	content = #{content,jdbcType=VARCHAR},
+        </if>
+		<if test="picCover != null">
+       	pic_cover = #{picCover,jdbcType=VARCHAR},
+        </if>
+		<if test="sortNo != null and sortNo != 0">
+       	sort_no = #{sortNo,jdbcType=INTEGER},
+        </if>
+		<if test="createTime != null">
+       	create_time = #{createTime,jdbcType=TIMESTAMP},
+        </if>
+		<if test="operUser != null">
+       	oper_user = #{operUser,jdbcType=VARCHAR},
+        </if>
+		<if test="updateTime != null">
+       	update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+    
+    <sql id="batchSet">
+		<if test="no != null and no != 0">
+       	no = #{no,jdbcType=INTEGER},
+        </if>
+		<if test="title != null">
+       	title = #{title,jdbcType=VARCHAR},
+        </if>
+		<if test="authorType != null and authorType != 0">
+       	author_type = #{authorType,jdbcType=TINYINT},
+        </if>
+		<if test="authorAccount != null">
+       	author_account = #{authorAccount,jdbcType=VARCHAR},
+        </if>
+		<if test="channelId != null">
+       	channel_id = #{channelId,jdbcType=VARCHAR},
+        </if>
+		<if test="publishStatus != null and publishStatus != 0">
+       	publish_status = #{publishStatus,jdbcType=TINYINT},
+        </if>
+		<if test="recommendFlag != null and recommendFlag != 0">
+       	recommend_flag = #{recommendFlag,jdbcType=TINYINT},
+        </if>
+		<if test="deleteFlag != null and deleteFlag != 0">
+       	delete_flag = #{deleteFlag,jdbcType=TINYINT},
+        </if>
+		<if test="content != null">
+       	content = #{content,jdbcType=VARCHAR},
+        </if>
+		<if test="picCover != null">
+       	pic_cover = #{picCover,jdbcType=VARCHAR},
+        </if>
+		<if test="sortNo != null and sortNo != 0">
+       	sort_no = #{sortNo,jdbcType=INTEGER},
+        </if>
+		<if test="createTime != null">
+       	create_time = #{createTime,jdbcType=TIMESTAMP},
+        </if>
+		<if test="operUser != null">
+       	oper_user = #{operUser,jdbcType=VARCHAR},
+        </if>
+		<if test="updateTime != null">
+       	update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+    
+    <select id="getById" resultMap="DiscoverArticle" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_discover_article
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.discover.model.DiscoverArticleEntity" resultMap="DiscoverArticle">
+        select <include refid="Base_Column_List"/> from tbl_wfx_discover_article where 1=1 
+        <include refid="where" />
+        order by sort_no asc
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.discover.model.DiscoverArticleEntity" resultType="int">
+        select count(1) from tbl_wfx_discover_article where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="findInfoPage" parameterType="com.yougou.wfx.discover.model.ArticleInfoEntity" resultMap="ArticleInfo">
+        select <include refid="BaseInfo_Column_List"/> 
+        from tbl_wfx_discover_article a left join 
+		tbl_wfx_discover_channel c on a.channel_id = c.id where 1=1 
+        <include refid="infoWhere" />
+        order by a.sort_no desc,a.update_time desc,a.title
+    </select>
+    
+    <select id="findInfoPageCount" parameterType="com.yougou.wfx.discover.model.ArticleInfoEntity" resultType="int">
+        select count(1)
+        from tbl_wfx_discover_article a left join 
+		tbl_wfx_discover_channel c on a.channel_id = c.id where 1=1 
+        <include refid="infoWhere" />
+    </select>
+    
+    <select id="getMaxSortNo" resultType="Integer">
+        select max(sort_no) from tbl_wfx_discover_article
+    </select>
+    
+    <select id="queryList" parameterType="com.yougou.wfx.discover.model.DiscoverArticleEntity" resultMap="DiscoverArticle">
+        select <include refid="Base_Column_List"/> from tbl_wfx_discover_article where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.discover.model.DiscoverArticleEntity">
+        insert into tbl_wfx_discover_article (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},#{no,jdbcType=INTEGER},#{title,jdbcType=VARCHAR},#{authorType,jdbcType=TINYINT},#{authorAccount,jdbcType=VARCHAR},#{channelId,jdbcType=VARCHAR},#{publishStatus,jdbcType=TINYINT},#{recommendFlag,jdbcType=TINYINT},#{deleteFlag,jdbcType=TINYINT},#{content,jdbcType=VARCHAR},#{picCover,jdbcType=VARCHAR},#{sortNo,jdbcType=INTEGER},#{createTime,jdbcType=TIMESTAMP},#{operUser,jdbcType=VARCHAR},#{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_discover_article
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.discover.model.DiscoverArticleEntity" >
+        update tbl_wfx_discover_article
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <update id="batchUpdate" parameterType="com.yougou.wfx.discover.model.DiscoverArticleEntity" >
+        update tbl_wfx_discover_article
+        <set>
+      	<include refid="batchSet" />
+        </set>
+        where id in ${id}
+    </update>
+    
+    <delete id="batchRemove" parameterType="java.lang.String" >
+        delete from tbl_wfx_discover_article
+        where id in ${_parameter}
+    </delete>
+    
+    <select id="getPublishCountByIds" parameterType="java.lang.String" resultType="int">
+        select count(1) from tbl_wfx_discover_article 
+		where publish_status = '2' 
+		and id in ${_parameter}
+    </select>
+    
+    <select id="getChannelCountByids" parameterType="java.lang.String" resultType="int">
+        select count(1) from tbl_wfx_discover_article a,tbl_wfx_discover_carousel_figure f
+		where a.no = f.article_no and a.id in ${_parameter}
+    </select>
+</mapper>

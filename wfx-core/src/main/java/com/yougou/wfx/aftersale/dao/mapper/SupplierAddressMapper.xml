@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.aftersale.dao.SupplierAddressMapper">
+    <resultMap id="SupplierAddress" type="com.yougou.wfx.aftersale.model.SupplierAddressEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="supplierCode" column="supplier_code" jdbcType="VARCHAR"/>
+    	<result property="outsideNo" column="outside_no" jdbcType="VARCHAR"/>
+    	<result property="provinceNo" column="province_no" jdbcType="VARCHAR"/>
+    	<result property="province" column="province" jdbcType="VARCHAR"/>
+    	<result property="cityNo" column="city_no" jdbcType="VARCHAR"/>
+    	<result property="city" column="city" jdbcType="VARCHAR"/>
+    	<result property="areaNo" column="area_no" jdbcType="VARCHAR"/>
+    	<result property="area" column="area" jdbcType="VARCHAR"/>
+    	<result property="address" column="address" jdbcType="VARCHAR"/>
+    	<result property="contact" column="contact" jdbcType="VARCHAR"/>
+    	<result property="phone" column="phone" jdbcType="VARCHAR"/>
+    	<result property="remark" column="remark" jdbcType="VARCHAR"/>
+    	<result property="detailAddress" column="detailAddress" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,supplier_code,outside_no,province_no,province,city_no,city,area_no,area,address,contact,phone,remark
+    </sql>
+     <sql id="A_Column_List" >
+		a.id,a.supplier_code,a.outside_no,a.province_no,a.province,a.city_no,a.city,a.area_no,a.area,a.address,a.contact,a.phone,a.remark
+    </sql>
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="supplierCode != null and supplierCode != ''">
+        	and supplier_code = #{supplierCode,jdbcType=VARCHAR}
+	        </if>
+			<if test="outsideNo != null and outsideNo != 0">
+        	and outside_no = #{outsideNo,jdbcType=INTEGER}
+	        </if>
+			<if test="provinceNo != null and provinceNo != ''">
+        	and province_no = #{provinceNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="province != null and province != ''">
+        	and province = #{province,jdbcType=VARCHAR}
+	        </if>
+			<if test="cityNo != null and cityNo != ''">
+        	and city_no = #{cityNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="city != null and city != ''">
+        	and city = #{city,jdbcType=VARCHAR}
+	        </if>
+			<if test="areaNo != null and areaNo != ''">
+        	and area_no = #{areaNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="area != null and area != ''">
+        	and area = #{area,jdbcType=VARCHAR}
+	        </if>
+			<if test="address != null and address != ''">
+        	and address = #{address,jdbcType=VARCHAR}
+	        </if>
+			<if test="contact != null and contact != ''">
+        	and contact = #{contact,jdbcType=VARCHAR}
+	        </if>
+			<if test="phone != null and phone != ''">
+        	and phone = #{phone,jdbcType=VARCHAR}
+	        </if>
+			<if test="remark != null and remark != ''">
+        	and remark = #{remark,jdbcType=VARCHAR}
+	        </if>
+    </sql>
+    
+    <sql id="set">
+			<if test="id != null">
+        	id = #{id,jdbcType=VARCHAR},
+	        </if>
+			<if test="supplierCode != null">
+        	supplier_code = #{supplierCode,jdbcType=VARCHAR},
+	        </if>
+			<if test="outsideNo != null">
+        	outside_no = #{outsideNo,jdbcType=INTEGER},
+	        </if>
+			<if test="provinceNo != null">
+        	province_no = #{provinceNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="province != null">
+        	province = #{province,jdbcType=VARCHAR},
+	        </if>
+			<if test="cityNo != null">
+        	city_no = #{cityNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="city != null">
+        	city = #{city,jdbcType=VARCHAR},
+	        </if>
+			<if test="areaNo != null">
+        	area_no = #{areaNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="area != null">
+        	area = #{area,jdbcType=VARCHAR},
+	        </if>
+			<if test="address != null">
+        	address = #{address,jdbcType=VARCHAR},
+	        </if>
+			<if test="contact != null">
+        	contact = #{contact,jdbcType=VARCHAR},
+	        </if>
+			<if test="phone != null">
+        	phone = #{phone,jdbcType=VARCHAR},
+	        </if>
+			<if test="remark != null">
+        	remark = #{remark,jdbcType=VARCHAR}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="SupplierAddress" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_supplier_address
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+     <select id="getByOutSideNo" resultMap="SupplierAddress" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_supplier_address
+        where outside_no = #{outsideNo,jdbcType=INTEGER}
+    </select>
+    
+    
+    
+    <select id="findPage" parameterType="com.yougou.wfx.aftersale.model.SupplierAddressEntity" resultMap="SupplierAddress">
+        select <include refid="Base_Column_List"/>,CONCAT(province,city,area,address) as detailAddress from tbl_wfx_supplier_address where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.aftersale.model.SupplierAddressEntity" resultType="int">
+        select count(1) from tbl_wfx_supplier_address where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryList" parameterType="com.yougou.wfx.aftersale.model.SupplierAddressEntity" resultMap="SupplierAddress">
+        select <include refid="Base_Column_List"/> from tbl_wfx_supplier_address where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.aftersale.model.SupplierAddressEntity">
+        insert into tbl_wfx_supplier_address (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},#{supplierCode,jdbcType=VARCHAR},#{outsideNo,jdbcType=INTEGER},#{provinceNo,jdbcType=VARCHAR},#{province,jdbcType=VARCHAR},#{cityNo,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},#{areaNo,jdbcType=VARCHAR},#{area,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},#{contact,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_supplier_address
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.aftersale.model.SupplierAddressEntity" >
+        update tbl_wfx_supplier_address
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+      <select id="queryByOrderDetailId" resultMap="SupplierAddress" parameterType="java.lang.String">
+    	 select 
+        <include refid="A_Column_List"/>
+        from tbl_wfx_supplier_address a join tbl_wfx_order_detail d on a.outside_no = d.return_address_no
+        where d.id = #{orderDetailId,jdbcType=VARCHAR}
+    </select>
+    
+     <select id="queryBySupplierCode" resultMap="SupplierAddress" parameterType="java.lang.String">
+    	 select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_supplier_address 
+        where supplier_code = #{supplierCode,jdbcType=VARCHAR}
+        limit 1
+    </select>
+    
+</mapper>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- console -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%t] [%c] - %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- all -->
+	<appender name="dailyRollingFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="/data/applogs/wfx/wfx-all.log" />
+		<param name="encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-d{yyyy-MM-dd HH\:mm\:ss} %-5p [%t] [%c] - %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- api监控 -->
+	<appender name="monitorDailyRollingFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="/data/applogs/wfx/monitor/monitor.log" />
+		<param name="encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-5p] %d{ISO8601} [%t] %m %n%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="DEBUG" />
+			<param name="LevelMax" value="INFO" />
+		</filter>
+	</appender>
+	<logger name="MonitorLogger" additivity="false">
+		<level value="INFO"/>
+		<appender-ref ref="monitorDailyRollingFile" />
+	</logger>
+	
+	<!-- api调用日志 -->
+	<appender name="apiLoggerProfilerDailyRollingFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="/data/applogs/wfx/api-profiler/api-profiler.log" />
+		<param name="encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-5p] %d{ISO8601} [%t] %m %n%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="DEBUG" />
+			<param name="LevelMax" value="INFO" />
+		</filter>
+	</appender>
+	<logger name="ApiLoggerProfiler" additivity="false">
+		<level value="INFO"/>
+		<appender-ref ref="apiLoggerProfilerDailyRollingFile" />
+	</logger>
+	
+	<!-- 业务拦截 -->
+	<appender name="filterDailyRollingFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="/data/applogs/wfx/filter/filter.log" />
+		<param name="encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-5p] %d{ISO8601} [%t] %m %n%n" />
+		</layout>
+	</appender>
+	<logger name="FilterLogger" additivity="false">
+		<level value="INFO"/>
+		<appender-ref ref="filterDailyRollingFile" />
+	</logger>
+
+	<!-- 性能跟踪日志 -->
+	<appender name="TimeConsumRollingFile" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/data/applogs/wfx/capacity/capacity.log" />
+		<param name="encoding" value="UTF-8" /> 
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-d{yyyy-MM-dd HH\:mm\:ss} %m%n" />
+		</layout>
+	</appender>
+	<logger name="TimeConsumingLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="TimeConsumRollingFile"/>
+    </logger>
+    
+	<logger name="org">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="net">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="org.springframework">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="org.mybatis">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="org.apache.ibatis">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="java.sql">
+		<level value="WARN" />
+	</logger>
+	
+	<logger name="com.alibaba">
+		<level value="WARN" />
+	</logger>
+	
+	<logger name="com.yougou">
+		<level value="DEBUG" />
+	</logger>
+
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="console" />
+		<appender-ref ref="dailyRollingFile" />
+		<appender-ref ref="apiLoggerProfilerDailyRollingFile" />
+	</root>
+</log4j:configuration>

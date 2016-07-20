@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.seller.dao.SellerInfoMapper">
+    <resultMap id="SellerInfo" type="com.yougou.wfx.seller.model.SellerInfoEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="loginaccountId" column="loginaccount_id" jdbcType="VARCHAR"/>
+    	<result property="loginName" column="login_name" jdbcType="VARCHAR"/>
+    	<result property="sellerName" column="seller_name" jdbcType="VARCHAR"/>
+    	<result property="state" column="state" jdbcType="VARCHAR"/>
+    	<result property="passDate" column="pass_date" jdbcType="TIMESTAMP"/>
+    	<result property="passSysuser" column="pass_sysuser" jdbcType="VARCHAR"/>
+    	<result property="lastActiveDate" column="last_active_date" jdbcType="TIMESTAMP"/>
+    	<result property="lastActiveOptuser" column="last_active_optuser" jdbcType="VARCHAR"/>
+    	<result property="lastUnactiveDate" column="last_unactive_date" jdbcType="TIMESTAMP"/>
+    	<result property="lastUnactiveOptuser" column="last_unactive_optuser" jdbcType="VARCHAR"/>
+    	<result property="refuseRemark" column="refuse_remark" jdbcType="VARCHAR"/>
+    	<result property="parentId" column="parent_id" jdbcType="VARCHAR"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="orderAmount" column="order_amount" jdbcType="DECIMAL"/>
+    	<result property="orderCount" column="order_count" jdbcType="INTEGER"/>
+    	<result property="birthday" column="birthday" jdbcType="TIMESTAMP"/>
+    	<result property="memberSex" column="member_sex" jdbcType="VARCHAR"/>
+    	<result property="registerDate" column="register_date" jdbcType="TIMESTAMP"/>
+    	<result property="lastLoginTime" column="last_login_time" jdbcType="TIMESTAMP"/>
+    	<result property="registerDate" column="register_date" jdbcType="TIMESTAMP"/>
+    	<result property="lastLoginTime" column="last_login_time" jdbcType="TIMESTAMP"/>
+    	<result property="shopName" column="shop_name" jdbcType="VARCHAR"/>
+    	<result property="shopCode" column="shop_code" jdbcType="VARCHAR"/>
+    	<result property="subSellerCount" column="subSellerCount" jdbcType="INTEGER"/>
+    	<result property="platformUsername" column="platform_username" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,create_time,loginaccount_id,login_name,seller_name,state,pass_date,pass_sysuser,last_active_date,last_active_optuser,last_unactive_date,last_unactive_optuser,refuse_remark,parent_id
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="loginaccountId != null and loginaccountId != ''">
+        	and loginaccount_id = #{loginaccountId,jdbcType=VARCHAR}
+	        </if>
+			<if test="loginName != null and loginName != ''">
+        	and login_name = #{loginName,jdbcType=VARCHAR}
+	        </if>
+			<if test="sellerName != null and sellerName != ''">
+        	and seller_name = #{sellerName,jdbcType=VARCHAR}
+	        </if>
+			<if test="state != null and state != ''">
+        	and state = #{state,jdbcType=VARCHAR}
+	        </if>
+			<if test="passDate != null">
+        	and pass_date = #{passDate,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="passSysuser != null and passSysuser != ''">
+        	and pass_sysuser = #{passSysuser,jdbcType=VARCHAR}
+	        </if>
+			<if test="lastActiveDate != null">
+        	and last_active_date = #{lastActiveDate,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="lastActiveOptuser != null and lastActiveOptuser != ''">
+        	and last_active_optuser = #{lastActiveOptuser,jdbcType=VARCHAR}
+	        </if>
+			<if test="lastUnactiveDate != null">
+        	and last_unactive_date = #{lastUnactiveDate,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="lastUnactiveOptuser != null and lastUnactiveOptuser != ''">
+        	and last_unactive_optuser = #{lastUnactiveOptuser,jdbcType=VARCHAR}
+	        </if>
+			<if test="refuseRemark != null and refuseRemark != ''">
+        	and refuse_remark = #{refuseRemark,jdbcType=VARCHAR}
+	        </if>
+		
+			<if test="parentId != null and parentId != ''">
+        	and parent_id = #{parentId,jdbcType=VARCHAR}
+	        </if>
+    </sql>
+    
+    <sql id="set">		
+    		<if test="loginName != null and loginName != '' ">
+        	login_name = #{loginName,jdbcType=VARCHAR},
+	        </if>
+			<if test="sellerName != null ">
+        	seller_name = #{sellerName,jdbcType=VARCHAR},
+	        </if>
+			<if test="state != null ">
+        	state = #{state,jdbcType=VARCHAR},
+	        </if>
+			<if test="passDate != null ">
+        	pass_date = #{passDate,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="passSysuser != null ">
+        	pass_sysuser = #{passSysuser,jdbcType=VARCHAR},
+	        </if>
+			<if test="lastActiveDate != null ">
+        	last_active_date = #{lastActiveDate,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="lastActiveOptuser != null ">
+        	last_active_optuser = #{lastActiveOptuser,jdbcType=VARCHAR},
+	        </if>
+			<if test="lastUnactiveDate != null ">
+        	last_unactive_date = #{lastUnactiveDate,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="lastUnactiveOptuser != null ">
+        	last_unactive_optuser = #{lastUnactiveOptuser,jdbcType=VARCHAR},
+	        </if>
+			<if test="refuseRemark != null ">
+        	refuse_remark = #{refuseRemark,jdbcType=VARCHAR},
+	        </if>
+			
+			<if test="parentId != null ">
+        	parent_id = #{parentId,jdbcType=VARCHAR}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="SellerInfo" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_seller_info
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.seller.model.SellerInfoEntity" resultMap="SellerInfo">
+        select <include refid="Base_Column_List"/> from tbl_wfx_seller_info where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryList" parameterType="com.yougou.wfx.seller.model.SellerInfoEntity" resultMap="SellerInfo">
+        select <include refid="Base_Column_List"/> from tbl_wfx_seller_info where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.seller.model.SellerInfoEntity" resultType="int">
+        select count(1) from tbl_wfx_seller_info where 1=1 
+        <include refid="where" />
+    </select>
+    
+     <select id="findByPage"  resultMap="SellerInfo">
+        select <include refid="Base_Column_List"/> from tbl_wfx_seller_info where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.seller.model.SellerInfoEntity">
+        insert into tbl_wfx_seller_info (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{loginaccountId,jdbcType=VARCHAR},#{loginName,jdbcType=VARCHAR},#{sellerName,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR},#{passDate,jdbcType=TIMESTAMP}, #{passSysuser,jdbcType=VARCHAR},#{lastActiveDate,jdbcType=TIMESTAMP}, #{lastActiveOptuser,jdbcType=VARCHAR}, #{lastUnactiveDate,jdbcType=TIMESTAMP}, #{lastUnactiveOptuser,jdbcType=VARCHAR},#{refuseRemark,jdbcType=VARCHAR},#{parentId,jdbcType=VARCHAR}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_seller_info
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.seller.model.SellerInfoEntity" >
+        update tbl_wfx_seller_info
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+   
+   <!-- 后台分销商审核列表 added by zhangfeng--> 
+   <select id="findSellerAuditPage" parameterType="com.yougou.wfx.seller.model.SellerInfoEntity" resultMap="SellerInfo">
+   		select
+		s.id,
+		s.loginaccount_id,
+		s.login_name,
+		s.seller_name,
+		s.create_time,
+	 	IFNULL(p.order_count,0) order_count,
+		round(IFNULL(p.order_amount,0),2) order_amount,
+		a.platform_username
+	from tbl_wfx_seller_info s  
+	left join tbl_wfx_member_profile p on s.loginaccount_id = p.loginaccount_id
+	left join tbl_wfx_member_account a on a.id = s.loginaccount_id
+	where s.state = '1'
+	  <include refid="sellerAuditWhere" />
+	order by s.create_time desc
+   </select>
+   
+   <!-- 后台分销商审核列表总数 added by zhangfeng -->
+   <select id="findSellerAuditCount" parameterType="com.yougou.wfx.seller.model.SellerInfoEntity" resultType="int">
+      select
+		count(*)		
+	from tbl_wfx_seller_info s  left join tbl_wfx_member_profile p on s.loginaccount_id = p.loginaccount_id
+	where  s.state = '1'
+        <include refid="sellerAuditWhere" />
+   </select>
+   
+   <!-- 后台分销商审核列表查询条件 added by zhangfeng -->
+   <sql id="sellerAuditWhere">
+   		<!-- 会员账号 -->
+		<if test="loginName != null and loginName != ''">
+	      	and s.login_name = #{loginName,jdbcType=VARCHAR}
+	    </if>
+	    <!-- 会员姓名 -->
+		<if test="sellerName != null and sellerName != ''">
+	      	and s.seller_name = #{sellerName,jdbcType=VARCHAR}
+	    </if>
+	    <!-- 订单总数start -->
+	    <if test="orderCountStart != null and orderCountStart >0 ">
+	      	and  p.order_count <![CDATA[  >= ]]> #{orderCountStart,jdbcType=INTEGER}
+	    </if>
+	    <!-- 订单总数end -->
+		<if test="orderCountEnd != null and orderCountEnd >0 ">
+	      	and p.order_count <![CDATA[ <= ]]> #{orderCountEnd,jdbcType=INTEGER}
+	    </if>
+	    <!-- 订单总金额start -->
+	    <if test="orderAmountStart != null and orderAmountStart >0 ">
+	      	and p.order_amount <![CDATA[  >= ]]>  #{orderAmountStart,jdbcType=DECIMAL}
+	    </if>
+	    <!-- 订单总金额end -->
+		 <if test="orderAmountEnd != null and orderAmountEnd >0 ">
+	      	and p.order_amount <![CDATA[  <= ]]>  #{orderAmountEnd,jdbcType=DECIMAL}
+	    </if>
+	    <!-- 申请时间start -->
+	    <if test="createTimeStart != null and createTimeStart !='' ">
+	      	and s.create_time <![CDATA[  >= ]]> #{createTimeStart,jdbcType=VARCHAR}
+	    </if>
+	    <!-- 申请时间end -->
+		<if test="createTimeEnd != null and createTimeEnd !='' ">
+	      	and s.create_time <![CDATA[  <= ]]> #{createTimeEnd,jdbcType=VARCHAR}
+	    </if>
+   </sql>
+   
+   <!-- 后台根据分销商ID获取分销商详情 added by zhangfeng -->
+   <select id="getSellerInfoById" parameterType="java.lang.String" resultMap="SellerInfo">
+   	select s.id,
+   		   s.parent_id,	
+		   s.login_name,
+	       s.loginaccount_id,
+	       s.create_time,
+		   s.seller_name,
+		   s.state,
+		   s.last_active_date,
+	       s.pass_date,
+	       s.last_unactive_date,
+	       m.birthday,
+	       m.member_sex,
+	       m.order_count,
+		   m.order_amount,
+	       a.register_date,
+	       a.last_login_time,
+		   p.name shop_name,
+		   p.shop_code,
+		   (select count(*) from tbl_wfx_seller_info t where t.parent_id = s.id and t.state = 3) subSellerCount	       
+       from tbl_wfx_seller_info s 
+		  INNER JOIN tbl_wfx_member_profile m on s.loginaccount_id = m.loginaccount_id
+		  INNER JOIN tbl_wfx_member_account a on m.loginaccount_id = a.id
+		  left JOIN tbl_wfx_shop p on p.seller_id = s.id
+		where s.id = #{sellerId,jdbcType=VARCHAR}
+   </select>
+   
+    <!-- 后台分销商列表 added by zhangfeng -->
+   <select id="findSellerPage" parameterType="java.lang.String" resultMap="SellerInfo">
+   		select
+			s.id,
+			s.loginaccount_id,
+			s.login_name,
+			s.seller_name,
+			s.pass_date,
+	   		s.state,
+	   		m.platform_username,
+	   		s.parent_id
+		from tbl_wfx_seller_info s  
+		left join tbl_wfx_member_account m on s.loginaccount_id = m.id
+		where s.state in( '3','4')
+		 <include refid="sellerWhere" />
+		order by s.pass_date desc
+   </select>
+   
+   <!-- 后台分销商列表查询条件 -->
+   <sql id="sellerWhere">
+   		<!-- 会员账号 -->
+		<if test="loginName != null and loginName != ''">
+	      	and s.login_name = #{loginName,jdbcType=VARCHAR}
+	    </if>
+	    <!-- 会员姓名 -->
+		<if test="sellerName != null and sellerName != ''">
+	      	and s.seller_name = #{sellerName,jdbcType=VARCHAR}
+	    </if>
+	     <!-- 注册时间start -->
+	    <if test="registerDateStart != null and registerDateStart !='' ">
+	      	and  m.register_date <![CDATA[  >= ]]> #{registerDateStart,jdbcType=VARCHAR}
+	    </if>
+	    <!-- 注册时间end -->
+		<if test="registerDateEnd != null and registerDateEnd !='' ">
+	      	and m.register_date <![CDATA[  <= ]]> #{registerDateEnd,jdbcType=VARCHAR}
+	    </if>
+	    <!-- 会员状态 -->
+		<if test="state != null and state != ''">
+	      	and s.state = #{state,jdbcType=VARCHAR}
+	    </if>
+   </sql>
+   
+    <!-- 后台分销商列表总数 added by zhangfeng -->
+   <select id="findSellerCount" parameterType="java.lang.String" resultType="int">
+   		select
+			count(*)
+		from tbl_wfx_seller_info s  
+		 <if test="(registerDateStart != null and registerDateStart !='') || (registerDateEnd != null and registerDateEnd !='') ">
+			left join tbl_wfx_member_account m on s.loginaccount_id = m.id
+		 </if>
+		where s.state in( '3','4')
+		 <include refid="sellerWhere" />
+		order by s.create_time desc
+   </select>
+   
+   <resultMap type="java.util.HashMap" id="sellerAndShopStatusMap">
+   		<result column="sellerId" property="sellerId" javaType="String"/>
+   		<result column="sellerStatus" property="sellerStatus" javaType="int"/>
+   		<result column="shopId" property="shopId" javaType="String"/>
+   		<result column="shopStatus" property="shopStatus" javaType="int"/>
+   </resultMap>
+   <!-- 根据用户ID 获取用户分销商和店铺状态 -->
+   <select id="getSellerAndShopStatusByMemberId" parameterType="java.lang.String" resultMap="sellerAndShopStatusMap">
+   		select s.id sellerId,s.state sellerStatus ,p.id shopId,p.status shopStatus 
+		from tbl_wfx_seller_info s 
+		INNER JOIN tbl_wfx_shop p on s.id = p.seller_id
+		where s.loginaccount_id =  #{memberId,jdbcType=VARCHAR}
+		limit 1
+   </select>
+   
+   <!-- 根据店铺ID 获取分销商及店铺状态 -->
+   <select id="getSellerAndShopStatusByShopId" parameterType="java.lang.String" resultMap="sellerAndShopStatusMap">
+   		select s.id sellerId,s.state sellerStatus ,p.id shopId,p.status shopStatus 
+		from tbl_wfx_seller_info s 
+		INNER JOIN tbl_wfx_shop p on s.id = p.seller_id
+		where p.id =  #{shopId,jdbcType=VARCHAR}
+		limit 1
+   </select>
+   
+   
+   
+    <!-- 根据用户ID 获取其作为分销商的信息 -->
+   <select id="getSellerByMemberId"  parameterType="java.lang.String" resultMap="SellerInfo" >
+   		 select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_seller_info
+        where loginaccount_id = #{memberId,jdbcType=VARCHAR}
+        limit 1
+   </select>
+   
+   <!-- 获取分销商下级分销商列表 -->
+   <select id="getSubSellerList" parameterType="java.lang.String" resultMap="SellerInfo">
+   		select s.id,
+   			s.parent_id,
+			s.create_time,
+			s.loginaccount_id,
+			s.login_name,
+			s.seller_name,
+			s.pass_date,
+			p.name shop_name ,
+			p.shop_code,
+			m.member_sex,
+			m.birthday,
+			a.register_date,
+			(select count(*) from tbl_wfx_seller_info t where t.parent_id = s.id and t.state = 3)subSellerCount	
+		from tbl_wfx_seller_info s 
+			INNER JOIN tbl_wfx_shop p on s.id = p.seller_id 
+			INNER JOIN tbl_wfx_member_profile m on s.loginaccount_id = m.loginaccount_id
+			INNER JOIN tbl_wfx_member_account a on a.id = m.loginaccount_id		
+		where s.parent_id = #{sellerId,jdbcType=VARCHAR}
+		  and s.state = 3
+		  order by s.pass_date desc 
+   </select>
+   
+    <!-- 获取分销商下级分销商列表 -->
+   <select id="getSubSellerCount" parameterType="java.lang.String" resultType="int">
+   		select count(s.id) 
+   		from tbl_wfx_seller_info s 
+		where s.parent_id = #{sellerId,jdbcType=VARCHAR}
+		and s.state = 3
+   </select>
+   
+   <resultMap type="java.util.HashMap" id="allApplyToSellerMap">
+   		<result property="sellerId" column="sellerId" jdbcType="VARCHAR"/>
+    	<result property="memberId" column="memberId" jdbcType="VARCHAR"/>
+    	<result property="loginName" column="loginName" jdbcType="VARCHAR"/>    	
+    	<result property="shopId" column="shopId" jdbcType="VARCHAR"/>
+    	<result property="shopName" column="shopName" jdbcType="VARCHAR"/>
+    	<result property="orderCount" column="orderCount" jdbcType="INTEGER"/>  	
+   </resultMap>
+   <!-- 查询出所有待审核状态的分销商及店铺信息 -->
+   <select id="queryAllApplyToSeller" resultMap="allApplyToSellerMap">
+	  select tmp.* from (
+		select 
+			s.id sellerId,
+			s.loginaccount_id memberId,
+			s.login_name loginName,
+			p.id shopId,
+			p.name shopName,
+			IFNULL((select count(*) from tbl_wfx_order o 
+					where o.buyer_id = s.loginaccount_id and o.status = 'TRADE_SUCCESS'),0) orderCount
+		from tbl_wfx_seller_info s 
+			INNER JOIN tbl_wfx_shop p on s.id = p.seller_id 
+			INNER JOIN tbl_wfx_member_account m on s.loginaccount_id = m.id
+		where s.state = 1
+			and p.status = 2
+			and m.member_type = 1
+			and p.create_time BETWEEN ADDDATE(CURDATE(),-30) and NOW()
+			and s.create_time BETWEEN ADDDATE(CURDATE(),-30) and NOW() 
+	)tmp where 
+		tmp.orderCount >= IFNULL((select config_value 
+										from tbl_wfx_sys_config f 
+									where f.config_key = 'wfx.apply.seller.order.count' limit 1),1)
+   </select>
+   
+    <!-- 查询出所有待审核状态的分销商及店铺信息总数 -->
+   <select id="queryAllApplyToSellerCount" resultType="int">
+		select count(*) from (
+			select 
+				IFNULL((select count(*) from tbl_wfx_order o 
+							where o.buyer_id = s.loginaccount_id and o.status = 'TRADE_SUCCESS'),0) orderCount
+				from tbl_wfx_seller_info s 
+				INNER JOIN tbl_wfx_shop p on s.id = p.seller_id 
+				INNER JOIN tbl_wfx_member_account m on s.loginaccount_id = m.id
+			where s.state = 1
+				and p.status = 2
+				and m.member_type = 1
+				and p.create_time BETWEEN ADDDATE(CURDATE(),-30) and NOW()
+				and s.create_time BETWEEN ADDDATE(CURDATE(),-30) and NOW() 
+		)tmp where tmp.orderCount >= IFNULL((select config_value 
+											from tbl_wfx_sys_config f where f.config_key = 'wfx.apply.seller.order.count' limit 1),1)
+   </select>
+   
+   <!-- 批量审核通过，修改分销商状态，用于分销商自动审核通过job -->
+   <update id="batchUpdateSellerStatus" parameterType="java.util.List" >
+   		 <foreach collection="list" item="item" index="index" open="" close="" separator=";">  
+              update tbl_wfx_seller_info  
+              set state = #{item.state,jdbcType=VARCHAR},
+	         	 pass_date = #{item.passDate,jdbcType=TIMESTAMP},
+	       		 pass_sysuser = #{item.passSysuser,jdbcType=VARCHAR},
+	       		 last_active_date = #{item.lastActiveDate,jdbcType=TIMESTAMP},
+	        	 last_active_optuser = #{item.lastActiveOptuser,jdbcType=VARCHAR}
+	         where id = #{item.id,jdbcType=VARCHAR}
+         </foreach>  
+   </update>
+   
+   <select id="getSellerIdByLoginName" parameterType="java.lang.String" resultType="java.lang.String">
+  		 select s.id from tbl_wfx_seller_info s left join tbl_wfx_member_account a 
+		on s.loginaccount_id= a.id where a.login_name=#{loginName,jdbcType=VARCHAR} 
+		limit 1
+   </select>
+   
+   <select id="getLevelTwoSeller" parameterType="java.lang.String" resultMap="SellerInfo">
+  		select sb.* from tbl_wfx_seller_info sa,tbl_wfx_seller_info sb
+		where sa.id = sb.parent_id
+		and sa.id = #{_parameter}
+   </select>
+   
+   <select id="getLevelThreeSeller" parameterType="java.lang.String" resultMap="SellerInfo">
+  		select sc.* from tbl_wfx_seller_info sa,tbl_wfx_seller_info sb,
+		tbl_wfx_seller_info sc
+		where sa.id = sb.parent_id and sb.id = sc.parent_id
+		and sa.id = #{_parameter} 
+   </select>
+   
+    <!-- 获取分销商二级分销商列表 -->
+   <select id="getLevelThreeSellerNum" parameterType="java.lang.String" resultType="int">
+   		select count(s.id) 
+   		from tbl_wfx_seller_info s 
+		where 
+		 EXISTS (
+		SELECT
+			s2.id
+		FROM
+			tbl_wfx_seller_info s2
+		WHERE
+			s2.parent_id = #{sellerId,jdbcType=VARCHAR}
+		AND s2.id = s.parent_id
+		
+		)
+		and s.state = 3
+   </select>
+   
+   <!-- 获取分销商二级分销商列表 -->
+   <select id="getLevelThreeSellerListById" parameterType="java.lang.String" resultMap="SellerInfo">
+   		select s.id,
+   			s.parent_id,
+			s.create_time,
+			s.loginaccount_id,
+			s.login_name,
+			s.seller_name,
+			s.pass_date,
+			p.name shop_name ,
+			p.shop_code,
+			m.member_sex,
+			m.birthday,
+			a.register_date,
+			(select count(*) from tbl_wfx_seller_info t where t.parent_id = s.id ) subSellerCount	
+		from tbl_wfx_seller_info s 
+			INNER JOIN tbl_wfx_shop p on s.id = p.seller_id 
+			INNER JOIN tbl_wfx_member_profile m on s.loginaccount_id = m.loginaccount_id
+			INNER JOIN tbl_wfx_member_account a on a.id = m.loginaccount_id		
+		where  EXISTS (
+		SELECT
+			s2.id
+		FROM
+			tbl_wfx_seller_info s2
+		WHERE
+			s2.parent_id = #{sellerId,jdbcType=VARCHAR}
+		AND s2.id = s.parent_id
+		
+		)
+		and s.state = 3
+		  order by s.pass_date desc 
+   </select>
+   
+</mapper>

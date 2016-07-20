@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.discover.dao.DiscoverLogMapper">
+    <resultMap id="DiscoverLog" type="com.yougou.wfx.discover.model.DiscoverLogEntity">
+    	<result property="id" column="Id" jdbcType="VARCHAR"/>
+    	<result property="operateUser" column="operate_user" jdbcType="VARCHAR"/>
+    	<result property="operateAccount" column="operate_account" jdbcType="VARCHAR"/>
+    	<result property="businessType" column="business_type" jdbcType="VARCHAR"/>
+    	<result property="operateType" column="operate_type" jdbcType="VARCHAR"/>
+    	<result property="operateContent" column="operate_content" jdbcType="VARCHAR"/>
+    	<result property="operateDate" column="operate_date" jdbcType="TIMESTAMP"/>
+    	<result property="operatorIp" column="operator_ip" jdbcType="VARCHAR"/>
+    	<result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		Id,operate_user,operate_account,business_type,operate_type,operate_content,operate_date,operator_ip,remark
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and Id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="operateUser != null and operateUser != ''">
+        	and operate_user = #{operateUser,jdbcType=VARCHAR}
+	        </if>
+			<if test="operateAccount != null and operateAccount != ''">
+        	and operate_account = #{operateAccount,jdbcType=VARCHAR}
+	        </if>
+			<if test="businessType != null and businessType != ''">
+        	and business_type = #{businessType,jdbcType=VARCHAR}
+	        </if>
+			<if test="operateType != null and operateType != ''">
+        	and operate_type = #{operateType,jdbcType=VARCHAR}
+	        </if>
+			<if test="operateContent != null and operateContent != ''">
+        	and operate_content = #{operateContent,jdbcType=VARCHAR}
+	        </if>
+			<if test="operateDate != null">
+        	and operate_date = #{operateDate,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="operatorIp != null and operatorIp != ''">
+        	and operator_ip = #{operatorIp,jdbcType=VARCHAR}
+	        </if>
+			<if test="remark != null and remark != ''">
+        	and remark = #{remark,jdbcType=VARCHAR}
+	        </if>
+	         <if test="createTimeStart != null and createTimeStart != ''  and createTimeEnd != null and createTimeEnd != ''" >
+        	and (operate_date<![CDATA[>= ]]> #{createTimeStart,jdbcType=TIMESTAMP}    and operate_date<![CDATA[<=]]> #{createTimeEnd,jdbcType=TIMESTAMP} )
+	        </if>
+    </sql>
+    
+    <sql id="set">
+			<if test="id != null ">
+        	Id = #{id,jdbcType=VARCHAR},
+	        </if>
+			<if test="operateUser != null ">
+        	operate_user = #{operateUser,jdbcType=VARCHAR},
+	        </if>
+			<if test="operateAccount != null ">
+        	operate_account = #{operateAccount,jdbcType=VARCHAR},
+	        </if>
+			<if test="businessType != null ">
+        	business_type = #{businessType,jdbcType=VARCHAR},
+	        </if>
+			<if test="operateType != null ">
+        	operate_type = #{operateType,jdbcType=VARCHAR},
+	        </if>
+			<if test="operateContent != null ">
+        	operate_content = #{operateContent,jdbcType=VARCHAR},
+	        </if>
+			<if test="operateDate != null ">
+        	operate_date = #{operateDate,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="operatorIp != null ">
+        	operator_ip = #{operatorIp,jdbcType=VARCHAR},
+	        </if>
+			<if test="remark != null ">
+        	remark = #{remark,jdbcType=VARCHAR}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="DiscoverLog" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_discover_log
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.discover.model.DiscoverLogEntity" resultMap="DiscoverLog">
+        select <include refid="Base_Column_List"/> from tbl_wfx_discover_log where 1=1 
+        <include refid="where" />
+        order by operate_date desc
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.discover.model.DiscoverLogEntity" resultType="int">
+        select count(1) from tbl_wfx_discover_log where 1=1 
+        <include refid="where" />
+    </select>
+    
+     <select id="findByPage"  resultMap="DiscoverLog">
+        select <include refid="Base_Column_List"/> from tbl_wfx_discover_log where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.discover.model.DiscoverLogEntity">
+        insert into tbl_wfx_discover_log (<include refid="Base_Column_List" />)
+        values (
+        	#{id,jdbcType=VARCHAR},#{operateUser,jdbcType=VARCHAR}, #{operateAccount,jdbcType=VARCHAR},#{businessType,jdbcType=VARCHAR},#{operateType,jdbcType=VARCHAR}, #{operateContent,jdbcType=VARCHAR},#{operateDate,jdbcType=TIMESTAMP},#{operatorIp,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_discover_log
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.discover.model.DiscoverLogEntity" >
+        update tbl_wfx_discover_log
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

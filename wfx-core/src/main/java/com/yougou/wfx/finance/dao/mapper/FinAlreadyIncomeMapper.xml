@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.finance.dao.FinAlreadyIncomeMapper">
+    <resultMap id="FinAlreadyIncome" type="com.yougou.wfx.finance.model.FinAlreadyIncomeEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+    	<result property="customerName" column="customer_name" jdbcType="VARCHAR"/>
+    	<result property="customerNo" column="customer_no" jdbcType="VARCHAR"/>
+    	<result property="orderNo" column="order_no" jdbcType="VARCHAR"/>
+    	<result property="orderDate" column="order_date" jdbcType="TIMESTAMP"/>
+    	<result property="orderAmount" column="order_amount" jdbcType="DOUBLE"/>
+    	<result property="storeName" column="store_name" jdbcType="VARCHAR"/>
+    	<result property="storeId" column="store_id" jdbcType="VARCHAR"/>
+    	<result property="outTradeNo" column="out_trade_no" jdbcType="VARCHAR"/>
+    	<result property="tradeDate" column="trade_date" jdbcType="TIMESTAMP"/>
+    	<result property="tradeAmount" column="trade_amount" jdbcType="DOUBLE"/>
+    	<result property="bankTradeNo" column="bank_trade_no" jdbcType="VARCHAR"/>
+    	<result property="bankNo" column="bank_no" jdbcType="VARCHAR"/>
+    	<result property="bankName" column="bank_name" jdbcType="VARCHAR"/>
+    	<result property="incomeType" column="income_type" jdbcType="INTEGER"/>
+    	<result property="incomeTypeDesc" column="income_type_desc" jdbcType="VARCHAR"/>
+    	<result property="incomeAccount" column="income_account" jdbcType="VARCHAR"/>
+    	<result property="productAmount" column="product_amount" jdbcType="DOUBLE"/>
+    	<result property="fareAmount" column="fare_amount" jdbcType="DOUBLE"/>
+    	<result property="incomedAmount" column="incomed_amount" jdbcType="DOUBLE"/>
+    	<result property="operator" column="operator" jdbcType="VARCHAR"/>
+    	<result property="operateType" column="operate_type" jdbcType="INTEGER"/>
+    	<result property="note" column="note" jdbcType="VARCHAR"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,create_date,customer_name,customer_no,order_no,order_date,order_amount,store_name,store_id,out_trade_no,trade_date,trade_amount,bank_trade_no,bank_no,bank_name,income_type,income_type_desc,income_account,product_amount,fare_amount,incomed_amount,operator,operate_type,note,update_time
+    </sql>
+    
+    <sql id="where">
+		<if test="id != null and id != ''">
+       	and id = #{id,jdbcType=VARCHAR}
+        </if>
+		<if test="customerName != null and customerName != ''">
+       	and customer_name like CONCAT(#{customerName,jdbcType=VARCHAR}, '%') 
+        </if>
+		<if test="customerNo != null and customerNo != ''">
+       	and customer_no = #{customerNo,jdbcType=VARCHAR}
+        </if>
+		<if test="orderNo != null and orderNo != ''">
+       	and order_no = #{orderNo,jdbcType=VARCHAR}
+        </if>
+		<if test="storeName != null and storeName != ''">
+       	and store_name like CONCAT(#{storeName,jdbcType=VARCHAR}, '%') 
+        </if>
+		<if test="storeId != null and storeId != ''">
+       	and store_id = #{storeId,jdbcType=VARCHAR}
+        </if>
+		<if test="outTradeNo != null and outTradeNo != ''">
+       	and out_trade_no = #{outTradeNo,jdbcType=VARCHAR}
+        </if>
+		<if test="tradeStartTime != null and tradeStartTime != '' ">
+       	and trade_date &gt;= STR_TO_DATE(#{tradeStartTime, jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="tradeEndTime != null and tradeEndTime != '' ">
+       	and trade_date &lt;= STR_TO_DATE(#{tradeEndTime, jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%s')
+        </if>
+		<if test="bankTradeNo != null and bankTradeNo != ''">
+       	and bank_trade_no = #{bankTradeNo,jdbcType=VARCHAR}
+        </if>
+		<if test="bankNo != null and bankNo != ''">
+       	and bank_no = #{bankNo,jdbcType=VARCHAR}
+        </if>
+		<if test="bankName != null and bankName != ''">
+       	and bank_name = #{bankName,jdbcType=VARCHAR}
+        </if>
+		<if test="incomeType != null ">
+       	and income_type = #{incomeType,jdbcType=INTEGER}
+        </if>
+		<if test="incomeTypeDesc != null and incomeTypeDesc != ''">
+       	and income_type_desc = #{incomeTypeDesc,jdbcType=VARCHAR}
+        </if>
+		<if test="incomeAccount != null and incomeAccount != ''">
+       	and income_account = #{incomeAccount,jdbcType=VARCHAR}
+        </if>
+		<if test="operateType != null ">
+       	and operate_type = #{operateType,jdbcType=INTEGER}
+        </if>
+    </sql>
+    
+    <sql id="set">
+		<if test="customerName != null and customerName != '' ">
+       	customer_name = #{customerName,jdbcType=VARCHAR},
+        </if>
+		<if test="customerNo != null and customerNo != '' ">
+       	customer_no = #{customerNo,jdbcType=VARCHAR},
+        </if>
+		<if test="orderNo != null and orderNo != '' ">
+       	order_no = #{orderNo,jdbcType=VARCHAR},
+        </if>
+		<if test="orderDate != null">
+       	order_date = #{orderDate,jdbcType=TIMESTAMP},
+        </if>
+		<if test="orderAmount != null">
+       	order_amount = #{orderAmount,jdbcType=DOUBLE},
+        </if>
+		<if test="storeName != null and storeName != '' ">
+       	store_name = #{storeName,jdbcType=VARCHAR},
+        </if>
+		<if test="storeId != null and storeId != '' ">
+       	store_id = #{storeId,jdbcType=VARCHAR},
+        </if>
+		<if test="outTradeNo != null and outTradeNo != '' ">
+       	out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+        </if>
+		<if test="tradeDate != null">
+       	trade_date = #{tradeDate,jdbcType=TIMESTAMP},
+        </if>
+		<if test="tradeAmount != null">
+       	trade_amount = #{tradeAmount,jdbcType=DOUBLE},
+        </if>
+		<if test="bankTradeNo != null and bankTradeNo != '' ">
+       	bank_trade_no = #{bankTradeNo,jdbcType=VARCHAR},
+        </if>
+		<if test="bankNo != null and bankNo != '' ">
+       	bank_no = #{bankNo,jdbcType=VARCHAR},
+        </if>
+		<if test="bankName != null and bankName != '' ">
+       	bank_name = #{bankName,jdbcType=VARCHAR},
+        </if>
+		<if test="incomeType != null">
+       	income_type = #{incomeType,jdbcType=INTEGER},
+        </if>
+		<if test="incomeTypeDesc != null and incomeTypeDesc != '' ">
+       	income_type_desc = #{incomeTypeDesc,jdbcType=VARCHAR},
+        </if>
+		<if test="incomeAccount != null">
+       	income_account = #{incomeAccount,jdbcType=VARCHAR},
+        </if>
+		<if test="productAmount != null">
+       	product_amount = #{productAmount,jdbcType=DOUBLE},
+        </if>
+		<if test="fareAmount != null">
+       	fare_amount = #{fareAmount,jdbcType=DOUBLE},
+        </if>
+		<if test="incomedAmount != null">
+       	incomed_amount = #{incomedAmount,jdbcType=DOUBLE},
+        </if>
+		<if test="operator != null and operator != '' ">
+       	operator = #{operator,jdbcType=VARCHAR},
+        </if>
+		<if test="operateType != null">
+       	operate_type = #{operateType,jdbcType=INTEGER},
+        </if>
+		<if test="note != null and note != '' ">
+       	note = #{note,jdbcType=VARCHAR},
+        </if>
+        <if test="updateTime != null">
+       	update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+    
+    <select id="getById" resultMap="FinAlreadyIncome" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_fin_already_income
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.finance.model.FinAlreadyIncomeEntity" resultMap="FinAlreadyIncome">
+        select * from tbl_wfx_fin_already_income where 1=1 
+        <include refid="where" />
+        order by create_date desc 
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.finance.model.FinAlreadyIncomeEntity" resultType="int">
+        select count(1) from tbl_wfx_fin_already_income where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryDataList" parameterType="com.yougou.wfx.finance.model.FinAlreadyIncomeEntity" resultMap="FinAlreadyIncome">
+        select * from tbl_wfx_fin_already_income where 1=1 
+        <include refid="where" />
+        order by create_date desc 
+    </select>
+    
+    <select id="queryDataListCount" parameterType="com.yougou.wfx.finance.model.FinAlreadyIncomeEntity" resultType="int">
+        select count(1) from tbl_wfx_fin_already_income where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryAlreadyIncome" parameterType="com.yougou.wfx.finance.model.FinAlreadyIncomeEntity" resultMap="FinAlreadyIncome">
+        select * from tbl_wfx_fin_already_income where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.finance.model.FinAlreadyIncomeEntity">
+        insert into tbl_wfx_fin_already_income (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{customerName,jdbcType=VARCHAR}
+        , #{customerNo,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{orderDate,jdbcType=TIMESTAMP}
+        , #{orderAmount,jdbcType=DOUBLE}, #{storeName,jdbcType=VARCHAR}, #{storeId,jdbcType=VARCHAR}
+        , #{outTradeNo,jdbcType=VARCHAR}, #{tradeDate,jdbcType=TIMESTAMP}, #{tradeAmount,jdbcType=DOUBLE}
+        , #{bankTradeNo,jdbcType=VARCHAR}, #{bankNo,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}
+        , #{incomeType,jdbcType=INTEGER}, #{incomeTypeDesc,jdbcType=VARCHAR}, #{incomeAccount,jdbcType=VARCHAR}
+        , #{productAmount,jdbcType=DOUBLE}, #{fareAmount,jdbcType=DOUBLE}, #{incomedAmount,jdbcType=DOUBLE}
+        , #{operator,jdbcType=VARCHAR}, #{operateType,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR},#{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    
+    <update id="update" parameterType="com.yougou.wfx.finance.model.FinAlreadyIncomeEntity" >
+        update tbl_wfx_fin_already_income
+        <trim prefix="SET" suffixOverrides=",">
+      		<include refid="set" />
+        </trim>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+</mapper>

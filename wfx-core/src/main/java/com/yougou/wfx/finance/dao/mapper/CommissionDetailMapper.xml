@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.finance.dao.CommissionDetailMapper">
+    <resultMap id="CommissionDetail" type="com.yougou.wfx.finance.model.CommissionDetailEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="wfxOrderDetailNo" column="wfx_order_detail_no" jdbcType="VARCHAR"/>
+    	<result property="orderTime" column="order_time" jdbcType="TIMESTAMP"/>
+    	<result property="wfxShopName" column="wfx_shop_name" jdbcType="VARCHAR"/>
+    	<result property="loginName" column="login_name" jdbcType="VARCHAR"/>
+    	<result property="commodityNo" column="commodity_no" jdbcType="VARCHAR"/>
+    	<result property="supplierCode" column="supplier_code" jdbcType="VARCHAR"/>
+    	<result property="brandNo" column="brand_no" jdbcType="VARCHAR"/>
+    	<result property="baseCatId1" column="base_cat_id1" jdbcType="VARCHAR"/>
+    	<result property="baseCatId2" column="base_cat_id2" jdbcType="VARCHAR"/>
+    	<result property="confirmTime" column="confirm_time" jdbcType="TIMESTAMP"/>
+    	<result property="settlementType" column="settlement_type" jdbcType="CHAR"/>
+    	<result property="commodityQuantity" column="commodity_quantity" jdbcType="INTEGER"/>
+    	<result property="goodsPrice" column="goods_price" jdbcType="DECIMAL"/>
+    	<result property="goodsAmount" column="goods_amount" jdbcType="DECIMAL"/>
+    	<result property="freightCharges" column="freight_charges" jdbcType="DECIMAL"/>
+    	<result property="deductRatio" column="deduct_ratio" jdbcType="DECIMAL"/>
+    	<result property="commissionAmount" column="commission_amount" jdbcType="DECIMAL"/>
+    	<result property="status" column="status" jdbcType="CHAR"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="sellerId" column="seller_id" jdbcType="VARCHAR"/>
+    	<result property="dealType" column="deal_type" jdbcType="CHAR"/>
+    	<result property="remark" column="remark" jdbcType="VARCHAR"/>
+    	<result property="commissionLevel" column="commission_level" jdbcType="CHAR"/>
+    	<result property="wfxOrderNo" column="wfx_order_no" jdbcType="VARCHAR"/>
+    	<result property="nextSellerId" column="next_seller_id" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,wfx_order_detail_no,order_time,wfx_shop_name,login_name,commodity_no,supplier_code,brand_no,base_cat_id1,base_cat_id2,
+		confirm_time,settlement_type,commodity_quantity,goods_price,goods_amount,freight_charges,deduct_ratio,commission_amount,
+		status,update_time,create_time,seller_id,deal_type,remark,commission_level,wfx_order_no,next_seller_id
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="wfxOrderDetailNo != null and wfxOrderDetailNo != ''">
+        	and wfx_order_detail_no LIKE CONCAT(#{wfxOrderDetailNo,jdbcType=VARCHAR}, '%')
+	        </if>
+			<if test="orderTime != null">
+        	and order_time = #{orderTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="wfxShopName != null and wfxShopName != ''">
+        	and wfx_shop_name = #{wfxShopName,jdbcType=VARCHAR}
+	        </if>
+			<if test="loginName != null and loginName != ''">
+        	and login_name = #{loginName,jdbcType=VARCHAR}
+	        </if>
+			<if test="commodityNo != null and commodityNo != ''">
+        	and commodity_no = #{commodityNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="supplierCode != null and supplierCode != ''">
+        	and supplier_code = #{supplierCode,jdbcType=VARCHAR}
+	        </if>
+			<if test="brandNo != null and brandNo != ''">
+        	and brand_no = #{brandNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="baseCatId1 != null and baseCatId1 != ''">
+        	and base_cat_id1 = #{baseCatId1,jdbcType=VARCHAR}
+	        </if>
+			<if test="baseCatId2 != null and baseCatId2 != ''">
+        	and base_cat_id2 = #{baseCatId2,jdbcType=VARCHAR}
+	        </if>
+	        
+	        <if test="confirmStartTime != null and confirmStartTime != '' ">
+				AND	confirm_time &gt;= #{confirmStartTime}
+			</if>
+			<if test="confirmEndTime != null and confirmEndTime != '' ">
+				AND	confirm_time &lt;= #{confirmEndTime}
+			</if>
+			
+			<if test="settlementType != null and settlementType != ''">
+        	and settlement_type = #{settlementType,jdbcType=CHAR}
+	        </if>
+			<if test="status != null">
+				<if test="status == 1">
+					<if test="dealType == 9 "><!-- 已结算（含1已结算、3已关闭） -->
+		        		and (status = '1' or status = '3')
+			        </if>
+					<if test="dealType == 2 "><!-- 已结算（仅查询3已关闭） -->
+		        		and status = '3' 
+			        </if>
+			        <if test="dealType == 1 "><!-- 已结算（仅查询1已结算） -->
+		        		and status = '1'
+			        </if>
+				</if>
+				<if test="status != 1">
+					and status = #{status,jdbcType=CHAR}
+				</if>
+	        </if>
+	        
+	        <if test="settleStartTime != null and settleStartTime != '' ">
+				AND	update_time &gt;= #{settleStartTime}
+			</if>
+			<if test="settleEndTime != null and settleEndTime != '' ">
+				AND	update_time &lt;= #{settleEndTime}
+			</if>
+			<if test="sellerId != null and sellerId != ''">
+        	and seller_id = #{sellerId,jdbcType=VARCHAR}
+	        </if>
+	        <if test="commissionLevel != null and commissionLevel != ''">
+        	and commission_level = #{commissionLevel}
+	        </if>
+			<if test="wfxOrderNo != null and wfxOrderNo != ''">
+        	and wfx_order_no = #{wfxOrderNo,jdbcType=VARCHAR}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="CommissionDetail" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_commission_detail
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.finance.model.CommissionDetailEntity" resultMap="CommissionDetail">
+        select (select brand_name from tbl_commodity_brand b where b.brand_no = cd.brand_no limit 0,1) brand_no,
+        	   (select cat_name from tbl_commodity_catb2c ct where ct.id = cd.base_cat_id1 limit 0,1) base_cat_id1,
+        	   (select cat_name from tbl_commodity_catb2c ct where ct.id = cd.base_cat_id2 limit 0,1) base_cat_id2,
+        id,wfx_order_detail_no,order_time,wfx_shop_name,login_name,commodity_no,supplier_code,confirm_time,settlement_type,
+        commodity_quantity,goods_price,goods_amount,freight_charges,deduct_ratio,commission_amount,status,update_time,
+        create_time,seller_id,deal_type,remark,commission_level,wfx_order_no,next_seller_id
+        from tbl_wfx_commission_detail cd where 1=1 
+        <include refid="where" />
+        order by order_time desc
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.finance.model.CommissionDetailEntity" resultType="int">
+        select count(1) from tbl_wfx_commission_detail where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="findPageGroup" parameterType="java.util.Map" resultType="com.yougou.wfx.finance.model.CommissionDetailEntity">
+       SELECT * from (
+				SELECT
+					t.wfx_order_no wfxOrderNo,
+					t.order_time orderTime,
+					t.seller_id sellerId,
+					ROUND(sum(t.commission_amount), 2) commissionAmount,
+					min(commission_level) commissionLevel
+				FROM
+					tbl_wfx_commission_detail t
+				WHERE
+					t.status = #{status,jdbcType=CHAR}
+				AND t.seller_id = #{sellerId,jdbcType=CHAR}
+				GROUP BY
+					t.wfx_order_no,
+					t.order_time,
+					t.seller_id) a ORDER BY a.orderTime desc
+    </select>
+    <select id="findPageCountGroup" parameterType="java.util.Map" resultType="int">
+       SELECT count(1) from (
+				SELECT
+					t.wfx_order_no wfxOrderNo,
+					t.order_time orderTime,
+					t.seller_id sellerId,
+					ROUND(sum(t.commission_amount), 2) commissionAmount
+				FROM
+					tbl_wfx_commission_detail t
+				WHERE
+					t.status = #{status,jdbcType=CHAR}
+				AND t.seller_id = #{sellerId,jdbcType=CHAR}
+				GROUP BY
+					t.wfx_order_no,
+					t.order_time,
+					t.seller_id) a 
+    </select>
+    
+    <!-- 已结算佣金按月分组，汇总 ===先期不使用
+    <select id="findCommissionByMonths" parameterType="com.yougou.wfx.finance.model.CommissionDetailEntity" resultType="java.util.Map">
+       select DATE_FORMAT(create_time,'%Y-%m') months,sum(commission_amount) commissionCollect from tbl_wfx_commission_detail 
+        where seller_id=#{sellerId,jdbcType=VARCHAR} and status='1' group by months
+    </select>-->
+    
+    <!-- 佣金根据分销商id和结算状态，汇总 -->
+    <select id="findCommissionCollect" parameterType="com.yougou.wfx.finance.model.CommissionDetailEntity" resultType="java.util.Map">
+        select seller_id sellerId,ROUND(ifnull(sum(commission_amount),0),2) commissionAmount  
+          from tbl_wfx_commission_detail 
+         where seller_id=#{sellerId,jdbcType=VARCHAR} and status =#{status,jdbcType=CHAR} 
+    </select>
+    
+    <insert id="insert" parameterType="com.yougou.wfx.finance.model.CommissionDetailEntity">
+        insert into tbl_wfx_commission_detail (<include refid="Base_Column_List" />)
+        values (
+         #{id,jdbcType=VARCHAR},#{wfxOrderDetailNo,jdbcType=VARCHAR},#{orderTime,jdbcType=TIMESTAMP},#{wfxShopName,jdbcType=VARCHAR},
+         #{loginName,jdbcType=VARCHAR},#{commodityNo,jdbcType=VARCHAR},#{supplierCode,jdbcType=VARCHAR},#{brandNo,jdbcType=VARCHAR},
+         #{baseCatId1,jdbcType=VARCHAR},#{baseCatId2,jdbcType=VARCHAR},#{confirmTime,jdbcType=TIMESTAMP},#{settlementType,jdbcType=CHAR},
+         #{commodityQuantity,jdbcType=INTEGER},#{goodsPrice,jdbcType=DECIMAL},#{goodsAmount,jdbcType=DECIMAL},#{freightCharges,jdbcType=DECIMAL},
+         #{deductRatio,jdbcType=TINYINT},#{commissionAmount,jdbcType=DECIMAL},#{status,jdbcType=CHAR},null,
+         now(),#{sellerId,jdbcType=VARCHAR},#{dealType,jdbcType=CHAR},#{remark,jdbcType=VARCHAR},#{commissionLevel,jdbcType=CHAR},
+         #{wfxOrderNo,jdbcType=VARCHAR}, #{nextSellerId,jdbcType=VARCHAR}
+        )
+    </insert>
+    
+    <update id="update" parameterType="com.yougou.wfx.finance.model.CommissionDetailEntity" >
+        update tbl_wfx_commission_detail set
+        <if test="status != null and status !='' ">
+       	status = #{status,jdbcType=CHAR},
+        </if>
+		<if test="dealType != null and dealType !='' ">
+       	deal_type = #{dealType,jdbcType=CHAR},
+        </if>
+		<if test="remark != null and remark !='' ">
+       	remark = #{remark,jdbcType=VARCHAR},
+        </if> 
+        update_time =now() where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+     <!--1、根据状态为0未结算，查询  -->
+    <select id="queryUnSettleCommission" resultType="com.yougou.wfx.finance.model.CommissionDetailEntity" >
+        select c.id,c.commission_level commissionLevel,c.wfx_order_detail_no wfxOrderDetailNo,c.commission_amount commissionAmount,
+        	   c.seller_id sellerId,c.create_time createTime ,next_seller_id nextSellerId
+        	   from tbl_wfx_commission_detail c 
+         where c.status='0' 
+         order by c.order_time asc limit 0,1000
+    </select>
+     <!--2、调度结束佣金明细处理  -->
+    <update id="dispatchEndUpdate" parameterType="com.yougou.wfx.finance.model.CommissionDetailEntity" >
+       update tbl_wfx_commission_detail set
+        <if test="status != null and status !='' ">
+       	status = #{status,jdbcType=CHAR},
+        </if>
+		<if test="remark != null and remark !='' ">
+       	remark = #{remark,jdbcType=VARCHAR},
+        </if>
+        deal_type =null,update_time =now()
+		where id = #{id} and status='0'
+    </update>
+    
+    <select id="queryList" parameterType="com.yougou.wfx.finance.model.CommissionDetailEntity" resultMap="CommissionDetail">
+        select <include refid="Base_Column_List"/> from tbl_wfx_commission_detail where 1=1 
+        	<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="wfxOrderDetailNo != null and wfxOrderDetailNo != ''">
+        	and wfx_order_detail_no = #{wfxOrderDetailNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="wfxShopName != null and wfxShopName != ''">
+        	and wfx_shop_name = #{wfxShopName,jdbcType=VARCHAR}
+	        </if>
+			<if test="loginName != null and loginName != ''">
+        	and login_name = #{loginName,jdbcType=VARCHAR}
+	        </if>
+			<if test="commodityNo != null and commodityNo != ''">
+        	and commodity_no = #{commodityNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="supplierCode != null and supplierCode != ''">
+        	and supplier_code = #{supplierCode,jdbcType=VARCHAR}
+	        </if>
+			<if test="brandNo != null and brandNo != ''">
+        	and brand_no = #{brandNo,jdbcType=VARCHAR}
+	        </if>
+	        <if test="confirmStartTime != null and confirmStartTime != '' ">
+				AND	confirm_time &gt;= #{confirmStartTime}
+			</if>
+			<if test="confirmEndTime != null and confirmEndTime != '' ">
+				AND	confirm_time &lt;= #{confirmEndTime}
+			</if>
+			<if test="settlementType != null and settlementType != ''">
+        	and settlement_type = #{settlementType,jdbcType=CHAR}
+	        </if>
+			<if test="status != null and status !='' ">
+				and status = #{status,jdbcType=CHAR}
+	        </if>
+	        <if test="settleStartTime != null and settleStartTime != '' ">
+				AND	update_time &gt;= #{settleStartTime}
+			</if>
+			<if test="settleEndTime != null and settleEndTime != '' ">
+				AND	update_time &lt;= #{settleEndTime}
+			</if>
+			<if test="sellerId != null and sellerId != ''">
+        	and seller_id = #{sellerId,jdbcType=VARCHAR}
+	        </if>
+	        <if test="commissionLevel != null and commissionLevel != ''">
+        	and commission_level = #{commissionLevel}
+	        </if>
+			<if test="wfxOrderNo != null and wfxOrderNo != ''">
+        	and wfx_order_no = #{wfxOrderNo,jdbcType=VARCHAR}
+	        </if>
+    </select>
+</mapper>

@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.order.dao.OrderDetailMapper">
+    <resultMap id="OrderDetail" type="com.yougou.wfx.order.model.OrderDetailEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="wfxOrderDetailNo" column="wfx_order_detail_no" jdbcType="VARCHAR"/>
+    	<result property="sellerId" column="seller_id" jdbcType="VARCHAR"/>
+    	<result property="shopId" column="shop_id" jdbcType="VARCHAR"/>
+    	<result property="shopName" column="shop_name" jdbcType="VARCHAR"/>
+    	<result property="orderId" column="order_id" jdbcType="VARCHAR"/>
+    	<result property="commodityId" column="commodity_id" jdbcType="VARCHAR"/>
+    	<result property="prodId" column="prod_id" jdbcType="VARCHAR"/>
+    	<result property="outerCommodityId" column="outer_commodity_id" jdbcType="VARCHAR"/>
+    	<result property="outerProdId" column="outer_prod_id" jdbcType="VARCHAR"/>
+    	<result property="prodName" column="prod_name" jdbcType="VARCHAR"/>
+    	<result property="prodSpec" column="prod_spec" jdbcType="VARCHAR"/>
+    	<result property="payment" column="payment" jdbcType="DECIMAL"/>
+    	<result property="num" column="num" jdbcType="INTEGER"/>
+    	<result property="price" column="price" jdbcType="DECIMAL"/>
+    	<result property="discountFee" column="discount_fee" jdbcType="DECIMAL"/>
+    	<result property="totalFee" column="total_fee" jdbcType="DECIMAL"/>
+    	<result property="proDiscountFee" column="pro_discount_fee" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel1" column="commission_level1" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel2" column="commission_level2" jdbcType="DECIMAL"/>
+    	<result property="refundStatus" column="refund_status" jdbcType="VARCHAR"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    	<result property="commissionLevel1Percent" column="commission_level1_percent" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel2Percent" column="commission_level2_percent" jdbcType="DECIMAL"/>
+    	<result property="returnAddressNo" column="return_address_no" jdbcType="VARCHAR"/>
+    	<result property="commissionLevel3Percent" column="commission_level3_percent" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel3" column="commission_level3" jdbcType="DECIMAL"/>
+    </resultMap>
+    
+    <resultMap id="OrderDetailComm" type="com.yougou.wfx.order.dto.output.OrderDetailCommDto">
+    	<result property="orderDetailId" column="orderDetailId" jdbcType="VARCHAR"/>
+    	<result property="wfxOrderDetailNo" column="wfxOrderDetailNo" jdbcType="VARCHAR"/>
+    	<result property="prodId" column="prodId" jdbcType="VARCHAR"/>
+    	<result property="commodityId" column="commodityId" jdbcType="VARCHAR"/>
+    	<result property="picSmall" column="picSmall" jdbcType="VARCHAR"/>
+    	<result property="prodName" column="prodName" jdbcType="VARCHAR"/>
+    	<result property="prodSpec" column="prodSpec" jdbcType="VARCHAR"/>
+    	<result property="wfxPrice" column="wfxPrice" jdbcType="DECIMAL"/>
+    	<result property="num" column="num" jdbcType="INTEGER"/>
+    	<result property="commissionLevel1" column="commissionLevel1" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel2" column="commissionLevel2" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel1Percent" column="commissionLevel1Percent" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel2Percent" column="commissionLevel2Percent" jdbcType="DECIMAL"/>
+    	<result property="returnAddressNo" column="return_address_no" jdbcType="VARCHAR"/>
+    	<result property="commissionLevel3Percent" column="commission_level3_percent" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel3" column="commission_level3" jdbcType="DECIMAL"/>
+    	
+    </resultMap>
+    
+    <resultMap id="commissionDetail" type="com.yougou.wfx.order.dto.output.OrderDetailCommissionOutPutDto">
+    	<result property="orderId" column="orderId" jdbcType="VARCHAR"/>
+    	<result property="orderNo" column="orderNo" jdbcType="VARCHAR"/>
+    	<result property="createOrderTime" column="createOrderTime" jdbcType="TIMESTAMP"/>
+    	<result property="shopId" column="shopId" jdbcType="VARCHAR"/>
+    	<result property="shopName" column="shopName" jdbcType="VARCHAR"/>
+    	<result property="prodId" column="prodId" jdbcType="VARCHAR"/>
+    	<result property="commodityId" column="commodityId" jdbcType="VARCHAR"/>
+    	<result property="picSmall" column="picSmall" jdbcType="VARCHAR"/>
+    	<result property="prodName" column="prodName" jdbcType="VARCHAR"/>
+    	<result property="prodSpec" column="prodSpec" jdbcType="VARCHAR"/>
+    	<result property="wfxPrice" column="wfxPrice" jdbcType="DECIMAL"/>
+    	<result property="num" column="num" jdbcType="INTEGER"/>
+    	<result property="commission" column="commission" jdbcType="DECIMAL"/> 
+    	<result property="wfxOrderDetailNo" column="wfxOrderDetailNo" jdbcType="VARCHAR"/>
+    	<result property="shopLevel" column="shopLevel" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,wfx_order_detail_no,seller_id,shop_id,shop_name,order_id,commodity_id,prod_id,outer_commodity_id,outer_prod_id,prod_name,prod_spec,payment,num,price,discount_fee,total_fee,pro_discount_fee,commission_level1,commission_level2,refund_status,create_time,update_time,commission_level1_percent,commission_level2_percent
+		,return_address_no,commission_level3_percent,commission_level3
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="wfxOrderDetailNo != null and wfxOrderDetailNo != ''">
+        	and wfx_order_detail_no = #{wfxOrderDetailNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="sellerId != null and sellerId != ''">
+        	and seller_id = #{sellerId,jdbcType=VARCHAR}
+	        </if>
+			<if test="shopId != null and shopId != ''">
+        	and shop_id = #{shopId,jdbcType=VARCHAR}
+	        </if>
+			<if test="shopName != null and shopName != ''">
+        	and shop_name = #{shopName,jdbcType=VARCHAR}
+	        </if>
+			<if test="orderId != null and orderId != ''">
+        	and order_id = #{orderId,jdbcType=VARCHAR}
+	        </if>
+			<if test="commodityId != null and commodityId != ''">
+        	and commodity_id = #{commodityId,jdbcType=VARCHAR}
+	        </if>
+			<if test="prodId != null and prodId != ''">
+        	and prod_id = #{prodId,jdbcType=VARCHAR}
+	        </if>
+			<if test="outerCommodityId != null and outerCommodityId != ''">
+        	and outer_commodity_id = #{outerCommodityId,jdbcType=VARCHAR}
+	        </if>
+			<if test="outerProdId != null and outerProdId != ''">
+        	and outer_prod_id = #{outerProdId,jdbcType=VARCHAR}
+	        </if>
+			<if test="prodName != null and prodName != ''">
+        	and prod_name = #{prodName,jdbcType=VARCHAR}
+	        </if>
+			<if test="prodSpec != null and prodSpec != ''">
+        	and prod_spec = #{prodSpec,jdbcType=VARCHAR}
+	        </if>
+			<if test="payment != null">
+        	and payment = #{payment,jdbcType=DECIMAL}
+	        </if>
+			<if test="num != null and num != 0">
+        	and num = #{num,jdbcType=INTEGER}
+	        </if>
+			<if test="price != null">
+        	and price = #{price,jdbcType=DECIMAL}
+	        </if>
+			<if test="discountFee != null">
+        	and discount_fee = #{discountFee,jdbcType=DECIMAL}
+	        </if>
+			<if test="totalFee != null">
+        	and total_fee = #{totalFee,jdbcType=DECIMAL}
+	        </if>
+			<if test="proDiscountFee != null">
+        	and pro_discount_fee = #{proDiscountFee,jdbcType=DECIMAL}
+	        </if>
+			<if test="commissionLevel1 != null">
+        	and commission_level1 = #{commissionLevel1,jdbcType=DECIMAL}
+	        </if>
+			<if test="commissionLevel2 != null">
+        	and commission_level2 = #{commissionLevel2,jdbcType=DECIMAL}
+	        </if>
+			<if test="refundStatus != null and refundStatus != ''">
+        	and refund_status = #{refundStatus,jdbcType=VARCHAR}
+	        </if>
+			<if test="createTime != null">
+        	and create_time = #{createTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="updateTime != null">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="commissionLevel1Percent != null">
+        	and commission_level1_percent = #{commissionLevel1Percent,jdbcType=DECIMAL}
+	        </if>
+			<if test="commissionLevel2Percent != null">
+        	and commission_level2_percent = #{commissionLevel2Percent,jdbcType=DECIMAL}
+	        </if>
+	        <if test="returnAddressNo != null and returnAddressNo != ''">
+        	and return_address_no = #{returnAddressNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="commissionLevel3Percent != null">
+        	and commission_level3_percent = #{commissionLevel3Percent,jdbcType=DECIMAL}
+	        </if>
+			<if test="commissionLevel3 != null">
+        	and commission_level3 = #{commissionLevel3,jdbcType=DECIMAL}
+        	</if>
+    </sql>
+    
+    <sql id="set">
+			<if test="id != null">
+        	id = #{id,jdbcType=VARCHAR},
+	        </if>
+			<if test="wfxOrderDetailNo != null">
+        	wfx_order_detail_no = #{wfxOrderDetailNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="sellerId != null">
+        	seller_id = #{sellerId,jdbcType=VARCHAR},
+	        </if>
+			<if test="shopId != null">
+        	shop_id = #{shopId,jdbcType=VARCHAR},
+	        </if>
+			<if test="shopName != null">
+        	shop_name = #{shopName,jdbcType=VARCHAR},
+	        </if>
+			<if test="orderId != null">
+        	order_id = #{orderId,jdbcType=VARCHAR},
+	        </if>
+			<if test="commodityId != null">
+        	commodity_id = #{commodityId,jdbcType=VARCHAR},
+	        </if>
+			<if test="prodId != null">
+        	prod_id = #{prodId,jdbcType=VARCHAR},
+	        </if>
+			<if test="outerCommodityId != null">
+        	outer_commodity_id = #{outerCommodityId,jdbcType=VARCHAR},
+	        </if>
+			<if test="outerProdId != null">
+        	outer_prod_id = #{outerProdId,jdbcType=VARCHAR},
+	        </if>
+			<if test="prodName != null">
+        	prod_name = #{prodName,jdbcType=VARCHAR},
+	        </if>
+			<if test="prodSpec != null">
+        	prod_spec = #{prodSpec,jdbcType=VARCHAR},
+	        </if>
+			<if test="payment != null">
+        	payment = #{payment,jdbcType=DECIMAL},
+	        </if>
+			<if test="num != null and num != 0">
+        	num = #{num,jdbcType=INTEGER},
+	        </if>
+			<if test="price != null">
+        	price = #{price,jdbcType=DECIMAL},
+	        </if>
+			<if test="discountFee != null">
+        	discount_fee = #{discountFee,jdbcType=DECIMAL},
+	        </if>
+			<if test="totalFee != null">
+        	total_fee = #{totalFee,jdbcType=DECIMAL},
+	        </if>
+			<if test="proDiscountFee != null">
+        	pro_discount_fee = #{proDiscountFee,jdbcType=DECIMAL},
+	        </if>
+			<if test="commissionLevel1 != null">
+        	commission_level1 = #{commissionLevel1,jdbcType=DECIMAL},
+	        </if>
+			<if test="commissionLevel2 != null">
+        	commission_level2 = #{commissionLevel2,jdbcType=DECIMAL},
+	        </if>
+			<if test="refundStatus != null">
+        	refund_status = #{refundStatus,jdbcType=VARCHAR},
+	        </if>
+			<if test="createTime != null">
+        	create_time = #{createTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="updateTime != null">
+        	update_time = #{updateTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="commissionLevel1Percent != null">
+        	commission_level1_percent = #{commissionLevel1Percent,jdbcType=DECIMAL},
+	        </if>
+			<if test="commissionLevel2Percent != null">
+        	commission_level2_percent = #{commissionLevel2Percent,jdbcType=DECIMAL}
+	        </if>
+	        <if test="returnAddressNo != null and returnAddressNo != ''">
+        	return_address_no = #{returnAddressNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="commissionLevel3Percent != null ">
+        	commission_level3_percent = #{commissionLevel3Percent,jdbcType=DECIMAL},
+	        </if>
+			<if test="commissionLevel3 != null ">
+        	commission_level3 = #{commissionLevel3,jdbcType=DECIMAL}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="OrderDetail" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_order_detail
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+      <select id="getByOrderIdAndProId" resultType="java.lang.String"  >
+        select id    from tbl_wfx_order_detail
+        where order_id = #{orderId,jdbcType=VARCHAR} and prod_id = #{prodId,jdbcType=VARCHAR} 
+    </select>
+    
+    
+    <select id="findPage" parameterType="com.yougou.wfx.order.model.OrderDetailEntity" resultMap="OrderDetail">
+        select <include refid="Base_Column_List"/> from tbl_wfx_order_detail where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.order.model.OrderDetailEntity" resultType="int">
+        select count(1) from tbl_wfx_order_detail where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryList" parameterType="com.yougou.wfx.order.model.OrderDetailEntity" resultMap="OrderDetail">
+        select <include refid="Base_Column_List"/> from tbl_wfx_order_detail where 1=1 
+        <include refid="where" />
+    </select>
+    <select id="queryDetailListByOrderId" parameterType="java.lang.String" resultMap="OrderDetail">
+    	SELECT
+			d.id,
+			d.wfx_order_detail_no,
+			d.seller_id,
+			d.shop_id,
+			d.shop_name,
+			d.order_id,
+			d.commodity_id,
+			d.prod_id,
+			d.outer_commodity_id,
+			d.outer_prod_id,
+			d.prod_name,
+			d.prod_spec,
+			d.payment,
+			d.num,
+			d.price,
+			d.discount_fee,
+			d.total_fee,
+			d.pro_discount_fee,
+			d.commission_level1,
+			d.commission_level2,
+			d.create_time,
+			d.update_time,
+			d.commission_level1_percent,
+			d.commission_level2_percent,
+			d.return_address_no,
+			d.commission_level3_percent,
+			d.commission_level3,
+			r.`status` AS refund_status
+		FROM
+			tbl_wfx_order_detail d
+		LEFT JOIN tbl_wfx_order_refund r ON d.id = r.order_detail_id
+			WHERE d.order_id = #{orderId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="queryCommsByOrderId" parameterType="java.lang.String" resultMap="OrderDetailComm">
+        select d.id orderDetailId,d.wfx_order_detail_no wfxOrderDetailNo,d.prod_id prodId,
+		d.commodity_id commodityId,s.pic_small picSmall,d.prod_name prodName,d.prod_spec prodSpec,d.price wfxPrice,
+		d.num num,d.commission_level1 commissionLevel1,d.commission_level2 commissionLevel2,d.commission_level3 commissionLevel3,
+		d.commission_level1_percent commissionLevel1Percent,d.commission_level2_percent commissionLevel2Percent,
+        d.commission_level3_percent commissionLevel3Percent
+		from tbl_wfx_order_detail d 
+		left join tbl_commodity_product p on d.prod_id = p.id
+		left join tbl_commodity_style s on p.commodity_id = s.id
+		where d.order_id = #{orderId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="getCommByCommId" parameterType="java.lang.String" resultMap="commissionDetail">
+        select o.id orderId,o.wfx_order_no orderNo,o.created_time createOrderTime,o.shop_id shopId,o.shop_code shopName,
+		d.prod_id prodId,s.id commodityId,s.pic_small picSmall,s.commodity_name prodName,c.commission_level shopLevel,
+		d.prod_spec prodSpec,d.price wfxPrice,d.num num,c.commission_amount commission,c.wfx_order_detail_no wfxOrderDetailNo
+		from tbl_wfx_commission_detail c
+		left join tbl_wfx_order o on c.wfx_order_no = o.wfx_order_no 
+		left join tbl_wfx_order_detail d on c.wfx_order_detail_no = d.wfx_order_detail_no
+		left join tbl_commodity_product p on d.prod_id = p.id
+		left join tbl_commodity_style s on p.commodity_id = s.id
+		where c.id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="getRealCommission" parameterType="java.util.HashMap" resultType="Double">
+        select sum(commission_amount) from tbl_wfx_commission_detail t
+         where t.commission_level = #{level,jdbcType=VARCHAR} and t.wfx_order_detail_no=  #{wfxOrderDetailNo,jdbcType=VARCHAR}
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.order.model.OrderDetailEntity">
+        insert into tbl_wfx_order_detail (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},#{wfxOrderDetailNo,jdbcType=VARCHAR},#{sellerId,jdbcType=VARCHAR},#{shopId,jdbcType=VARCHAR},#{shopName,jdbcType=VARCHAR},#{orderId,jdbcType=VARCHAR},
+        #{commodityId,jdbcType=VARCHAR},#{prodId,jdbcType=VARCHAR},#{outerCommodityId,jdbcType=VARCHAR},#{outerProdId,jdbcType=VARCHAR},
+        #{prodName,jdbcType=VARCHAR},#{prodSpec,jdbcType=VARCHAR},#{payment,jdbcType=DECIMAL},#{num,jdbcType=INTEGER},
+        #{price,jdbcType=DECIMAL},#{discountFee,jdbcType=DECIMAL},#{totalFee,jdbcType=DECIMAL},#{proDiscountFee,jdbcType=DECIMAL},
+        #{commissionLevel1,jdbcType=DECIMAL},#{commissionLevel2,jdbcType=DECIMAL},#{refundStatus,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP},#{commissionLevel1Percent,jdbcType=DECIMAL},
+        #{commissionLevel2Percent,jdbcType=DECIMAL}, #{returnAddressNo,jdbcType=VARCHAR},
+         #{commissionLevel3Percent,jdbcType=DECIMAL},#{commissionLevel3,jdbcType=DECIMAL}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_order_detail
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.order.model.OrderDetailEntity" >
+        update tbl_wfx_order_detail
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+     <select id="getByOrderId" resultType="java.lang.String" parameterType="java.lang.String">
+        select 
+        distinct id
+        from tbl_wfx_order_detail
+        where order_id = #{orderId,jdbcType=VARCHAR}
+    </select>
+</mapper>

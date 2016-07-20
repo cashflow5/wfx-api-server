@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.discover.dao.DiscoverChannelMapper">
+    <resultMap id="DiscoverChannel" type="com.yougou.wfx.discover.model.DiscoverChannelEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="channelCode" column="channel_code" jdbcType="VARCHAR"/>
+    	<result property="channelName" column="channel_name" jdbcType="VARCHAR"/>
+    	<result property="status" column="status" jdbcType="TINYINT"/>
+    	<result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+    	<result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+    	<result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+    	<result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+    	<result property="orderMark" column="order_mark" jdbcType="TINYINT"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,channel_code,channel_name,status,create_date,update_date,create_user,update_user,order_mark
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="channelCode != null and channelCode != ''">
+        	and channel_code = #{channelCode,jdbcType=VARCHAR}
+	        </if>
+			<if test="channelName != null and channelName != ''">
+        	and channel_name = #{channelName,jdbcType=VARCHAR}
+	        </if>
+			<if test="status != null and status !=0">
+        	and status = #{status,jdbcType=TINYINT}
+	        </if>
+			<if test="createDate != null">
+        	and create_date = #{createDate,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="updateDate != null">
+        	and update_date = #{updateDate,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="createUser != null and createUser != ''">
+        	and create_user = #{createUser,jdbcType=VARCHAR}
+	        </if>
+			<if test="updateUser != null and updateUser != ''">
+        	and update_user = #{updateUser,jdbcType=VARCHAR}
+	        </if>
+		
+    </sql>
+    
+    <sql id="set">
+			<if test="id != null ">
+        	id = #{id,jdbcType=VARCHAR},
+	        </if>
+			<if test="channelCode != null ">
+        	channel_code = #{channelCode,jdbcType=VARCHAR},
+	        </if>
+			<if test="channelName != null ">
+        	channel_name = #{channelName,jdbcType=VARCHAR},
+	        </if>
+			<if test="status != null and status !=0">
+        	status = #{status,jdbcType=TINYINT},
+	        </if>
+			<if test="createDate != null ">
+        	create_date = #{createDate,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="updateDate != null ">
+        	update_date = #{updateDate,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="createUser != null ">
+        	create_user = #{createUser,jdbcType=VARCHAR},
+	        </if>
+			<if test="updateUser != null ">
+        	update_user = #{updateUser,jdbcType=VARCHAR},
+	        </if>
+			<if test="orderMark != null and orderMark !=0 ">
+        	order_mark = #{orderMark,jdbcType=TINYINT}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="DiscoverChannel" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_discover_channel
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.discover.model.DiscoverChannelEntity" resultMap="DiscoverChannel">
+        select <include refid="Base_Column_List"/> from tbl_wfx_discover_channel where 1=1 
+        <include refid="where" />
+       order by STATUS asc, order_mark asc,    update_date desc
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.discover.model.DiscoverChannelEntity" resultType="int">
+        select count(1) from tbl_wfx_discover_channel where 1=1 
+        <include refid="where" />
+         order by STATUS asc, order_mark asc,    update_date desc
+    </select>
+    
+  
+    
+     <select id="findByPage"  resultMap="DiscoverChannel">
+        select <include refid="Base_Column_List"/> from tbl_wfx_discover_channel where 1=1 
+        <include refid="where" />
+        order by order_mark
+    </select>
+    
+    <select id="getChannelList" parameterType="com.yougou.wfx.discover.model.DiscoverChannelEntity" resultMap="DiscoverChannel">
+        select <include refid="Base_Column_List"/> from tbl_wfx_discover_channel where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.discover.model.DiscoverChannelEntity">
+        insert into tbl_wfx_discover_channel (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},#{channelCode,jdbcType=VARCHAR},#{channelName,jdbcType=VARCHAR},#{status,jdbcType=TINYINT},#{createDate,jdbcType=TIMESTAMP},#{updateDate,jdbcType=TIMESTAMP},#{createUser,jdbcType=VARCHAR},#{updateUser,jdbcType=VARCHAR},#{orderMark,jdbcType=TINYINT}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_discover_channel
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.discover.model.DiscoverChannelEntity" >
+        update tbl_wfx_discover_channel
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    
+    <select id="getorderMark" parameterType="java.lang.String" resultType="java.lang.Integer">
+       select order_mark from tbl_wfx_discover_channel  order by order_mark  desc  LIMIT  1 
+    </select>
+    <select id="queryList" parameterType="com.yougou.wfx.discover.model.DiscoverChannelEntity"  resultMap="DiscoverChannel">
+       	 select <include refid="Base_Column_List"/> from tbl_wfx_discover_channel where 1=1 
+        <include refid="where" />
+        order by order_mark asc
+    </select>
+     <update id="updateOrderMark">
+        update tbl_wfx_discover_channel
+        set order_mark = order_mark + 1
+    </update>
+    
+    
+    <select id="getPrevious" parameterType="com.yougou.wfx.discover.model.DiscoverChannelEntity" resultMap="DiscoverChannel">
+        select <include refid="Base_Column_List"/> from tbl_wfx_discover_channel
+		where order_mark &lt;= #{orderMark,jdbcType=VARCHAR}
+		and id != #{id,jdbcType=VARCHAR} 
+		order by order_mark desc,update_Date limit 1
+    </select>
+    
+    <select id="getNext" parameterType="com.yougou.wfx.discover.model.DiscoverChannelEntity" resultMap="DiscoverChannel">
+        select <include refid="Base_Column_List"/> from tbl_wfx_discover_channel
+		where order_mark &gt;= #{orderMark,jdbcType=VARCHAR}
+		and id != #{id,jdbcType=VARCHAR}
+		order by order_mark,update_Date desc limit 1
+    </select>
+    
+    <update id="updateReduceOrderMark" parameterType="com.yougou.wfx.discover.model.DiscoverChannelEntity">
+        update tbl_wfx_discover_channel
+        set order_mark = order_mark - 1, channel_code=order_mark - 1
+        where #{orderMark,jdbcType=TINYINT}<![CDATA[<]]>order_mark
+    </update>
+    <delete id="batchRemove" parameterType="java.util.List" >
+           delete from tbl_wfx_discover_channel
+ 			where id in 
+         <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">  
+        	 #{item}
+         </foreach>
+    </delete>
+       
+</mapper>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.commodity.dao.BagMapper">
+    <resultMap id="Bag" type="com.yougou.wfx.commodity.model.BagEntity">
+    	<result property="id" column="Id" jdbcType="VARCHAR"/>
+    	<result property="bagName" column="Bag_Name" jdbcType="VARCHAR"/>
+    	<result property="bagSmallPic" column="Bag_small_pic" jdbcType="VARCHAR"/>
+    	<result property="bagBigPic" column="Bag_big_pic" jdbcType="VARCHAR"/>
+    	<result property="sortNo" column="sort_no" jdbcType="TINYINT"/>
+    	<result property="status" column="Status" jdbcType="TINYINT"/>
+    	<result property="commodityNum" column="commodity_num" jdbcType="INTEGER"/>
+    	<result property="comments" column="comments" jdbcType="VARCHAR"/>
+    	<result property="isDelete" column="Is_delete" jdbcType="TINYINT"/>
+    	<result property="createTime" column="Create_time" jdbcType="TIMESTAMP"/>
+    	<result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		Id,Bag_Name,Bag_small_pic,Bag_big_pic,sort_no,Status,commodity_num,comments,Is_delete,Create_time,update_user,update_time
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+	        	and Id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="bagName != null and bagName != ''">
+	        	and Bag_Name = #{bagName,jdbcType=VARCHAR}
+	        </if>
+			<if test="bagSmallPic != null and bagSmallPic != ''">
+	        	and Bag_small_pic = #{bagSmallPic,jdbcType=VARCHAR}
+	        </if>
+			<if test="bagBigPic != null and bagBigPic != ''">
+	        	and Bag_big_pic = #{bagBigPic,jdbcType=VARCHAR}
+	        </if>
+			<if test="status != null and status !=-1">
+	        	and Status = #{status,jdbcType=TINYINT}
+	        </if>
+			<if test="comments != null and comments != ''">
+	        	and comments = #{comments,jdbcType=VARCHAR}
+	        </if>
+			<if test="isDelete != null and isDelete !=0">
+	        	and Is_delete = #{isDelete,jdbcType=TINYINT}
+	        </if>
+			<if test="createTime != null">
+	        	and Create_time = #{createTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="updateUser != null and updateUser != ''">
+	        	and update_user = #{updateUser,jdbcType=VARCHAR}
+	        </if>
+			<if test="updateTime != null">
+	        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+	        </if>
+	        
+	        <if test="startTime != null and startTime != ''">
+        		and update_time &gt;= #{startTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="endTime != null and endTime != ''">
+        		and update_time &lt;= #{endTime,jdbcType=TIMESTAMP}
+	        </if>
+    </sql>
+    
+    <sql id="set">
+			<if test="id != null ">
+	        	Id = #{id,jdbcType=VARCHAR},
+	        </if>
+			<if test="bagName != null ">
+	        	Bag_Name = #{bagName,jdbcType=VARCHAR},
+	        </if>
+			<if test="bagSmallPic != null ">
+	        	Bag_small_pic = #{bagSmallPic,jdbcType=VARCHAR},
+	        </if>
+			<if test="bagBigPic != null ">
+	        	Bag_big_pic = #{bagBigPic,jdbcType=VARCHAR},
+	        </if>
+			<if test="sortNo != null ">
+	        	sort_no = #{sortNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="status != null ">
+	        	Status = #{status,jdbcType=TINYINT},
+	        </if>
+			<if test="commodityNum != null ">
+	        	commodity_num = #{commodityNum,jdbcType=TINYINT},
+	        </if>
+			<if test="comments != null ">
+	        	comments = #{comments,jdbcType=VARCHAR},
+	        </if>
+			<if test="isDelete != null ">
+	        	Is_delete = #{isDelete,jdbcType=TINYINT},
+	        </if>
+			<if test="createTime != null ">
+	        	Create_time = #{createTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="updateUser != null ">
+	        	update_user = #{updateUser,jdbcType=VARCHAR},
+	        </if>
+			<if test="updateTime != null ">
+	        	update_time = #{updateTime,jdbcType=TIMESTAMP}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="Bag" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_commodity_bag
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.commodity.model.BagEntity" resultMap="Bag">
+        select <include refid="Base_Column_List"/> from tbl_wfx_commodity_bag where 1=1 
+        <include refid="where" />
+        order by sort_no desc
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.commodity.model.BagEntity" resultType="INTEGER">
+        select count(1) from tbl_wfx_commodity_bag where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="findByPage"  resultMap="Bag">
+        select <include refid="Base_Column_List"/> from tbl_wfx_commodity_bag where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.commodity.model.BagEntity">
+        insert into tbl_wfx_commodity_bag (<include refid="Base_Column_List" />)
+        values (
+          #{id,jdbcType=VARCHAR}, #{bagName,jdbcType=VARCHAR}, #{bagSmallPic,jdbcType=VARCHAR}, #{bagBigPic,jdbcType=VARCHAR}, #{sortNo,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{commodityNum,jdbcType=INTEGER}, #{comments,jdbcType=VARCHAR}, #{isDelete,jdbcType=TINYINT}, #{createTime,jdbcType=DATE}, #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=DATE}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_commodity_bag
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.commodity.model.BagEntity" >
+        update tbl_wfx_commodity_bag
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    
+    <select id="findRelaCommodityList" resultMap="com.yougou.wfx.commodity.dao.CommodityStyleMapper.CommodityStyle" parameterType="java.lang.String">
+        select b.*
+        from tbl_wfx_commodity_bag_rela a, tbl_commodity_style b 
+        where a.Bag_id = #{bagId,jdbcType=VARCHAR}
+        and a.Commodity_id=b.id
+    </select>
+    
+    <select id="findBagCommodityList" resultMap="com.yougou.wfx.commodity.dao.CommodityStyleMapper.CommodityStyle" parameterType="java.lang.String">
+        select b.*,(select SUM(inventory_num) from tbl_commodity_product p where p.commodity_id=a.Commodity_id) as stock
+        from tbl_wfx_commodity_bag_rela a, tbl_commodity_style b 
+        where a.Bag_id = #{bagId,jdbcType=VARCHAR}
+        and a.Commodity_id=b.id
+    </select>
+    
+    <select id="findBagCommodityCount" resultType="INTEGER" parameterType="java.lang.String">
+        select count(b.id)
+        from tbl_wfx_commodity_bag_rela a, tbl_commodity_style b 
+        where a.Bag_id = #{bagId,jdbcType=VARCHAR}
+        and a.Commodity_id=b.id
+    </select>
+    
+    <insert id="insertCommodityBagRela" parameterType="com.yougou.wfx.commodity.model.CommodityBagRelaEntity">
+        insert into tbl_wfx_commodity_bag_rela (id, Bag_id, Commodity_id, create_time)
+        values (
+        	#{id,jdbcType=VARCHAR}, #{bagId,jdbcType=VARCHAR}, #{commodityId,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}
+        )
+    </insert>
+    
+    <delete id="removeCommodityBagRela" parameterType="java.lang.String" >
+        delete from tbl_wfx_commodity_bag_rela
+        where 1=1
+        <if test="id != null ">
+        	Id = #{id,jdbcType=VARCHAR},
+        </if>
+		<if test="bagId != null ">
+        	and Bag_id = #{bagId,jdbcType=VARCHAR}
+        </if>
+    </delete>
+</mapper>

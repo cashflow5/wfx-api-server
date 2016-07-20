@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.member.dao.MemberAddressMapper">
+    <resultMap id="MemberAddress" type="com.yougou.wfx.member.model.MemberAddressEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="loginacccountId" column="loginacccount_id" jdbcType="VARCHAR"/>
+    	<result property="receivingName" column="receiving_name" jdbcType="VARCHAR"/>
+    	<result property="receivingProvince" column="receiving_province" jdbcType="VARCHAR"/>
+    	<result property="receivingCity" column="receiving_city" jdbcType="VARCHAR"/>
+    	<result property="receivingDistrict" column="receiving_district" jdbcType="VARCHAR"/>
+    	<result property="receivingAddress" column="receiving_address" jdbcType="VARCHAR"/>
+    	<result property="receivingZipCode" column="receiving_zip_code" jdbcType="VARCHAR"/>
+    	<result property="receivingTelephone" column="receiving_telephone" jdbcType="VARCHAR"/>
+    	<result property="receivingMobilePhone" column="receiving_mobile_phone" jdbcType="VARCHAR"/>
+    	<result property="isDefaultAddress" column="is_default_address" jdbcType="SMALLINT"/>
+    	<result property="distributionType" column="distribution_type" jdbcType="INTEGER"/>
+    	<result property="remarks" column="remarks" jdbcType="VARCHAR"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="lastUpdateTime" column="last_update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,loginacccount_id,receiving_name,receiving_province,receiving_city,receiving_district,receiving_address,receiving_zip_code,receiving_telephone,receiving_mobile_phone,is_default_address,distribution_type,remarks,create_time,last_update_time
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="loginacccountId != null and loginacccountId != ''">
+        	and loginacccount_id = #{loginacccountId,jdbcType=VARCHAR}
+	        </if>
+			<if test="receivingName != null and receivingName != ''">
+        	and receiving_name = #{receivingName,jdbcType=VARCHAR}
+	        </if>
+			<if test="receivingProvince != null and receivingProvince != ''">
+        	and receiving_province = #{receivingProvince,jdbcType=VARCHAR}
+	        </if>
+			<if test="receivingCity != null and receivingCity != ''">
+        	and receiving_city = #{receivingCity,jdbcType=VARCHAR}
+	        </if>
+			<if test="receivingDistrict != null and receivingDistrict != ''">
+        	and receiving_district = #{receivingDistrict,jdbcType=VARCHAR}
+	        </if>
+			<if test="receivingAddress != null and receivingAddress != ''">
+        	and receiving_address = #{receivingAddress,jdbcType=VARCHAR}
+	        </if>
+			<if test="receivingZipCode != null and receivingZipCode != ''">
+        	and receiving_zip_code = #{receivingZipCode,jdbcType=VARCHAR}
+	        </if>
+			<if test="receivingTelephone != null and receivingTelephone != ''">
+        	and receiving_telephone = #{receivingTelephone,jdbcType=VARCHAR}
+	        </if>
+			<if test="receivingMobilePhone != null and receivingMobilePhone != ''">
+        	and receiving_mobile_phone = #{receivingMobilePhone,jdbcType=VARCHAR}
+	        </if>
+			<if test="isDefaultAddress != null and isDefaultAddress != 0">
+        	and is_default_address = #{isDefaultAddress,jdbcType=SMALLINT}
+	        </if>
+			<if test="distributionType != null and distributionType != 0">
+        	and distribution_type = #{distributionType,jdbcType=INTEGER}
+	        </if>
+			<if test="remarks != null and remarks != ''">
+        	and remarks = #{remarks,jdbcType=VARCHAR}
+	        </if>
+			<if test="createTime != null">
+        	and create_time = #{createTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="lastUpdateTime != null">
+        	and last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
+	        </if>
+    </sql>
+    
+    <sql id="set">
+			<if test="loginacccountId != null">
+        	loginacccount_id = #{loginacccountId,jdbcType=VARCHAR},
+	        </if>
+			<if test="receivingName != null">
+        	receiving_name = #{receivingName,jdbcType=VARCHAR},
+	        </if>
+			<if test="receivingProvince != null">
+        	receiving_province = #{receivingProvince,jdbcType=VARCHAR},
+	        </if>
+			<if test="receivingCity != null">
+        	receiving_city = #{receivingCity,jdbcType=VARCHAR},
+	        </if>
+			<if test="receivingDistrict != null">
+        	receiving_district = #{receivingDistrict,jdbcType=VARCHAR},
+	        </if>
+			<if test="receivingAddress != null">
+        	receiving_address = #{receivingAddress,jdbcType=VARCHAR},
+	        </if>
+			<if test="receivingZipCode != null">
+        	receiving_zip_code = #{receivingZipCode,jdbcType=VARCHAR},
+	        </if>
+			<if test="receivingTelephone != null">
+        	receiving_telephone = #{receivingTelephone,jdbcType=VARCHAR},
+	        </if>
+			<if test="receivingMobilePhone != null">
+        	receiving_mobile_phone = #{receivingMobilePhone,jdbcType=VARCHAR},
+	        </if>
+			<if test="isDefaultAddress != null and isDefaultAddress != 0">
+        	is_default_address = #{isDefaultAddress,jdbcType=SMALLINT},
+	        </if>
+			<if test="distributionType != null and distributionType != 0">
+        	distribution_type = #{distributionType,jdbcType=INTEGER},
+	        </if>
+			<if test="remarks != null">
+        	remarks = #{remarks,jdbcType=VARCHAR},
+	        </if>
+			<if test="createTime != null">
+        	create_time = #{createTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="lastUpdateTime != null">
+        	last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="MemberAddress" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_member_address
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.member.model.MemberAddressEntity" resultMap="MemberAddress">
+        select <include refid="Base_Column_List"/> from tbl_wfx_member_address where 1=1 
+        <include refid="where" />
+        order by is_default_address asc ,create_time desc
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.member.model.MemberAddressEntity" resultType="int">
+        select count(1) from tbl_wfx_member_address where 1=1 
+        <include refid="where" />
+    </select>
+    
+     <select id="findByPage" parameterType="com.yougou.wfx.member.model.MemberAddressEntity" resultMap="MemberAddress">
+        select <include refid="Base_Column_List"/> from tbl_wfx_member_address where 1=1 
+        <include refid="where" />
+    </select>
+    
+     <select id="queryList" parameterType="com.yougou.wfx.member.model.MemberAddressEntity" resultMap="MemberAddress">
+        select <include refid="Base_Column_List"/> from tbl_wfx_member_address where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.member.model.MemberAddressEntity">
+        insert into tbl_wfx_member_address (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},#{loginacccountId,jdbcType=VARCHAR},#{receivingName,jdbcType=VARCHAR},#{receivingProvince,jdbcType=VARCHAR},#{receivingCity,jdbcType=VARCHAR},#{receivingDistrict,jdbcType=VARCHAR},#{receivingAddress,jdbcType=VARCHAR},#{receivingZipCode,jdbcType=VARCHAR},#{receivingTelephone,jdbcType=VARCHAR},#{receivingMobilePhone,jdbcType=VARCHAR},#{isDefaultAddress,jdbcType=SMALLINT},#{distributionType,jdbcType=INTEGER},#{remarks,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{lastUpdateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_member_address
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.member.model.MemberAddressEntity" >
+        update tbl_wfx_member_address
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <update id="updateAllMemberAddressNotDefault" parameterType="java.lang.String" >
+        update tbl_wfx_member_address
+        set is_default_address = 2
+        where loginacccount_id = #{loginacccountId,jdbcType=VARCHAR}
+    </update>
+</mapper>

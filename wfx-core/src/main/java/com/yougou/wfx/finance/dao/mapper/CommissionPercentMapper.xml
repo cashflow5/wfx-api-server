@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.finance.dao.CommissionPercentMapper">
+    <resultMap id="CommissionPercent" type="com.yougou.wfx.finance.model.CommissionPercentEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="baseCatId" column="base_cat_id" jdbcType="VARCHAR"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    	<result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+    	<result property="commissionLevel1Percent" column="commission_level1_percent" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel2Percent" column="commission_level2_percent" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel3Percent" column="commission_level3_percent" jdbcType="DECIMAL"/>
+    	<result property="type" column="type" jdbcType="TINYINT"/>
+    	<result property="catName" column="cat_name" jdbcType="VARCHAR"/>
+    	<result property="baseCatLevel" column="level" jdbcType="VARCHAR"/>
+    	<result property="supplierCode" column="supplier_code" jdbcType="VARCHAR"/>
+    	<result property="brandNo" column="brand_no" jdbcType="VARCHAR"/>
+    	<result property="brandName" column="brand_name" jdbcType="VARCHAR"/>
+    	<result property="commodityName" column="commodity_name" jdbcType="VARCHAR"/>
+    	<result property="commodityId" column="commodity_id" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		cp.id, cp.base_cat_id, cp.create_time, cp.create_user, cp.update_time, cp.update_user, cp.commission_level1_percent, 
+		cp.commission_level2_percent, cp.commission_level3_percent, cp.type, cp.supplier_code, cp.brand_no, cp.commodity_id
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and cp.id = #{id,jdbcType=VARCHAR}
+	        </if>
+	        <if test="type != null and type != 0 ">
+        	and cp.type = #{type,jdbcType=VARCHAR}
+	        </if>
+			<if test="catName != null and catName != ''">
+        	and cc.cat_name like CONCAT('%',CONCAT(#{catName}, '%'))
+	        </if>
+			<if test="createTime != null">
+        	and cp.create_time = #{createTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="updateTime != null">
+        	and cp.update_time = #{updateTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="updateUser != null and updateUser != ''">
+        	and cp.update_user = #{updateUser,jdbcType=VARCHAR}
+	        </if>
+	        <if test="supplierCode != null and supplierCode != ''">
+        	and cp.supplier_code  in (${supplierCode}) 
+	        </if>
+	         <if test="commodityId != null and commodityId != ''">
+        	and cp.commodity_id in (${commodityId}) 
+	        </if>
+	        <if test="commodityName != null and commodityName != '' ">
+		        <if test="commodityId == null or commodityId == ''">
+	        	and cp.commodity_id in (select cs.id from tbl_commodity_style cs where cs.commodity_name like '%${commodityName}%') 
+		        </if>
+	        </if>
+	        <if test="brandName != null and brandName != ''">
+	         	<if test="brandNo == null or brandNo == '' ">
+        		and cp.brand_no in (select cb.brand_no from tbl_commodity_brand cb where cb.brand_name like '%${brandName}%') 
+	       		</if>
+	       	</if>
+	       	<if test="brandNo != null and brandNo != '' ">
+       			and cp.brand_no =#{brandNo,jdbcType=VARCHAR}
+       		</if>
+       		<if test="baseCatId != null and baseCatId != '' ">
+       			<if test="baseCatId =='has'"><!--获取佣金比例有传值分类id，但是没有查询到相应设置，所以现在查询单品牌，同时分类id要为空  -->
+       				and (cp.base_cat_id is null or cp.base_cat_id='') 
+       			</if>
+       			<if test="baseCatId !='has'">
+       				and cp.base_cat_id =#{baseCatId,jdbcType=VARCHAR}
+       			</if>
+       		</if>
+	        <if test="id == null or id == ''">
+	       		and cp.id!='999999'
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="CommissionPercent" parameterType="java.lang.String">
+        select '' as cat_name,'' as level,
+        (SELECT cs.brand_name from tbl_commodity_brand cs where cs.brand_no=cp.brand_no LIMIT 0,1) brand_name,
+        (SELECT cs.commodity_name from tbl_commodity_style cs where cs.id=cp.commodity_id LIMIT 0,1) commodity_name,
+        	<include refid="Base_Column_List"/>
+        from tbl_wfx_commission_percent cp  where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="getByBaseCatId" resultMap="CommissionPercent" parameterType="java.lang.String">
+         select cc.cat_name,cc.level,
+        	(SELECT cs.brand_name from tbl_commodity_brand cs where cs.brand_no=cp.brand_no LIMIT 0,1) brand_name,
+        	(SELECT cs.commodity_name from tbl_commodity_style cs where cs.id=cp.commodity_id LIMIT 0,1) commodity_name,
+        	<include refid="Base_Column_List"/>
+	 	from tbl_wfx_commission_percent cp left join tbl_commodity_catb2c cc on cp.base_cat_id=cc.id 
+	 	where cp.base_cat_id = #{baseCatId,jdbcType=VARCHAR} limit 0,1
+    </select>
+    
+    <select id="getCommissionByCondition" resultType="com.yougou.wfx.finance.model.CommissionPercentEntity" parameterType="com.yougou.wfx.finance.model.CommissionPercentEntity">
+        select id,commission_level1_percent commissionLevel1Percent, commission_level2_percent commissionLevel2Percent, 
+        	   commission_level3_percent commissionLevel3Percent, type
+	 	from tbl_wfx_commission_percent  
+	 	where 1=1
+	 	 <if test="commodityId != null and commodityId != ''">
+       	 and commodity_id =#{commodityId,jdbcType=VARCHAR}
+        </if>
+       	<if test="brandNo != null and brandNo != '' ">
+  			and brand_no =#{brandNo,jdbcType=VARCHAR}
+  		</if>
+  		<if test="id != null and id != '' ">
+  			and id =#{id,jdbcType=VARCHAR}
+  		</if>
+  		<if test="baseCatId != null and baseCatId != '' ">
+  			<if test="baseCatId =='has'"><!--查询单品牌，同时分类id要为空  -->
+  				and (base_cat_id is null or base_cat_id='') 
+  			</if>
+  			<if test="baseCatId !='has'">
+  				and base_cat_id =#{baseCatId,jdbcType=VARCHAR}
+  			</if>
+  		</if>
+	 	limit 0,1
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.finance.model.CommissionPercentEntity" resultMap="CommissionPercent">
+        select cc.cat_name,cc.level,
+			(SELECT cs.brand_name from tbl_commodity_brand cs where cs.brand_no=cp.brand_no LIMIT 0,1) brand_name,
+        	(SELECT cs.commodity_name from tbl_commodity_style cs where cs.id=cp.commodity_id LIMIT 0,1) commodity_name,
+        	<include refid="Base_Column_List"/>
+	 	from tbl_wfx_commission_percent cp left join tbl_commodity_catb2c cc on cp.base_cat_id=cc.id  
+	 	where 1=1 
+        <include refid="where" />
+        order by cp.update_time desc
+    </select>
+    <select id="findPageCount" parameterType="com.yougou.wfx.finance.model.CommissionPercentEntity" resultType="int">
+        select count(cp.id) from tbl_wfx_commission_percent cp left join tbl_commodity_catb2c cc on cp.base_cat_id=cc.id  
+	 	where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <insert id="insert" parameterType="com.yougou.wfx.finance.model.CommissionPercentEntity">
+        insert into tbl_wfx_commission_percent (
+	        id, base_cat_id, create_time, create_user, update_time, update_user, commission_level1_percent, 
+			commission_level2_percent, commission_level3_percent, type, supplier_code, brand_no, commodity_id
+        )
+        values (
+        #{id,jdbcType=VARCHAR},#{baseCatId,jdbcType=VARCHAR},now(),#{createUser,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP},#{updateUser,jdbcType=VARCHAR},#{commissionLevel1Percent,jdbcType=DECIMAL},
+        #{commissionLevel2Percent,jdbcType=DECIMAL},#{commissionLevel3Percent,jdbcType=DECIMAL},
+        #{type,jdbcType=TINYINT},#{supplierCode,jdbcType=VARCHAR},#{brandNo,jdbcType=VARCHAR},#{commodityId,jdbcType=VARCHAR}
+        )
+    </insert>
+   
+  <insert id="batchInsert" parameterType="java.util.List" >
+    insert into tbl_wfx_commission_percent (
+		id, base_cat_id, create_time, create_user, update_time, update_user, commission_level1_percent, 
+		commission_level2_percent, commission_level3_percent, type, supplier_code, brand_no, commodity_id
+	)
+    values
+     <foreach collection="list" item="item" index="index" separator=",">
+     (
+       #{item.id,jdbcType=VARCHAR},#{item.baseCatId,jdbcType=VARCHAR},now(),#{item.createUser,jdbcType=TIMESTAMP},
+        #{item.updateTime,jdbcType=TIMESTAMP},#{item.updateUser,jdbcType=VARCHAR},#{item.commissionLevel1Percent,jdbcType=DECIMAL},
+        #{item.commissionLevel2Percent,jdbcType=DECIMAL},#{item.commissionLevel3Percent,jdbcType=DECIMAL},
+        #{item.type,jdbcType=TINYINT},#{item.supplierCode,jdbcType=VARCHAR},#{item.brandNo,jdbcType=VARCHAR},#{item.commodityId,jdbcType=VARCHAR}
+      )
+     </foreach>
+  </insert>
+  
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_commission_percent
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.finance.model.CommissionPercentEntity" >
+        update tbl_wfx_commission_percent set
+		<if test="updateUser != null ">
+       		update_user = #{updateUser,jdbcType=VARCHAR},
+        </if>
+		<if test="commissionLevel1Percent != null ">
+       		commission_level1_percent = #{commissionLevel1Percent,jdbcType=DECIMAL},
+        </if>
+		<if test="commissionLevel2Percent != null ">
+       		commission_level2_percent = #{commissionLevel2Percent,jdbcType=DECIMAL},
+        </if>
+        <if test="commissionLevel3Percent != null ">
+       		commission_level3_percent = #{commissionLevel3Percent,jdbcType=DECIMAL},
+        </if>
+        update_time =now()
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <sql id="whereLog">
+			<if test="id != null and id != ''">
+        		and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="startTime != null and startTime != '' ">
+				AND	create_time &gt;= #{startTime}
+			</if>
+			<if test="endTime != null and endTime != '' ">
+				AND	create_time &lt;= #{endTime}
+			</if>
+			<if test="createUser != null and createUser != ''">
+        	and create_user = #{createUser,jdbcType=VARCHAR}
+	        </if>
+			<if test="operateType != null and operateType != ''">
+        	and operate_type = #{operateType,jdbcType=VARCHAR}
+	        </if>
+	        <if test="commissionType != null and commissionType != ''">
+        	and commission_type = #{commissionType,jdbcType=VARCHAR}
+	        </if>
+    </sql>
+    <select id="findPageLog" parameterType="com.yougou.wfx.finance.model.CommissionPercentLogEntity" resultType="com.yougou.wfx.finance.model.CommissionPercentLogEntity">
+        select id,base_cat_id baseCatId,create_time createTime,create_user createUser,operate_type operateType,remark ,commission_type commissionType
+        from tbl_wfx_commission_percent_log where 1=1 <include refid="whereLog" />
+        order by create_time desc
+    </select>
+    
+    <select id="findPageCountLog" parameterType="com.yougou.wfx.finance.model.CommissionPercentLogEntity" resultType="int">
+        select count(1) from tbl_wfx_commission_percent_log where 1=1 
+        <include refid="whereLog" />
+    </select>
+    <insert id="insertLog" parameterType="com.yougou.wfx.finance.model.CommissionPercentLogEntity">
+        insert into tbl_wfx_commission_percent_log (id,base_cat_id,create_time,create_user,operate_type,remark,commission_type,
+	    		commodity_id,supplier_code,brand_no)
+        values (
+         #{id,jdbcType=VARCHAR},#{baseCatId,jdbcType=VARCHAR},now(),#{createUser,jdbcType=VARCHAR},#{operateType,jdbcType=VARCHAR},
+         #{remark,jdbcType=VARCHAR},#{commissionType,jdbcType=VARCHAR},
+	     #{commodityId,jdbcType=VARCHAR},#{supplierCode,jdbcType=VARCHAR},#{brandNo,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="batchInsertLog" parameterType="java.util.List" >
+	    insert into tbl_wfx_commission_percent_log (id,base_cat_id,create_time,create_user,operate_type,remark,commission_type,
+	    		commodity_id,supplier_code,brand_no)
+	    values
+	     <foreach collection="list" item="item" index="index" separator=",">
+	     (
+	       #{item.id,jdbcType=VARCHAR},#{item.baseCatId,jdbcType=VARCHAR},now(),#{item.createUser,jdbcType=VARCHAR},#{item.operateType,jdbcType=VARCHAR},
+	         #{item.remark,jdbcType=VARCHAR},#{item.commissionType,jdbcType=VARCHAR},
+	         #{item.commodityId,jdbcType=VARCHAR},#{item.supplierCode,jdbcType=VARCHAR},#{item.brandNo,jdbcType=VARCHAR}
+	      )
+	     </foreach>
+  </insert>
+</mapper>

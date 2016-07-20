@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.finance.dao.FinSellerAccountWithdrawMapper">
+    <resultMap id="FinSellerAccountWithdraw" type="com.yougou.wfx.finance.model.FinSellerAccountWithdrawEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="withdrawApplyNo" column="withdraw_apply_no" jdbcType="VARCHAR"/>
+    	<result property="applyTime" column="apply_time" jdbcType="TIMESTAMP"/>
+    	<result property="shopName" column="shop_name" jdbcType="VARCHAR"/>
+    	<result property="sellerAccount" column="seller_account" jdbcType="VARCHAR"/>
+    	<result property="sellerId" column="seller_id" jdbcType="VARCHAR"/>
+    	<result property="sellerDetailId" column="seller_detail_id" jdbcType="VARCHAR"/>
+    	<result property="accountBalance" column="account_balance" jdbcType="DOUBLE"/>
+    	<result property="actualReceivedAmount" column="actual_received_amount" jdbcType="DOUBLE"/>
+    	<result property="serviceAmount" column="service_amount" jdbcType="DOUBLE"/>
+    	<result property="withdrawAmount" column="withdraw_amount" jdbcType="DOUBLE"/>
+    	<result property="accountName" column="account_name" jdbcType="VARCHAR"/>
+    	<result property="accountBankNo" column="account_bank_no" jdbcType="VARCHAR"/>
+    	<result property="accountBankName" column="account_bank_name" jdbcType="VARCHAR"/>
+    	<result property="accountBankAllName" column="account_bank_all_name" jdbcType="VARCHAR"/>
+    	<result property="accountNo" column="account_no" jdbcType="VARCHAR"/>
+    	<result property="applyReason" column="apply_reason" jdbcType="VARCHAR"/>
+    	<result property="applyer" column="applyer" jdbcType="VARCHAR"/>
+    	<result property="operater" column="operater" jdbcType="VARCHAR"/>
+    	<result property="operaterTime" column="operater_time" jdbcType="TIMESTAMP"/>
+    	<result property="modifier" column="modifier" jdbcType="VARCHAR"/>
+    	<result property="modifyTime" column="modify_time" jdbcType="TIMESTAMP"/>
+    	<result property="billStatus" column="bill_status" jdbcType="VARCHAR"/>
+    	<result property="remark" column="remark" />
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,create_time,withdraw_apply_no,apply_time,shop_name,seller_account,account_balance,actual_received_amount,service_amount,withdraw_amount,account_name,account_bank_no,account_bank_name,account_bank_all_name,account_no,
+		apply_reason,applyer,operater,operater_time,modifier,modify_time,bill_status,remark,seller_id,seller_detail_id
+    </sql>
+    
+    <sql id="where">
+		<if test="id != null and id != ''">
+       	and id = #{id,jdbcType=VARCHAR}
+        </if>
+		<if test="withdrawApplyNo != null and withdrawApplyNo != ''">
+       	and withdraw_apply_no LIKE CONCAT('%', #{withdrawApplyNo,jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="applyTimeStart !=null and applyTimeStart !='' ">
+        AND DATE_FORMAT(apply_time,'%Y-%m-%d') &gt;= #{applyTimeStart}
+        </if>
+        <if test="applyTimeEnd != null and applyTimeEnd !='' ">
+        AND DATE_FORMAT(apply_time,'%Y-%m-%d') &lt;= #{applyTimeEnd}
+        </if>
+        <if test="withdrawalTimeStart !=null and withdrawalTimeStart !='' ">
+        AND DATE_FORMAT(modify_time,'%Y-%m-%d') &gt;= #{withdrawalTimeStart}
+        </if>
+        <if test="withdrawalTimeEnd != null and withdrawalTimeEnd !='' ">
+        AND DATE_FORMAT(modify_time,'%Y-%m-%d') &lt;= #{withdrawalTimeEnd}
+        </if>
+		<if test="shopName != null and shopName != ''">
+       	and shop_name = #{shopName,jdbcType=VARCHAR}
+        </if>
+		<if test="sellerAccount != null and sellerAccount != ''">
+       	and seller_account LIKE CONCAT('%', #{sellerAccount,jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="sellerId != null and sellerId != '' ">
+        and seller_id = #{sellerId}
+        </if>
+		<if test="accountBalance != null">
+       	and account_balance = #{accountBalance,jdbcType=DOUBLE}
+        </if>
+		<if test="actualReceivedAmount != null">
+       	and actual_received_amount = #{actualReceivedAmount,jdbcType=DOUBLE}
+        </if>
+		<if test="serviceAmount != null">
+       	and service_amount = #{serviceAmount,jdbcType=DOUBLE}
+        </if>
+		<if test="withdrawAmount != null">
+       	and withdraw_amount = #{withdrawAmount,jdbcType=DOUBLE}
+        </if>
+		<if test="accountName != null and accountName != ''">
+       	and account_name = #{accountName,jdbcType=VARCHAR}
+        </if>
+		<if test="accountBankNo != null and accountBankNo != ''">
+       	and account_bank_no = #{accountBankNo,jdbcType=VARCHAR}
+        </if>
+		<if test="accountNo != null and accountNo != ''">
+       	and account_no = #{accountNo,jdbcType=VARCHAR}
+        </if>
+		<if test="applyReason != null and applyReason != ''">
+       	and apply_reason = #{applyReason,jdbcType=VARCHAR}
+        </if>
+		<if test="applyer != null and applyer != ''">
+       	and applyer = #{applyer,jdbcType=VARCHAR}
+        </if>
+		<if test="billStatus != null and billStatus != ''">
+       	and bill_status = #{billStatus,jdbcType=VARCHAR}
+        </if>
+		<if test="remark != null">
+       	and remark = #{remark}
+        </if>
+    </sql>
+    
+    <sql id="set">
+		<if test="applyTime != null">
+       	apply_time = #{applyTime,jdbcType=TIMESTAMP},
+        </if>
+		<if test="shopName != null and shopName != '' ">
+       	shop_name = #{shopName,jdbcType=VARCHAR},
+        </if>
+		<if test="sellerAccount != null and sellerAccount != '' ">
+       	seller_account = #{sellerAccount,jdbcType=VARCHAR},
+        </if>
+        <if test="sellerDetailId != null and sellerDetailId != '' ">
+        seller_detail_id = #{sellerDetailId},
+        </if>
+		<if test="accountBalance != null">
+       	account_balance = #{accountBalance,jdbcType=DOUBLE},
+        </if>
+		<if test="actualReceivedAmount != null">
+       	actual_received_amount = #{actualReceivedAmount,jdbcType=DOUBLE},
+        </if>
+		<if test="serviceAmount != null">
+       	service_amount = #{serviceAmount,jdbcType=DOUBLE},
+        </if>
+		<if test="withdrawAmount != null">
+       	withdraw_amount = #{withdrawAmount,jdbcType=DOUBLE},
+        </if>
+		<if test="accountName != null and accountName != '' ">
+       	account_name = #{accountName,jdbcType=VARCHAR},
+        </if>
+		<if test="accountBankNo != null and accountBankNo != '' ">
+       	account_bank_no = #{accountBankNo,jdbcType=VARCHAR},
+        </if>
+		<if test="accountNo != null and accountNo != '' ">
+       	account_no = #{accountNo,jdbcType=VARCHAR},
+        </if>
+		<if test="applyReason != null and applyReason != '' ">
+       	apply_reason = #{applyReason,jdbcType=VARCHAR},
+        </if>
+		<if test="applyer != null and applyer != '' ">
+       	applyer = #{applyer,jdbcType=VARCHAR},
+        </if>
+		<if test="operater != null">
+       	operater = #{operater,jdbcType=VARCHAR},
+        </if>
+		<if test="operaterTime != null">
+       	operater_time = #{operaterTime,jdbcType=TIMESTAMP},
+        </if>
+		<if test="modifier != null">
+       	modifier = #{modifier,jdbcType=VARCHAR},
+        </if>
+		<if test="modifyTime != null">
+       	modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+        </if>
+		<if test="billStatus != null">
+       	bill_status = #{billStatus,jdbcType=VARCHAR},
+        </if>
+		<if test="remark != null and remark != '' ">
+       	remark = #{remark}
+        </if>
+    </sql>
+    
+    <sql id="infoSet">
+    	<if test="operater != null and operater != '' ">
+       	operater = #{operater,jdbcType=VARCHAR},
+        </if>
+		<if test="operaterTime != null">
+       	operater_time = #{operaterTime,jdbcType=TIMESTAMP},
+        </if>
+		<if test="modifier != null and modifier != '' ">
+       	modifier = #{modifier,jdbcType=VARCHAR},
+        </if>
+		<if test="modifyTime != null">
+       	modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+        </if>
+		<if test="billStatus != null and billStatus != '' ">
+       	bill_status = #{billStatus,jdbcType=VARCHAR},
+        </if>
+		<if test="remark != null and remark != '' ">
+       	remark = #{remark}
+        </if>
+    </sql>
+    
+    <select id="getById" resultMap="FinSellerAccountWithdraw" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_fin_seller_account_withdraw
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.finance.model.FinSellerAccountWithdrawEntity" resultMap="FinSellerAccountWithdraw">
+        select * from tbl_wfx_fin_seller_account_withdraw where 1=1 
+        <include refid="where" />
+        order by create_time desc 
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.finance.model.FinSellerAccountWithdrawEntity" resultType="int">
+        select count(1) from tbl_wfx_fin_seller_account_withdraw where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="findByPage"  resultMap="FinSellerAccountWithdraw" >
+        select * from tbl_wfx_fin_seller_account_withdraw where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <select id="queryDetailsWithdraw" resultMap="FinSellerAccountWithdraw" parameterType="com.yougou.wfx.finance.model.FinSellerAccountWithdrawEntity">
+       select * from tbl_wfx_fin_seller_account_withdraw where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryWithdrawalList" parameterType="com.yougou.wfx.finance.model.FinSellerAccountWithdrawEntity" resultMap="FinSellerAccountWithdraw">
+        select * from tbl_wfx_fin_seller_account_withdraw where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryWithdrawalListCount" parameterType="com.yougou.wfx.finance.model.FinSellerAccountWithdrawEntity" resultType="int">
+        select count(1) from tbl_wfx_fin_seller_account_withdraw where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <!-- 前端查询条件 -->
+    <sql id="frontWhere">
+		<if test="id != null and id != ''">
+       	and id = #{id,jdbcType=VARCHAR}
+        </if>
+		<if test="withdrawApplyNo != null and withdrawApplyNo != ''">
+       	and withdraw_apply_no LIKE "%"#{withdrawApplyNo,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="sellerId != null and sellerId != '' ">
+        and seller_id = #{sellerId}
+        </if>
+        <if test="statusFlag != null ">
+        	<choose>
+        		<!-- 提现中 （待审核，已审核）-->
+        		<when test="statusFlag == 1 ">
+        			and bill_status in ('1', '2')
+        		</when>
+        		<!-- 已提现 （已提现）-->
+        		<when test="statusFlag == 2 ">
+        			and bill_status = '3'
+        		</when>
+        		<!-- 提现失败 （审核不通过）-->
+        		<when test="statusFlag == 3 ">
+        			and bill_status = '4'
+        		</when>
+        	</choose>
+        </if>
+    </sql>
+    
+    <select id="queryPageList" parameterType="com.yougou.wfx.finance.model.FinSellerAccountWithdrawEntity" resultMap="FinSellerAccountWithdraw">
+        select * from tbl_wfx_fin_seller_account_withdraw where 1=1 
+        <include refid="frontWhere" />
+        order by create_time desc 
+    </select>
+    
+    <select id="queryPageListCount" parameterType="com.yougou.wfx.finance.model.FinSellerAccountWithdrawEntity" resultType="int">
+        select count(1) from tbl_wfx_fin_seller_account_withdraw where 1=1 
+        <include refid="frontWhere" />
+    </select>
+    
+    <select id="queryDataList" parameterType="com.yougou.wfx.finance.model.FinSellerAccountWithdrawEntity" resultMap="FinSellerAccountWithdraw">
+        select * from tbl_wfx_fin_seller_account_withdraw where 1=1 
+        <include refid="frontWhere" />
+    </select>
+    
+    <!-- 获取分销商当月提现总额 -->
+    <select id="getCurrMonthWithdrawAmount" parameterType="com.yougou.wfx.finance.model.FinSellerAccountWithdrawEntity" resultType="java.util.Map">
+    	SELECT SELLER_ID, SUM(IFNULL(WITHDRAW_AMOUNT, 0)) AS MONTH_TOTAL_AMOUNT FROM TBL_WFX_FIN_SELLER_ACCOUNT_WITHDRAW WHERE 1 = 1
+    	<if test="sellerId != null and sellerId != '' ">
+    		AND SELLER_ID = #{sellerId, jdbcType=VARCHAR}
+    	</if>
+    	<if test="applyTimeStart !=null and applyTimeStart !='' ">
+        	AND create_time &gt;= STR_TO_DATE(#{applyTimeStart, jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="applyTimeEnd != null and applyTimeEnd !='' ">
+        	AND create_time &lt;= STR_TO_DATE(#{applyTimeEnd, jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%s')
+        </if>
+    	AND BILL_STATUS != #{billStatus, jdbcType=VARCHAR}
+    </select>
+    
+    <select id="queryWithdrawNumInWeek" parameterType="com.yougou.wfx.finance.model.FinSellerAccountWithdrawEntity" resultType="int">
+    	select count(id) from tbl_wfx_fin_seller_account_withdraw
+    	where 1 = 1
+    	and seller_id = #{sellerId, jdbcType=VARCHAR}
+    	and create_time &gt;= STR_TO_DATE(#{applyTimeStart, jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%s')
+    	and create_time &lt;= STR_TO_DATE(#{applyTimeEnd, jdbcType=VARCHAR}, '%Y-%m-%d %H:%i:%s')
+    	and bill_status != #{billStatus, jdbcType=VARCHAR} 
+    </select>
+    
+    <insert id="insert" parameterType="com.yougou.wfx.finance.model.FinSellerAccountWithdrawEntity">
+        insert into tbl_wfx_fin_seller_account_withdraw (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{withdrawApplyNo,jdbcType=VARCHAR},#{applyTime,jdbcType=TIMESTAMP},
+        #{shopName,jdbcType=VARCHAR},#{sellerAccount,jdbcType=VARCHAR},
+        #{accountBalance,jdbcType=DOUBLE},#{actualReceivedAmount,jdbcType=DOUBLE},
+        #{serviceAmount,jdbcType=DOUBLE},#{withdrawAmount,jdbcType=DOUBLE},
+        #{accountName,jdbcType=VARCHAR},#{accountBankNo,jdbcType=VARCHAR},
+        #{accountBankName,jdbcType=VARCHAR},#{accountBankAllName,jdbcType=VARCHAR},#{accountNo,jdbcType=VARCHAR},
+        #{applyReason,jdbcType=VARCHAR},#{applyer,jdbcType=VARCHAR},
+        #{operater,jdbcType=VARCHAR},#{operaterTime,jdbcType=TIMESTAMP},
+        #{modifier,jdbcType=VARCHAR},#{modifyTime,jdbcType=TIMESTAMP},
+        #{billStatus,jdbcType=VARCHAR},#{remark},#{sellerId},
+        #{sellerDetailId}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_fin_seller_account_withdraw
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.finance.model.FinSellerAccountWithdrawEntity" >
+        update tbl_wfx_fin_seller_account_withdraw
+        <trim prefix="SET" suffixOverrides=",">
+      		<include refid="set" />
+        </trim>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <!-- 更新基本信息 -->
+    <update id="updateBaseInfo" parameterType="com.yougou.wfx.finance.model.FinSellerAccountWithdrawEntity" >
+        update tbl_wfx_fin_seller_account_withdraw
+        <trim prefix="SET" suffixOverrides=",">
+      		<include refid="infoSet" />
+        </trim>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+</mapper>

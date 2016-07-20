@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.outside.dao.CommodityForOutSideMapper">
+
+    <resultMap id="Commodity" type="com.yougou.wfx.outside.domain.Commodity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="no" column="no" jdbcType="VARCHAR"/>
+    	<result property="commodityName" column="commodity_name" jdbcType="VARCHAR"/>
+    	<result property="isOnsale" column="is_onsale" jdbcType="TINYINT"/>
+    	<result property="brandNo" column="brand_no" jdbcType="VARCHAR"/>
+    	<result property="supplierCode" column="supplier_code" jdbcType="VARCHAR"/>
+    	<result property="brandName" column="brand_name" jdbcType="VARCHAR"/>
+    	<result property="catNo" column="cat_no" jdbcType="VARCHAR"/>
+    	<result property="catName" column="cat_name" jdbcType="VARCHAR"/>
+    	<result property="wfxPrice" column="wfx_price" jdbcType="DECIMAL"/>
+    	<result property="publicPrice" column="public_price" jdbcType="DECIMAL"/>
+    	<result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+    	<result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <resultMap id="CommodityProduct" type="com.yougou.wfx.outside.domain.CommodityProduct">
+        <result property="thirdPartyCode" column="third_party_code" jdbcType="VARCHAR"/>
+        <result property="inventoryNum" column="inventory_num" jdbcType="TINYINT"/>
+        <result property="sizeNo" column="size_no" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <resultMap id="CommodityDetail" type="com.yougou.wfx.outside.domain.CommodityDetail">
+    	<result property="stock" column="stock" jdbcType="TINYINT"/>
+    	<association property="commodity" javaType="com.yougou.wfx.outside.domain.Commodity" resultMap="Commodity"/>
+    	<collection property="commodityProducts" ofType="com.yougou.wfx.outside.domain.CommodityProduct" resultMap="CommodityProduct"/>
+    </resultMap>
+    
+    <sql id="Commodity_Column_List" >
+		t1.id,
+		t1.no,
+		t1.commodity_name,
+		t1.is_onsale,
+		t1.brand_no,
+		t1.supplier_code,
+		t1.brand_name,
+		t1.cat_no,
+		t1.cat_name,
+		t1.wfx_price,
+		t1.public_price,
+		t1.create_date,
+		t1.update_date
+    </sql>
+    <sql id="CommodityProduct_Column_List" >
+    	t2.third_party_code,
+    	t2.product_no,
+    	t2.inventory_num,
+    	t2.size_no
+    </sql>
+
+    <sql id="wherequeryCommodity">
+		<if test="updateStartTime != null and updateStartTime != ''">
+       	and t1.update_date &gt;= #{updateStartTime,jdbcType=VARCHAR}
+        </if>
+		<if test="updateEndTime != null and updateEndTime != ''">
+       	and t1.update_date &lt;= #{updateEndTime,jdbcType=VARCHAR}
+        </if>
+        <if test="isOnsale != null and isOnsale !=0">
+        and t1.is_onsale = #{isOnsale,jdbcType=TINYINT}
+	    </if>
+	    <if test="noArr != null">
+	    and t1.no in
+		     <foreach item="item" index="index" collection="noArr" open="(" separator="," close=")">
+	            #{item}
+	        </foreach>
+        </if>
+    </sql>
+    
+    <select id="queryCommodityList" resultMap="Commodity" parameterType="com.yougou.wfx.outside.request.CommodityGetRequest">
+        select 
+        	<include refid="Commodity_Column_List" />
+        from 
+        	tbl_commodity_style t1
+        where 1=1 and Is_wfx_commodity=1
+        <include refid="wherequeryCommodity" />
+    </select>
+    
+    <select id="queryCommodityCount" resultType="int" parameterType="com.yougou.wfx.outside.request.CommodityGetRequest">
+        select 
+        	count(1)
+        from 
+        	tbl_commodity_style t1
+        where 1=1 and Is_wfx_commodity=1
+        <include refid="wherequeryCommodity" />
+    </select>
+
+
+  <select id="queryCommodityDetailList" resultMap="CommodityDetail" parameterType="com.yougou.wfx.outside.request.CommodityDetailGetRequest">
+        select 
+        	<include refid="Commodity_Column_List" />,
+        	<include refid="CommodityProduct_Column_List" />,
+        	(select SUM(inventory_num) from tbl_commodity_product p where p.commodity_id=t1.id) as stock
+        from 
+        	tbl_commodity_style t1 left join 
+        	tbl_commodity_product t2
+        on  t1.id=t2.commodity_id
+        where 1=1  and t1.Is_wfx_commodity=1
+        <if test="noArr != null">
+	    and t1.no in
+		     <foreach item="item" index="index" collection="noArr" open="(" separator="," close=")">
+	            #{item}
+	        </foreach>
+        </if>
+ </select>
+ <select id="queryCommodityDetailCount" resultType="int" parameterType="com.yougou.wfx.outside.request.CommodityDetailGetRequest">
+         select 
+        	count(1)
+        from 
+        	tbl_commodity_style t1 right join 
+        	tbl_commodity_product t2
+        on  t1.id=t2.commodity_id
+        where 1=1 and t1.Is_wfx_commodity=1
+        <if test="noArr != null">
+	    and t1.no in
+		     <foreach item="item" index="index" collection="noArr" open="(" separator="," close=")">
+	            #{item}
+	        </foreach>
+        </if>
+ </select>
+ 
+ 	<update id="updateSkuQuantity">
+        update tbl_commodity_product
+        <set>
+	      	<if test="request.quantity != null and request.type == 1">
+	       	inventory_num = #{request.quantity,jdbcType=VARCHAR},
+	        </if>
+	        <if test="request.quantity != null and request.type == 2">
+	       	inventory_num = inventory_num + #{request.quantity,jdbcType=TINYINT},
+	        </if>
+			<if test="updateTime != null">
+	       	update_date = #{updateTime,jdbcType=TIMESTAMP},
+	        </if>
+        </set>
+        where 1=1 
+	        <if test="request.commodityNo != null and request.commodityNo != ''">
+	       	and no = #{request.commodityNo,jdbcType=VARCHAR}
+	        </if>
+	        <if test="request.outerSkuId != null and request.outerSkuId != ''">
+	       	and third_party_code = #{request.outerSkuId,jdbcType=VARCHAR}
+	        </if>
+    </update>
+    
+</mapper>

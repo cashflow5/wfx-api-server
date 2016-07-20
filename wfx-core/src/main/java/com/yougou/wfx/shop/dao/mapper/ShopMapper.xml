@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.shop.dao.ShopMapper">
+    <resultMap id="Shop" type="com.yougou.wfx.shop.model.ShopEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="sellerId" column="seller_id" jdbcType="VARCHAR"/>
+    	<result property="loginName" column="login_name" jdbcType="VARCHAR"/>
+    	<result property="name" column="name" jdbcType="VARCHAR"/>
+    	<result property="shopCode" column="shop_code" jdbcType="VARCHAR"/>
+    	<result property="notice" column="notice" jdbcType="VARCHAR"/>
+    	<result property="contact" column="contact" jdbcType="VARCHAR"/>
+    	<result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+    	<result property="status" column="status" jdbcType="TINYINT"/>
+    	<result property="shopUrl" column="shop_url" jdbcType="VARCHAR"/>
+    	<result property="logoUrl" column="logo_url" jdbcType="VARCHAR"/>
+    	<result property="signUrl" column="sign_url" jdbcType="VARCHAR"/>
+    	<result property="qrCodeUrl" column="qr_code_url" jdbcType="VARCHAR"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    	<result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+    	<result property="validateCode" column="validate_code" jdbcType="VARCHAR"/>
+    	<result property="verifySeries" column="verify_series" jdbcType="INTEGER"/>
+    </resultMap>
+    
+    <resultMap id="disShop" type="com.yougou.wfx.shop.dto.output.DiscoverShopOutputDto">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="sellerId" column="seller_id" jdbcType="VARCHAR"/>
+    	<result property="sellerName" column="seller_name" jdbcType="VARCHAR"/>
+    	<result property="loginName" column="login_name" jdbcType="VARCHAR"/>
+    	<result property="name" column="name" jdbcType="VARCHAR"/>
+    	<result property="shopCode" column="shop_code" jdbcType="VARCHAR"/>
+    	<result property="notice" column="notice" jdbcType="VARCHAR"/>
+    	<result property="contact" column="contact" jdbcType="VARCHAR"/>
+    	<result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+    	<result property="status" column="status" jdbcType="TINYINT"/>
+    	<result property="shopUrl" column="shop_url" jdbcType="VARCHAR"/>
+    	<result property="logoUrl" column="logo_url" jdbcType="VARCHAR"/>
+    	<result property="signUrl" column="sign_url" jdbcType="VARCHAR"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    	<result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+    	<result property="verifySeries" column="verify_series" jdbcType="INTEGER"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,seller_id,login_name,name,shop_code,notice,contact,mobile,status,shop_url,logo_url,sign_url,qr_code_url,create_time,update_time,update_user,validate_code,verify_series
+    </sql>
+    
+     <sql id="S_Column_List" >
+	s.id,s.seller_id,s.login_name,s.name,s.shop_code,s.notice,s.contact,s.mobile,s.status,s.shop_url,s.logo_url,s.sign_url,s.qr_code_url,s.create_time,s.update_time,s.update_user,s.validate_code,s.verify_series
+  		
+    </sql>
+    
+    <sql id="where">
+		<if test="id != null and id != ''">
+       	and id = #{id,jdbcType=VARCHAR}
+        </if>
+		<if test="loginName != null and loginName != ''">
+       	and login_name = #{loginName,jdbcType=VARCHAR}
+        </if>
+		<if test="name != null and name != ''">
+       	and name = #{name,jdbcType=VARCHAR}
+        </if>
+		<if test="shopCode != null and shopCode != ''">
+       	and shop_code = #{shopCode,jdbcType=VARCHAR}
+        </if>
+		<if test="status != null and status >0">
+       	and status = #{status,jdbcType=TINYINT}
+        </if>
+		<if test="createTimeStart != null">
+       	and create_time <![CDATA[>=]]> #{createTimeStart,jdbcType=TIMESTAMP}
+        </if>
+        <if test="createTimeEnd != null">
+       	and create_time <![CDATA[<=]]> #{createTimeEnd,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+    
+    <sql id="disInfoWhere">
+		<if test="id != null and id != ''">
+       	and s.id = #{id,jdbcType=VARCHAR}
+        </if>
+		<if test="loginName != null and loginName != ''">
+       	and s.login_name = #{loginName,jdbcType=VARCHAR}
+        </if>
+		<if test="name != null and name != ''">
+       	and s.name like CONCAT('%', #{name,jdbcType=VARCHAR}, '%')
+        </if>
+		<if test="sellerName != null and sellerName != ''">
+       	and i.seller_name like CONCAT('%', #{sellerName,jdbcType=VARCHAR}, '%')
+        </if>
+		<if test="shopCode != null and shopCode != ''">
+       	and s.shop_code = #{shopCode,jdbcType=VARCHAR}
+        </if>
+		<if test="status != null and status >0">
+       	and s.status = #{status,jdbcType=TINYINT}
+        </if>
+    </sql>
+    
+    <sql id="set">
+		<if test="loginName != null and  loginName !='' ">
+       	login_name = #{loginName,jdbcType=VARCHAR},
+        </if>
+		<if test="name != null and name !=''">
+       	name = #{name,jdbcType=VARCHAR},
+        </if>
+		<if test="shopCode != null and shopCode !=''">
+       	shop_code = #{shopCode,jdbcType=VARCHAR},
+        </if>
+		<if test="notice != null and  notice !=''">
+       	notice = #{notice,jdbcType=VARCHAR},
+        </if>
+		<if test="contact != null and contact  !=''">
+       	contact = #{contact,jdbcType=VARCHAR},
+        </if>
+		<if test="mobile != null and  mobile !=''">
+       	mobile = #{mobile,jdbcType=VARCHAR},
+        </if>
+		<if test="status != null and status>0">
+       	status = #{status,jdbcType=TINYINT},
+        </if>
+		<if test="shopUrl != null and  shopUrl !=''">
+       	shop_url = #{shopUrl,jdbcType=VARCHAR},
+        </if>
+		<if test="logoUrl != null and logoUrl  !=''">
+       	logo_url = #{logoUrl,jdbcType=VARCHAR},
+        </if>
+		<if test="signUrl != null and signUrl  !=''">
+       	sign_url = #{signUrl,jdbcType=VARCHAR},
+        </if>
+		<if test="qrCodeUrl != null and qrCodeUrl  !=''">
+       	qr_code_url = #{qrCodeUrl,jdbcType=VARCHAR},
+        </if>
+		<if test="createTime != null ">
+       	create_time = #{createTime,jdbcType=TIMESTAMP},
+        </if>
+		<if test="updateTime != null ">
+       	update_time = #{updateTime,jdbcType=TIMESTAMP},
+        </if>
+		<if test="updateUser != null and  updateUser !=''">
+       	update_user = #{updateUser,jdbcType=VARCHAR},
+        </if>
+		<if test="validateCode != null and  validateCode !='' ">
+       	validate_code = #{validateCode,jdbcType=VARCHAR},
+        </if>
+		<if test="verifySeries != null ">
+       	verify_series = #{verifySeries,jdbcType=INTEGER}
+        </if>
+    </sql>
+    
+    <select id="getById" resultMap="Shop" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_shop
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+     <select id="getShopBySeller" resultMap="Shop" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_shop
+        where seller_id = #{sellerId,jdbcType=VARCHAR}
+        limit 1
+    </select>
+    
+    <select id="findInfoPage" parameterType="com.yougou.wfx.shop.dto.output.DiscoverShopOutputDto" resultMap="disShop">
+        select s.id,s.seller_id,i.seller_name,s.login_name,s.`name`,s.notice,s.contact,
+		s.mobile,s.`status`,s.shop_url,s.logo_url,s.sign_url,s.create_time,s.update_time,
+		s.update_user,s.verify_series,s.shop_code
+		from tbl_wfx_shop s left join tbl_wfx_seller_info i
+		on i.id = s.seller_id 
+		where 1=1
+        <include refid="disInfoWhere" />
+        order by update_time desc
+    </select>
+    
+    <select id="findInfoPageCount" parameterType="com.yougou.wfx.shop.dto.output.DiscoverShopOutputDto" resultType="int">
+        select count(1)
+		from tbl_wfx_shop s left join tbl_wfx_seller_info i
+		on i.id = s.seller_id 
+		where 1=1
+        <include refid="disInfoWhere" />
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.shop.model.ShopEntity" resultMap="Shop">
+        select <include refid="Base_Column_List"/> from tbl_wfx_shop where 1=1 
+        <include refid="where" />
+        order by update_time desc
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.shop.model.ShopEntity" resultType="int">
+        select count(1) from tbl_wfx_shop where 1=1 
+        <include refid="where" />
+    </select>
+    
+     <select id="findByPage"  resultMap="Shop">
+        select <include refid="Base_Column_List"/> from tbl_wfx_shop where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.shop.model.ShopEntity">
+        insert into tbl_wfx_shop (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},#{sellerId,jdbcType=VARCHAR},#{loginName,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR}, 
+        #{shopCode,jdbcType=VARCHAR}, 
+        #{notice,jdbcType=VARCHAR},#{contact,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{shopUrl,jdbcType=VARCHAR},#{logoUrl,jdbcType=VARCHAR}, #{signUrl,jdbcType=VARCHAR}, #{qrCodeUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR},#{validateCode,jdbcType=VARCHAR},#{verifySeries,jdbcType=INTEGER}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_shop
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.shop.model.ShopEntity" >
+        update tbl_wfx_shop
+        <set>
+      	<include refid="set" />
+        </set>
+        where 1=1
+        <if test="id != null and id != '' ">
+         and id = #{id,jdbcType=VARCHAR}
+        </if> 
+        <if test="sellerId != null and sellerId != '' ">
+         and seller_id = #{sellerId,jdbcType=VARCHAR}
+        </if> 
+        <!-- 店铺id 和分销商id 都为空，默认按照店铺id条件修改，避免全表修改 -->
+        <if test="(id == null or id == '') and (sellerId == null or sellerId == '') ">
+        	 and id = #{id,jdbcType=VARCHAR}
+        </if>
+    </update>
+    
+    <update id="closeShop"  parameterType="com.yougou.wfx.shop.model.ShopEntity" >
+        update tbl_wfx_shop
+         set status = #{status,jdbcType=TINYINT},
+         	 update_time = now(),
+         	 update_user = #{updateUser,jdbcType=VARCHAR}
+        where seller_id = #{sellerId,jdbcType=VARCHAR}
+    </update>
+    
+    <!-- 校验店铺名称唯一性：根据店铺名称获取数量 -->
+    <select id="getCountsByShopName" parameterType="string" resultType="int">
+    	select count(*) from tbl_wfx_shop where name = #{name,jdbcType=VARCHAR}
+    </select>
+    
+     <!-- 批量审核通过，批量修改店铺状态，用于分销商自动审核通过job -->
+   <update id="batchUpdateShopStatus" parameterType="java.util.List" >
+   		 <foreach collection="list" item="item" index="index" open="" close="" separator=";">  
+              update tbl_wfx_shop  
+              	set status = #{item.status,jdbcType=TINYINT},
+        			update_time = #{item.updateTime,jdbcType=TIMESTAMP},
+        			update_user = #{item.updateUser,jdbcType=VARCHAR}
+	         where id = #{item.id,jdbcType=VARCHAR}
+         </foreach>  
+   </update>
+    
+    <!-- 根据店铺ID 获取用户ID -->
+   <select id="getMemberIdByShopId" resultType="string" parameterType="string">
+    	select
+    	  s.loginaccount_id
+		from tbl_wfx_seller_info s 
+			INNER JOIN tbl_wfx_shop p on s.id = p.seller_id
+    	where p.id =  #{shopId,jdbcType=VARCHAR}
+   </select>
+   
+   <!-- 批量插入敏感词，用于敏感词库初始化 -->
+   <insert id="insertSensitiveWord" parameterType="java.util.List">
+   		insert into tbl_wfx_sensitive_word(id,create_time,update_time,sensitive_word)
+   		values
+   		<foreach collection="list" item="item" index="index" separator="," >  
+        (REPLACE(UUID(),'-',''),now(),now(),#{item})  
+    	</foreach>   
+   </insert>
+   
+   <!-- 获取所有敏感词 -->
+   <select id="getAllSensitiveWord" resultType="string">
+   		select sensitive_word from tbl_wfx_sensitive_word 
+   </select>
+   
+   <select id="getShopByPhoneNumber" resultMap="Shop" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_shop 
+        where login_name= #{loginName,jdbcType=VARCHAR} 
+        limit 1
+    </select>
+   <select id="getShopByMemberId" resultMap="Shop" parameterType="java.lang.String">
+        select 
+        <include refid="S_Column_List"/>
+        from tbl_wfx_shop s join tbl_wfx_seller_info se on s.seller_id = se.id
+        where se.loginaccount_id = #{memberId,jdbcType=VARCHAR} 
+        limit 1
+    </select>
+   	
+</mapper>

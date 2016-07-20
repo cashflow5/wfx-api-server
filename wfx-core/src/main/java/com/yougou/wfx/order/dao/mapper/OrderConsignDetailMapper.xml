@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.order.dao.OrderConsignDetailMapper">
+    <resultMap id="OrderConsignDetail" type="com.yougou.wfx.order.model.OrderConsignDetailEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="consignId" column="consign_id" jdbcType="VARCHAR"/>
+    	<result property="orderDetailId" column="order_detail_id" jdbcType="VARCHAR"/>
+    	<result property="prodId" column="prod_id" jdbcType="VARCHAR"/>
+    	<result property="num" column="num" jdbcType="INTEGER"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,consign_id,order_detail_id,prod_id,num,create_time,update_time
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="consignId != null and consignId != ''">
+        	and consign_id = #{consignId,jdbcType=VARCHAR}
+	        </if>
+			<if test="orderDetailId != null and orderDetailId != ''">
+        	and order_detail_id = #{orderDetailId,jdbcType=VARCHAR}
+	        </if>
+			<if test="prodId != null and prodId != ''">
+        	and prod_id = #{prodId,jdbcType=VARCHAR}
+	        </if>
+			<if test="num != null and num != 0">
+        	and num = #{num,jdbcType=INTEGER}
+	        </if>
+			<if test="createTime != null">
+        	and create_time = #{createTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="updateTime != null">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+	        </if>
+    </sql>
+    
+    <sql id="set">
+			<if test="id != null">
+        	id = #{id,jdbcType=VARCHAR},
+	        </if>
+			<if test="consignId != null">
+        	consign_id = #{consignId,jdbcType=VARCHAR},
+	        </if>
+			<if test="orderDetailId != null">
+        	order_detail_id = #{orderDetailId,jdbcType=VARCHAR},
+	        </if>
+			<if test="prodId != null">
+        	prod_id = #{prodId,jdbcType=VARCHAR},
+	        </if>
+			<if test="num != null and num != 0">
+        	num = #{num,jdbcType=INTEGER},
+	        </if>
+			<if test="createTime != null">
+        	create_time = #{createTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="updateTime != null">
+        	update_time = #{updateTime,jdbcType=TIMESTAMP}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="OrderConsignDetail" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_order_consign_detail
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.order.model.OrderConsignDetailEntity" resultMap="OrderConsignDetail">
+        select <include refid="Base_Column_List"/> from tbl_wfx_order_consign_detail where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.order.model.OrderConsignDetailEntity" resultType="int">
+        select count(1) from tbl_wfx_order_consign_detail where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryList" parameterType="com.yougou.wfx.order.model.OrderConsignDetailEntity" resultMap="OrderConsignDetail">
+        select <include refid="Base_Column_List"/> from tbl_wfx_order_consign_detail where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.order.model.OrderConsignDetailEntity">
+        insert into tbl_wfx_order_consign_detail (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},#{consignId,jdbcType=VARCHAR},#{orderDetailId,jdbcType=VARCHAR},#{prodId,jdbcType=VARCHAR},#{num,jdbcType=INTEGER},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_order_consign_detail
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.order.model.OrderConsignDetailEntity" >
+        update tbl_wfx_order_consign_detail
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <select id="queryQualifiedByOrderDetailId" resultType="java.lang.Integer">
+    select  ( UNIX_TIMESTAMP(#{curDate,jdbcType=TIMESTAMP})-UNIX_TIMESTAMP( IFNULL(update_time,create_time) ) )  as diffFromNow
+	from tbl_wfx_order_consign_detail
+	where order_detail_id=#{orderDetailId,jdbcType=VARCHAR}
+	limit 1
+    </select>
+    
+    <select id="queryConsignStatusByWfxOrderNo" resultType="java.lang.Integer">
+	    SELECT
+			(count(DISTINCT t1.id)-count(DISTINCT t3.order_detail_id)) as c
+		FROM
+			tbl_wfx_order_detail t1
+		LEFT JOIN
+			tbl_wfx_order t2 ON t1.order_id = t2.id
+		LEFT JOIN tbl_wfx_order_consign_detail t3 ON t3.order_detail_id = t1.id
+		WHERE
+			t2.wfx_order_no = #{wfxOrderNo,jdbcType=VARCHAR}
+		AND t1.id NOT IN (
+			SELECT
+				t4.order_detail_id
+			FROM
+				tbl_wfx_order_refund t4
+			WHERE
+				t4.order_id = t1.order_id
+			AND 
+				t4.order_detail_id = t1.id
+			AND t4.status = 'SUCCESS_REFUND'
+		)
+    </select>
+</mapper>

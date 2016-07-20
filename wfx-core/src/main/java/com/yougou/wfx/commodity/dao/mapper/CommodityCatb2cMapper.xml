@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.commodity.dao.CommodityCatb2cMapper">
+    <resultMap id="CommodityCatb2c" type="com.yougou.wfx.commodity.model.CommodityCatb2cEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="catName" column="cat_name" jdbcType="VARCHAR"/>
+    	<result property="catWordsId" column="cat_words_id" jdbcType="VARCHAR"/>
+    	<result property="structName" column="struct_name" jdbcType="VARCHAR"/>
+    	<result property="structCatName" column="struct_cat_name" jdbcType="VARCHAR"/>
+    	<result property="isRecommend" column="is_recommend" jdbcType="BIT"/>
+    	<result property="isShow" column="is_show" jdbcType="BIT"/>
+    	<result property="sortNo" column="sort_no" jdbcType="INTEGER"/>
+    	<result property="updatePerson" column="update_person" jdbcType="VARCHAR"/>
+    	<result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+    	<result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+    	<result property="catAlias" column="cat_alias" jdbcType="VARCHAR"/>
+    	<result property="keywords" column="keywords" jdbcType="VARCHAR"/>
+    	<result property="catb2cDesc" column="catb2c_desc" jdbcType="VARCHAR"/>
+    	<result property="isEnabled" column="is_enabled" jdbcType="BIT"/>
+    	<result property="deleteFlag" column="delete_flag" jdbcType="SMALLINT"/>
+    	<result property="no" column="no" jdbcType="VARCHAR"/>
+    	<result property="level" column="level" jdbcType="INTEGER"/>
+    	<result property="updateTimestamp" column="update_timestamp" jdbcType="BIGINT"/>
+    	<result property="channelId" column="channel_id" jdbcType="VARCHAR"/>
+    	<result property="propType" column="prop_type" jdbcType="INTEGER"/>
+    	<result property="seoKeyword" column="seo_keyword" jdbcType="VARCHAR"/>
+    	<result property="seoTitle" column="seo_title" jdbcType="VARCHAR"/>
+    	<result property="seoDescription" column="seo_description" jdbcType="VARCHAR"/>
+    	<result property="taobaoImgOrder" column="taobao_img_order" jdbcType="VARCHAR"/>
+    	<result property="interestedRateOrder" column="interested_rate_order" jdbcType="DOUBLE"/>
+    	<result property="parentId" column="parent_id" jdbcType="VARCHAR"/>
+    	<result property="status" column="status" jdbcType="TINYINT"/>
+    	<result property="skuNum" column="sku_num" jdbcType="TINYINT"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,cat_name,cat_words_id,struct_name,struct_cat_name,is_recommend,is_show,sort_no,update_person,create_date,update_date,cat_alias,keywords,catb2c_desc,is_enabled,delete_flag,no,level,update_timestamp,channel_id,prop_type,seo_keyword,seo_title,seo_description,taobao_img_order,interested_rate_order,parent_id,status,sku_num
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="catName != null and catName != ''">
+        	and cat_name = #{catName,jdbcType=VARCHAR}
+	        </if>
+			<if test="catWordsId != null and catWordsId != ''">
+        	and cat_words_id = #{catWordsId,jdbcType=VARCHAR}
+	        </if>
+			<if test="structName != null and structName != ''">
+        	and struct_name = #{structName,jdbcType=VARCHAR}
+	        </if>
+			<if test="structCatName != null and structCatName != ''">
+        	and struct_cat_name = #{structCatName,jdbcType=VARCHAR}
+	        </if>
+			<if test="isRecommend != null">
+        	and is_recommend = #{isRecommend,jdbcType=BIT}
+	        </if>
+			<if test="isShow != null">
+        	and is_show = #{isShow,jdbcType=BIT}
+	        </if>
+			<if test="sortNo != null and sortNo !=0">
+        	and sort_no = #{sortNo,jdbcType=INTEGER}
+	        </if>
+			<if test="updatePerson != null and updatePerson != ''">
+        	and update_person = #{updatePerson,jdbcType=VARCHAR}
+	        </if>
+			<if test="createDate != null">
+        	and create_date = #{createDate,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="updateDate != null">
+        	and update_date = #{updateDate,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="catAlias != null and catAlias != ''">
+        	and cat_alias = #{catAlias,jdbcType=VARCHAR}
+	        </if>
+			<if test="keywords != null and keywords != ''">
+        	and keywords = #{keywords,jdbcType=VARCHAR}
+	        </if>
+			<if test="catb2cDesc != null and catb2cDesc != ''">
+        	and catb2c_desc = #{catb2cDesc,jdbcType=VARCHAR}
+	        </if>
+			<if test="isEnabled != null">
+        	and is_enabled = #{isEnabled,jdbcType=BIT}
+	        </if>
+			<if test="deleteFlag != null and deleteFlag !=0">
+        	and delete_flag = #{deleteFlag,jdbcType=SMALLINT}
+	        </if>
+			<if test="no != null and no != ''">
+        	and no = #{no,jdbcType=VARCHAR}
+	        </if>
+			<if test="level != null and level !=0">
+        	and level = #{level,jdbcType=INTEGER}
+	        </if>
+			<if test="updateTimestamp != null">
+        	and update_timestamp = #{updateTimestamp,jdbcType=BIGINT}
+	        </if>
+			<if test="channelId != null and channelId != ''">
+        	and channel_id = #{channelId,jdbcType=VARCHAR}
+	        </if>
+			<if test="propType != null and propType !=0">
+        	and prop_type = #{propType,jdbcType=INTEGER}
+	        </if>
+			<if test="seoKeyword != null and seoKeyword != ''">
+        	and seo_keyword = #{seoKeyword,jdbcType=VARCHAR}
+	        </if>
+			<if test="seoTitle != null and seoTitle != ''">
+        	and seo_title = #{seoTitle,jdbcType=VARCHAR}
+	        </if>
+			<if test="seoDescription != null and seoDescription != ''">
+        	and seo_description = #{seoDescription,jdbcType=VARCHAR}
+	        </if>
+			<if test="taobaoImgOrder != null and taobaoImgOrder != ''">
+        	and taobao_img_order = #{taobaoImgOrder,jdbcType=VARCHAR}
+	        </if>
+			<if test="interestedRateOrder != null">
+        	and interested_rate_order = #{interestedRateOrder,jdbcType=DOUBLE}
+	        </if>
+			<if test="parentId != null and parentId != ''">
+        	and parent_id = #{parentId,jdbcType=VARCHAR}
+	        </if>
+			<if test="status != null and status !=0">
+        	and status = #{status,jdbcType=TINYINT}
+	        </if>
+    </sql>
+    
+    <sql id="set">
+			<if test="id != null ">
+        	id = #{id,jdbcType=VARCHAR},
+	        </if>
+			<if test="catName != null ">
+        	cat_name = #{catName,jdbcType=VARCHAR},
+	        </if>
+			<if test="catWordsId != null ">
+        	cat_words_id = #{catWordsId,jdbcType=VARCHAR},
+	        </if>
+			<if test="structName != null ">
+        	struct_name = #{structName,jdbcType=VARCHAR},
+	        </if>
+			<if test="structCatName != null ">
+        	struct_cat_name = #{structCatName,jdbcType=VARCHAR},
+	        </if>
+			<if test="isRecommend != null ">
+        	is_recommend = #{isRecommend,jdbcType=BIT},
+	        </if>
+			<if test="isShow != null ">
+        	is_show = #{isShow,jdbcType=BIT},
+	        </if>
+			<if test="sortNo != null ">
+        	sort_no = #{sortNo,jdbcType=INTEGER},
+	        </if>
+			<if test="updatePerson != null ">
+        	update_person = #{updatePerson,jdbcType=VARCHAR},
+	        </if>
+			<if test="createDate != null ">
+        	create_date = #{createDate,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="updateDate != null ">
+        	update_date = #{updateDate,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="catAlias != null ">
+        	cat_alias = #{catAlias,jdbcType=VARCHAR},
+	        </if>
+			<if test="keywords != null ">
+        	keywords = #{keywords,jdbcType=VARCHAR},
+	        </if>
+			<if test="catb2cDesc != null ">
+        	catb2c_desc = #{catb2cDesc,jdbcType=VARCHAR},
+	        </if>
+			<if test="isEnabled != null ">
+        	is_enabled = #{isEnabled,jdbcType=BIT},
+	        </if>
+			<if test="deleteFlag != null ">
+        	delete_flag = #{deleteFlag,jdbcType=SMALLINT},
+	        </if>
+			<if test="no != null ">
+        	no = #{no,jdbcType=VARCHAR},
+	        </if>
+			<if test="level != null ">
+        	level = #{level,jdbcType=INTEGER},
+	        </if>
+			<if test="updateTimestamp != null ">
+        	update_timestamp = #{updateTimestamp,jdbcType=BIGINT},
+	        </if>
+			<if test="channelId != null ">
+        	channel_id = #{channelId,jdbcType=VARCHAR},
+	        </if>
+			<if test="propType != null ">
+        	prop_type = #{propType,jdbcType=INTEGER},
+	        </if>
+			<if test="seoKeyword != null ">
+        	seo_keyword = #{seoKeyword,jdbcType=VARCHAR},
+	        </if>
+			<if test="seoTitle != null ">
+        	seo_title = #{seoTitle,jdbcType=VARCHAR},
+	        </if>
+			<if test="seoDescription != null ">
+        	seo_description = #{seoDescription,jdbcType=VARCHAR},
+	        </if>
+			<if test="taobaoImgOrder != null ">
+        	taobao_img_order = #{taobaoImgOrder,jdbcType=VARCHAR},
+	        </if>
+			<if test="interestedRateOrder != null ">
+        	interested_rate_order = #{interestedRateOrder,jdbcType=DOUBLE},
+	        </if>
+			<if test="parentId != null ">
+        	parent_id = #{parentId,jdbcType=VARCHAR},
+	        </if>
+			<if test="status != null ">
+        	status = #{status,jdbcType=TINYINT}
+	        </if>
+    </sql>
+    <!--财务佣金设置有调用  -->
+    <select id="getById" resultMap="CommodityCatb2c" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_commodity_catb2c
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.commodity.model.CommodityCatb2cEntity" resultMap="CommodityCatb2c">
+        select <include refid="Base_Column_List"/> from tbl_commodity_catb2c where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.commodity.model.CommodityCatb2cEntity" resultType="int">
+        select count(1) from tbl_commodity_catb2c where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryList" parameterType="com.yougou.wfx.commodity.model.CommodityCatb2cEntity" resultMap="CommodityCatb2c">
+        select <include refid="Base_Column_List"/> from tbl_commodity_catb2c where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.commodity.model.CommodityCatb2cEntity">
+        insert into tbl_commodity_catb2c (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},#{catName,jdbcType=VARCHAR},#{catWordsId,jdbcType=VARCHAR},#{structName,jdbcType=VARCHAR},#{structCatName,jdbcType=VARCHAR},#{isRecommend,jdbcType=BIT},#{isShow,jdbcType=BIT},#{sortNo,jdbcType=INTEGER},#{updatePerson,jdbcType=VARCHAR},#{createDate,jdbcType=TIMESTAMP},#{updateDate,jdbcType=TIMESTAMP},#{catAlias,jdbcType=VARCHAR},#{keywords,jdbcType=VARCHAR},#{catb2cDesc,jdbcType=VARCHAR},#{isEnabled,jdbcType=BIT},#{deleteFlag,jdbcType=SMALLINT},#{no,jdbcType=VARCHAR},#{level,jdbcType=INTEGER},#{updateTimestamp,jdbcType=BIGINT},#{channelId,jdbcType=VARCHAR},#{propType,jdbcType=INTEGER},#{seoKeyword,jdbcType=VARCHAR},#{seoTitle,jdbcType=VARCHAR},#{seoDescription,jdbcType=VARCHAR},#{taobaoImgOrder,jdbcType=VARCHAR},#{interestedRateOrder,jdbcType=DOUBLE},#{parentId,jdbcType=VARCHAR},#{status,jdbcType=TINYINT},#{skuNum,jdbcType=TINYINT}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_commodity_catb2c
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.commodity.model.CommodityCatb2cEntity" >
+        update tbl_commodity_catb2c
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <update id="batchUpdateSkuNumLevel_3" >
+       UPDATE tbl_commodity_catb2c AS t2,
+		(
+			SELECT
+				t1.cat_no AS 'cat_no',
+				count(1) AS 'sku_num'
+			FROM
+				tbl_commodity_product t1
+			GROUP BY
+				t1.cat_no
+		) AS t3
+		SET t2.sku_num = t3.sku_num
+		WHERE
+			t2.`no` = t3.cat_no
+    </update>
+    
+    <update id="batchUpdateSkuNumLevel_2_1" >
+    UPDATE tbl_commodity_catb2c AS t2,
+	(
+		SELECT
+			t1.parent_id AS parent_id,
+			ifnull(SUM(t1.sku_num), 0)  AS sku_num
+		FROM
+			tbl_commodity_catb2c t1
+		GROUP BY
+			parent_id
+	) AS t3
+	SET t2.sku_num = t3.sku_num
+	WHERE
+		t2.id = t3.parent_id
+	</update>
+    
+    <select id="getCatIds" parameterType="java.lang.String" resultType="java.util.HashMap">
+        select c2.id catId1,c2.parent_id catId2 
+        from tbl_commodity_catb2c c1 
+        left join tbl_commodity_catb2c c2 on c1.parent_id = c2.id
+		where c1.level = 3 and c1.no = #{no,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="getCatList" parameterType="java.lang.String" resultMap="CommodityCatb2c">
+        SELECT DISTINCT
+        	<if test="level == 2 ">
+        		lv2.*
+	        </if>
+	        <if test="level == 1 ">
+        		lv1.*
+	        </if>
+		FROM
+			tbl_commodity_brand b,
+			tbl_commodity_brand_catb2c c,
+			tbl_commodity_catb2c cat
+		LEFT JOIN tbl_commodity_catb2c lv2 ON lv2.id = cat.parent_id
+		<if test="level == 2 ">
+       		and lv2.parent_id = #{baseCatId,jdbcType=VARCHAR}
+        </if>
+		<if test="level == 1 ">
+       		LEFT JOIN tbl_commodity_catb2c lv1 ON lv1.id = lv2.parent_id
+        </if>
+		WHERE
+			b.id = c.brand_id
+		AND cat.id = c.catb2c_id
+		AND b.brand_no = #{brandNo,jdbcType=VARCHAR}
+    </select>
+</mapper>

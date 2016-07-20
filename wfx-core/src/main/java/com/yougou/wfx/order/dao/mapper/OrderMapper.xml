@@ -1,0 +1,1075 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.order.dao.OrderMapper">
+    <resultMap id="Order" type="com.yougou.wfx.order.model.OrderEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="wfxOrderNo" column="wfx_order_no" jdbcType="VARCHAR"/>
+    	<result property="outerOrderNo" column="outer_order_no" jdbcType="VARCHAR"/>
+    	<result property="sellerId" column="seller_id" jdbcType="VARCHAR"/>
+    	<result property="shopId" column="shop_id" jdbcType="VARCHAR"/>
+    	<result property="shopName" column="shop_name" jdbcType="VARCHAR"/>
+    	<result property="shopCode" column="shop_code" jdbcType="VARCHAR"/>
+    	<result property="supplierId" column="supplier_id" jdbcType="VARCHAR"/>
+    	<result property="payType" column="pay_type" jdbcType="VARCHAR"/>
+    	<result property="payTime" column="pay_time" jdbcType="TIMESTAMP"/>
+    	<result property="payment" column="payment" jdbcType="DECIMAL"/>
+    	<result property="num" column="num" jdbcType="INTEGER"/>
+    	<result property="totalFee" column="total_fee" jdbcType="DECIMAL"/>
+    	<result property="discountFee" column="discount_fee" jdbcType="DECIMAL"/>
+    	<result property="postFee" column="post_fee" jdbcType="DECIMAL"/>
+    	<result property="status" column="status" jdbcType="VARCHAR"/>
+    	<result property="buyerId" column="buyer_id" jdbcType="VARCHAR"/>
+    	<result property="buyerAccount" column="buyer_account" jdbcType="VARCHAR"/>
+    	<result property="buyerMessage" column="buyer_message" jdbcType="VARCHAR"/>
+    	<result property="buyerNick" column="buyer_nick" jdbcType="VARCHAR"/>
+    	<result property="receiverName" column="receiver_name" jdbcType="VARCHAR"/>
+    	<result property="receiverMobile" column="receiver_mobile" jdbcType="VARCHAR"/>
+    	<result property="receiverPhone" column="receiver_phone" jdbcType="VARCHAR"/>
+    	<result property="idCardNo" column="Id_card_no" jdbcType="VARCHAR"/>
+    	<result property="receiverState" column="receiver_state" jdbcType="VARCHAR"/>
+    	<result property="receiverCity" column="receiver_city" jdbcType="VARCHAR"/>
+    	<result property="receiverDistrict" column="receiver_district" jdbcType="VARCHAR"/>
+    	<result property="receiverAddress" column="receiver_address" jdbcType="VARCHAR"/>
+    	<result property="receiverZip" column="receiver_zip" jdbcType="VARCHAR"/>
+    	<result property="shippingType" column="shipping_type" jdbcType="VARCHAR"/>
+    	<result property="receiveTimeRange" column="receive_time_range" jdbcType="TINYINT"/>
+    	<result property="commissionStatus" column="commission_status" jdbcType="TINYINT"/>
+    	<result property="syncStatus" column="sync_status" jdbcType="VARCHAR"/>
+    	<result property="syncBatchNo" column="sync_batch_no" jdbcType="VARCHAR"/>
+    	<result property="syncRemark" column="sync_remark" jdbcType="VARCHAR"/>
+    	<result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    	<result property="confirmTime" column="confirm_time" jdbcType="TIMESTAMP"/>
+    	<result property="closeTime" column="close_time" jdbcType="TIMESTAMP"/>
+    	<result property="manualRefundFlag" column="manual_refund_flag" jdbcType="BIT"/>
+    	<result property="commissionSellerId" column="commission_seller_id" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <resultMap id="ApplyOrder" type="com.yougou.wfx.aftersale.model.OrderApplyEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="wfxOrderNo" column="wfx_order_no" jdbcType="VARCHAR"/>
+    	<result property="outerOrderNo" column="outer_order_no" jdbcType="VARCHAR"/>
+    	<result property="sellerId" column="seller_id" jdbcType="VARCHAR"/>
+    	<result property="shopId" column="shop_id" jdbcType="VARCHAR"/>
+    	<result property="shopName" column="shop_name" jdbcType="VARCHAR"/>
+    	<result property="shopCode" column="shop_code" jdbcType="VARCHAR"/>
+    	<result property="supplierId" column="supplier_id" jdbcType="VARCHAR"/>
+    	<result property="supplierName" column="supplier_name" jdbcType="VARCHAR"/>
+    	<result property="payType" column="pay_type" jdbcType="VARCHAR"/>
+    	<result property="payTime" column="pay_time" jdbcType="TIMESTAMP"/>
+    	<result property="payment" column="payment" jdbcType="DECIMAL"/>
+    	<result property="num" column="num" jdbcType="INTEGER"/>
+    	<result property="totalFee" column="total_fee" jdbcType="DECIMAL"/>
+    	<result property="discountFee" column="discount_fee" jdbcType="DECIMAL"/>
+    	<result property="postFee" column="post_fee" jdbcType="DECIMAL"/>
+    	<result property="status" column="status" jdbcType="VARCHAR"/>
+    	<result property="buyerId" column="buyer_id" jdbcType="VARCHAR"/>
+    	<result property="buyerAccount" column="buyer_account" jdbcType="VARCHAR"/>
+    	<result property="buyerMessage" column="buyer_message" jdbcType="VARCHAR"/>
+    	<result property="buyerNick" column="buyer_nick" jdbcType="VARCHAR"/>
+    	<result property="receiverName" column="receiver_name" jdbcType="VARCHAR"/>
+    	<result property="receiverMobile" column="receiver_mobile" jdbcType="VARCHAR"/>
+    	<result property="receiverPhone" column="receiver_phone" jdbcType="VARCHAR"/>
+    	<result property="idCardNo" column="Id_card_no" jdbcType="VARCHAR"/>
+    	<result property="receiverState" column="receiver_state" jdbcType="VARCHAR"/>
+    	<result property="receiverCity" column="receiver_city" jdbcType="VARCHAR"/>
+    	<result property="receiverDistrict" column="receiver_district" jdbcType="VARCHAR"/>
+    	<result property="receiverAddress" column="receiver_address" jdbcType="VARCHAR"/>
+    	<result property="receiverZip" column="receiver_zip" jdbcType="VARCHAR"/>
+    	<result property="shippingType" column="shipping_type" jdbcType="VARCHAR"/>
+    	<result property="receiveTimeRange" column="receive_time_range" jdbcType="TINYINT"/>
+    	<result property="syncStatus" column="sync_status" jdbcType="VARCHAR"/>
+    	<result property="syncBatchNo" column="sync_batch_no" jdbcType="VARCHAR"/>
+    	<result property="syncRemark" column="sync_remark" jdbcType="VARCHAR"/>
+    	<result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    	<result property="confirmTime" column="confirm_time" jdbcType="TIMESTAMP"/>
+    	<result property="closeTime" column="close_time" jdbcType="TIMESTAMP"/>
+    	<result property="manualRefundFlag" column="manual_refund_flag" jdbcType="BIT"/>
+    	<result property="parentLoginName" column="parent_login_name" jdbcType="VARCHAR"/>
+    	<collection property="orderDetailDto" select="queryOrderDetailsInfo" column="{order_id=id}"></collection>
+    	<collection property="orderConsign" select="queryOrderConsign" column="{order_id=id}"></collection>
+    	<collection property="orderRemark" select="queryOrderRemarks" column="{order_id=id}"></collection>
+    	
+    </resultMap>
+    
+      <resultMap id="orderDetailEntity" type="com.yougou.wfx.order.model.OrderDetailEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="wfxOrderDetailNo" column="wfx_order_detail_no" jdbcType="VARCHAR"/>
+    	<result property="sellerId" column="seller_id" jdbcType="VARCHAR"/>
+    	<result property="shopId" column="shop_id" jdbcType="VARCHAR"/>
+    	<result property="shopName" column="shop_name" jdbcType="VARCHAR"/>
+    	<result property="orderId" column="order_id" jdbcType="VARCHAR"/>
+    	<result property="commodityId" column="commodity_id" jdbcType="VARCHAR"/>
+    	<result property="prodId" column="prod_id" jdbcType="VARCHAR"/>
+    	<result property="outerCommodityId" column="outer_commodity_id" jdbcType="VARCHAR"/>
+    	<result property="outerProdId" column="outer_prod_id" jdbcType="VARCHAR"/>
+    	<result property="prodName" column="prod_name" jdbcType="VARCHAR"/>
+    	<result property="prodSpec" column="prod_spec" jdbcType="VARCHAR"/>
+    	<result property="payment" column="payment" jdbcType="DECIMAL"/>
+    	<result property="num" column="num" jdbcType="INTEGER"/>
+    	<result property="price" column="price" jdbcType="DECIMAL"/>
+    	<result property="discountFee" column="discount_fee" jdbcType="DECIMAL"/>
+    	<result property="totalFee" column="total_fee" jdbcType="DECIMAL"/>
+    	<result property="proDiscountFee" column="pro_discount_fee" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel1" column="commission_level1" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel2" column="commission_level2" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel3" column="commission_level3" jdbcType="DECIMAL"/>
+    	<result property="refundStatus" column="refund_status" jdbcType="VARCHAR"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    	<result property="commissionLevel1Percent" column="commission_level1_percent" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel2Percent" column="commission_level2_percent" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel3Percent" column="commission_level3_percent" jdbcType="DECIMAL"/>
+    	<result property="picSmall" column="pic_small" jdbcType="VARCHAR"/>
+    	<result property="thirdPartyCode" column="third_party_code" jdbcType="VARCHAR"/>
+    </resultMap>
+     <resultMap id="orderConsignCommodity" type="com.yougou.wfx.order.model.OrderConsignCommodityEntity">
+    	<result property="prodName" column="prod_Name" jdbcType="VARCHAR"/>
+    	<result property="prodSpec" column="prod_Spec" jdbcType="VARCHAR"/>
+    	<result property="num" column="num" />
+    	<result property="shopName" column="shop_name" jdbcType="VARCHAR"/>
+    	<result property="defaultPic" column="default_Pic" jdbcType="VARCHAR"/>
+    	
+    </resultMap>
+      <resultMap id="orderConsign" type="com.yougou.wfx.order.model.OrderConsignEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="orderId" column="order_id" jdbcType="VARCHAR"/>
+    	<result property="outOrderId" column="out_order_id" jdbcType="VARCHAR"/>
+    	<result property="expressCode" column="express_code" jdbcType="VARCHAR"/>
+    	<result property="expressName" column="express_name" jdbcType="VARCHAR"/>
+    	<result property="expressNo" column="express_no" jdbcType="VARCHAR"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    	<collection property="orderConsignCommodity" select="queryOrderConsignCommodity" column="{id=id,orderId=order_id}"></collection>
+    </resultMap>
+    
+     <resultMap id="OrderRemark" type="com.yougou.wfx.order.model.OrderRemarkEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="orderId" column="order_id" jdbcType="VARCHAR"/>
+    	<result property="memberId" column="member_id" jdbcType="VARCHAR"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="type" column="type" jdbcType="TINYINT"/>
+    	<result property="markNote" column="mark_note" jdbcType="VARCHAR"/>
+    	<result property="operator" column="operator" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+     <resultMap id="CommissionOrder" type="com.yougou.wfx.order.model.CommissionOrderEntity">
+    	<result property="orderId" column="id" jdbcType="VARCHAR"/>
+    	<result property="createTime" column="created_time" jdbcType="TIMESTAMP"/>
+    	<result property="wfxOrderNo" column="wfx_order_no" jdbcType="VARCHAR"/>
+    	<result property="commission" column="commission" jdbcType="DECIMAL"/>
+    	<result property="level" column="level" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    
+    <sql id="Base_Column_List" >
+		id,wfx_order_no,outer_order_no,seller_id,shop_id,shop_name,shop_code,supplier_id,pay_type,pay_time,payment,num,total_fee,discount_fee,post_fee,status,buyer_id,buyer_account,buyer_message,buyer_nick,receiver_name,receiver_mobile,
+		receiver_phone,Id_card_no,receiver_state,receiver_city,receiver_district,receiver_address,receiver_zip,shipping_type,receive_time_range,commission_status,sync_status,sync_batch_no,sync_remark,created_time,update_time,confirm_time,
+		close_time,manual_refund_flag,commission_seller_id
+    </sql>
+    
+    <sql id="Apply_Column_List" >
+		o.id,o.wfx_order_no,o.outer_order_no,o.seller_id,o.shop_id,o.shop_name,
+		o.shop_code,o.supplier_id,o.pay_type,o.pay_time,o.payment,o.num,o.total_fee,o.discount_fee,o.post_fee,o.status,o.buyer_id,o.buyer_account,o.buyer_message,o.buyer_nick,o.receiver_name,o.receiver_mobile,o.receiver_phone,o.Id_card_no,
+		o.receiver_state,o.receiver_city,o.receiver_district,o.receiver_address,o.receiver_zip,o.shipping_type,o.receive_time_range,o.sync_status,o.sync_batch_no,o.sync_remark,o.created_time,o.update_time,o.confirm_time,o.close_time,
+		o.manual_refund_flag,o.commission_seller_id,s.supplier_name
+    </sql>
+    
+    <sql id="Query_Seller_Column" >
+		o.id,o.wfx_order_no,o.outer_order_no,o.seller_id,o.shop_id,o.shop_name,
+		o.shop_code,o.supplier_id,o.pay_type,o.pay_time,o.payment,o.num,o.total_fee,o.discount_fee,o.post_fee,o.status,o.buyer_id,o.buyer_account,o.buyer_message,o.buyer_nick,o.receiver_name,o.receiver_mobile,o.receiver_phone,o.Id_card_no,
+		o.receiver_state,o.receiver_city,o.receiver_district,o.receiver_address,o.receiver_zip,o.shipping_type,o.receive_time_range,o.sync_status,o.sync_batch_no,o.sync_remark,o.created_time,o.update_time,o.confirm_time,o.close_time,
+		o.manual_refund_flag,o.commission_seller_id
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="wfxOrderNo != null and wfxOrderNo != ''">
+        	and wfx_order_no = #{wfxOrderNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="outerOrderNo != null and outerOrderNo != ''">
+        	and outer_order_no = #{outerOrderNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="sellerId != null and sellerId != ''">
+        	and seller_id = #{sellerId,jdbcType=VARCHAR}
+	        </if>
+			<if test="commissionSellerId != null and commissionSellerId != ''">
+        	and commission_seller_id = #{commissionSellerId,jdbcType=VARCHAR}
+	        </if>
+			<if test="shopId != null and shopId != ''">
+        	and shop_id = #{shopId,jdbcType=VARCHAR}
+	        </if>
+			<if test="shopName != null and shopName != ''">
+        	and shop_name = #{shopName,jdbcType=VARCHAR}
+	        </if>
+			<if test="shopCode != null and shopCode != ''">
+        	and shop_code = #{shopCode,jdbcType=VARCHAR}
+	        </if>
+			<if test="supplierId != null and supplierId != ''">
+        	and supplier_id = #{supplierId,jdbcType=VARCHAR}
+	        </if>
+			<if test="payType != null and payType != ''">
+        	and pay_type = #{payType,jdbcType=VARCHAR}
+	        </if>
+			<if test="payTime != null">
+        	and pay_time = #{payTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="payment != null">
+        	and payment = #{payment,jdbcType=DECIMAL}
+	        </if>
+			<if test="num != null and num != 0">
+        	and num = #{num,jdbcType=INTEGER}
+	        </if>
+			<if test="totalFee != null">
+        	and total_fee = #{totalFee,jdbcType=DECIMAL}
+	        </if>
+			<if test="discountFee != null">
+        	and discount_fee = #{discountFee,jdbcType=DECIMAL}
+	        </if>
+			<if test="postFee != null">
+        	and post_fee = #{postFee,jdbcType=DECIMAL}
+	        </if>
+			<if test="status != null and status != ''">
+        	and status = #{status,jdbcType=VARCHAR}
+	        </if>
+			<if test="buyerId != null and buyerId != ''">
+        	and buyer_id = #{buyerId,jdbcType=VARCHAR}
+	        </if>
+			<if test="buyerAccount != null and buyerAccount != ''">
+        	and buyer_account = #{buyerAccount,jdbcType=VARCHAR}
+	        </if>
+			<if test="buyerMessage != null and buyerMessage != ''">
+        	and buyer_message = #{buyerMessage,jdbcType=VARCHAR}
+	        </if>
+			<if test="buyerNick != null and buyerNick != ''">
+        	and buyer_nick = #{buyerNick,jdbcType=VARCHAR}
+	        </if>
+			<if test="receiverName != null and receiverName != ''">
+        	and receiver_name = #{receiverName,jdbcType=VARCHAR}
+	        </if>
+			<if test="receiverMobile != null and receiverMobile != ''">
+        	and receiver_mobile = #{receiverMobile,jdbcType=VARCHAR}
+	        </if>
+			<if test="receiverPhone != null and receiverPhone != ''">
+        	and receiver_phone = #{receiverPhone,jdbcType=VARCHAR}
+	        </if>
+			<if test="idCardNo != null and idCardNo != ''">
+        	and Id_card_no = #{idCardNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="receiverState != null and receiverState != ''">
+        	and receiver_state = #{receiverState,jdbcType=VARCHAR}
+	        </if>
+			<if test="receiverCity != null and receiverCity != ''">
+        	and receiver_city = #{receiverCity,jdbcType=VARCHAR}
+	        </if>
+			<if test="receiverDistrict != null and receiverDistrict != ''">
+        	and receiver_district = #{receiverDistrict,jdbcType=VARCHAR}
+	        </if>
+			<if test="receiverAddress != null and receiverAddress != ''">
+        	and receiver_address = #{receiverAddress,jdbcType=VARCHAR}
+	        </if>
+			<if test="receiverZip != null and receiverZip != ''">
+        	and receiver_zip = #{receiverZip,jdbcType=VARCHAR}
+	        </if>
+			<if test="shippingType != null and shippingType != ''">
+        	and shipping_type = #{shippingType,jdbcType=VARCHAR}
+	        </if>
+			<if test="receiveTimeRange != null and receiveTimeRange != 0">
+        	and receive_time_range = #{receiveTimeRange,jdbcType=TINYINT}
+	        </if>
+			<if test="commissionStatus != null and commissionStatus != 0">
+        	and commission_status = #{commissionStatus,jdbcType=VARCHAR}
+	        </if>
+			<if test="syncStatus != null and syncStatus != ''">
+        	and sync_status = #{syncStatus,jdbcType=VARCHAR}
+	        </if>
+			<if test="syncBatchNo != null and syncBatchNo != ''">
+        	and sync_batch_no = #{syncBatchNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="syncRemark != null and syncRemark != ''">
+        	and sync_remark = #{syncRemark,jdbcType=VARCHAR}
+	        </if>
+			<if test="createdTime != null">
+        	and created_time = #{createdTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="updateTime != null">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="confirmTime != null">
+        	and confirm_time = #{confirmTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="closeTime != null">
+        	and close_time = #{closeTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="manualRefundFlag != null and manualRefundFlag != 0">
+        	and manual_refund_flag = #{manualRefundFlag,jdbcType=BIT}
+	        </if>
+	        <if test="createTimeStart != null and createTimeStart != ''  and createTimeEnd != null and createTimeEnd != ''" >
+        	and (created_time<![CDATA[>= ]]> #{createTimeStart,jdbcType=TIMESTAMP}    and created_time<![CDATA[<=]]> #{createTimeEnd,jdbcType=TIMESTAMP} )
+	        </if>
+    </sql>
+    
+    <sql id="applyWhere">
+		<if test="id != null and id != ''">
+       	and o.id = #{id,jdbcType=VARCHAR}
+        </if>
+		<if test="wfxOrderNo != null and wfxOrderNo != ''">
+       	and o.wfx_order_no = #{wfxOrderNo,jdbcType=VARCHAR}
+        </if>
+		<if test="outerOrderNo != null and outerOrderNo != ''">
+       	and o.outer_order_no = #{outerOrderNo,jdbcType=VARCHAR}
+        </if>
+		<if test="sellerId != null and sellerId != ''">
+       	and o.seller_id = #{sellerId,jdbcType=VARCHAR}
+        </if>
+		<if test="shopId != null and shopId != ''">
+       	and o.shop_id = #{shopId,jdbcType=VARCHAR}
+        </if>
+		<if test="shopName != null and shopName != ''">
+       	and o.shop_name = #{shopName,jdbcType=VARCHAR}
+        </if>
+		<if test="shopCode != null and shopCode != ''">
+       	and o.shop_code = #{shopCode,jdbcType=VARCHAR}
+        </if>
+		<if test="supplierId != null and supplierId != ''">
+       	and o.supplier_id = #{supplierId,jdbcType=VARCHAR}
+        </if>
+		<if test="payType != null and payType != ''">
+       	and o.pay_type = #{payType,jdbcType=VARCHAR}
+        </if>
+		<if test="payTime != null">
+       	and o.pay_time = #{payTime,jdbcType=TIMESTAMP}
+        </if>
+		<if test="payment != null">
+       	and o.payment = #{payment,jdbcType=DECIMAL}
+        </if>
+		<if test="num != null and num != 0">
+       	and o.num = #{num,jdbcType=INTEGER}
+        </if>
+		<if test="totalFee != null">
+       	and o.total_fee = #{totalFee,jdbcType=DECIMAL}
+        </if>
+		<if test="discountFee != null">
+       	and o.discount_fee = #{discountFee,jdbcType=DECIMAL}
+        </if>
+		<if test="postFee != null">
+       	and o.post_fee = #{postFee,jdbcType=DECIMAL}
+        </if>
+		<if test="status != null and status != ''">
+       	and o.status = #{status,jdbcType=VARCHAR}
+        </if>
+		<if test="buyerId != null and buyerId != ''">
+       	and o.buyer_id = #{buyerId,jdbcType=VARCHAR}
+        </if>
+		<if test="buyerAccount != null and buyerAccount != ''">
+       	and o.buyer_account = #{buyerAccount,jdbcType=VARCHAR}
+        </if>
+		<if test="buyerMessage != null and buyerMessage != ''">
+       	and o.buyer_message = #{buyerMessage,jdbcType=VARCHAR}
+        </if>
+		<if test="buyerNick != null and buyerNick != ''">
+       	and o.buyer_nick = #{buyerNick,jdbcType=VARCHAR}
+        </if>
+		<if test="receiverName != null and receiverName != ''">
+       	and o.receiver_name = #{receiverName,jdbcType=VARCHAR}
+        </if>
+		<if test="receiverMobile != null and receiverMobile != ''">
+       	and o.receiver_mobile = #{receiverMobile,jdbcType=VARCHAR}
+        </if>
+		<if test="receiverPhone != null and receiverPhone != ''">
+       	and o.receiver_phone = #{receiverPhone,jdbcType=VARCHAR}
+        </if>
+		<if test="idCardNo != null and idCardNo != ''">
+       	and o.Id_card_no = #{idCardNo,jdbcType=VARCHAR}
+        </if>
+		<if test="receiverState != null and receiverState != ''">
+       	and o.receiver_state = #{receiverState,jdbcType=VARCHAR}
+        </if>
+		<if test="receiverCity != null and receiverCity != ''">
+       	and o.receiver_city = #{receiverCity,jdbcType=VARCHAR}
+        </if>
+		<if test="receiverDistrict != null and receiverDistrict != ''">
+       	and o.receiver_district = #{receiverDistrict,jdbcType=VARCHAR}
+        </if>
+		<if test="receiverAddress != null and receiverAddress != ''">
+       	and o.receiver_address = #{receiverAddress,jdbcType=VARCHAR}
+        </if>
+		<if test="receiverZip != null and receiverZip != ''">
+       	and o.receiver_zip = #{receiverZip,jdbcType=VARCHAR}
+        </if>
+		<if test="shippingType != null and shippingType != ''">
+       	and o.shipping_type = #{shippingType,jdbcType=VARCHAR}
+        </if>
+		<if test="receiveTimeRange != null and receiveTimeRange != 0">
+       	and o.receive_time_range = #{receiveTimeRange,jdbcType=TINYINT}
+        </if>
+		<if test="createdTime != null">
+       	and o.created_time = #{createdTime,jdbcType=TIMESTAMP}
+        </if>
+		<if test="createdTimeStart != null">
+       	and o.created_time &gt;= #{createdTimeStart,jdbcType=TIMESTAMP}
+        </if>
+		<if test="createdTimeEnd != null">
+       	and o.created_time &lt;= #{createdTimeEnd,jdbcType=TIMESTAMP}
+        </if>
+		<if test="updateTime != null">
+       	and o.update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+		<if test="confirmTime != null">
+       	and o.confirm_time <![CDATA[<=]]> #{confirmTime,jdbcType=TIMESTAMP}
+        </if>
+		<if test="closeTime != null">
+       	and o.close_time = #{closeTime,jdbcType=TIMESTAMP}
+        </if>
+		<if test="manualRefundFlag != null and manualRefundFlag != 0">
+       	and o.manual_refund_flag = #{manualRefundFlag,jdbcType=BIT}
+        </if>
+		<if test="supplierName != null and supplierName != ''">
+       	and s.supplier_name = #{supplierName,jdbcType=BIT}
+        </if>
+    </sql>
+    
+    <sql id="querySellerWhere">
+			<if test="id != null and id != ''">
+        	and o.id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="wfxOrderNo != null and wfxOrderNo != ''">
+        	and o.wfx_order_no = #{wfxOrderNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="outerOrderNo != null and outerOrderNo != ''">
+        	and o.outer_order_no = #{outerOrderNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="sellerId != null and sellerId != ''">
+        	and o.seller_id = #{sellerId,jdbcType=VARCHAR}
+	        </if>
+	        <if test="commissionSellerId != null and commissionSellerId != ''">
+        	and o.commission_seller_id = #{commissionSellerId,jdbcType=VARCHAR}
+	        </if>
+			<if test="shopId != null and shopId != ''">
+        	and o.shop_id = #{shopId,jdbcType=VARCHAR}
+	        </if>
+			<if test="shopName != null and shopName != ''">
+        	and o.shop_name = #{shopName,jdbcType=VARCHAR}
+	        </if>
+			<if test="shopCode != null and shopCode != ''">
+        	and o.shop_code = #{shopCode,jdbcType=VARCHAR}
+	        </if>
+			<if test="supplierId != null and supplierId != ''">
+        	and o.supplier_id = #{supplierId,jdbcType=VARCHAR}
+	        </if>
+			<if test="payType != null and payType != ''">
+        	and o.pay_type = #{payType,jdbcType=VARCHAR}
+	        </if>
+			<if test="payTime != null">
+        	and o.pay_time = #{payTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="payment != null">
+        	and o.payment = #{payment,jdbcType=DECIMAL}
+	        </if>
+			<if test="num != null and num != 0">
+        	and o.num = #{num,jdbcType=INTEGER}
+	        </if>
+			<if test="totalFee != null">
+        	and o.total_fee = #{totalFee,jdbcType=DECIMAL}
+	        </if>
+			<if test="discountFee != null">
+        	and o.discount_fee = #{discountFee,jdbcType=DECIMAL}
+	        </if>
+			<if test="postFee != null">
+        	and o.post_fee = #{postFee,jdbcType=DECIMAL}
+	        </if>
+			<if test="status != null and status != ''">
+        	and o.status = #{status,jdbcType=VARCHAR}
+	        </if>
+	        <if test="mergeSearchFlag != null and mergeSearchFlag==1">
+        	and o.status in('DELIVERED','PART_DELIVERED')
+	        </if>
+			<if test="buyerId != null and buyerId != ''">
+        	and o.buyer_id = #{buyerId,jdbcType=VARCHAR}
+	        </if>
+			<if test="buyerAccount != null and buyerAccount != ''">
+        	and o.buyer_account = #{buyerAccount,jdbcType=VARCHAR}
+	        </if>
+			<if test="buyerMessage != null and buyerMessage != ''">
+        	and o.buyer_message = #{buyerMessage,jdbcType=VARCHAR}
+	        </if>
+			<if test="buyerNick != null and buyerNick != ''">
+        	and o.buyer_nick = #{buyerNick,jdbcType=VARCHAR}
+	        </if>
+			<if test="receiverName != null and receiverName != ''">
+        	and o.receiver_name = #{receiverName,jdbcType=VARCHAR}
+	        </if>
+			<if test="receiverMobile != null and receiverMobile != ''">
+        	and o.receiver_mobile = #{receiverMobile,jdbcType=VARCHAR}
+	        </if>
+			<if test="receiverPhone != null and receiverPhone != ''">
+        	and o.receiver_phone = #{receiverPhone,jdbcType=VARCHAR}
+	        </if>
+			<if test="idCardNo != null and idCardNo != ''">
+        	and o.Id_card_no = #{idCardNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="receiverState != null and receiverState != ''">
+        	and o.receiver_state = #{receiverState,jdbcType=VARCHAR}
+	        </if>
+			<if test="receiverCity != null and receiverCity != ''">
+        	and o.receiver_city = #{receiverCity,jdbcType=VARCHAR}
+	        </if>
+			<if test="receiverDistrict != null and receiverDistrict != ''">
+        	and o.receiver_district = #{receiverDistrict,jdbcType=VARCHAR}
+	        </if>
+			<if test="receiverAddress != null and receiverAddress != ''">
+        	and o.receiver_address = #{receiverAddress,jdbcType=VARCHAR}
+	        </if>
+			<if test="receiverZip != null and receiverZip != ''">
+        	and o.receiver_zip = #{receiverZip,jdbcType=VARCHAR}
+	        </if>
+			<if test="shippingType != null and shippingType != ''">
+        	and o.shipping_type = #{shippingType,jdbcType=VARCHAR}
+	        </if>
+			<if test="receiveTimeRange != null and receiveTimeRange != 0">
+        	and o.receive_time_range = #{receiveTimeRange,jdbcType=TINYINT}
+	        </if>
+			<if test="createdTime != null">
+        	and o.created_time = #{createdTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="updateTime != null">
+        	and o.update_time = #{updateTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="confirmTime != null">
+        	and o.confirm_time = #{confirmTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="closeTime != null">
+        	and o.close_time = #{closeTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="manualRefundFlag != null and manualRefundFlag != 0">
+        	and o.manual_refund_flag = #{manualRefundFlag,jdbcType=BIT}
+	        </if>
+    </sql>
+    
+    <sql id="set">
+			<if test="id != null">
+        	id = #{id,jdbcType=VARCHAR},
+	        </if>
+			<if test="wfxOrderNo != null">
+        	wfx_order_no = #{wfxOrderNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="outerOrderNo != null">
+        	outer_order_no = #{outerOrderNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="sellerId != null">
+        	seller_id = #{sellerId,jdbcType=VARCHAR},
+	        </if>
+	        <if test="commissionSellerId != null">
+        	commission_seller_id = #{commissionSellerId,jdbcType=VARCHAR},
+	        </if>
+			<if test="shopId != null">
+        	shop_id = #{shopId,jdbcType=VARCHAR},
+	        </if>
+			<if test="shopName != null">
+        	shop_name = #{shopName,jdbcType=VARCHAR},
+	        </if>
+			<if test="shopCode != null">
+        	shop_code = #{shopCode,jdbcType=VARCHAR},
+	        </if>
+			<if test="supplierId != null">
+        	supplier_id = #{supplierId,jdbcType=VARCHAR},
+	        </if>
+			<if test="payType != null">
+        	pay_type = #{payType,jdbcType=VARCHAR},
+	        </if>
+			<if test="payTime != null">
+        	pay_time = #{payTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="payment != null">
+        	payment = #{payment,jdbcType=DECIMAL},
+	        </if>
+			<if test="num != null and num != 0">
+        	num = #{num,jdbcType=INTEGER},
+	        </if>
+			<if test="totalFee != null">
+        	total_fee = #{totalFee,jdbcType=DECIMAL},
+	        </if>
+			<if test="discountFee != null">
+        	discount_fee = #{discountFee,jdbcType=DECIMAL},
+	        </if>
+			<if test="postFee != null">
+        	post_fee = #{postFee,jdbcType=DECIMAL},
+	        </if>
+			<if test="status != null">
+        	status = #{status,jdbcType=VARCHAR},
+	        </if>
+			<if test="buyerId != null">
+        	buyer_id = #{buyerId,jdbcType=VARCHAR},
+	        </if>
+			<if test="buyerAccount != null">
+        	buyer_account = #{buyerAccount,jdbcType=VARCHAR},
+	        </if>
+			<if test="buyerMessage != null">
+        	buyer_message = #{buyerMessage,jdbcType=VARCHAR},
+	        </if>
+			<if test="buyerNick != null">
+        	buyer_nick = #{buyerNick,jdbcType=VARCHAR},
+	        </if>
+			<if test="receiverName != null">
+        	receiver_name = #{receiverName,jdbcType=VARCHAR},
+	        </if>
+			<if test="receiverMobile != null">
+        	receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+	        </if>
+			<if test="receiverPhone != null">
+        	receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
+	        </if>
+			<if test="idCardNo != null">
+        	Id_card_no = #{idCardNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="receiverState != null">
+        	receiver_state = #{receiverState,jdbcType=VARCHAR},
+	        </if>
+			<if test="receiverCity != null">
+        	receiver_city = #{receiverCity,jdbcType=VARCHAR},
+	        </if>
+			<if test="receiverDistrict != null">
+        	receiver_district = #{receiverDistrict,jdbcType=VARCHAR},
+	        </if>
+			<if test="receiverAddress != null">
+        	receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+	        </if>
+			<if test="receiverZip != null">
+        	receiver_zip = #{receiverZip,jdbcType=VARCHAR},
+	        </if>
+			<if test="shippingType != null">
+        	shipping_type = #{shippingType,jdbcType=VARCHAR},
+	        </if>
+			<if test="receiveTimeRange != null and receiveTimeRange != 0">
+        	receive_time_range = #{receiveTimeRange,jdbcType=TINYINT},
+	        </if>
+			<if test="commissionStatus != null and commissionStatus != 0">
+        	commission_status = #{commissionStatus,jdbcType=VARCHAR},
+	        </if>
+			<if test="syncStatus != null">
+        	sync_status = #{syncStatus,jdbcType=VARCHAR},
+	        </if>
+			<if test="syncBatchNo != null">
+        	sync_batch_no = #{syncBatchNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="syncRemark != null">
+        	sync_remark = #{syncRemark,jdbcType=VARCHAR},
+	        </if>
+			<if test="createdTime != null">
+        	created_time = #{createdTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="updateTime != null">
+        	update_time = #{updateTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="confirmTime != null">
+        	confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="closeTime != null">
+        	close_time = #{closeTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="manualRefundFlag != null and manualRefundFlag != 0">
+        	manual_refund_flag = #{manualRefundFlag,jdbcType=BIT}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="Order" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_order
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="getByWFXOrderNo" resultMap="Order" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_order
+        where wfx_order_no = #{wfxOrderNo,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.order.model.OrderEntity" resultMap="Order">
+        select <include refid="Base_Column_List"/> from tbl_wfx_order where 1=1 
+        <include refid="where" />
+        order by  created_time  desc
+    </select>
+    
+    <select id="querySellerListCount" parameterType="com.yougou.wfx.order.model.OrderEntity" resultType="int">
+        select count(distinct o.id) from tbl_wfx_order o 
+        left join tbl_wfx_order_detail d on o.id = d.order_id  where 1=1 
+        <include refid="querySellerWhere" />
+        <if test="extraMap != null and extraMap.commissionSellerList != null">
+        	and o.commission_seller_id  in
+        	<foreach item="item" index="index" collection="extraMap.commissionSellerList"
+        		open="(" separator="," close=")">
+        		#{item}
+        	</foreach>
+        </if>
+        <if test="extraMap != null and extraMap.prodName != null and extraMap.prodName != ''">
+        and d.prod_name = #{extraMap.prodName,jdbcType=VARCHAR}
+        </if>
+        <if test="extraMap != null and extraMap.prodId != null and extraMap.prodId != ''">
+        and d.prod_id = #{extraMap.prodId,jdbcType=VARCHAR}
+        </if>
+    </select>
+    
+    <select id="querySellerList" parameterType="com.yougou.wfx.order.model.OrderEntity" resultMap="Order">
+        select distinct <include refid="Query_Seller_Column" /> from tbl_wfx_order o 
+        left join tbl_wfx_order_detail d on o.id = d.order_id  where 1=1 
+        <include refid="querySellerWhere" />
+        <if test="extraMap != null and extraMap.commissionSellerList != null">
+        	and o.commission_seller_id in
+        	<foreach item="item" index="index" collection="extraMap.commissionSellerList"
+        		open="(" separator="," close=")">
+        		#{item}
+        	</foreach>
+        </if>
+        <if test="extraMap != null and extraMap.prodName != null and extraMap.prodName != ''">
+        and d.prod_name = #{extraMap.prodName,jdbcType=VARCHAR}
+        </if>
+        <if test="extraMap != null and extraMap.prodId != null and extraMap.prodId != ''">
+        and d.prod_id = #{extraMap.prodId,jdbcType=VARCHAR}
+        </if>
+        order by o.created_time desc
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.order.model.OrderEntity" resultType="int">
+        select count(1) from tbl_wfx_order where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="findByPage"  resultMap="Order">
+        select <include refid="Base_Column_List"/> from tbl_wfx_order where 1=1 
+        <include refid="where" />
+        order by created_time desc
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.order.model.OrderEntity">
+        insert into tbl_wfx_order (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},#{wfxOrderNo,jdbcType=VARCHAR},#{outerOrderNo,jdbcType=VARCHAR},#{sellerId,jdbcType=VARCHAR},#{shopId,jdbcType=VARCHAR},#{shopName,jdbcType=VARCHAR},
+        #{shopCode,jdbcType=VARCHAR},
+        #{supplierId,jdbcType=VARCHAR},#{payType,jdbcType=VARCHAR},#{payTime,jdbcType=TIMESTAMP},#{payment,jdbcType=DECIMAL},#{num,jdbcType=INTEGER},#{totalFee,jdbcType=DECIMAL},
+        #{discountFee,jdbcType=DECIMAL},#{postFee,jdbcType=DECIMAL},#{status,jdbcType=VARCHAR},#{buyerId,jdbcType=VARCHAR},#{buyerAccount,jdbcType=VARCHAR},#{buyerMessage,jdbcType=VARCHAR},
+        #{buyerNick,jdbcType=VARCHAR},#{receiverName,jdbcType=VARCHAR},#{receiverMobile,jdbcType=VARCHAR},#{receiverPhone,jdbcType=VARCHAR},#{idCardNo,jdbcType=VARCHAR},
+        #{receiverState,jdbcType=VARCHAR},#{receiverCity,jdbcType=VARCHAR},#{receiverDistrict,jdbcType=VARCHAR},#{receiverAddress,jdbcType=VARCHAR},#{receiverZip,jdbcType=VARCHAR},
+        #{shippingType,jdbcType=VARCHAR},#{receiveTimeRange,jdbcType=TINYINT},#{commissionStatus,jdbcType=VARCHAR},#{syncStatus,jdbcType=VARCHAR},#{syncBatchNo,jdbcType=VARCHAR},#{syncRemark,jdbcType=VARCHAR},
+        #{createdTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP},#{confirmTime,jdbcType=TIMESTAMP},#{closeTime,jdbcType=TIMESTAMP},#{manualRefundFlag,jdbcType=BIT},#{commissionSellerId,jdbcType=VARCHAR}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_order
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.order.model.OrderEntity" >
+        update tbl_wfx_order
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <select id="queryApplyList" parameterType="com.yougou.wfx.aftersale.model.OrderApplyEntity" resultMap="ApplyOrder">
+        select <include refid="Apply_Column_List" /> from tbl_wfx_order o left join 
+		tbl_wfx_supplier s on o.supplier_id = supplier_code where 1=1
+        <include refid="applyWhere" />
+        order by o.created_time desc
+    </select>
+    
+    <select id="queryOrderDetails" parameterType="java.lang.String" resultMap="ApplyOrder">
+        select <include refid="Apply_Column_List" />
+        ,(select r.login_name from tbl_wfx_seller_info l JOIN tbl_wfx_seller_info r 
+		on l.parent_id = r.id
+		where l.id = o.seller_id
+		) as parent_login_name
+         from tbl_wfx_order o
+         left join 	tbl_wfx_supplier s on o.supplier_id = supplier_code 
+		 
+		where 1=1
+        and  o.id=#{value}
+        order by o.created_time desc
+    </select>
+    <select id="queryOrderDetailsByNo" parameterType="java.lang.String" resultMap="ApplyOrder">
+        select <include refid="Apply_Column_List" /> 
+        ,(select r.login_name from tbl_wfx_seller_info l JOIN tbl_wfx_seller_info r 
+		on l.parent_id = r.id
+		where l.id = o.seller_id
+		) as parent_login_name
+        from tbl_wfx_order o left join 
+		tbl_wfx_supplier s on o.supplier_id = supplier_code 
+		where 1=1
+        and o.wfx_order_no = #{wfxOrderNo,jdbcType=VARCHAR}
+    </select>
+    
+    
+      
+    <select id="queryOrderDetailsInfo" parameterType="java.util.HashMap" resultMap="orderDetailEntity">
+        select s.pic_small,t.third_party_code,d.* from tbl_wfx_order_detail d,tbl_commodity_product t ,tbl_commodity_style s
+  		where d.order_id=#{order_id}  and d.commodity_id=s.id   and d.prod_id=t.id
+  		
+  		<!-- 
+  		select CONCAT(p.pic_path,p.pic_name) pic_small,t.third_party_code,d.* 
+		from tbl_wfx_order_detail d 
+		left join tbl_commodity_product t on d.prod_id = t.id
+		left join tbl_commodity_style s on d.commodity_id = s.id
+		left join tbl_commodity_pics p on s.no = p.commodity_no and p.pic_type = 's' and p.del_flag='1'
+		where d.order_id='0c1862e96f1e4ede882312f29d509cbf';
+  		 -->
+    </select>
+
+    
+    <select id="queryApplyCount" parameterType="com.yougou.wfx.aftersale.model.OrderApplyEntity" resultType="int">
+        select count(1) from tbl_wfx_order o left join 
+		tbl_wfx_supplier s on o.supplier_id = supplier_code where 1=1
+        <include refid="applyWhere" />
+    </select>
+    
+    <!-- 根据用户ID查询确认收货(交易成功)订单数量 -->
+    <select id="queryReceivedCount" parameterType="string" resultType="int">
+    	select count(1) from tbl_wfx_order where buyer_id = #{memberId,jdbcType=VARCHAR} and status = 'TRADE_SUCCESS'
+    </select>
+    <select id="queryOrderConsignCommodity" parameterType="java.util.HashMap" resultMap="orderConsignCommodity">
+       select d.prod_Name,d.prod_Spec,d.num,d.shop_name ,s.default_Pic from tbl_wfx_order_consign_detail c ,tbl_commodity_style s,
+  	   tbl_wfx_order_detail d where c.consign_id=#{id}  and c.prod_id=d.prod_id
+	   and d.order_id=#{orderId}
+	   and  s.id=d.commodity_id 
+    </select>
+    <select id="queryOrderConsign" parameterType="java.util.HashMap" resultMap="orderConsign">
+        select * from tbl_wfx_order_consign
+        where order_id=#{order_id}
+    </select>
+    
+    <!-- 根据订单状态查询用户订单数量 -->
+    <select id="queryMemberOrderCountByStatus" parameterType="java.util.HashMap" resultType="int">
+    	select count(1) from tbl_wfx_order 
+    	where buyer_id = #{memberId,jdbcType=VARCHAR} 
+    	  <if test="status != null and status != '' ">
+    	 	 and status = #{status,jdbcType=VARCHAR}
+    	  </if>	
+    </select>
+    
+     <!-- 根据用户ID查询其退款/售后中的订单数量 -->
+    <select id="queryMemberRefundOrderCount" parameterType="java.lang.String" resultType="int">
+	    select count(*) from tbl_wfx_order o 
+		INNER JOIN tbl_wfx_order_refund r on o.id = r.order_id
+		where r.status in ('APPLYING','PENDING_DELIVERD','REJECT_REFUND','UNDER_REFUND')
+		and o.buyer_id = #{memberId,jdbcType=VARCHAR} 
+    </select>
+    
+    <select id="getByOrderDetailId" parameterType="java.lang.String" resultMap="Order"> 
+     	 select distinct <include refid="Query_Seller_Column" />
+         from tbl_wfx_order o left join tbl_wfx_order_detail d on o.id = d.order_id
+         where d.id = #{orderDetailId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="queryUnCommissionOrders" parameterType="com.yougou.wfx.order.model.OrderEntity" resultMap="Order"> 
+     	 select <include refid="Base_Column_List" /> from tbl_wfx_order
+         where commission_status in ('1','2') 
+         and confirm_time <![CDATA[<=]]> #{confirmTime,jdbcType=TIMESTAMP}
+         and status = 'TRADE_SUCCESS'
+    </select>
+    
+     <select id="queryForCloseOrders" resultMap="Order"> 
+     	 select  <include refid="Base_Column_List" /> from tbl_wfx_order 
+		 where status='WAIT_PAY' and  ( UNIX_TIMESTAMP(#{curDate,jdbcType=TIMESTAMP})-UNIX_TIMESTAMP(created_time)<![CDATA[>]]>#{seconds,jdbcType=INTEGER} )
+     </select>
+    
+    <update id="closeOrders" >
+     update tbl_wfx_order set status='TRADE_CLOSED',update_time=#{curDate,jdbcType=TIMESTAMP}
+     where status='WAIT_PAY' and  ( UNIX_TIMESTAMP(#{curDate,jdbcType=TIMESTAMP})-UNIX_TIMESTAMP(created_time)<![CDATA[>]]>#{seconds,jdbcType=INTEGER} )
+    </update>
+   
+    <select id="queryAutoChangeOrderStatusList" resultMap="Order">
+    	SELECT DISTINCT
+		<include refid="Base_Column_List" />
+	FROM
+		tbl_wfx_order 
+	WHERE
+		(status = 'DELIVERED' or status ='PART_DELIVERED' )
+	AND not EXISTS (
+		SELECT
+			order_id
+		FROM
+			tbl_wfx_order_refund
+		WHERE
+			STATUS IN ( 
+				'APPLYING',
+				'PENDING_DELIVERD',
+				'REJECT_REFUND',
+				'UNDER_REFUND'
+			) and order_id = tbl_wfx_order.id
+	)
+    </select>
+    
+    <!-- 根据分销商ID 获取最近7日（前6天+当天）订单数量 -->
+    <select id="getSellerSevenDayOrderCount" resultType="int" parameterType="com.yougou.wfx.order.model.OrderEntity">
+    	
+    	 select count(distinct o.id) from tbl_wfx_order o 
+        left join tbl_wfx_order_detail d on o.id = d.order_id  where 1=1 
+        <include refid="querySellerWhere" />
+        <if test="extraMap != null and extraMap.commissionSellerList != null">
+        	and o.commission_seller_id  in
+        	<foreach item="item" index="index" collection="extraMap.commissionSellerList"
+        		open="(" separator="," close=")">
+        		#{item}
+        	</foreach>
+        </if>
+		  and o.created_time<![CDATA[>=]]> ADDDATE(CURDATE(),-6)
+    </select>
+    
+    <select id="queryOrderRemarks" parameterType="java.util.HashMap" resultMap="OrderRemark">
+       select 
+       id,order_id,member_id,create_time,type,mark_note,operator
+        from tbl_wfx_order_remark
+        where order_id=#{order_id} 
+        order by create_time desc
+    </select>
+    
+	<select id="queryPreCommFee" parameterType="java.util.HashMap" resultType="Double">
+		select sum(commissions.commission) from 
+		(select 'commission1' level,sum(d.commission_level1) commission from tbl_wfx_order o,
+		tbl_wfx_order_detail d,tbl_wfx_seller_info i1
+		where o.id = d.order_id and o.commission_seller_id = i1.id
+		and o.`status` in ('WAIT_DELIVER','PART_DELIVERED','DELIVERED','TRADE_SUCCESS')
+		and o.commission_status in (1,2)
+		<if test="dateStart != null and dateStart != ''">
+		and o.pay_time &gt;= #{dateStart,jdbcType=TIMESTAMP}
+		</if>
+		<if test="dateEnd != null and dateEnd != ''">
+		and o.pay_time &lt;= #{dateEnd,jdbcType=TIMESTAMP}
+		</if>
+		and i1.id = #{id,jdbcType=VARCHAR}
+		union
+		select 'commission2' level,sum(d.commission_level2) commission from tbl_wfx_order o,tbl_wfx_order_detail d,
+		tbl_wfx_seller_info i1,tbl_wfx_seller_info i2
+		where o.id = d.order_id and o.commission_seller_id = i1.id and i1.parent_id = i2.id
+		and o.`status` in ('WAIT_DELIVER','PART_DELIVERED','DELIVERED','TRADE_SUCCESS')
+		and o.commission_status in (1,2)
+		<if test="dateStart != null and dateStart != ''">
+		and o.pay_time &gt;= #{dateStart,jdbcType=TIMESTAMP}
+		</if>
+		<if test="dateEnd != null and dateEnd != ''">
+		and o.pay_time &lt;= #{dateEnd,jdbcType=TIMESTAMP}
+		</if>
+		and i2.id = #{id,jdbcType=VARCHAR}
+		union
+		select 'commission3' level,sum(d.commission_level3) commission from tbl_wfx_order o,tbl_wfx_order_detail d,
+		tbl_wfx_seller_info i1,tbl_wfx_seller_info i2,tbl_wfx_seller_info i3
+		where o.id = d.order_id and o.commission_seller_id = i1.id and i1.parent_id = i2.id
+		and i2.parent_id = i3.id
+		and o.`status` in ('WAIT_DELIVER','PART_DELIVERED','DELIVERED','TRADE_SUCCESS')
+		and o.commission_status in (1,2)
+		<if test="dateStart != null and dateStart != ''">
+		and o.pay_time &gt;= #{dateStart,jdbcType=TIMESTAMP}
+		</if>
+		<if test="dateEnd != null and dateEnd != ''">
+		and o.pay_time &lt;= #{dateEnd,jdbcType=TIMESTAMP}
+		</if>
+		and i3.id = #{id,jdbcType=VARCHAR}) commissions
+    </select>
+    
+    <select id="queryRefundCommFee" parameterType="java.util.HashMap" resultType="Double">
+		select sum(commissions.commission) from 
+		(select 'commission1' level,sum(ROUND(d.commission_level1_percent*r.refund_fee,2)) commission from tbl_wfx_order o,
+		tbl_wfx_order_detail d,tbl_wfx_order_refund r,tbl_wfx_seller_info i1
+		where o.id = d.order_id and d.id = r.order_detail_id and o.commission_seller_id = i1.id
+		and o.`status` in ('WAIT_DELIVER','PART_DELIVERED','DELIVERED','TRADE_SUCCESS')
+		and o.commission_status in (1,2)
+		<if test="dateStart != null and dateStart != ''">
+		and o.pay_time &gt;= #{dateStart,jdbcType=TIMESTAMP}
+		</if>
+		<if test="dateEnd != null and dateEnd != ''">
+		and o.pay_time &lt;= #{dateEnd,jdbcType=TIMESTAMP}
+		</if>
+		and r.`status` = 'SUCCESS_REFUND'
+		and i1.id = #{id,jdbcType=VARCHAR}
+		union
+		select 'commission2' level,sum(ROUND(d.commission_level2_percent*r.refund_fee,2)) commission from tbl_wfx_order o,tbl_wfx_order_detail d,
+		tbl_wfx_order_refund r,tbl_wfx_seller_info i1,tbl_wfx_seller_info i2
+		where o.id = d.order_id and d.id = r.order_detail_id and o.commission_seller_id = i1.id and i1.parent_id = i2.id
+		and o.`status` in ('WAIT_DELIVER','PART_DELIVERED','DELIVERED','TRADE_SUCCESS')
+		and o.commission_status in (1,2)
+		<if test="dateStart != null and dateStart != ''">
+		and o.pay_time &gt;= #{dateStart,jdbcType=TIMESTAMP}
+		</if>
+		<if test="dateEnd != null and dateEnd != ''">
+		and o.pay_time &lt;= #{dateEnd,jdbcType=TIMESTAMP}
+		</if>
+		and r.`status` = 'SUCCESS_REFUND'
+		and i2.id = #{id,jdbcType=VARCHAR}
+		union
+		select 'commission3' level,sum(ROUND(d.commission_level3_percent*r.refund_fee,2)) commission from tbl_wfx_order o,tbl_wfx_order_detail d,
+		tbl_wfx_order_refund r,tbl_wfx_seller_info i1,tbl_wfx_seller_info i2,tbl_wfx_seller_info i3
+		where o.id = d.order_id and d.id = r.order_detail_id and o.commission_seller_id = i1.id and i1.parent_id = i2.id
+		and i2.parent_id = i3.id
+		and o.`status` in ('WAIT_DELIVER','PART_DELIVERED','DELIVERED','TRADE_SUCCESS')
+		and o.commission_status in (1,2)
+		<if test="dateStart != null and dateStart != ''">
+		and o.pay_time &gt;= #{dateStart,jdbcType=TIMESTAMP}
+		</if>
+		<if test="dateEnd != null and dateEnd != ''">
+		and o.pay_time &lt;= #{dateEnd,jdbcType=TIMESTAMP}
+		</if>
+		and r.`status` = 'SUCCESS_REFUND'
+		and i3.id = #{id,jdbcType=VARCHAR}) commissions
+    </select>
+    
+    <select id="queryPreCommFeeList" parameterType="String" resultMap="CommissionOrder">
+		select * from 
+		(select o.id, o.wfx_order_no,o.created_time, '1' level,(sum(d.commission_level1)-ROUND(sum(d.commission_level1_percent * IFNULL(r.refund_fee,0)),2)) commission from tbl_wfx_order o,
+		tbl_wfx_seller_info i1,tbl_wfx_order_detail d LEFT JOIN tbl_wfx_order_refund r ON (d.id = r.order_detail_id and r.`status` = 'SUCCESS_REFUND')
+		where o.id = d.order_id and o.commission_seller_id = i1.id
+		and o.`status` in ('WAIT_DELIVER','PART_DELIVERED','DELIVERED','TRADE_SUCCESS')
+		and o.commission_status in (1,2)		
+		and i1.id = #{id,jdbcType=VARCHAR}
+		group BY o.wfx_order_no
+		union
+		select  o.id,o.wfx_order_no,o.created_time,'2' level,(sum(d.commission_level2)-ROUND(sum(d.commission_level2_percent*IFNULL(r.refund_fee,0)),2)) commission from tbl_wfx_order o,
+		tbl_wfx_seller_info i1,tbl_wfx_seller_info i2,tbl_wfx_order_detail d  LEFT JOIN tbl_wfx_order_refund r ON (d.id = r.order_detail_id and r.`status` = 'SUCCESS_REFUND')
+		where o.id = d.order_id and o.commission_seller_id = i1.id and i1.parent_id = i2.id
+		and o.`status` in ('WAIT_DELIVER','PART_DELIVERED','DELIVERED','TRADE_SUCCESS')
+		and o.commission_status in (1,2)
+		and i2.id = #{id,jdbcType=VARCHAR}
+		group BY o.wfx_order_no
+		union
+		select  o.id,o.wfx_order_no,o.created_time,'3' level,(sum(d.commission_level3)-ROUND(sum(d.commission_level3_percent*IFNULL(r.refund_fee,0)),2)) commission from tbl_wfx_order o,
+		tbl_wfx_seller_info i1,tbl_wfx_seller_info i2,tbl_wfx_seller_info i3,tbl_wfx_order_detail d LEFT JOIN tbl_wfx_order_refund r ON (d.id = r.order_detail_id and r.`status` = 'SUCCESS_REFUND')
+		where o.id = d.order_id and o.commission_seller_id = i1.id and i1.parent_id = i2.id
+		and i2.parent_id = i3.id
+		and o.`status` in ('WAIT_DELIVER','PART_DELIVERED','DELIVERED','TRADE_SUCCESS')
+		and o.commission_status in (1,2)	
+		and i3.id = #{id,jdbcType=VARCHAR}
+		group BY o.wfx_order_no) commissions order by created_time desc
+    </select>
+    
+    <select id="queryPreCommFeeCount" parameterType="String" resultType="int">
+		select count(1) from 
+		(select o.wfx_order_no,o.created_time, '1' level,(sum(d.commission_level1)-ROUND(sum(d.commission_level1_percent * IFNULL(r.refund_fee,0)),2)) commission from tbl_wfx_order o,
+		tbl_wfx_seller_info i1,tbl_wfx_order_detail d LEFT JOIN tbl_wfx_order_refund r ON (d.id = r.order_detail_id and r.`status` = 'SUCCESS_REFUND')
+		where o.id = d.order_id and o.commission_seller_id = i1.id
+		and o.`status` in ('WAIT_DELIVER','PART_DELIVERED','DELIVERED','TRADE_SUCCESS')
+		and o.commission_status in (1,2)		
+		and i1.id = #{id,jdbcType=VARCHAR}
+		group BY o.wfx_order_no
+		union
+		select o.wfx_order_no,o.created_time,'2' level,(sum(d.commission_level2)-ROUND(sum(d.commission_level2_percent*IFNULL(r.refund_fee,0)),2)) commission from tbl_wfx_order o,
+		tbl_wfx_seller_info i1,tbl_wfx_seller_info i2,tbl_wfx_order_detail d  LEFT JOIN tbl_wfx_order_refund r ON (d.id = r.order_detail_id and r.`status` = 'SUCCESS_REFUND')
+		where o.id = d.order_id and o.commission_seller_id = i1.id and i1.parent_id = i2.id
+		and o.`status` in ('WAIT_DELIVER','PART_DELIVERED','DELIVERED','TRADE_SUCCESS')
+		and o.commission_status in (1,2)
+		and i2.id = #{id,jdbcType=VARCHAR}
+		group BY o.wfx_order_no
+		union
+		select o.wfx_order_no,o.created_time,'3' level,(sum(d.commission_level3)-ROUND(sum(d.commission_level3_percent*IFNULL(r.refund_fee,0)),2)) commission from tbl_wfx_order o,
+		tbl_wfx_seller_info i1,tbl_wfx_seller_info i2,tbl_wfx_seller_info i3,tbl_wfx_order_detail d LEFT JOIN tbl_wfx_order_refund r ON (d.id = r.order_detail_id and r.`status` = 'SUCCESS_REFUND')
+		where o.id = d.order_id and o.commission_seller_id = i1.id and i1.parent_id = i2.id
+		and i2.parent_id = i3.id
+		and o.`status` in ('WAIT_DELIVER','PART_DELIVERED','DELIVERED','TRADE_SUCCESS')
+		and o.commission_status in (1,2)	
+		and i3.id = #{id,jdbcType=VARCHAR}
+		group BY o.wfx_order_no) commissions
+    </select>
+</mapper>

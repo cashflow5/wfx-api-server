@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.basicset.dao.SysConfigMapper">
+    <resultMap id="SysConfig" type="com.yougou.wfx.basicset.model.SysConfigEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="configName" column="config_name" jdbcType="VARCHAR"/>
+    	<result property="configKey" column="config_key" jdbcType="VARCHAR"/>
+    	<result property="configValue" column="config_value" jdbcType="VARCHAR"/>
+    	<result property="remark" column="remark" jdbcType="VARCHAR"/>
+    	<result property="status" column="status" jdbcType="TINYINT"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,config_name,config_key,config_value,remark,status,create_time,update_user,update_time
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="configName != null and configName != ''">
+        	and config_name = #{configName,jdbcType=VARCHAR}
+	        </if>
+			<if test="configKey != null and configKey != ''">
+        	and config_key = #{configKey,jdbcType=VARCHAR}
+	        </if>
+			<if test="configValue != null and configValue != ''">
+        	and config_value = #{configValue,jdbcType=VARCHAR}
+	        </if>
+			<if test="remark != null and remark != ''">
+        	and remark = #{remark,jdbcType=VARCHAR}
+	        </if>
+			<if test="status != null and status != 0">
+        	and status = #{status,jdbcType=TINYINT}
+	        </if>
+			<if test="createTime != null">
+        	and create_time = #{createTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="updateUser != null and updateUser != ''">
+        	and update_user = #{updateUser,jdbcType=VARCHAR}
+	        </if>
+			<if test="updateTime != null">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+	        </if>
+    </sql>
+    
+    <sql id="set">
+			<if test="id != null">
+        	id = #{id,jdbcType=VARCHAR},
+	        </if>
+			<if test="configName != null">
+        	config_name = #{configName,jdbcType=VARCHAR},
+	        </if>
+			<if test="configKey != null">
+        	config_key = #{configKey,jdbcType=VARCHAR},
+	        </if>
+			<if test="configValue != null">
+        	config_value = #{configValue,jdbcType=VARCHAR},
+	        </if>
+			<if test="remark != null">
+        	remark = #{remark,jdbcType=VARCHAR},
+	        </if>
+			<if test="status != null and status != 0">
+        	status = #{status,jdbcType=TINYINT},
+	        </if>
+			<if test="createTime != null">
+        	create_time = #{createTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="updateUser != null">
+        	update_user = #{updateUser,jdbcType=VARCHAR},
+	        </if>
+			<if test="updateTime != null">
+        	update_time = #{updateTime,jdbcType=TIMESTAMP}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="SysConfig" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_sys_config
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.basicset.model.SysConfigEntity" resultMap="SysConfig">
+        select <include refid="Base_Column_List"/> from tbl_wfx_sys_config where 1=1 
+        <include refid="where" />
+        <if test="syncMap != null and syncMap.orderBy != null">
+        	order by ${syncMap.orderBy}
+        </if>
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.basicset.model.SysConfigEntity" resultType="int">
+        select count(1) from tbl_wfx_sys_config where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryList" parameterType="com.yougou.wfx.basicset.model.SysConfigEntity" resultMap="SysConfig">
+        select <include refid="Base_Column_List"/> from tbl_wfx_sys_config where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.basicset.model.SysConfigEntity">
+        insert into tbl_wfx_sys_config (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},#{configName,jdbcType=VARCHAR},#{configKey,jdbcType=VARCHAR},#{configValue,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},#{status,jdbcType=TINYINT},#{createTime,jdbcType=TIMESTAMP},#{updateUser,jdbcType=VARCHAR},#{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_sys_config
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.basicset.model.SysConfigEntity" >
+        update tbl_wfx_sys_config
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

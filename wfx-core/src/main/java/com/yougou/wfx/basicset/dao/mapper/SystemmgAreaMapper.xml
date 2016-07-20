@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.basicset.dao.SystemmgAreaMapper">
+    <resultMap id="SystemmgArea" type="com.yougou.wfx.basicset.model.SystemmgAreaEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="name" column="name" jdbcType="VARCHAR"/>
+    	<result property="no" column="no" jdbcType="VARCHAR"/>
+    	<result property="isleaf" column="isleaf" jdbcType="VARCHAR"/>
+    	<result property="child" column="child" jdbcType="VARCHAR"/>
+    	<result property="level" column="level" jdbcType="VARCHAR"/>
+    	<result property="sort" column="sort" jdbcType="VARCHAR"/>
+    	<result property="post" column="post" jdbcType="VARCHAR"/>
+    	<result property="code" column="code" jdbcType="VARCHAR"/>
+    	<result property="timestamp" column="timestamp" jdbcType="BIGINT"/>
+    	<result property="isUsable" column="is_usable" jdbcType="SMALLINT"/>
+    	<result property="isCashOnDelivy" column="is_cash_on_delivy" jdbcType="SMALLINT"/>
+    	<result property="butTheServiceArea" column="but_the_service_area" jdbcType="VARCHAR"/>
+    	<result property="notServiceArea" column="not_service_area" jdbcType="VARCHAR"/>
+    	<result property="isCashOnDelivyMobile" column="is_cash_on_delivy_mobile" jdbcType="SMALLINT"/>
+    	<result property="isSupportInvoice" column="is_support_invoice" jdbcType="SMALLINT"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,name,no,isleaf,child,level,sort,post,code,timestamp,is_usable,is_cash_on_delivy,but_the_service_area,not_service_area,is_cash_on_delivy_mobile,is_support_invoice
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="name != null and name != ''">
+        	and name = #{name,jdbcType=VARCHAR}
+	        </if>
+			<if test="no != null and no != ''">
+        	and no like '${no}%'
+	        </if>
+			<if test="isleaf != null and isleaf != ''">
+        	and isleaf = #{isleaf,jdbcType=VARCHAR}
+	        </if>
+			<if test="child != null and child != ''">
+        	and child = #{child,jdbcType=VARCHAR}
+	        </if>
+			<if test="level != null and level != ''">
+        	and level = #{level,jdbcType=VARCHAR}
+	        </if>
+			<if test="sort != null and sort != ''">
+        	and sort = #{sort,jdbcType=VARCHAR}
+	        </if>
+			<if test="post != null and post != ''">
+        	and post = #{post,jdbcType=VARCHAR}
+	        </if>
+			<if test="code != null and code != ''">
+        	and code = #{code,jdbcType=VARCHAR}
+	        </if>
+			<if test="timestamp != null">
+        	and timestamp = #{timestamp,jdbcType=BIGINT}
+	        </if>
+			<if test="isUsable != null and isUsable != 0">
+        	and is_usable = #{isUsable,jdbcType=SMALLINT}
+	        </if>
+			<if test="isCashOnDelivy != null and isCashOnDelivy != 0">
+        	and is_cash_on_delivy = #{isCashOnDelivy,jdbcType=SMALLINT}
+	        </if>
+			<if test="butTheServiceArea != null">
+        	and but_the_service_area = #{butTheServiceArea,jdbcType=VARCHAR}
+	        </if>
+			<if test="notServiceArea != null">
+        	and not_service_area = #{notServiceArea,jdbcType=VARCHAR}
+	        </if>
+			<if test="isCashOnDelivyMobile != null and isCashOnDelivyMobile != 0">
+        	and is_cash_on_delivy_mobile = #{isCashOnDelivyMobile,jdbcType=SMALLINT}
+	        </if>
+			<if test="isSupportInvoice != null and isSupportInvoice != 0">
+        	and is_support_invoice = #{isSupportInvoice,jdbcType=SMALLINT}
+	        </if>
+    </sql>
+    
+    <sql id="set">
+			<if test="name != null">
+        	name = #{name,jdbcType=VARCHAR},
+	        </if>
+			<if test="no != null">
+        	no = #{no,jdbcType=VARCHAR},
+	        </if>
+			<if test="isleaf != null">
+        	isleaf = #{isleaf,jdbcType=VARCHAR},
+	        </if>
+			<if test="child != null">
+        	child = #{child,jdbcType=VARCHAR},
+	        </if>
+			<if test="level != null">
+        	level = #{level,jdbcType=VARCHAR},
+	        </if>
+			<if test="sort != null">
+        	sort = #{sort,jdbcType=VARCHAR},
+	        </if>
+			<if test="post != null">
+        	post = #{post,jdbcType=VARCHAR},
+	        </if>
+			<if test="code != null">
+        	code = #{code,jdbcType=VARCHAR},
+	        </if>
+			<if test="timestamp != null">
+        	timestamp = #{timestamp,jdbcType=BIGINT},
+	        </if>
+			<if test="isUsable != null">
+        	is_usable = #{isUsable,jdbcType=SMALLINT},
+	        </if>
+			<if test="isCashOnDelivy != null and isCashOnDelivy != 0">
+        	is_cash_on_delivy = #{isCashOnDelivy,jdbcType=SMALLINT},
+	        </if>
+			<if test="butTheServiceArea != null">
+        	but_the_service_area = #{butTheServiceArea,jdbcType=VARCHAR},
+	        </if>
+			<if test="notServiceArea != null">
+        	not_service_area = #{notServiceArea,jdbcType=VARCHAR},
+	        </if>
+			<if test="isCashOnDelivyMobile != null and isCashOnDelivyMobile != 0">
+        	is_cash_on_delivy_mobile = #{isCashOnDelivyMobile,jdbcType=SMALLINT},
+	        </if>
+			<if test="isSupportInvoice != null and isSupportInvoice != 0">
+        	is_support_invoice = #{isSupportInvoice,jdbcType=SMALLINT}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="SystemmgArea" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_systemmg_area
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.basicset.model.SystemmgAreaEntity" resultMap="SystemmgArea">
+        select <include refid="Base_Column_List"/> from tbl_systemmg_area where 1=1 
+        <include refid="where" />
+        order by sort+0
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.basicset.model.SystemmgAreaEntity" resultType="int">
+        select count(1) from tbl_systemmg_area where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryList" parameterType="com.yougou.wfx.basicset.model.SystemmgAreaEntity" resultMap="SystemmgArea">
+        select <include refid="Base_Column_List"/> from tbl_systemmg_area where 1=1 
+        <include refid="where" />
+        order by sort asc
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.basicset.model.SystemmgAreaEntity">
+        insert into tbl_systemmg_area (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{no,jdbcType=VARCHAR},#{isleaf,jdbcType=VARCHAR},#{child,jdbcType=VARCHAR},#{level,jdbcType=VARCHAR},#{sort,jdbcType=VARCHAR},#{post,jdbcType=VARCHAR},#{code,jdbcType=VARCHAR},#{timestamp,jdbcType=BIGINT},#{isUsable,jdbcType=SMALLINT},#{isCashOnDelivy,jdbcType=SMALLINT},#{butTheServiceArea,jdbcType=VARCHAR},#{notServiceArea,jdbcType=VARCHAR},#{isCashOnDelivyMobile,jdbcType=SMALLINT},#{isSupportInvoice,jdbcType=SMALLINT}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_systemmg_area
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.basicset.model.SystemmgAreaEntity" >
+        update tbl_systemmg_area
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <delete id="removeSubAreaByNo" parameterType="java.lang.String" >
+        delete from tbl_systemmg_area
+        where no like '${no}%'
+    </delete>
+</mapper>

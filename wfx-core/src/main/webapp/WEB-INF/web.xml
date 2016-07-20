@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  	<display-name>WFX Api Server</display-name>
+  
+  	<context-param>
+	    <param-name>webAppRootKey</param-name>
+	    <param-value>wfx-api.root</param-value>
+  	</context-param>
+  
+  	<!-- 
+  		一、包特性标识
+  		api-front：B、C端接口
+  		api-background:后台接口
+  		all:全部(默认)
+  		二、环境运行标识
+  		production：生产环境(默认)
+  		development:开发环境
+  		test:测试环境
+  	-->
+  	<context-param>
+    	<param-name>spring.profiles.default</param-name>  
+    	<param-value>all,development</param-value>  
+  	</context-param>
+  
+  	<context-param>
+    	<param-name>contextConfigLocation</param-name>
+    	<param-value>
+			classpath*:/profile/applicationContext-bootstrap.xml
+		</param-value>
+  	</context-param>
+  
+   	<listener>
+    	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  	</listener>
+  	
+  	<listener>
+    	<listener-class>
+			org.springframework.web.util.IntrospectorCleanupListener
+		</listener-class>
+  	</listener>
+	
+	<servlet>
+        <servlet-name>dubbo</servlet-name>
+        <servlet-class>com.alibaba.dubbo.remoting.http.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+        <servlet-name>dubbo</servlet-name>
+        <url-pattern>/*</url-pattern>
+	</servlet-mapping>
+	
+  	<session-config>
+    	<session-timeout>400</session-timeout>
+  	</session-config>
+ 
+  	<welcome-file-list>
+    	<welcome-file>index.html</welcome-file>
+    	<welcome-file>index.jsp</welcome-file>
+  	</welcome-file-list>
+  	
+  	<distributable/>
+</web-app>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.1.xsd
+	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	default-lazy-init="false">
+	
+	<!-- 消息实体转换 -->
+	<bean id="jsonMessageConverter"	class="org.springframework.amqp.support.converter.JsonMessageConverter">
+		<property name="classMapper">
+			<bean class="org.springframework.amqp.support.converter.DefaultClassMapper">
+			</bean>
+		</property>
+	</bean>
+	
+	<rabbit:connection-factory id="connectionFactory" addresses="${rabbitmq.host}" />
+	
+	<rabbit:admin connection-factory="connectionFactory"/>
+	
+	<rabbit:template id="rabbitTemplate" connection-factory="connectionFactory" reply-timeout="50000"
+	message-converter="jsonMessageConverter" />
+	
+	
+	<!-- 财务收款消息队列（对接订单） -->
+    <rabbit:queue id="wfx.finance.alreadyincome.queue" name="wfx.finance.alreadyincome.queue">
+        <rabbit:queue-arguments>
+            <entry key="x-ha-policy" value="all" />
+        </rabbit:queue-arguments>
+    </rabbit:queue> 
+    
+	<!-- 财务退款，退款成功异步消息回调（对接支付中心） -->
+	<rabbit:queue id="wfx.finance.refund.call.back.queue" name="wfx.finance.refund.call.back.queue">
+        <rabbit:queue-arguments>
+            <entry key="x-ha-policy" value="all" />
+        </rabbit:queue-arguments>
+    </rabbit:queue> 
+	
+	<rabbit:listener-container connection-factory="connectionFactory" concurrency="4" message-converter="jsonMessageConverter"> 
+		<!-- 财务收款消息队列监听 -->
+		<rabbit:listener ref="alreadyIncomeNormalMQHandler" method="handleMessage" queues="wfx.finance.alreadyincome.queue" />
+		<!-- 财务退款，退款成功消息队列监听 -->
+		<rabbit:listener ref="refundConfirmMQHandler" method="handleMessage" queues="wfx.finance.refund.call.back.queue" />
+	</rabbit:listener-container> 
+	
+</beans>

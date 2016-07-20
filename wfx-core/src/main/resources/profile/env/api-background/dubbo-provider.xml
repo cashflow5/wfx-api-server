@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+						   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	 					   http://code.alibabatech.com/schema/dubbo	
+	 					   http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+	default-lazy-init="true">
+
+	<description>Dubbo Provider配置</description>
+	<!-- 地址 -->
+	<!-- 品牌 backgroundApi -->
+	<dubbo:service interface="com.yougou.wfx.commodity.api.background.ICommodityBrandBackgroundApi" version="1.0" ref="commodityBrandBackgroundApiImpl" timeout="10000" />
+	<!-- 收藏 -->
+	
+	<!-- 售后服务-->
+	
+	<!-- 会员APi -->
+	
+	<!-- 会员登录 -->
+	
+	<!-- 会员常用银行 -->
+	
+	<!-- 分销商账户信息服务管理 -->
+    <dubbo:service interface="com.yougou.wfx.finance.api.background.IFinSellerInfoBackgroundApi" version="1.0" ref="finSellerInfoBackgroundApiImpl" timeout="10000" protocol="dubbo"/>
+</beans>

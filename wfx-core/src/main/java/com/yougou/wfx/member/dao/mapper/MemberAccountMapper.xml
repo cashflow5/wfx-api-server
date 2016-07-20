@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.member.dao.MemberAccountMapper">
+    <resultMap id="MemberAccount" type="com.yougou.wfx.member.model.MemberAccountEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="loginName" column="login_name" jdbcType="VARCHAR"/>
+    	<!-- <result property="loginPassword" column="login_password" jdbcType="VARCHAR"/> -->
+    	<result property="lastLoginTime" column="last_login_time" jdbcType="TIMESTAMP"/>
+    	<result property="loginCount" column="login_count" jdbcType="INTEGER"/>
+    	<result property="state" column="state" jdbcType="SMALLINT"/>
+    	<result property="lastLoginIp" column="last_login_ip" jdbcType="VARCHAR"/>
+    	<result property="levelId" column="level_id" jdbcType="VARCHAR"/>
+    	<result property="validateCode" column="validate_code" jdbcType="VARCHAR"/>
+    	<result property="memberName" column="member_name" jdbcType="VARCHAR"/>
+    	<result property="platformUsername" column="platform_username" jdbcType="VARCHAR"/>
+    	<result property="hasCompletedOrder" column="has_completed_order" jdbcType="INTEGER"/>
+    	<result property="platform" column="platform" jdbcType="VARCHAR"/>
+    	<result property="regType" column="reg_type" jdbcType="VARCHAR"/>
+    	<result property="extensionChannel" column="extension_channel" jdbcType="VARCHAR"/>
+    	<result property="lastLoginSite" column="last_login_site" jdbcType="VARCHAR"/>
+    	<result property="memberType" column="member_type" jdbcType="INTEGER"/>
+    	<result property="registerCheckMobile" column="register_check_mobile" jdbcType="VARCHAR"/>
+    	<result property="registerCheckMobileTime" column="register_check_mobile_time" jdbcType="TIMESTAMP"/>
+    	<result property="registerIp" column="register_ip" jdbcType="VARCHAR"/>
+    	<result property="registerDate" column="register_date" jdbcType="TIMESTAMP"/>
+    	<result property="orderCount" column="order_count" jdbcType="INTEGER"/>
+    	<result property="orderAmount" column="order_amount" jdbcType="DECIMAL"/>
+    	<result property="memberSex" column="member_sex" jdbcType="SMALLINT"/>
+    	<result property="birthday" column="birthday" jdbcType="DATE"/>
+    	<result property="parentSellerId" column="parent_seller_id" jdbcType="VARCHAR"/>
+    	<result property="openId" column="open_id" jdbcType="VARCHAR"/>
+    	<result property="h5OpenId" column="h5_open_id" jdbcType="VARCHAR"/>
+    	<result property="headShowImg" column="head_show_img" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+     <resultMap id="MemberInfo" type="com.yougou.wfx.member.model.MemberAccountEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="loginName" column="login_name" jdbcType="VARCHAR"/>
+    	<!-- <result property="loginPassword" column="login_password" jdbcType="VARCHAR"/> -->
+    	<result property="lastLoginTime" column="last_login_time" jdbcType="TIMESTAMP"/>
+    	<result property="loginCount" column="login_count" jdbcType="INTEGER"/>
+    	<result property="state" column="state" jdbcType="SMALLINT"/>
+    	<result property="lastLoginIp" column="last_login_ip" jdbcType="VARCHAR"/>
+    	<result property="levelId" column="level_id" jdbcType="VARCHAR"/>
+    	<result property="validateCode" column="validate_code" jdbcType="VARCHAR"/>
+    	<result property="memberName" column="member_name" jdbcType="VARCHAR"/>
+    	<result property="platformUsername" column="platform_username" jdbcType="VARCHAR"/>
+    	<result property="hasCompletedOrder" column="has_completed_order" jdbcType="INTEGER"/>
+    	<result property="platform" column="platform" jdbcType="VARCHAR"/>
+    	<result property="regType" column="reg_type" jdbcType="VARCHAR"/>
+    	<result property="extensionChannel" column="extension_channel" jdbcType="VARCHAR"/>
+    	<result property="lastLoginSite" column="last_login_site" jdbcType="VARCHAR"/>
+    	<result property="memberType" column="member_type" jdbcType="INTEGER"/>
+    	<result property="registerCheckMobile" column="register_check_mobile" jdbcType="VARCHAR"/>
+    	<result property="registerCheckMobileTime" column="register_check_mobile_time" jdbcType="TIMESTAMP"/>
+    	<result property="registerIp" column="register_ip" jdbcType="VARCHAR"/>
+    	<result property="registerDate" column="register_date" jdbcType="TIMESTAMP"/>
+    	<result property="parentSellerId" column="parent_seller_id" jdbcType="VARCHAR"/>
+    	<association property="profileInfo" select="selectProfileInfoById" column="{loginaccount_id=id}"/>
+    </resultMap>
+    <resultMap id="profileInfo" type="com.yougou.wfx.member.model.MemberProfileEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<!-- <result property="avatarAddress" column="avatar_address" jdbcType="VARCHAR"/> -->
+    	<result property="memberSex" column="member_sex" jdbcType="SMALLINT"/>
+    	<result property="idCardNum" column="id_card_num" jdbcType="VARCHAR"/>
+    	<result property="headShowImg" column="head_show_img" jdbcType="VARCHAR"/>
+    	<result property="birthday" column="birthday" jdbcType="DATE"/>
+    	<result property="province" column="province" jdbcType="VARCHAR"/>
+    	<result property="city" column="city" jdbcType="VARCHAR"/>
+    	<result property="district" column="district" jdbcType="VARCHAR"/>
+    	<result property="loginaccountId" column="loginaccount_id" jdbcType="VARCHAR"/>
+    	<result property="applySeller" column="apply_seller" jdbcType="VARCHAR"/>
+    	<result property="applySellerTime" column="apply_seller_time" jdbcType="TIMESTAMP"/>
+    	<result property="orderCount" column="order_count" jdbcType="INTEGER"/>
+    	<result property="orderAmount" column="order_amount" jdbcType="DECIMAL"/>
+    </resultMap>
+     <sql id="Profile_Column_List" >
+		id,member_sex,head_show_img,id_card_num,birthday,province,city,district,loginaccount_id,apply_seller,apply_seller_time,order_count,order_amount
+    </sql>
+    
+    <sql id="Base_Column_List" >
+		id,login_name,login_password,last_login_time,login_count,state,last_login_ip,level_id,validate_code,member_name,platform_username,has_completed_order,platform,reg_type,extension_channel,
+		last_login_site,member_type,register_check_mobile,register_check_mobile_time,register_ip,register_date,parent_seller_id,open_id,h5_open_id
+    </sql>
+    
+    <sql id="Info_Column_List" >
+    a.id,a.login_name,a.last_login_time,a.member_name,a.register_date,
+    a.parent_seller_id,a.platform_username,p.member_sex,p.birthday,p.order_count,p.order_amount
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="loginName != null and loginName != ''">
+        	and login_name = #{loginName,jdbcType=VARCHAR}
+	        </if>
+			<if test="loginPassword != null and loginPassword != ''">
+        	and login_password = #{loginPassword,jdbcType=VARCHAR}
+	        </if>
+			<if test="lastLoginTime != null">
+        	and last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="loginCount != null and loginCount !=0">
+        	and login_count = #{loginCount,jdbcType=INTEGER}
+	        </if>
+			<if test="state != null and state !=0">
+        	and state = #{state,jdbcType=SMALLINT}
+	        </if>
+			<if test="lastLoginIp != null and lastLoginIp != ''">
+        	and last_login_ip = #{lastLoginIp,jdbcType=VARCHAR}
+	        </if>
+			<if test="levelId != null and levelId != ''">
+        	and level_id = #{levelId,jdbcType=VARCHAR}
+	        </if>
+			<if test="validateCode != null and validateCode != ''">
+        	and validate_code = #{validateCode,jdbcType=VARCHAR}
+	        </if>
+			<if test="memberName != null and memberName != ''">
+        	and member_name = #{memberName,jdbcType=VARCHAR}
+	        </if>
+			<if test="platformUsername != null and platformUsername != ''">
+        	and platform_username = #{platformUsername,jdbcType=VARCHAR}
+	        </if>
+			<if test="hasCompletedOrder != null and hasCompletedOrder !=0">
+        	and has_completed_order = #{hasCompletedOrder,jdbcType=INTEGER}
+	        </if>
+			<if test="platform != null and platform != ''">
+        	and platform = #{platform,jdbcType=VARCHAR}
+	        </if>
+			<if test="regType != null and regType != ''">
+        	and reg_type = #{regType,jdbcType=VARCHAR}
+	        </if>
+			<if test="extensionChannel != null and extensionChannel != ''">
+        	and extension_channel = #{extensionChannel,jdbcType=VARCHAR}
+	        </if>
+			<if test="lastLoginSite != null and lastLoginSite != ''">
+        	and last_login_site = #{lastLoginSite,jdbcType=VARCHAR}
+	        </if>
+			<if test="memberType != null and memberType !=0">
+        	and member_type = #{memberType,jdbcType=INTEGER}
+	        </if>
+			<if test="registerCheckMobile != null and registerCheckMobile != ''">
+        	and register_check_mobile = #{registerCheckMobile,jdbcType=VARCHAR}
+	        </if>
+			<if test="registerCheckMobileTime != null">
+        	and register_check_mobile_time = #{registerCheckMobileTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="registerIp != null and registerIp != ''">
+        	and register_ip = #{registerIp,jdbcType=VARCHAR}
+	        </if>
+			<if test="registerDate != null">
+        	and register_date = #{registerDate,jdbcType=TIMESTAMP}
+	        </if>
+	        <if test="parentSellerId != null and parentSellerId != ''">
+        	and parent_seller_id = #{parentSellerId,jdbcType=VARCHAR}
+	        </if>
+	        <if test="openId != null and openId != ''">
+        	and open_id = #{openId,jdbcType=VARCHAR}
+	        </if>
+	        <if test="h5OpenId != null and h5OpenId != ''">
+        	and h5_open_id = #{h5OpenId,jdbcType=VARCHAR}
+	        </if>
+    </sql>
+    
+      <sql id="where_for_rela">
+			<if test="id != null and id != ''">
+        	and a.id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="loginName != null and loginName != ''">
+        	and a.login_name = #{loginName,jdbcType=VARCHAR}
+	        </if>
+			
+			<if test="lastLoginTimeStart != null">
+        	and a.last_login_time <![CDATA[>= ]]> #{lastLoginTimeStart,jdbcType=TIMESTAMP}
+	        </if>
+	        <if test="lastLoginTimeEnd != null">
+        	and a.last_login_time <![CDATA[<= ]]> #{lastLoginTimeEnd,jdbcType=TIMESTAMP}
+	        </if>
+									
+			<if test="memberName != null and memberName != ''">
+        	and a.member_name = #{memberName,jdbcType=VARCHAR}
+	        </if>
+			<if test="memberType != null and memberType !=0">
+        	and a.member_type = #{memberType,jdbcType=INTEGER}
+	        </if>
+						
+			<if test="registerDateStart != null">
+        	and a.register_date <![CDATA[>= ]]> #{registerDateStart,jdbcType=TIMESTAMP}
+	        </if>
+	        <if test="registerDateEnd != null">
+        	and a.register_date <![CDATA[<= ]]> #{registerDateEnd,jdbcType=TIMESTAMP}
+	        </if>
+    </sql>
+    
+    <sql id="set">
+			<if test="loginName != null and loginName != '' ">
+        	login_name = #{loginName,jdbcType=VARCHAR},
+	        </if>
+			<if test="loginPassword != null and loginPassword != '' ">
+        	login_password = #{loginPassword,jdbcType=VARCHAR},
+	        </if>
+			<if test="lastLoginTime != null ">
+        	last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="loginCount != null and loginCount >0">
+        	login_count = #{loginCount,jdbcType=INTEGER},
+	        </if>
+			<if test="state != null and state >0 ">
+        	state = #{state,jdbcType=SMALLINT},
+	        </if>
+			<if test="lastLoginIp != null and lastLoginIp != '' ">
+        	last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+	        </if>
+			<if test="levelId != null and levelId != '' ">
+        	level_id = #{levelId,jdbcType=VARCHAR},
+	        </if>
+			<if test="validateCode != null and validateCode != '' ">
+        	validate_code = #{validateCode,jdbcType=VARCHAR},
+	        </if>
+			<if test="memberName != null and memberName != '' ">
+        	member_name = #{memberName,jdbcType=VARCHAR},
+	        </if>
+			<if test="platformUsername != null and platformUsername != '' ">
+        	platform_username = #{platformUsername,jdbcType=VARCHAR},
+	        </if>
+			<if test="hasCompletedOrder != null and hasCompletedOrder >0 ">
+        	has_completed_order = #{hasCompletedOrder,jdbcType=INTEGER},
+	        </if>
+			<if test="platform != null and platform != '' ">
+        	platform = #{platform,jdbcType=VARCHAR},
+	        </if>
+			<if test="regType != null and regType != '' ">
+        	reg_type = #{regType,jdbcType=VARCHAR},
+	        </if>
+			<if test="extensionChannel != null and extensionChannel != '' ">
+        	extension_channel = #{extensionChannel,jdbcType=VARCHAR},
+	        </if>
+			<if test="lastLoginSite != null and lastLoginSite !='' ">
+        	last_login_site = #{lastLoginSite,jdbcType=VARCHAR},
+	        </if>
+			<if test="memberType != null and memberType >0 ">
+        	member_type = #{memberType,jdbcType=INTEGER},
+	        </if>
+			<if test="registerCheckMobile != null and registerCheckMobile !=''  ">
+        	register_check_mobile = #{registerCheckMobile,jdbcType=VARCHAR},
+	        </if>
+			<if test="registerCheckMobileTime != null  ">
+        	register_check_mobile_time = #{registerCheckMobileTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="registerIp != null and registerIp != '' ">
+        	register_ip = #{registerIp,jdbcType=VARCHAR},
+	        </if>
+			<if test="registerDate != null ">
+        	register_date = #{registerDate,jdbcType=TIMESTAMP},
+	        </if>
+	        <if test="parentSellerId != null and parentSellerId != '' ">
+        	parent_seller_id = #{parentSellerId,jdbcType=VARCHAR},
+	        </if>
+	        <if test="openId != null and openId != '' ">
+        	open_id = #{openId,jdbcType=VARCHAR},
+	        </if>
+	        <if test="h5OpenId != null and h5OpenId != '' ">
+        	h5_open_id = #{h5OpenId,jdbcType=VARCHAR}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="MemberAccount" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_member_account
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+     <select id="getMemberInfoById" resultMap="MemberAccount" parameterType="java.lang.String">
+        select 
+        <include refid="Info_Column_List"/>
+        from tbl_wfx_member_account a left join  tbl_wfx_member_profile p on  p.loginaccount_id = a.id  
+        where a.id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.member.model.MemberAccountEntity" resultMap="MemberAccount">
+        select 
+		<include refid="Info_Column_List"/>
+		 from tbl_wfx_member_account a left join  tbl_wfx_member_profile p on  p.loginaccount_id = a.id where 1=1 
+        <include refid="where_for_rela" />
+        order by a.last_login_time desc
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.member.model.MemberAccountEntity" resultType="int">
+        select count(1) from tbl_wfx_member_account a left join  tbl_wfx_member_profile p on  p.loginaccount_id = a.id where 1=1 
+        <include refid="where_for_rela" />
+    </select>
+    
+     <select id="findByPage"  resultMap="MemberAccount">
+        select <include refid="Base_Column_List"/> from tbl_wfx_member_account where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.member.model.MemberAccountEntity">
+        insert into tbl_wfx_member_account (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR},#{loginPassword,jdbcType=VARCHAR},#{lastLoginTime,jdbcType=TIMESTAMP},#{loginCount,jdbcType=INTEGER},#{state,jdbcType=SMALLINT},#{lastLoginIp,jdbcType=VARCHAR},#{levelId,jdbcType=VARCHAR},#{validateCode,jdbcType=VARCHAR},#{memberName,jdbcType=VARCHAR},#{platformUsername,jdbcType=VARCHAR},#{hasCompletedOrder,jdbcType=INTEGER},#{platform,jdbcType=VARCHAR},#{regType,jdbcType=VARCHAR},#{extensionChannel,jdbcType=VARCHAR},#{lastLoginSite,jdbcType=VARCHAR},
+        #{memberType,jdbcType=INTEGER},#{registerCheckMobile,jdbcType=VARCHAR},#{registerCheckMobileTime,jdbcType=TIMESTAMP},#{registerIp,jdbcType=VARCHAR},#{registerDate,jdbcType=TIMESTAMP},#{parentSellerId,jdbcType=VARCHAR},#{openId,jdbcType=VARCHAR},#{h5OpenId,jdbcType=VARCHAR}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_member_account
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.member.model.MemberAccountEntity" >
+        update tbl_wfx_member_account
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <!-- 前端注册，手机号校验重复：根据手机号查询用户数量 -->
+    <select id="getCountByPhone" parameterType="java.lang.String" resultType="int">
+    	select count(*) from tbl_wfx_member_account where login_name = #{phone,jdbcType=VARCHAR}
+    </select>
+    
+    <!-- C端用户登录ResultMap -->
+    <resultMap type="com.yougou.wfx.member.model.MemberAccountEntity" id="memberLoginMap">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="loginName" column="login_name" jdbcType="VARCHAR"/>
+    	<!-- <result property="loginPassword" column="login_password" jdbcType="VARCHAR"/> -->
+    	<result property="lastLoginTime" column="last_login_time" jdbcType="TIMESTAMP"/>
+    	<result property="loginCount" column="login_count" jdbcType="INTEGER"/>
+    	<result property="lastLoginIp" column="last_login_ip" jdbcType="VARCHAR"/>
+    	<result property="validateCode" column="validate_code" jdbcType="VARCHAR"/>
+    	<result property="lastLoginSite" column="last_login_site" jdbcType="VARCHAR"/>
+    	<result property="memberType" column="member_type" jdbcType="INTEGER"/>
+    	<result property="registerCheckMobile" column="register_check_mobile" jdbcType="VARCHAR"/>
+    	<result property="registerCheckMobileTime" column="register_check_mobile_time" jdbcType="TIMESTAMP"/>
+    	<result property="registerIp" column="register_ip" jdbcType="VARCHAR"/>
+    	<result property="registerDate" column="register_date" jdbcType="TIMESTAMP"/>
+    	<result property="platformUsername" column="platform_username" jdbcType="VARCHAR"/>
+    	<result property="openId" column="open_id" jdbcType="VARCHAR"/>
+    	<result property="h5OpenId" column="h5_open_id" jdbcType="VARCHAR"/>
+    	<!-- <association property="profileInfo" column="#{loginaccount_id = id}" select="selectMeberProfileInfo" /> -->
+    	    	
+    </resultMap>
+    <!-- 用户登录 -->
+    <select id="memberLogin"  parameterType="java.util.HashMap" resultMap="memberLoginMap" >
+    	select id,
+			login_name,
+			last_login_time,
+			login_count,
+			last_login_ip,
+			validate_code,
+			last_login_site,
+			member_type,
+			register_check_mobile,
+			register_check_mobile_time,
+			register_ip,
+			register_date,
+			platform_username,
+			open_id,
+			h5_open_id
+		from tbl_wfx_member_account t
+	   where t.login_name = #{loginName,jdbcType=VARCHAR}
+		   and t.login_password = #{loginPassword,jdbcType=VARCHAR}
+		   limit 1
+    </select>
+    
+     <!-- B端用户登录 -->
+    <select id="memberLoginForApp"  parameterType="java.util.HashMap" resultMap="memberLoginMap" >
+    	select id,
+			login_name,
+			last_login_time,
+			login_count,
+			last_login_ip,
+			validate_code,
+			last_login_site,
+			member_type,
+			register_check_mobile,
+			register_check_mobile_time,
+			register_ip,
+			register_date,
+			platform_username,
+			open_id,
+			h5_open_id
+		from tbl_wfx_member_account t
+	   where t.login_name = #{loginName,jdbcType=VARCHAR}
+		   and t.login_password = #{loginPassword,jdbcType=VARCHAR}
+		   <!-- and t.member_type = 2 -->
+		   limit 1
+    </select>
+    
+    <!-- 修改用户登录密码 -->
+    <update id="updatePassword" parameterType="java.util.HashMap" >
+    	update tbl_wfx_member_account 
+    	set login_password =  #{newPassword,jdbcType=VARCHAR}
+    	where id =  #{memberId,jdbcType=VARCHAR}
+    </update>
+    
+    <!-- 根据手机号获取用户信息 -->
+    <select id="getMemberAccountByPhoneNumber" parameterType="java.lang.String" resultMap="memberLoginMap">
+    	select id,
+			login_name,
+			last_login_time,
+			login_count,
+			last_login_ip,
+			validate_code,
+			last_login_site,
+			member_type,
+			register_check_mobile,
+			register_check_mobile_time,
+			register_ip,
+			register_date,
+			platform_username,
+			open_id,
+			h5_open_id
+		from tbl_wfx_member_account t
+	   where t.login_name = #{phoneNumber,jdbcType=VARCHAR}
+	   limit 1
+    </select>
+    
+    <!-- 校验用户密码是否正确 -->
+    <select id="checkMemberPassWord" parameterType="java.util.HashMap" resultType="int">
+    	select count(*) 
+    	from tbl_wfx_member_account t 
+    	where t.id =  #{memberId,jdbcType=VARCHAR}
+    	  and t.login_password = #{oldPassword,jdbcType=VARCHAR}
+    </select>
+    
+     <!-- 批量审核通过，批量修改用户身份为分销商，用于分销商自动审核通过job -->
+   <update id="batchUpdateMemberType" parameterType="java.util.List" >
+   		 <foreach collection="list" item="item" index="index" open="" close="" separator=";">  
+              update tbl_wfx_member_account  
+              	set member_type = #{item.memberType,jdbcType=TINYINT}
+	         where id = #{item.id,jdbcType=VARCHAR}
+         </foreach>  
+   </update>
+   <!-- 根据openId获取用户信息 -->
+    <select id="getMemberAccountByOpenId" parameterType="java.lang.String" resultMap="memberLoginMap">
+    	select id,
+			login_name,
+			last_login_time,
+			login_count,
+			last_login_ip,
+			validate_code,
+			last_login_site,
+			member_type,
+			register_check_mobile,
+			register_check_mobile_time,
+			register_ip,
+			register_date,
+			platform_username,
+			open_id,
+			h5_open_id
+		from tbl_wfx_member_account t
+	   where t.open_id = #{openId,jdbcType=VARCHAR}
+	   limit 1
+    </select> 
+    
+    <select id="queryFansList" parameterType="com.yougou.wfx.member.model.MemberAccountEntity" resultMap="MemberAccount">
+       select head_show_img,
+       <include refid="Base_Column_List"></include>
+       from
+       ( SELECT
+					t.*,
+					s.id as sid,
+					p.head_show_img
+				FROM
+					tbl_wfx_member_account t
+				LEFT JOIN tbl_wfx_seller_info s ON t.id = s.loginaccount_id
+				LEFT JOIN tbl_wfx_member_profile p ON t.id = p.loginaccount_id
+				WHERE
+					t.parent_seller_id = #{sellerId,jdbcType=VARCHAR}
+				AND s.id IS NULL 
+		) as a
+         order by register_date desc
+    </select>
+    
+    <select id="queryFansListCount" parameterType="java.lang.String" resultType="int">
+	   	SELECT
+		COUNT(1) 
+		FROM
+			(
+				SELECT
+					a.id,
+					s.id as sid
+				FROM
+					tbl_wfx_member_account a
+				LEFT JOIN tbl_wfx_seller_info s ON a.id = s.loginaccount_id
+				WHERE
+					a.parent_seller_id = #{sellerId,jdbcType=VARCHAR}
+				AND s.id IS NULL
+			) t
+	 </select>
+   
+    <select id="selectProfileInfoById" resultMap="profileInfo">
+    	select 
+    	<include refid="Profile_Column_List" />
+		from tbl_wfx_member_profile where loginaccount_id =#{loginaccount_id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="getParentMemberIdByMemberId" resultType="String">
+    	select i.loginaccount_id from tbl_wfx_member_account a ,tbl_wfx_seller_info i
+		where a.parent_seller_id = i.id
+		and a.id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+</mapper>

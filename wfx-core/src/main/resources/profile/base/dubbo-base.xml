@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+						   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	 					   http://code.alibabatech.com/schema/dubbo	
+	 					   http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+	default-lazy-init="true">
+
+	<description>Dubbo consumer配置</description>
+	
+	<dubbo:consumer check="false" />
+
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="wfx-api" owner="dev_merchant"/>
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry protocol="zookeeper" address="${dubbo.reference.registry.address}" file="${dubbo.reference.registry.file}" register="${dubbo.registry}" />
+		
+	<!-- 监控中心 -->
+	<dubbo:monitor protocol="registry" />
+
+	<!-- 用dubbo协议在22880端口暴露服务 -->
+	<dubbo:protocol name="dubbo" port="22880" dispather="all" threadpool="cached" threads="5000"/>
+	
+	<dubbo:protocol name="hessian" port="8090" server="servlet" contextpath="dubbo"/>
+	
+	<!-- 优雅停机 -->
+	<bean class="com.yougou.tools.common.utils.DubboDestruction" destroy-method="destroy" lazy-init="false" />
+	
+	<!-- 引用外部dubbo接口 -->
+	<!-- Email 接口服务 -->	
+	<dubbo:reference interface="com.yougou.component.email.api.IEmailApi" version="1.1" id="emailApi" async="true" protocol="dubbo" />
+		
+	<!-- SMS 接口服务 -->	
+	<dubbo:reference interface="com.yougou.component.sms.api.ISmsApi" version="1.1" id="smsApi" async="true" protocol="dubbo"/>
+	
+	<!-- 物流 -->
+	<dubbo:reference interface="com.yougou.component.logistics.api.IMemberLogisticsApi" version="1.1" id="logisticApi" protocol="dubbo" />
+	
+	<!-- 商品系统API -->
+	<dubbo:reference id="commodityMerchantApiService" interface="com.yougou.pc.api.ICommodityMerchantApiService" timeout="60000" protocol="dubbo" check="false" version="1.1"/>
+</beans>

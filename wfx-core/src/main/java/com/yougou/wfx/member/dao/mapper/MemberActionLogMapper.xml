@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.member.dao.MemberActionLogMapper">
+    <resultMap id="MemberActionLog" type="com.yougou.wfx.member.model.MemberActionLogEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="loginaccountId" column="loginaccount_id" jdbcType="VARCHAR"/>
+    	<result property="loginName" column="login_name" jdbcType="VARCHAR"/>
+    	<result property="optIp" column="opt_ip" jdbcType="VARCHAR"/>
+    	<result property="optTime" column="opt_time" jdbcType="TIMESTAMP"/>
+    	<result property="optType" column="opt_type" jdbcType="VARCHAR"/>
+    	<result property="optSite" column="opt_site" jdbcType="TINYINT"/>
+    	<result property="optShopId" column="opt_shop_id" jdbcType="VARCHAR"/>
+    	<result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,loginaccount_id,login_name,opt_ip,opt_time,opt_type,opt_site,opt_shop_id,remark
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="loginaccountId != null and loginaccountId != ''">
+        	and loginaccount_id = #{loginaccountId,jdbcType=VARCHAR}
+	        </if>
+			<if test="loginName != null and loginName != ''">
+        	and login_name = #{loginName,jdbcType=VARCHAR}
+	        </if>
+			<if test="optIp != null and optIp != ''">
+        	and opt_ip = #{optIp,jdbcType=VARCHAR}
+	        </if>
+			<if test="optTime != null">
+        	and opt_time = #{optTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="optType != null and optType != ''">
+        	and opt_type in ('${optType}')
+	        </if>
+			<if test="optSite != null and optSite != 0">
+        	and opt_site = #{optSite,jdbcType=TINYINT}
+	        </if>
+			<if test="optShopId != null and optShopId != ''">
+        	and opt_shop_id = #{optShopId,jdbcType=VARCHAR}
+	        </if>
+			<if test="remark != null and remark != ''">
+        	and remark = #{remark,jdbcType=VARCHAR}
+	        </if>
+    </sql>
+    
+    <sql id="set">
+			<if test="id != null">
+        	id = #{id,jdbcType=VARCHAR},
+	        </if>
+			<if test="loginaccountId != null">
+        	loginaccount_id = #{loginaccountId,jdbcType=VARCHAR},
+	        </if>
+			<if test="loginName != null">
+        	login_name = #{loginName,jdbcType=VARCHAR},
+	        </if>
+			<if test="optIp != null">
+        	opt_ip = #{optIp,jdbcType=VARCHAR},
+	        </if>
+			<if test="optTime != null">
+        	opt_time = #{optTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="optType != null">
+        	opt_type = #{optType,jdbcType=VARCHAR},
+	        </if>
+			<if test="optSite != null and optSite != 0">
+        	opt_site = #{optSite,jdbcType=TINYINT},
+	        </if>
+			<if test="optShopId != null">
+        	opt_shop_id = #{optShopId,jdbcType=VARCHAR},
+	        </if>
+			<if test="remark != null">
+        	remark = #{remark,jdbcType=VARCHAR}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="MemberActionLog" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_member_action_log
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.member.model.MemberActionLogEntity" resultMap="MemberActionLog">
+        select <include refid="Base_Column_List"/> from tbl_wfx_member_action_log where 1=1 
+        <include refid="where" />
+        order by opt_time desc
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.member.model.MemberActionLogEntity" resultType="int">
+        select count(1) from tbl_wfx_member_action_log where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryList" parameterType="com.yougou.wfx.member.model.MemberActionLogEntity" resultMap="MemberActionLog">
+        select <include refid="Base_Column_List"/> from tbl_wfx_member_action_log where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.member.model.MemberActionLogEntity">
+        insert into tbl_wfx_member_action_log (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},#{loginaccountId,jdbcType=VARCHAR},#{loginName,jdbcType=VARCHAR},#{optIp,jdbcType=VARCHAR},#{optTime,jdbcType=TIMESTAMP},#{optType,jdbcType=VARCHAR},#{optSite,jdbcType=TINYINT},#{optShopId,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_member_action_log
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.member.model.MemberActionLogEntity" >
+        update tbl_wfx_member_action_log
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.basicset.dao.AppVersionMapper">
+    <resultMap id="AppVersion" type="com.yougou.wfx.basicset.model.AppVersionEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="versionName" column="version_name" jdbcType="VARCHAR"/>
+    	<result property="versionCode" column="version_code" jdbcType="VARCHAR"/>
+    	<result property="versionUrl" column="version_url" jdbcType="VARCHAR"/>
+    	<result property="versionContent" column="version_content" jdbcType="VARCHAR"/>
+    	<result property="forceUpdate" column="force_update" jdbcType="TINYINT"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,version_name,version_code,version_url,version_content,force_update
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="versionName != null and versionName != ''">
+        	and version_name = #{versionName,jdbcType=VARCHAR}
+	        </if>
+			<if test="versionCode != null and versionCode != ''">
+        	and version_code = #{versionCode,jdbcType=VARCHAR}
+	        </if>
+			<if test="versionUrl != null and versionUrl != ''">
+        	and version_url = #{versionUrl,jdbcType=VARCHAR}
+	        </if>
+			<if test="versionContent != null and versionContent != ''">
+        	and version_content = #{versionContent,jdbcType=VARCHAR}
+	        </if>
+			<if test="forceUpdate != null and forceUpdate != 0">
+        	and force_update = #{forceUpdate,jdbcType=TINYINT}
+	        </if>
+    </sql>
+    
+    <sql id="set">
+			<if test="id != null">
+        	id = #{id,jdbcType=VARCHAR},
+	        </if>
+			<if test="versionName != null">
+        	version_name = #{versionName,jdbcType=VARCHAR},
+	        </if>
+			<if test="versionCode != null">
+        	version_code = #{versionCode,jdbcType=VARCHAR},
+	        </if>
+			<if test="versionUrl != null">
+        	version_url = #{versionUrl,jdbcType=VARCHAR},
+	        </if>
+			<if test="versionContent != null">
+        	version_content = #{versionContent,jdbcType=VARCHAR},
+	        </if>
+			<if test="forceUpdate != null and forceUpdate != 0">
+        	force_update = #{forceUpdate,jdbcType=TINYINT}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="AppVersion" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_app_version
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+     <select id="getAndroidNewestVersion" resultMap="AppVersion" >
+        SELECT <include refid="Base_Column_List"/> FROM tbl_wfx_app_version  ORDER BY version_code DESC LIMIT 0,1
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.basicset.model.AppVersionEntity" resultMap="AppVersion">
+        select <include refid="Base_Column_List"/> from tbl_wfx_app_version where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.basicset.model.AppVersionEntity" resultType="int">
+        select count(1) from tbl_wfx_app_version where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryList" parameterType="com.yougou.wfx.basicset.model.AppVersionEntity" resultMap="AppVersion">
+        select <include refid="Base_Column_List"/> from tbl_wfx_app_version where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.basicset.model.AppVersionEntity">
+        insert into tbl_wfx_app_version (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},#{versionName,jdbcType=VARCHAR},#{versionCode,jdbcType=VARCHAR},#{versionUrl,jdbcType=VARCHAR},#{versionContent,jdbcType=VARCHAR},#{forceUpdate,jdbcType=TINYINT}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_app_version
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.basicset.model.AppVersionEntity" >
+        update tbl_wfx_app_version
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

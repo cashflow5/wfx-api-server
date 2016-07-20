@@ -1,0 +1,1931 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.commodity.dao.CommodityStyleMapper">
+    <resultMap id="CommodityStyle" type="com.yougou.wfx.commodity.model.CommodityStyleEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="commodityName" column="commodity_name" jdbcType="VARCHAR"/>
+    	<result property="alias" column="alias" jdbcType="VARCHAR"/>
+    	<result property="isAudit" column="is_audit" jdbcType="SMALLINT"/>
+    	<result property="prodBriff" column="prod_briff" jdbcType="VARCHAR"/>
+    	<result property="prodDesc" column="prod_desc" jdbcType="VARCHAR"/>
+    	<result property="unitNo" column="unit_no" jdbcType="VARCHAR"/>
+    	<result property="dsno" column="d_sno" jdbcType="INTEGER"/>
+    	<result property="showDate" column="show_date" jdbcType="TIMESTAMP"/>
+    	<result property="downDate" column="down_date" jdbcType="TIMESTAMP"/>
+    	<result property="preShowDate" column="pre_show_date" jdbcType="DATE"/>
+    	<result property="showind" column="showind" jdbcType="SMALLINT"/>
+    	<result property="commodityStatus" column="commodity_status" jdbcType="SMALLINT"/>
+    	<result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+    	<result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+    	<result property="deleteFlag" column="delete_flag" jdbcType="SMALLINT"/>
+    	<result property="no" column="no" jdbcType="VARCHAR"/>
+    	<result property="updateTimestamp" column="update_timestamp" jdbcType="BIGINT"/>
+    	<result property="catNo" column="cat_no" jdbcType="VARCHAR"/>
+    	<result property="brandNo" column="brand_no" jdbcType="VARCHAR"/>
+    	<result property="isGenImage" column="is_gen_image" jdbcType="SMALLINT"/>
+    	<result property="catStructname" column="cat_structname" jdbcType="VARCHAR"/>
+    	<result property="minPrice" column="min_price" jdbcType="DECIMAL"/>
+    	<result property="catName" column="cat_name" jdbcType="VARCHAR"/>
+    	<result property="salesQuantity" column="sales_quantity" jdbcType="INTEGER"/>
+    	<result property="brandName" column="brand_name" jdbcType="VARCHAR"/>
+    	<result property="publicPrice" column="public_price" jdbcType="DECIMAL"/>
+    	<result property="maxPrice" column="max_price" jdbcType="DECIMAL"/>
+    	<result property="defaultPic" column="default_pic" jdbcType="VARCHAR"/>
+    	<result property="unitName" column="unit_name" jdbcType="VARCHAR"/>
+    	<result property="picSmall" column="pic_small" jdbcType="VARCHAR"/>
+    	<result property="preShowStatus" column="pre_show_status" jdbcType="TINYINT"/>
+    	<result property="commodityType" column="commodity_type" jdbcType="TINYINT"/>
+    	<result property="keywords" column="keywords" jdbcType="VARCHAR"/>
+    	<result property="years" column="years" jdbcType="VARCHAR"/>
+    	<result property="supplierCode" column="supplier_code" jdbcType="VARCHAR"/>
+    	<result property="priceScpe" column="price_scpe" jdbcType="VARCHAR"/>
+    	<result property="salePrice" column="sale_price" jdbcType="DECIMAL"/>
+    	<result property="costPrice" column="cost_price" jdbcType="DECIMAL"/>
+    	<result property="styleNo" column="style_no" jdbcType="VARCHAR"/>
+    	<result property="specNo" column="spec_no" jdbcType="VARCHAR"/>
+    	<result property="specName" column="spec_name" jdbcType="VARCHAR"/>
+    	<result property="heelName" column="heel_name" jdbcType="VARCHAR"/>
+    	<result property="heelNo" column="heel_no" jdbcType="VARCHAR"/>
+    	<result property="updatePerson" column="update_person" jdbcType="VARCHAR"/>
+    	<result property="seoKeyword" column="seo_keyword" jdbcType="VARCHAR"/>
+    	<result property="seoTitle" column="seo_title" jdbcType="VARCHAR"/>
+    	<result property="seoDescription" column="seo_description" jdbcType="VARCHAR"/>
+    	<result property="colorSeriesNo" column="color_series_no" jdbcType="VARCHAR"/>
+    	<result property="sortNo" column="sort_no" jdbcType="INTEGER"/>
+    	<result property="markid" column="markid" jdbcType="VARCHAR"/>
+    	<result property="colorDesc" column="color_desc" jdbcType="VARCHAR"/>
+    	<result property="costPrice2" column="cost_price2" jdbcType="DECIMAL"/>
+    	<result property="codeNo" column="code_no" jdbcType="VARCHAR"/>
+    	<result property="staticTimestamp" column="static_timestamp" jdbcType="VARCHAR"/>
+    	<result property="priceFlag" column="price_flag" jdbcType="INTEGER"/>
+    	<result property="picFlag" column="pic_flag" jdbcType="INTEGER"/>
+    	<result property="saleFlag" column="sale_flag" jdbcType="INTEGER"/>
+    	<result property="baseFlag" column="base_flag" jdbcType="INTEGER"/>
+    	<result property="firstSellDate" column="first_sell_date" jdbcType="TIMESTAMP"/>
+    	<result property="orderDistributionSide" column="order_distribution_side" jdbcType="INTEGER"/>
+    	<result property="merchantCode" column="merchant_code" jdbcType="VARCHAR"/>
+    	<result property="sizeChartId" column="size_chart_id" jdbcType="INTEGER"/>
+    	<result property="sampleFlag" column="sample_flag" jdbcType="TINYINT"/>
+    	<result property="suppliersPicFlag" column="suppliers_pic_flag" jdbcType="TINYINT"/>
+    	<result property="sourceFlag" column="source_flag" jdbcType="TINYINT"/>
+    	<result property="siteNo" column="site_no" jdbcType="VARCHAR"/>
+    	<result property="existsPurchase" column="exists_purchase" jdbcType="TINYINT"/>
+    	<result property="isSiteNoManual" column="is_site_no_manual" jdbcType="TINYINT"/>
+    	<result property="existsInventory" column="exists_inventory" jdbcType="TINYINT"/>
+    	<result property="downReason" column="down_reason" jdbcType="INTEGER"/>
+    	<result property="sellingPoint" column="selling_point" jdbcType="VARCHAR"/>
+    	<result property="isDirectMarketing" column="is_direct_marketing" jdbcType="SMALLINT"/>
+    	<result property="taxNo" column="tax_no" jdbcType="VARCHAR"/>
+    	<result property="recyclebinFlag" column="recyclebin_flag" jdbcType="SMALLINT"/>
+    	<result property="outerMarkPrice" column="outer_mark_price" jdbcType="DECIMAL"/>
+    	<result property="outerSellPrice" column="outer_sell_price" jdbcType="DECIMAL"/>
+    	<result property="isWfxCommodity" column="Is_wfx_commodity" jdbcType="TINYINT"/>
+    	<result property="wfxCommodityNo" column="Wfx_commodity_no" jdbcType="VARCHAR"/>
+    	<result property="isOnsale" column="Is_onsale" jdbcType="TINYINT"/>
+    	<result property="wfxPrice" column="Wfx_price" jdbcType="DECIMAL"/>
+    	<result property="addWfxTime" column="Add_wfx_time" jdbcType="TIMESTAMP"/>
+    	<result property="addWfxUser" column="Add_wfx_user" jdbcType="VARCHAR"/>
+    	<result property="saleQuantity" column="sale_quantity" jdbcType="TINYINT"/>
+    	<result property="popularity" column="popularity" jdbcType="TINYINT"/>
+    	<result property="proxyQuantity" column="proxy_quantity" jdbcType="TINYINT"/>
+    	<result property="supplierId" column="supplier_id" jdbcType="VARCHAR"/>
+    	<result property="stock" column="stock" />
+    	<result property="wfxCostPrice" column="wfx_Cost_Price" jdbcType="DECIMAL"/>
+    	<result property="sellerCommodityStatus" column="seller_status" jdbcType="TINYINT"/>
+    	<result property="sellerCommodityId" column="seller_id" jdbcType="VARCHAR"/>
+    	<result property="picBig" column="pic_big_name" jdbcType="VARCHAR"/>
+    	<result property="sellerFlag" column="seller_flag" jdbcType="VARCHAR"/>
+    	<result property="distributableMoney" column="distributable_money" jdbcType="DECIMAL"/>
+    	<result property="baseCatId" column="baseCatId" jdbcType="VARCHAR"/>
+    	
+    </resultMap>
+   
+     <resultMap id="commodityProduct" type="com.yougou.wfx.commodity.model.CommodityProductEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="commodityId" column="commodity_id" jdbcType="VARCHAR"/>
+    	<result property="prodModel" column="prod_model" jdbcType="VARCHAR"/>
+    	<result property="costPrice" column="cost_price" jdbcType="DECIMAL"/>
+    	<result property="salePrice" column="sale_price" jdbcType="DECIMAL"/>
+    	<result property="deleteFlag" column="delete_flag" jdbcType="SMALLINT"/>
+    	<result property="productNo" column="product_no" jdbcType="VARCHAR"/>
+    	<result property="thirdPartyCode" column="third_party_code" jdbcType="VARCHAR"/>
+    	<result property="insideCode" column="inside_code" jdbcType="VARCHAR"/>
+    	<result property="length" column="length" jdbcType="DECIMAL"/>
+    	<result property="width" column="width" jdbcType="DECIMAL"/>
+    	<result property="height" column="height" jdbcType="DECIMAL"/>
+    	<result property="weight" column="weight" jdbcType="DECIMAL"/>
+    	<result property="specKey" column="spec_key" jdbcType="VARCHAR"/>
+    	<result property="brandNo" column="brand_no" jdbcType="VARCHAR"/>
+    	<result property="brandName" column="brand_name" jdbcType="VARCHAR"/>
+    	<result property="catNo" column="cat_no" jdbcType="VARCHAR"/>
+    	<result property="catName" column="cat_name" jdbcType="VARCHAR"/>
+    	<result property="catStructName" column="cat_struct_name" jdbcType="VARCHAR"/>
+    	<result property="sizeNo" column="size_no" jdbcType="VARCHAR"/>
+    	<result property="sizeName" column="size_name" jdbcType="VARCHAR"/>
+    	<result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+    	<result property="secondCode" column="second_code" jdbcType="VARCHAR"/>
+    	<result property="sellStatus" column="sell_status" jdbcType="TINYINT"/>
+    	<result property="sampleSet" column="sample_set" jdbcType="TINYINT"/>
+    	<result property="opTimestamp" column="op_timestamp" jdbcType="TIMESTAMP"/>
+    	<result property="inventoryNum" column="inventory_num" jdbcType="TINYINT"/>
+    	<result property="prestoreInventoryNum" column="prestore_inventory_num" jdbcType="TINYINT"/>
+    </resultMap>
+    
+    <resultMap id="commodityProp" type="com.yougou.wfx.commodity.model.CommodityStyleFilterEntity">
+    	<result property="brandNo" column="brand_No" jdbcType="VARCHAR"/>
+    	<result property="brandName" column="brand_Name" jdbcType="VARCHAR"/>
+    	<result property="catNo" column="cat_No" jdbcType="VARCHAR"/>
+    	<result property="catName" column="cat_Name" jdbcType="VARCHAR"/>
+    	<result property="sizeNo" column="size_No" jdbcType="VARCHAR"/>
+    	<result property="sizeName" column="size_Name" jdbcType="VARCHAR"/>
+    	<result property="specName" column="spec_Name" jdbcType="VARCHAR"/>
+    	<result property="supplierCode" column="supplier_Code" jdbcType="VARCHAR"/>
+    	<result property="propValueNo" column="prop_Value_No" jdbcType="VARCHAR"/>
+    	<result property="propValue" column="prop_Value" jdbcType="VARCHAR"/>
+    	<result property="inventoryNum" column="inventory_num" jdbcType="TINYINT"/>
+    	<result property="minPrice" column="min_Price" jdbcType="TINYINT"/>
+    	<result property="maxPrice" column="max_price" jdbcType="TINYINT"/>
+    </resultMap>
+    
+    <resultMap id="propMap" type="com.yougou.wfx.commodity.dto.output.CommodityPropertyOutputDto">
+    	<result property="propItemNo" column="prop_item_no" jdbcType="VARCHAR"/>
+    	<result property="propItemName" column="prop_item_name" jdbcType="VARCHAR"/>
+    	<result property="propValueNo" column="prop_value_no" jdbcType="VARCHAR"/>
+    	<result property="propValue" column="prop_value" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,commodity_name,alias,is_audit,prod_briff,prod_desc,unit_no,d_sno,show_date,down_date,pre_show_date,showind,commodity_status,create_date,update_date,delete_flag,no,update_timestamp,cat_no,brand_no,is_gen_image,cat_structname,min_price,cat_name,sales_quantity,brand_name,public_price,max_price,default_pic,unit_name,pic_small,pre_show_status,commodity_type,keywords,years,supplier_code,price_scpe,sale_price,cost_price,style_no,spec_no,spec_name,heel_name,heel_no,update_person,seo_keyword,seo_title,seo_description,color_series_no,sort_no,markid,color_desc,cost_price2,code_no,static_timestamp,price_flag,pic_flag,sale_flag,base_flag,first_sell_date,order_distribution_side,merchant_code,size_chart_id,sample_flag,suppliers_pic_flag,source_flag,site_no,exists_purchase,is_site_no_manual,exists_inventory,down_reason,selling_point,is_direct_marketing,tax_no,recyclebin_flag,outer_mark_price,outer_sell_price,Is_wfx_commodity,
+		Wfx_commodity_no,Is_onsale,Wfx_price,Add_wfx_time,Add_wfx_user,sale_quantity,popularity,proxy_quantity,wfx_Cost_Price,distributable_money
+    </sql>
+    
+     <sql id="C_Column_List" >
+		s.id, s.commodity_name, s.alias, s.is_audit, s.prod_briff, s.prod_desc, s.unit_no, s.d_sno, s.show_date, s.down_date,
+		 s.pre_show_date, s.showind, s.commodity_status, s.create_date, s.update_date, s.delete_flag, s.no, s.update_timestamp,
+		  s.cat_no, s.brand_no, s.is_gen_image, s.cat_structname, s.min_price, s.cat_name, s.sales_quantity, s.brand_name, 
+		  s.public_price, s.max_price, s.default_pic, s.unit_name, s.pic_small, s.pre_show_status, s.commodity_type, s.keywords,
+		   s.years, s.supplier_code, s.price_scpe, s.sale_price, s.cost_price, s.style_no, s.spec_no, s.spec_name, s.heel_name,
+		    s.heel_no, s.update_person, s.seo_keyword, s.seo_title, s.seo_description, s.color_series_no, s.sort_no, s.markid, 
+		    s.color_desc, s.cost_price2, s.code_no, s.static_timestamp, s.price_flag, s.pic_flag, s.sale_flag, s.base_flag, 
+		    s.first_sell_date, s.order_distribution_side, s.merchant_code, s.size_chart_id, s.sample_flag, s.suppliers_pic_flag,
+		     s.source_flag, s.site_no, s.exists_purchase, s.is_site_no_manual, s.exists_inventory, s.down_reason, s.selling_point,
+		      s.is_direct_marketing, s.tax_no, s.recyclebin_flag, s.outer_mark_price, s.outer_sell_price, s.Is_wfx_commodity, 
+		      s.Wfx_commodity_no, s.Is_onsale, s.Wfx_price, s.Add_wfx_time, s.Add_wfx_user, s.sale_quantity, s.popularity, 
+		      s.proxy_quantity, s.wfx_Cost_Price, s.distributable_money
+      </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="commodityName != null and commodityName != ''">
+        	and commodity_name = #{commodityName,jdbcType=VARCHAR}
+	        </if>
+			<if test="alias != null and alias != ''">
+        	and alias = #{alias,jdbcType=VARCHAR}
+	        </if>
+			<if test="isAudit != null and isAudit !=0">
+        	and is_audit = #{isAudit,jdbcType=SMALLINT}
+	        </if>
+			<if test="prodBriff != null">
+        	and prod_briff = #{prodBriff,jdbcType=VARCHAR}
+	        </if>
+			<if test="prodDesc != null">
+        	and prod_desc = #{prodDesc,jdbcType=VARCHAR}
+	        </if>
+			<if test="unitNo != null and unitNo != ''">
+        	and unit_no = #{unitNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="dsno != null and dsno !=0">
+        	and d_sno = #{dsno,jdbcType=INTEGER}
+	        </if>
+			<if test="showDate != null">
+        	and show_date = #{showDate,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="downDate != null">
+        	and down_date = #{downDate,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="preShowDate != null">
+        	and pre_show_date = #{preShowDate,jdbcType=DATE}
+	        </if>
+			<if test="showind != null and showind !=0">
+        	and showind = #{showind,jdbcType=SMALLINT}
+	        </if>
+			<if test="commodityStatus != null and commodityStatus !=0">
+        	and commodity_status = #{commodityStatus,jdbcType=SMALLINT}
+	        </if>
+			<if test="createDate != null">
+        	and create_date = #{createDate,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="updateDate != null">
+        	and update_date = #{updateDate,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="deleteFlag != null and deleteFlag !=0">
+        	and delete_flag = #{deleteFlag,jdbcType=SMALLINT}
+	        </if>
+			<if test="no != null and no != ''">
+        	and no = #{no,jdbcType=VARCHAR}
+	        </if>
+			<if test="updateTimestamp != null">
+        	and update_timestamp = #{updateTimestamp,jdbcType=BIGINT}
+	        </if>
+			<if test="catNo != null and catNo != ''">
+        	and cat_no = #{catNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="brandNo != null and brandNo != ''">
+        	and brand_no = #{brandNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="isGenImage != null and isGenImage !=0">
+        	and is_gen_image = #{isGenImage,jdbcType=SMALLINT}
+	        </if>
+			<if test="catStructname != null and catStructname != ''">
+        	and cat_structname = #{catStructname,jdbcType=VARCHAR}
+	        </if>
+			<if test="minPrice != null">
+        	and min_price = #{minPrice,jdbcType=DECIMAL}
+	        </if>
+			<if test="catName != null and catName != ''">
+        	and cat_name = #{catName,jdbcType=VARCHAR}
+	        </if>
+			<if test="salesQuantity != null and salesQuantity !=0">
+        	and sales_quantity = #{salesQuantity,jdbcType=INTEGER}
+	        </if>
+			<if test="brandName != null and brandName != ''">
+        	and brand_name = #{brandName,jdbcType=VARCHAR}
+	        </if>
+			<if test="publicPrice != null">
+        	and public_price = #{publicPrice,jdbcType=DECIMAL}
+	        </if>
+			<if test="maxPrice != null">
+        	and max_price = #{maxPrice,jdbcType=DECIMAL}
+	        </if>
+			<if test="defaultPic != null and defaultPic != ''">
+        	and default_pic = #{defaultPic,jdbcType=VARCHAR}
+	        </if>
+			<if test="unitName != null and unitName != ''">
+        	and unit_name = #{unitName,jdbcType=VARCHAR}
+	        </if>
+			<if test="picBig != null and picBig != ''">
+        	and pic_big = #{picBig,jdbcType=VARCHAR}
+	        </if>
+			<if test="picSmall != null and picSmall != ''">
+        	and pic_small = #{picSmall,jdbcType=VARCHAR}
+	        </if>
+			<if test="preShowStatus != null and preShowStatus !=0">
+        	and pre_show_status = #{preShowStatus,jdbcType=TINYINT}
+	        </if>
+			<if test="commodityType != null and commodityType !=0">
+        	and commodity_type = #{commodityType,jdbcType=TINYINT}
+	        </if>
+			<if test="keywords != null and keywords != ''">
+        	and keywords = #{keywords,jdbcType=VARCHAR}
+	        </if>
+			<if test="years != null and years != ''">
+        	and years = #{years,jdbcType=VARCHAR}
+	        </if>
+			<if test="supplierCode != null and supplierCode != ''">
+        	and supplier_code = #{supplierCode,jdbcType=VARCHAR}
+	        </if>
+			<if test="priceScpe != null and priceScpe != ''">
+        	and price_scpe = #{priceScpe,jdbcType=VARCHAR}
+	        </if>
+			<if test="salePrice != null">
+        	and sale_price = #{salePrice,jdbcType=DECIMAL}
+	        </if>
+			<if test="costPrice != null">
+        	and cost_price = #{costPrice,jdbcType=DECIMAL}
+	        </if>
+			<if test="styleNo != null and styleNo != ''">
+        	and style_no = #{styleNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="specNo != null and specNo != ''">
+        	and spec_no = #{specNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="specName != null and specName != ''">
+        	and spec_name = #{specName,jdbcType=VARCHAR}
+	        </if>
+			<if test="heelName != null and heelName != ''">
+        	and heel_name = #{heelName,jdbcType=VARCHAR}
+	        </if>
+			<if test="heelNo != null and heelNo != ''">
+        	and heel_no = #{heelNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="updatePerson != null and updatePerson != ''">
+        	and update_person = #{updatePerson,jdbcType=VARCHAR}
+	        </if>
+			<if test="seoKeyword != null and seoKeyword != ''">
+        	and seo_keyword = #{seoKeyword,jdbcType=VARCHAR}
+	        </if>
+			<if test="seoTitle != null and seoTitle != ''">
+        	and seo_title = #{seoTitle,jdbcType=VARCHAR}
+	        </if>
+			<if test="seoDescription != null and seoDescription != ''">
+        	and seo_description = #{seoDescription,jdbcType=VARCHAR}
+	        </if>
+			<if test="colorSeriesNo != null and colorSeriesNo != ''">
+        	and color_series_no = #{colorSeriesNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="sortNo != null and sortNo !=0">
+        	and sort_no = #{sortNo,jdbcType=INTEGER}
+	        </if>
+			<if test="markid != null and markid != ''">
+        	and markid = #{markid,jdbcType=VARCHAR}
+	        </if>
+			<if test="colorDesc != null and colorDesc != ''">
+        	and color_desc = #{colorDesc,jdbcType=VARCHAR}
+	        </if>
+			<if test="costPrice2 != null">
+        	and cost_price2 = #{costPrice2,jdbcType=DECIMAL}
+	        </if>
+			<if test="codeNo != null and codeNo != ''">
+        	and code_no = #{codeNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="staticTimestamp != null and staticTimestamp != ''">
+        	and static_timestamp = #{staticTimestamp,jdbcType=VARCHAR}
+	        </if>
+			<if test="priceFlag != null and priceFlag !=0">
+        	and price_flag = #{priceFlag,jdbcType=INTEGER}
+	        </if>
+			<if test="picFlag != null and picFlag !=0">
+        	and pic_flag = #{picFlag,jdbcType=INTEGER}
+	        </if>
+			<if test="saleFlag != null and saleFlag !=0">
+        	and sale_flag = #{saleFlag,jdbcType=INTEGER}
+	        </if>
+			<if test="baseFlag != null and baseFlag !=0">
+        	and base_flag = #{baseFlag,jdbcType=INTEGER}
+	        </if>
+			<if test="firstSellDate != null">
+        	and first_sell_date = #{firstSellDate,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="orderDistributionSide != null and orderDistributionSide !=0">
+        	and order_distribution_side = #{orderDistributionSide,jdbcType=INTEGER}
+	        </if>
+			<if test="merchantCode != null and merchantCode != ''">
+        	and merchant_code = #{merchantCode,jdbcType=VARCHAR}
+	        </if>
+			<if test="sizeChartId != null and sizeChartId !=0">
+        	and size_chart_id = #{sizeChartId,jdbcType=INTEGER}
+	        </if>
+			<if test="sampleFlag != null and sampleFlag !=0">
+        	and sample_flag = #{sampleFlag,jdbcType=TINYINT}
+	        </if>
+			<if test="suppliersPicFlag != null and suppliersPicFlag !=0">
+        	and suppliers_pic_flag = #{suppliersPicFlag,jdbcType=TINYINT}
+	        </if>
+			<if test="sourceFlag != null and sourceFlag !=0">
+        	and source_flag = #{sourceFlag,jdbcType=TINYINT}
+	        </if>
+			<if test="siteNo != null and siteNo != ''">
+        	and site_no = #{siteNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="existsPurchase != null and existsPurchase !=0">
+        	and exists_purchase = #{existsPurchase,jdbcType=TINYINT}
+	        </if>
+			<if test="isSiteNoManual != null and isSiteNoManual !=0">
+        	and is_site_no_manual = #{isSiteNoManual,jdbcType=TINYINT}
+	        </if>
+			<if test="existsInventory != null and existsInventory !=0">
+        	and exists_inventory = #{existsInventory,jdbcType=TINYINT}
+	        </if>
+			<if test="downReason != null and downReason !=0">
+        	and down_reason = #{downReason,jdbcType=INTEGER}
+	        </if>
+			<if test="sellingPoint != null and sellingPoint != ''">
+        	and selling_point = #{sellingPoint,jdbcType=VARCHAR}
+	        </if>
+			<if test="isDirectMarketing != null and isDirectMarketing !=0">
+        	and is_direct_marketing = #{isDirectMarketing,jdbcType=SMALLINT}
+	        </if>
+			<if test="taxNo != null and taxNo != ''">
+        	and tax_no = #{taxNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="recyclebinFlag != null and recyclebinFlag !=0">
+        	and recyclebin_flag = #{recyclebinFlag,jdbcType=SMALLINT}
+	        </if>
+			<if test="outerMarkPrice != null">
+        	and outer_mark_price = #{outerMarkPrice,jdbcType=DECIMAL}
+	        </if>
+			<if test="outerSellPrice != null">
+        	and outer_sell_price = #{outerSellPrice,jdbcType=DECIMAL}
+	        </if>
+			<if test="isWfxCommodity != null and isWfxCommodity !=0">
+        	and Is_wfx_commodity = #{isWfxCommodity,jdbcType=TINYINT}
+	        </if>
+			<if test="wfxCommodityNo != null and wfxCommodityNo != ''">
+        	and Wfx_commodity_no = #{wfxCommodityNo,jdbcType=VARCHAR}
+	        </if>
+	        
+			<if test="isOnsale != null and isOnsale !=0">
+        	and Is_onsale = #{isOnsale,jdbcType=TINYINT}
+	        </if>
+			<if test="wfxPrice != null  and wfxPrice !=0" >
+        	and Wfx_price = #{wfxPrice,jdbcType=DECIMAL}
+	        </if>
+			<if test="addWfxTime != null">
+        	and Add_wfx_time = #{addWfxTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="addWfxUser != null and addWfxUser != ''">
+        	and Add_wfx_user = #{addWfxUser,jdbcType=VARCHAR}
+	        </if>
+			<if test="saleQuantity != null and saleQuantity !=0">
+        	and sale_quantity = #{saleQuantity,jdbcType=TINYINT}
+	        </if>
+			<if test="popularity != null and popularity !=0">
+        	and popularity = #{popularity,jdbcType=TINYINT}
+	        </if>
+			<if test="proxyQuantity != null and proxyQuantity !=0">
+        	and proxy_quantity = #{proxyQuantity,jdbcType=TINYINT}
+	        </if>
+			<if test="supplierId != null and supplierId != ''">
+        	and supplier_id = #{supplierId,jdbcType=VARCHAR}
+	        </if>
+    </sql>
+    
+    <sql id="set">
+			<if test="id != null ">
+        	id = #{id,jdbcType=VARCHAR},
+	        </if>
+			<if test="commodityName != null ">
+        	commodity_name = #{commodityName,jdbcType=VARCHAR},
+	        </if>
+			<if test="alias != null ">
+        	alias = #{alias,jdbcType=VARCHAR},
+	        </if>
+			<if test="isAudit != null ">
+        	is_audit = #{isAudit,jdbcType=SMALLINT},
+	        </if>
+			<if test="prodBriff != null ">
+        	prod_briff = #{prodBriff,jdbcType=VARCHAR},
+	        </if>
+			<if test="prodDesc != null ">
+        	prod_desc = #{prodDesc,jdbcType=VARCHAR},
+	        </if>
+			<if test="unitNo != null ">
+        	unit_no = #{unitNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="dsno != null ">
+        	d_sno = #{dsno,jdbcType=INTEGER},
+	        </if>
+			<if test="showDate != null ">
+        	show_date = #{showDate,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="downDate != null ">
+        	down_date = #{downDate,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="preShowDate != null ">
+        	pre_show_date = #{preShowDate,jdbcType=DATE},
+	        </if>
+			<if test="showind != null ">
+        	showind = #{showind,jdbcType=SMALLINT},
+	        </if>
+			<if test="commodityStatus != null ">
+        	commodity_status = #{commodityStatus,jdbcType=SMALLINT},
+	        </if>
+			<if test="createDate != null ">
+        	create_date = #{createDate,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="updateDate != null ">
+        	update_date = #{updateDate,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="deleteFlag != null ">
+        	delete_flag = #{deleteFlag,jdbcType=SMALLINT},
+	        </if>
+			<if test="no != null ">
+        	no = #{no,jdbcType=VARCHAR},
+	        </if>
+			<if test="updateTimestamp != null ">
+        	update_timestamp = #{updateTimestamp,jdbcType=BIGINT},
+	        </if>
+			<if test="catNo != null ">
+        	cat_no = #{catNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="brandNo != null ">
+        	brand_no = #{brandNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="isGenImage != null ">
+        	is_gen_image = #{isGenImage,jdbcType=SMALLINT},
+	        </if>
+			<if test="catStructname != null ">
+        	cat_structname = #{catStructname,jdbcType=VARCHAR},
+	        </if>
+			<if test="minPrice != null ">
+        	min_price = #{minPrice,jdbcType=DECIMAL},
+	        </if>
+			<if test="catName != null ">
+        	cat_name = #{catName,jdbcType=VARCHAR},
+	        </if>
+			<if test="salesQuantity != null ">
+        	sales_quantity = #{salesQuantity,jdbcType=INTEGER},
+	        </if>
+			<if test="brandName != null ">
+        	brand_name = #{brandName,jdbcType=VARCHAR},
+	        </if>
+			<if test="publicPrice != null ">
+        	public_price = #{publicPrice,jdbcType=DECIMAL},
+	        </if>
+			<if test="maxPrice != null ">
+        	max_price = #{maxPrice,jdbcType=DECIMAL},
+	        </if>
+			<if test="defaultPic != null ">
+        	default_pic = #{defaultPic,jdbcType=VARCHAR},
+	        </if>
+			<if test="unitName != null ">
+        	unit_name = #{unitName,jdbcType=VARCHAR},
+	        </if>
+			<if test="picBig != null ">
+        	pic_big = #{picBig,jdbcType=VARCHAR},
+	        </if>
+			<if test="picSmall != null ">
+        	pic_small = #{picSmall,jdbcType=VARCHAR},
+	        </if>
+			<if test="preShowStatus != null ">
+        	pre_show_status = #{preShowStatus,jdbcType=TINYINT},
+	        </if>
+			<if test="commodityType != null ">
+        	commodity_type = #{commodityType,jdbcType=TINYINT},
+	        </if>
+			<if test="keywords != null ">
+        	keywords = #{keywords,jdbcType=VARCHAR},
+	        </if>
+			<if test="years != null ">
+        	years = #{years,jdbcType=VARCHAR},
+	        </if>
+			<if test="supplierCode != null ">
+        	supplier_code = #{supplierCode,jdbcType=VARCHAR},
+	        </if>
+			<if test="priceScpe != null ">
+        	price_scpe = #{priceScpe,jdbcType=VARCHAR},
+	        </if>
+			<if test="salePrice != null ">
+        	sale_price = #{salePrice,jdbcType=DECIMAL},
+	        </if>
+			<if test="costPrice != null ">
+        	cost_price = #{costPrice,jdbcType=DECIMAL},
+	        </if>
+			<if test="styleNo != null ">
+        	style_no = #{styleNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="specNo != null ">
+        	spec_no = #{specNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="specName != null ">
+        	spec_name = #{specName,jdbcType=VARCHAR},
+	        </if>
+			<if test="heelName != null ">
+        	heel_name = #{heelName,jdbcType=VARCHAR},
+	        </if>
+			<if test="heelNo != null ">
+        	heel_no = #{heelNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="updatePerson != null ">
+        	update_person = #{updatePerson,jdbcType=VARCHAR},
+	        </if>
+			<if test="seoKeyword != null ">
+        	seo_keyword = #{seoKeyword,jdbcType=VARCHAR},
+	        </if>
+			<if test="seoTitle != null ">
+        	seo_title = #{seoTitle,jdbcType=VARCHAR},
+	        </if>
+			<if test="seoDescription != null ">
+        	seo_description = #{seoDescription,jdbcType=VARCHAR},
+	        </if>
+			<if test="colorSeriesNo != null ">
+        	color_series_no = #{colorSeriesNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="sortNo != null ">
+        	sort_no = #{sortNo,jdbcType=INTEGER},
+	        </if>
+			<if test="markid != null ">
+        	markid = #{markid,jdbcType=VARCHAR},
+	        </if>
+			<if test="colorDesc != null ">
+        	color_desc = #{colorDesc,jdbcType=VARCHAR},
+	        </if>
+			<if test="costPrice2 != null ">
+        	cost_price2 = #{costPrice2,jdbcType=DECIMAL},
+	        </if>
+			<if test="codeNo != null ">
+        	code_no = #{codeNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="staticTimestamp != null ">
+        	static_timestamp = #{staticTimestamp,jdbcType=VARCHAR},
+	        </if>
+			<if test="priceFlag != null ">
+        	price_flag = #{priceFlag,jdbcType=INTEGER},
+	        </if>
+			<if test="picFlag != null ">
+        	pic_flag = #{picFlag,jdbcType=INTEGER},
+	        </if>
+			<if test="saleFlag != null ">
+        	sale_flag = #{saleFlag,jdbcType=INTEGER},
+	        </if>
+			<if test="baseFlag != null ">
+        	base_flag = #{baseFlag,jdbcType=INTEGER},
+	        </if>
+			<if test="firstSellDate != null ">
+        	first_sell_date = #{firstSellDate,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="orderDistributionSide != null ">
+        	order_distribution_side = #{orderDistributionSide,jdbcType=INTEGER},
+	        </if>
+			<if test="merchantCode != null ">
+        	merchant_code = #{merchantCode,jdbcType=VARCHAR},
+	        </if>
+			<if test="sizeChartId != null ">
+        	size_chart_id = #{sizeChartId,jdbcType=INTEGER},
+	        </if>
+			<if test="sampleFlag != null ">
+        	sample_flag = #{sampleFlag,jdbcType=TINYINT},
+	        </if>
+			<if test="suppliersPicFlag != null ">
+        	suppliers_pic_flag = #{suppliersPicFlag,jdbcType=TINYINT},
+	        </if>
+			<if test="sourceFlag != null ">
+        	source_flag = #{sourceFlag,jdbcType=TINYINT},
+	        </if>
+			<if test="siteNo != null ">
+        	site_no = #{siteNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="existsPurchase != null ">
+        	exists_purchase = #{existsPurchase,jdbcType=TINYINT},
+	        </if>
+			<if test="isSiteNoManual != null ">
+        	is_site_no_manual = #{isSiteNoManual,jdbcType=TINYINT},
+	        </if>
+			<if test="existsInventory != null ">
+        	exists_inventory = #{existsInventory,jdbcType=TINYINT},
+	        </if>
+			<if test="downReason != null ">
+        	down_reason = #{downReason,jdbcType=INTEGER},
+	        </if>
+			<if test="sellingPoint != null ">
+        	selling_point = #{sellingPoint,jdbcType=VARCHAR},
+	        </if>
+			<if test="isDirectMarketing != null ">
+        	is_direct_marketing = #{isDirectMarketing,jdbcType=SMALLINT},
+	        </if>
+			<if test="taxNo != null ">
+        	tax_no = #{taxNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="recyclebinFlag != null ">
+        	recyclebin_flag = #{recyclebinFlag,jdbcType=SMALLINT},
+	        </if>
+			<if test="outerMarkPrice != null ">
+        	outer_mark_price = #{outerMarkPrice,jdbcType=DECIMAL},
+	        </if>
+			<if test="outerSellPrice != null ">
+        	outer_sell_price = #{outerSellPrice,jdbcType=DECIMAL},
+	        </if>
+			<if test="isWfxCommodity != null ">
+        	Is_wfx_commodity = #{isWfxCommodity,jdbcType=TINYINT},
+	        </if>
+			<if test="wfxCommodityNo != null ">
+        	Wfx_commodity_no = #{wfxCommodityNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="isOnsale != null ">
+        	Is_onsale = #{isOnsale,jdbcType=TINYINT},
+	        </if>
+			<if test="wfxPrice != null ">
+        	Wfx_price = #{wfxPrice,jdbcType=DECIMAL},
+	        </if>
+			<if test="addWfxTime != null ">
+        	Add_wfx_time = #{addWfxTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="addWfxUser != null ">
+        	Add_wfx_user = #{addWfxUser,jdbcType=VARCHAR},
+	        </if>
+			<if test="saleQuantity != null ">
+        	sale_quantity = #{saleQuantity,jdbcType=TINYINT},
+	        </if>
+			<if test="popularity != null ">
+        	popularity = #{popularity,jdbcType=TINYINT},
+	        </if>
+			<if test="proxyQuantity != null ">
+        	proxy_quantity = #{proxyQuantity,jdbcType=TINYINT},
+	        </if>
+			<if test="supplierId != null ">
+        	supplier_id = #{supplierId,jdbcType=VARCHAR}
+	        </if>
+	        <if test="warehouseFlag != null and warehouseFlag != ''">
+        	and is_wfx_commodity = #{warehouseFlag,jdbcType=VARCHAR}
+	        </if>
+	        <if test="wfxCostPrice != null ">
+        	wfx_Cost_Price = #{wfxCostPrice,jdbcType=DECIMAL},
+	        </if>
+			<if test="distributableMoney != null ">
+        	distributable_money = #{distributableMoney,jdbcType=DECIMAL}
+	        </if>
+	        
+    </sql>
+    
+    <select id="getById" resultMap="CommodityStyle" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_commodity_style
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="getByNo" resultMap="CommodityStyle" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_commodity_style
+        where no = #{no,jdbcType=VARCHAR}
+    </select>
+     <select id="findPage" parameterType="com.yougou.wfx.commodity.model.CommodityStyleEntity" resultMap="CommodityStyle">
+       select  s.*,
+ 			(select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id) as stock
+ 			from tbl_commodity_style  s  where 1=1
+           <if test="warehouseFlag != null and warehouseFlag == 1">
+        		and s.is_wfx_commodity = #{warehouseFlag,jdbcType=TINYINT}
+	        </if>
+	        <if test="warehouseFlag != null and warehouseFlag == 2">
+        		<![CDATA[ and  (  s.is_wfx_commodity is null or s.is_wfx_commodity  <> 1  )  ]]>
+	        </if>
+	       
+	        <if test="brandName != null and brandName != ''">
+        		and brand_name = #{brandName,jdbcType=VARCHAR}
+        		
+	        </if>
+	        <if test="styleNo != null and styleNo != ''">
+        		and style_no = #{styleNo,jdbcType=VARCHAR}
+	        </if>
+	        <if test="no != null and no != ''">
+        		and no = #{no,jdbcType=VARCHAR}
+	        </if>
+	        <if test="supplierCode != null and supplierCode != ''">
+        		and supplier_code = #{supplierCode,jdbcType=VARCHAR}
+	    	</if>
+	    	  and delete_flag=1 
+	    	<if test="isOnsale != null and isOnsale !=0">
+        		and Is_onsale = #{isOnsale,jdbcType=TINYINT}
+	        </if>
+	        <if test="catList != null and catList.size() > 0">
+	        	and	cat_no in
+		         <foreach collection="catList" item="item" index="index"    separator=","   open="(" close=")">  
+	                #{item}
+	         	</foreach>  
+	        </if>
+	        <if test="warehouseFlag != null and warehouseFlag == 1">
+	       			 order  by Add_wfx_time desc
+	         </if>
+    </select>
+    
+     <select id="findPageCount" parameterType="com.yougou.wfx.commodity.model.CommodityStyleEntity" resultType="int">
+        select count(1) from tbl_commodity_style s where 1=1 
+          <if test="warehouseFlag != null and warehouseFlag == 1">
+        		and s.is_wfx_commodity = #{warehouseFlag,jdbcType=TINYINT}
+	        </if>
+	        <if test="warehouseFlag != null and warehouseFlag == 2">
+        		<![CDATA[ and  (  s.is_wfx_commodity is null or s.is_wfx_commodity  <> 1  )  ]]>
+	        </if>
+        <if test="brandName != null and brandName != ''">
+        	and brand_name = #{brandName,jdbcType=VARCHAR}
+	    </if>
+    	<if test="styleNo != null and styleNo != ''">
+       		and style_no = #{styleNo,jdbcType=VARCHAR}
+        </if>
+        <if test="no != null and no != ''">
+        	and no = #{no,jdbcType=VARCHAR}
+	    </if>
+	      and delete_flag=1 
+	    <if test="supplierCode != null and supplierCode != ''">
+        	and supplier_code = #{supplierCode,jdbcType=VARCHAR}
+	    </if>
+	    <if test="isOnsale != null and isOnsale !=0">
+        		and Is_onsale = #{isOnsale,jdbcType=TINYINT}
+	     </if>
+	     
+	   <if test="catList != null and catList.size() > 0">
+	        		and cat_no in
+	        		<![CDATA[( ]]>
+				         <foreach collection="catList" item="item" index="index"    separator=","   open="" close="">  
+				           <if test="item != null and item != ''">
+			                #{item,jdbcType=VARCHAR}
+			                </if>
+			         	</foreach>  
+	         	   <![CDATA[) ]]>
+	   </if>
+	  <if test="warehouseFlag != null and warehouseFlag == 1">
+	       			 order  by Add_wfx_time desc
+	  </if>
+    </select>
+    
+    <select id="queryList" parameterType="com.yougou.wfx.commodity.model.CommodityStyleEntity" resultMap="CommodityStyle">
+        select <include refid="Base_Column_List"/> from tbl_commodity_style where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryListCount" parameterType="com.yougou.wfx.commodity.model.CommodityStyleEntity" resultType="int">
+        select count(1) from tbl_commodity_style where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.commodity.model.CommodityStyleEntity">
+        insert into tbl_commodity_style (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},#{commodityName,jdbcType=VARCHAR},#{alias,jdbcType=VARCHAR},#{isAudit,jdbcType=SMALLINT},#{prodBriff,jdbcType=VARCHAR},#{prodDesc,jdbcType=VARCHAR},#{unitNo,jdbcType=VARCHAR},#{dsno,jdbcType=INTEGER},#{showDate,jdbcType=TIMESTAMP},#{downDate,jdbcType=TIMESTAMP},#{preShowDate,jdbcType=DATE},#{showind,jdbcType=SMALLINT},#{commodityStatus,jdbcType=SMALLINT},#{createDate,jdbcType=TIMESTAMP},#{updateDate,jdbcType=TIMESTAMP},#{deleteFlag,jdbcType=SMALLINT},#{no,jdbcType=VARCHAR},#{updateTimestamp,jdbcType=BIGINT},#{catNo,jdbcType=VARCHAR},#{brandNo,jdbcType=VARCHAR},#{isGenImage,jdbcType=SMALLINT},#{catStructname,jdbcType=VARCHAR},#{minPrice,jdbcType=DECIMAL}
+        ,#{catName,jdbcType=VARCHAR},#{salesQuantity,jdbcType=INTEGER},#{brandName,jdbcType=VARCHAR},#{publicPrice,jdbcType=DECIMAL},#{maxPrice,jdbcType=DECIMAL},#{defaultPic,jdbcType=VARCHAR},#{unitName,jdbcType=VARCHAR},#{picBig,jdbcType=VARCHAR},#{picSmall,jdbcType=VARCHAR},#{preShowStatus,jdbcType=TINYINT},#{commodityType,jdbcType=TINYINT},#{keywords,jdbcType=VARCHAR},#{years,jdbcType=VARCHAR},#{supplierCode,jdbcType=VARCHAR},#{priceScpe,jdbcType=VARCHAR},#{salePrice,jdbcType=DECIMAL},#{costPrice,jdbcType=DECIMAL},#{styleNo,jdbcType=VARCHAR},#{specNo,jdbcType=VARCHAR},#{specName,jdbcType=VARCHAR},#{heelName,jdbcType=VARCHAR},#{heelNo,jdbcType=VARCHAR},#{updatePerson,jdbcType=VARCHAR},#{seoKeyword,jdbcType=VARCHAR},#{seoTitle,jdbcType=VARCHAR},#{seoDescription,jdbcType=VARCHAR},#{colorSeriesNo,jdbcType=VARCHAR},#{sortNo,jdbcType=INTEGER},#{markid,jdbcType=VARCHAR},#{colorDesc,jdbcType=VARCHAR},#{costPrice2,jdbcType=DECIMAL},#{codeNo,jdbcType=VARCHAR},#{staticTimestamp,jdbcType=VARCHAR},#{priceFlag,jdbcType=INTEGER},#{picFlag,jdbcType=INTEGER},
+        #{saleFlag,jdbcType=INTEGER},#{baseFlag,jdbcType=INTEGER},#{firstSellDate,jdbcType=TIMESTAMP},#{orderDistributionSide,jdbcType=INTEGER},#{merchantCode,jdbcType=VARCHAR},#{sizeChartId,jdbcType=INTEGER},#{sampleFlag,jdbcType=TINYINT},#{suppliersPicFlag,jdbcType=TINYINT},#{sourceFlag,jdbcType=TINYINT},#{siteNo,jdbcType=VARCHAR},#{existsPurchase,jdbcType=TINYINT},#{isSiteNoManual,jdbcType=TINYINT},#{existsInventory,jdbcType=TINYINT},#{downReason,jdbcType=INTEGER},#{sellingPoint,jdbcType=VARCHAR},#{isDirectMarketing,jdbcType=SMALLINT},#{taxNo,jdbcType=VARCHAR},#{recyclebinFlag,jdbcType=SMALLINT},#{outerMarkPrice,jdbcType=DECIMAL},#{outerSellPrice,jdbcType=DECIMAL},#{isWfxCommodity,jdbcType=TINYINT},#{wfxCommodityNo,jdbcType=VARCHAR},#{isOnsale,jdbcType=TINYINT},#{wfxPrice,jdbcType=DECIMAL},#{addWfxTime,jdbcType=TIMESTAMP},#{addWfxUser,jdbcType=VARCHAR},#{saleQuantity,jdbcType=TINYINT},#{popularity,jdbcType=TINYINT},#{proxyQuantity,jdbcType=TINYINT},#{supplierId,jdbcType=VARCHAR}
+        ,#{wfxCostPrice,jdbcType=DECIMAL},#{distributableMoney,jdbcType=DECIMAL})
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_commodity_style
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.commodity.model.CommodityStyleEntity" >
+        update tbl_commodity_style
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+        <update id="batchCommodityAddToWfx"  parameterType="com.yougou.wfx.commodity.model.CommodityStyleEntity">  
+                update tbl_commodity_style   
+                <set>  
+                  is_wfx_commodity=#{isWfxCommodity},
+                  is_Onsale=#{isOnsale},
+                  Wfx_Commodity_No=#{wfxCommodityNo},
+                  add_wfx_time=#{addWfxTime,jdbcType=TIMESTAMP}
+                  <if test="wfxPrice != null">
+        	       , Wfx_price = #{wfxPrice}
+	               </if>
+	               <if test="wfxCostPrice != null">
+        	         ,wfx_Cost_Price = #{wfxCostPrice}
+	               </if>
+	                <if test="updateDate != null">
+		        		, update_Date = #{updateDate,jdbcType=TIMESTAMP}
+			        </if>
+			         <if test="supplierId != null">
+		        		, supplier_Id = #{supplierId,jdbcType=TIMESTAMP}
+			        </if>
+			         <if test="distributableMoney != null">
+        	         ,distributable_money = #{distributableMoney}
+	               </if>
+                </set>  
+                where id = #{id}   
+    </update>
+     <update id="batchUpdateShelvesStatus"  parameterType="com.yougou.wfx.commodity.model.CommodityStyleEntity">  
+                update tbl_commodity_style   
+                <set>  
+                  <if test="isOnsale != null">
+        	       Is_onsale=#{isOnsale}
+	               </if>
+	               <if test="updateDate != null">
+		        	, update_Date = #{updateDate,jdbcType=TIMESTAMP}
+			        </if>
+                </set>  
+                where id = #{id}  
+    </update> 
+    
+    <select id="queryExportCommodityInfo" resultMap="CommodityStyle" parameterType="java.util.List">
+        select 
+        <include refid="C_Column_List"/>
+        ,c.id as baseCatId
+        from tbl_commodity_style s left join tbl_commodity_catb2c c on s.cat_no = c.no
+        where s.id in 
+         <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">  
+        	 #{item}
+         </foreach>
+    </select>
+      
+     <update id="readjustPrices"  parameterType="java.util.List"> 
+          <foreach collection="list" item="item" index="index" open="" close="" separator=";">  
+                update tbl_commodity_style   
+                <set>  
+                  <if test="item.wfxPrice != null">
+        	       Wfx_price = #{item.wfxPrice}
+	               </if>
+	               <if test="item.wfxCostPrice != null">
+        	         ,wfx_Cost_Price = #{item.wfxCostPrice}
+	               </if>
+	                <if test="item.distributableMoney != null">
+        	         ,distributable_money = #{item.distributableMoney}
+	               </if>
+	               <if test="item.updateDate != null">
+		        	, update_Date = #{item.updateDate,jdbcType=TIMESTAMP}
+			        </if>
+                </set>  
+                where id = #{item.id}  
+         </foreach>  
+            
+    </update>
+      <update id="batchReadjustPrices"  parameterType="com.yougou.wfx.commodity.model.CommodityStyleEntity"> 
+         
+                update tbl_commodity_style   
+                <set>  
+                  <if test="wfxPrice != null">
+        	      		 Wfx_price = #{wfxPrice}
+	               </if>
+	                <if test="wfxCostPrice != null">
+        	         ,wfx_Cost_Price = #{wfxCostPrice}
+	               </if>
+	                 <if test="distributableMoney != null">
+        	         , distributable_money =  #{distributableMoney,jdbcType=DECIMAL}
+	               </if>
+	                <if test="updateDate != null">
+		        	, update_Date = #{updateDate,jdbcType=TIMESTAMP}
+			        </if>
+                </set>  
+                where no = #{no}  
+            
+    </update>
+       
+     <resultMap id="CommodityInventory" type="com.yougou.wfx.commodity.model.CommodityInventoryEntity">
+    	<result property="commodityId" column="commodity_id" jdbcType="VARCHAR"/>
+    	<result property="productId" column="product_id" jdbcType="VARCHAR"/>
+    	<result property="commodityName" column="commodity_name" jdbcType="VARCHAR"/>
+    	<result property="specName" column="spec_name" jdbcType="VARCHAR"/>
+    	<result property="sizeName" column="size_name" jdbcType="VARCHAR"/>
+    	<result property="wfxCommodityNo" column="wfx_commodity_no" jdbcType="VARCHAR"/>
+    	<result property="defaultPic" column="default_pic" jdbcType="VARCHAR"/>
+    	<result property="supplierCode" column="supplier_code" jdbcType="VARCHAR"/>
+    	<result property="productNo" column="product_no" jdbcType="VARCHAR"/>
+    	<result property="thirdPartyCode" column="third_party_code" jdbcType="VARCHAR"/>
+    	<result property="inventoryNum" column="inventory_num" jdbcType="INTEGER"/>
+    	<result property="isOnsale" column="is_onsale" jdbcType="INTEGER"/>
+    	<result property="commodityNo" column="commodity_no" jdbcType="VARCHAR"/>
+    	
+    </resultMap>
+
+
+
+     <sql id="inverntoryWhere">
+			<if test="commodityName != null and commodityName != ''">
+        	and commodity_name = #{commodityName,jdbcType=VARCHAR}
+	        </if>
+			<if test="supplierCode != null and supplierCode != ''">
+        	and supplier_code = #{supplierCode,jdbcType=VARCHAR}
+	        </if>
+			<if test="wfxCommodityNo != null and wfxCommodityNo != ''">
+        	and Wfx_commodity_no = #{wfxCommodityNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="productNo != null and productNo != ''">
+        	and product_no = #{productNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="thirdPartyCode != null and thirdPartyCode != ''">
+        	and third_party_code = #{thirdPartyCode,jdbcType=VARCHAR}
+	        </if>
+			<if test="isOnsale != null">
+        	and Is_onsale = #{isOnsale,jdbcType=TINYINT}
+	        </if>
+			<if test="inventoryNumStart != null">
+        	and inventory_num >= #{inventoryNumStart,jdbcType=INTEGER}
+	        </if>
+	        <if test="inventoryNumEnd != null">
+        	and inventory_num <![CDATA[<=]]> #{inventoryNumEnd,jdbcType=INTEGER}
+	        </if>
+	       <if test="commodityNo != null and commodityNo != ''">
+        			and no = #{commodityNo,jdbcType=VARCHAR}
+	        </if>
+	        
+    </sql>
+    
+    <select id="findInventoryPage" parameterType="com.yougou.wfx.commodity.model.CommodityInventoryEntity" resultMap="CommodityInventory">
+        select b.commodity_id,a.commodity_name,b.id product_id, a.wfx_commodity_no, a.supplier_code,
+			b.product_no, b.third_party_code, COALESCE(b.inventory_num,0) - COALESCE(b.prestore_inventory_num,0) as inventory_num, a.is_onsale, a.default_pic,	
+			a.spec_name,b.size_name
+			,a.no  as commodity_no
+        from tbl_commodity_style a, tbl_commodity_product b 
+        where a.id = b.commodity_id
+        and Is_wfx_commodity = 1
+        <include refid="inverntoryWhere" />
+    </select>
+    
+    <select id="findInventoryPageCount" parameterType="com.yougou.wfx.commodity.model.CommodityInventoryEntity" resultType="int">
+        select count(1) from tbl_commodity_style a, tbl_commodity_product b 
+        where a.id = b.commodity_id
+        and Is_wfx_commodity = 1
+        <include refid="inverntoryWhere" />
+    </select>
+    
+    <select id="findPageByCommodityIds" resultMap="CommodityStyle">
+       select  s.*,(select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id) as stock
+ 			from tbl_commodity_style  s  where 1=1
+	        <if test="list != null and list.size() > 0">
+	        	and	id in
+		         <foreach collection="list" item="item" index="index"    separator=","   open="(" close=")">  
+	                #{item}
+	         	</foreach>  
+	        </if>
+    </select>
+    
+     <select id="getStock" resultType="int" parameterType="java.lang.String">
+   
+    		select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=#{id,jdbcType=VARCHAR}
+     </select>
+     
+    <select id="getSameSellerCommodity" resultMap="CommodityStyle" parameterType="java.lang.String">
+     select * from tbl_commodity_style e where e.style_no=
+		(select style_no from tbl_commodity_style  where id=#{id,jdbcType=VARCHAR}  LIMIT 1)
+		
+		and e.Is_wfx_commodity=1
+    		
+    </select>  
+    
+    <select id="queryProxyCommodity" resultMap="CommodityStyle" parameterType="java.lang.String">
+	   SELECT
+	style.*, (
+		SELECT
+			CONCAT(pic_path, pic_name)
+		FROM
+			tbl_commodity_pics
+		WHERE
+			commodity_no = style. NO
+		AND pic_type = 's'
+		AND del_flag = '1'
+		LIMIT 1
+	) AS pic_big_name
+FROM
+	(
+		SELECT
+			t.*
+		FROM
+			(
+				SELECT
+					e.commodity_Name,
+					e. NO,
+					e.cat_No,
+					e.brand_No,
+					e.brand_name,
+					e.Wfx_commodity_no,
+					e.Wfx_price,
+					e.wfx_Cost_Price,
+					e.style_no,
+					e.years,
+					1 AS seller_status,
+					'' AS seller_id,
+					CURDATE() AS seller_create_time
+				FROM
+					tbl_commodity_style e
+				WHERE
+					(
+						e.Is_onsale = 1
+						OR e.Is_onsale = 2
+					)
+				AND e.Is_wfx_commodity = 1
+				ORDER BY
+					e.wfx_price
+			) AS t
+		GROUP BY
+			t.style_no,
+			t.cat_no,
+			t.brand_no,
+			t.years
+	) AS style
+ORDER BY
+	seller_create_time DESC
+    </select>
+    
+    <select id="queryProxyCommodityCount" resultType="int" parameterType="java.lang.String">
+    
+	       select count(*) from (
+		   select t.* from (
+		 SELECT
+					e.commodity_Name,
+					e. NO,
+					e.cat_No,
+					e.brand_No,
+					e.brand_name,
+					e.Wfx_commodity_no,
+					e.Wfx_price,
+					e.wfx_Cost_Price,
+					e.style_no,
+					e.years,
+					1 AS seller_status,
+					'' AS seller_id,
+					CURDATE() AS seller_create_time
+				FROM
+					tbl_commodity_style e
+				WHERE
+					(
+						e.Is_onsale = 1
+						OR e.Is_onsale = 2
+					)
+				AND e.Is_wfx_commodity = 1
+				ORDER BY
+					e.wfx_price
+		) as t 
+		group by t.style_no,t.cat_no,t.brand_no,t.years) as styleInfo
+    </select>  
+    
+     <delete id="deleteDellerCommodityCatRela"  parameterType="java.util.List">
+     		delete from  tbl_wfx_seller_commodity_cat_rela    where seller_commodity_id
+     		  in
+          <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">  
+          		#{item,jdbcType=VARCHAR}  
+     	  </foreach>
+     </delete>
+     <insert id="updateCommodityClassify" parameterType="java.util.List">
+	      insert into tbl_wfx_seller_commodity_cat_rela (id,seller_commodity_id,cat_id)
+	        values
+	        <foreach collection="list" item="item" index="index" open="" close="" separator=","> 
+	        ( 
+		        #{item.id,jdbcType=VARCHAR},#{item.commodityId,jdbcType=VARCHAR},#{item.classifyId,jdbcType=VARCHAR}
+		     )
+	        </foreach>
+     </insert>
+     <select id="queryHotCommodity" parameterType="java.util.Map" resultMap="CommodityStyle">
+      		  SELECT
+				*
+			FROM
+				(
+					SELECT
+						 <include refid="C_Column_List"/>
+						, (
+							SELECT
+								SUM(
+									COALESCE (inventory_num, 0) - COALESCE (prestore_inventory_num, 0)
+								)
+							FROM
+								tbl_commodity_product p
+							WHERE
+								p.commodity_id = s.id
+						) AS stock
+					FROM
+						tbl_commodity_style s
+						
+					WHERE
+					s.Is_onsale = 1
+					AND s.Is_wfx_commodity = 1
+					ORDER BY
+						s.wfx_price
+				) AS e where  e.stock<![CDATA[>]]>0
+			GROUP BY
+				e.style_no,
+				e.cat_no,
+				e.brand_no,
+				e.years
+			ORDER BY
+				e.sale_quantity DESC,
+				e.popularity DESC,
+				e.Add_wfx_time DESC
+    </select>
+    <select id="queryHotCommodityList" parameterType="java.util.Map" resultMap="CommodityStyle">
+      		  SELECT
+				*
+			FROM
+				(
+					SELECT
+						<include refid="C_Column_List"/>
+						, (
+							SELECT
+								SUM(
+									COALESCE (inventory_num, 0) - COALESCE (prestore_inventory_num, 0)
+								)
+							FROM
+								tbl_commodity_product p
+							WHERE
+								p.commodity_id = s.id
+						) AS stock
+					FROM
+						tbl_commodity_style s
+					WHERE
+						s.Is_onsale = 1
+					AND s.Is_wfx_commodity = 1
+					ORDER BY
+						s.wfx_price
+				) AS e where  e.stock<![CDATA[>]]>0
+			GROUP BY
+				e.style_no,
+				e.cat_no,
+				e.brand_no,
+				e.years
+			ORDER BY
+				e.sale_quantity DESC,
+				e.popularity DESC,
+				e.Add_wfx_time DESC
+      		 	 <if test="count != null and count !=0">
+        			LIMIT #{count,jdbcType=INTEGER}	
+	      		 </if> 
+                   
+        
+    </select>
+     <select id="queryHotCommodityCount" parameterType="java.util.Map" resultType="int">
+      		 SELECT
+				count(*)
+			FROM
+				(
+					SELECT
+						*
+					FROM
+						(
+							SELECT
+								s.*, (
+									SELECT
+										SUM(
+											COALESCE (inventory_num, 0) - COALESCE (prestore_inventory_num, 0)
+										)
+									FROM
+										tbl_commodity_product p
+									WHERE
+										p.commodity_id = s.id
+								) AS stock
+							FROM
+								tbl_commodity_style s
+							WHERE
+								s.Is_onsale = 1
+							AND s.Is_wfx_commodity = 1
+							ORDER BY
+								s.wfx_price
+						) AS e where  e.stock<![CDATA[>]]>0
+					GROUP BY
+						e.style_no,
+						e.cat_no,
+						e.brand_no,
+						e.years
+					ORDER BY
+						e.sale_quantity DESC
+				) AS commodityCount
+        
+    </select>
+    <select id="getShopCategoryCommodity" parameterType="java.util.Map" resultMap="CommodityStyle">
+      		SELECT
+			t.*
+		FROM
+			(
+				SELECT
+					e.*
+				FROM
+					tbl_wfx_seller_cat t,
+					tbl_wfx_seller_commodity_cat_rela a,
+					tbl_commodity_style e
+				WHERE
+					t.seller_id = #{shopId,jdbcType=VARCHAR} 
+				AND t.id = #{categoryId,jdbcType=VARCHAR}   
+				AND t.id = a.cat_id
+				AND e.Is_onsale = 1
+				AND e.Is_wfx_commodity = 1
+				ORDER BY
+					e.wfx_price
+			) AS t
+		GROUP BY
+			t.style_no,
+			t.cat_no,
+			t.brand_no,
+			t.years
+        
+    </select>
+    
+     <select id="getShopCategoryCommodityCount" parameterType="java.util.Map" resultType="int">
+      	SELECT
+			count(*)
+		FROM
+			(
+				SELECT
+					t.*
+				FROM
+					(
+						SELECT
+							e.*
+						FROM
+							tbl_wfx_seller_cat t,
+							tbl_wfx_seller_commodity_cat_rela a,
+							tbl_commodity_style e
+						WHERE
+							t.seller_id = #{shopId,jdbcType=VARCHAR} 
+						AND t.id = #{categoryId,jdbcType=VARCHAR}   
+						AND t.id = a.cat_id
+						AND e.Is_onsale = 1
+						AND e.Is_wfx_commodity = 1
+						ORDER BY
+							e.wfx_price
+					) AS t
+				GROUP BY
+					t.style_no,
+					t.cat_no,
+					t.brand_no,
+					t.years
+		) as styleInfo
+        
+    </select>
+    <select id="getCommodityByNos" resultMap="CommodityStyle"  parameterType="java.util.List">
+       select  s.*,
+       	
+ 			(select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id) as stock
+ 			from tbl_commodity_style  s  where 1=1
+	        <if test="list != null and list.size() > 0">
+	        	and	no in
+		         <foreach collection="list" item="item" index="index"    separator=","   open="(" close=")">  
+	                #{item}
+	         	</foreach>  
+	        </if>
+    </select>
+    
+    <select id="getProductByProductNos" parameterType="java.lang.String"    resultMap="commodityProduct">
+        select * from tbl_commodity_product where 1=1 
+        and commodity_id=#{value}
+    </select>
+    
+        
+    <select id="getCommodityByParameter" parameterType="java.util.Map" resultMap="CommodityStyle">
+      		
+		         SELECT s.*,
+		         (select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id) as stock
+			    FROM tbl_commodity_style s
+			    WHERE 1=1
+			       <foreach item="item" collection="paramMap.entrySet()" separator="">
+			 			<if test="item.value!=null">
+						  and	 ${item.key}=#{item.value}
+						</if>		       
+				 </foreach>
+
+    </select>
+    
+    <update id="batchUpdateSaleQuantity"  > 
+    UPDATE tbl_commodity_style AS t LEFT JOIN 
+	 (
+		SELECT
+			t4.commodity_id,
+			SUM(t4.num) sale_quantity
+		FROM
+			tbl_wfx_order_detail t4
+		INNER JOIN tbl_wfx_order t5 ON t4.order_id = t5.id
+		WHERE  DATEDIFF(NOW(),created_time) <![CDATA[<]]> 3 and DATEDIFF(NOW(),created_time) <![CDATA[>=]]> 0
+		GROUP BY
+			t4.commodity_id
+	) AS t3 on t.id = t3.commodity_id
+	SET t.sale_quantity = t3.sale_quantity	
+	where t.merchant_code = 'SPYG'
+	and t.Is_wfx_commodity = 1
+    </update>
+       <select id="getCatId" parameterType="java.lang.String" resultType="java.lang.String">
+     	 select c.parent_id from tbl_commodity_style s left join tbl_commodity_catb2c c 
+		on s.cat_no = c.no 
+		where s.id =#{id,jdbcType=VARCHAR}
+    </select>
+    <select id="getCommodityBrandNo" parameterType="java.lang.String" resultType="java.lang.String">
+     	 select s.brand_no from tbl_commodity_style s 
+		where s.id =#{id,jdbcType=VARCHAR}
+    </select>
+     <select id="getCommodityByBrandNo" parameterType="java.util.Map" resultMap="CommodityStyle">
+     	select t.*,
+				'1'as seller_flag
+				from(
+				select s.commodity_Name,s.no,s.cat_No,s.brand_No,s.brand_name,s.Wfx_commodity_no,s.Wfx_price
+				,'' as  seller_id
+				
+				from 
+				tbl_commodity_style s
+				where s.brand_no =#{brandNo,jdbcType=VARCHAR}
+				and s.Is_wfx_commodity=1
+				and s.Is_onsale=1
+				and (select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id)<![CDATA[>]]> 0
+					order by s.wfx_price
+					) as t 
+				group by t.style_no,t.cat_no,t.brand_no,t.years
+    </select>
+    <select id="getCommodityByBrandNoCount" parameterType="java.lang.String" resultType="int">
+    select count(*) from (
+     	select t.*
+				from(
+				select s.commodity_Name,s.no,s.cat_No,s.brand_No,s.brand_name,s.Wfx_commodity_no,s.Wfx_price
+				,wfx_Cost_Price,s.style_no,s.years from 
+				tbl_commodity_style s
+				where s.brand_no =#{no,jdbcType=VARCHAR}
+				and s.Is_wfx_commodity=1
+				and s.Is_onsale=1
+				and (select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id)<![CDATA[>]]> 0
+					order by s.wfx_price
+					) as t 
+				group by t.style_no,t.cat_no,t.brand_no,t.years) as styleInfo
+    </select>
+    <select id="getCommodityByCatId" parameterType="java.util.Map" resultMap="CommodityStyle">
+     	select t.*,
+     	
+		'1' as seller_flag
+		from (select s.commodity_Name,s.no,s.cat_No,s.brand_No,s.brand_name,s.Wfx_commodity_no,s.Wfx_price
+			,wfx_Cost_Price,s.style_no,s.years,s.public_price,
+		'' as seller_id
+		from tbl_wfx_commodity_sale_cat cat,
+		tbl_wfx_commodity_sale_cat_rela r,
+		tbl_commodity_catb2c 2c,
+		tbl_commodity_style s
+		where cat.id = r.sale_cat_id and 2c.id=r.base_cat_id  and 2c.no=s.cat_no
+		and s.Is_wfx_commodity=1
+		and s.Is_onsale=1
+		and cat.parent_id = #{catId,jdbcType=VARCHAR}
+		and (select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id)<![CDATA[>]]> 0
+			order by s.wfx_price
+			) as t 
+		group by t.style_no,t.cat_no,t.brand_no,t.years
+    </select>
+    
+     <select id="getCommodityByCatIdCount" parameterType="java.lang.String" resultType="int">
+     	 select count(*) from (
+     	select t.*
+				from(
+				select s.commodity_Name,s.no,s.cat_No,s.brand_No,s.brand_name,s.Wfx_commodity_no,s.Wfx_price
+			,wfx_Cost_Price,s.style_no,s.years from 
+				tbl_wfx_commodity_sale_cat_rela r,
+				tbl_commodity_catb2c 2c,
+				tbl_commodity_style s
+				where r.sale_cat_id=#{catId,jdbcType=VARCHAR}  and 2c.id=r.base_cat_id  and 2c.no=s.cat_no
+				and s.Is_wfx_commodity=1
+				and s.Is_onsale=1
+				and (select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id)<![CDATA[>]]>0
+					order by s.wfx_price
+					) as t 
+				group by t.style_no,t.cat_no,t.brand_no,t.years) as styleInfo
+     	
+    </select>
+    
+    
+    
+     <select id="queryCommodityListForSearch" parameterType="java.util.Map" resultMap="CommodityStyle">
+	   
+	   
+	    select t.*,(select CONCAT(pic_path,pic_name)   from tbl_commodity_pics   where commodity_no=t.no  and pic_type='s'   and del_flag='1' LIMIT  1)as pic_big_name
+					,'1' as seller_flag
+					from(
+					select s.* ,
+					'' as  seller_id
+					from 
+					tbl_commodity_style s
+					where (s.brand_name  LIKE   concat('%',#{searchName,jdbcType=VARCHAR},'%')    or s.cat_name like concat('%',#{searchName,jdbcType=VARCHAR},'%')   or s.commodity_name LIKE concat('%',#{searchName,jdbcType=VARCHAR},'%') )
+					and s.Is_wfx_commodity=1
+					and s.Is_onsale=1
+				and (select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id)<![CDATA[>]]> 0
+						order by s.wfx_price
+						) as t 
+					group by t.style_no,t.cat_no,t.brand_no,t.years
+    
+    </select>
+      
+     <select id="queryCommodityListForSearchCount" parameterType="java.lang.String" resultType="int">
+	    select count(*) from (
+		    select t.*
+						from(
+						select s.* from 
+						tbl_commodity_style s
+						where (s.brand_name  LIKE  concat('%',#{searchName,jdbcType=VARCHAR},'%')    or s.cat_name like concat('%',#{searchName,jdbcType=VARCHAR},'%')   or s.commodity_name LIKE concat('%',#{searchName,jdbcType=VARCHAR},'%') )
+						and s.Is_wfx_commodity=1
+						and s.Is_onsale=1
+						and (select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id)<![CDATA[>]]> 0
+							order by s.wfx_price
+							) as t 
+						group by t.style_no,t.cat_no,t.brand_no,t.years) as styleInfo
+    
+    </select>
+    
+     <delete id="clearPicNotSPYG" parameterType="java.lang.String" >
+     DELETE
+		FROM
+			tbl_commodity_pics
+		WHERE
+			NOT EXISTS (
+				SELECT
+					NO
+				FROM
+					tbl_commodity_style
+				WHERE
+					NO = tbl_commodity_pics.commodity_no
+				AND merchant_code = 'SPYG'
+			)
+    </delete>
+
+      <select id="queryDiscoverStyleInfo" parameterType="com.yougou.wfx.commodity.model.CommodityStyleEntity" resultMap="CommodityStyle">
+  		select t.*,(select CONCAT(pic_path,pic_name)   from tbl_commodity_pics   where commodity_no=t.no  and pic_type='s'   and del_flag='1' LIMIT  1)as pic_big_name
+		from(
+			select s.* 
+			from 
+			tbl_commodity_style s
+			where 1=1
+			and s.Is_wfx_commodity=1
+			and s.Is_onsale=1
+			<if test="brandName != null and brandName != ''">
+				and	s.brand_name LIKE concat('%',#{brandName,jdbcType=VARCHAR},'%')  
+			</if>
+			<if test="commodityName != null and commodityName != ''">
+				and s.commodity_name LIKE concat('%',#{commodityName,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="wfxCommodityNo != null and wfxCommodityNo != ''">
+				and s.wfx_Commodity_No=#{wfxCommodityNo,jdbcType=VARCHAR}
+			</if>
+			<if test="styleNo != null and styleNo != ''">
+				and s.style_no=#{styleNo,jdbcType=VARCHAR}
+			</if>
+			<if test="supplierCode != null and supplierCode != ''">
+				and s.supplier_code=#{supplierCode,jdbcType=VARCHAR}
+			</if>
+			order by s.wfx_price
+			) as t 
+		group by t.style_no,t.cat_no,t.brand_no,t.years
+    </select>
+    <select id="queryDiscoverStyleInfoCount" parameterType="com.yougou.wfx.commodity.model.CommodityStyleEntity" resultType="int">
+	    select count(1) from (
+	    select t.*,(select CONCAT(pic_path,pic_name) from tbl_commodity_pics where commodity_no=t.no  and pic_type='s'   and del_flag='1' LIMIT  1)as pic_big_name
+		from(
+			select s.* 
+			from 
+			tbl_commodity_style s
+			where 1=1
+			and s.Is_wfx_commodity=1
+			and s.Is_onsale=1
+			<if test="brandName != null and brandName != ''">
+				and	s.brand_name LIKE concat('%',#{brandName,jdbcType=VARCHAR},'%')  
+			</if>
+			<if test="commodityName != null and commodityName != ''">
+				and s.commodity_name LIKE concat('%',#{commodityName,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="styleNo != null and styleNo != ''">
+				and s.style_no=#{styleNo,jdbcType=VARCHAR}
+			</if>
+			<if test="wfxCommodityNo != null and wfxCommodityNo != ''">
+				and s.wfx_Commodity_No=#{wfxCommodityNo,jdbcType=VARCHAR}
+			</if>
+			<if test="supplierCode != null and supplierCode != ''">
+				and s.supplier_code=#{supplierCode,jdbcType=VARCHAR}
+			</if>
+			order by s.wfx_price
+			) as t 
+		group by t.style_no,t.cat_no,t.brand_no,t.years ) styleCount
+    </select>
+    
+   <select id="getPicBigName" resultType="java.lang.String" parameterType="java.lang.String">
+	 SELECT
+			CONCAT(pic_path, pic_name)
+		FROM
+			tbl_commodity_pics
+		WHERE
+			commodity_no = #{no,jdbcType=VARCHAR}
+		AND pic_type = 's'
+		AND del_flag = '1'
+		LIMIT 1
+   </select>
+   
+    
+   
+  <select id="queryCommodityOrder" parameterType="com.yougou.wfx.commodity.model.CommodityStyleOrderEntity" resultMap="CommodityStyle">
+    		select * from (
+    		          select * from(
+								select 
+								 s.commodity_Name,s.no,s.cat_No,s.brand_No,s.brand_name,s.Wfx_commodity_no,s.Wfx_price,s.public_price
+								,s.wfx_Cost_Price,s.style_no,s.years,s.Is_wfx_commodity,s.Is_onsale,s.sale_quantity,s.Add_wfx_time,s.popularity,
+								(select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id) as stock
+								from tbl_commodity_style s  
+							<if test="catId != null and catId != ''">
+						    	,tbl_wfx_commodity_sale_cat cat,
+								tbl_wfx_commodity_sale_cat_rela r,
+								tbl_commodity_catb2c 2c
+							</if>
+							where 
+							<if test="catId != null and catId != ''">
+				                cat.id = r.sale_cat_id 
+				               	and 2c.id=r.base_cat_id  
+				               	and 2c.no=s.cat_no
+								and cat.parent_id = #{catId,jdbcType=VARCHAR} and
+						   </if>
+							 	s.Is_onsale=1
+								and s.Is_wfx_commodity=1
+								and (select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id)<![CDATA[>]]> 0
+						   <if test="catNoList != null and catNoList.size()  > 0">
+					        	and	s.cat_No in
+						        <foreach collection="catNoList" item="catNo" index="index"    separator=","   open="(" close=")">  
+					                #{catNo}
+					         	</foreach>  
+					       </if>
+						   <if test="brandNoList != null and brandNoList.size()  > 0">
+					        	and	s.brand_No in
+						        <foreach collection="brandNoList" item="bn" index="index"    separator=","   open="(" close=")">  
+					                #{bn}
+					         	</foreach>  
+					       </if>
+					       <if test="sizeNoList != null and sizeNoList.size()  > 0">
+					      		and  s.id in(select DISTINCT y.commodity_id  from tbl_commodity_product y where y.size_no in
+						        <foreach collection="sizeNoList" item="sizeNo" index="index"    separator=","   open="(" close=")">  
+					                #{sizeNo}
+					         	</foreach> 
+					         	 ) 
+					       </if>
+						   <if test="specNameList != null and specNameList.size()  > 0">
+					        	and s.Spec_Name in
+						        <foreach collection="specNameList" item="specName" index="index"    separator=","   open="(" close=")">  
+					                #{specName}
+					         	</foreach>  
+						   </if>		
+						   <if test="propValueNolist != null and propValueNolist.size()  > 0">
+					        	and  s.id in(select DISTINCT commodity_id from tbl_commodity_extend_prop  where prop_value_no  in  
+						        <foreach collection="propValueNolist" item="propValueNo" index="index"    separator=","   open="(" close=")">  
+					                #{propValueNo}
+					         	</foreach> 
+					         	 ) 
+						   </if>
+						   <if test="priceMap != null">
+							     and 
+								 <foreach item="item" collection="priceMap.entrySet()" separator="or" open="(" close=")">
+							 			<if test="item.value!=null">
+										 (  	  
+										 	 s.Wfx_price <![CDATA[>=]]> #{item.key,jdbcType=INTEGER}
+										 	 and 
+										 	 s.Wfx_price <![CDATA[<=]]> #{item.value,jdbcType=INTEGER}
+										 )
+										</if>		       
+								 </foreach>
+						  </if>
+						  <if test="brandNo != null and brandNo != ''">
+								 and s.brand_No=#{brandNo,jdbcType=VARCHAR}
+						  </if>
+					) as e 
+					group by e.style_no,e.cat_no,e.brand_no,e.years) bb
+					<if test="saleQuantityOrder != null and saleQuantityOrder != ''">
+					 	order  by sale_quantity  ${saleQuantityOrder},commodity_Name asc
+					 </if>
+					  <if test="updateOrder != null and updateOrder != ''">
+					 	order  by Add_wfx_time  ${updateOrder} ,commodity_Name asc
+					 </if>
+					  <if test="popularity != null and popularity != ''">
+					 	order  by popularity  ${popularity} ,commodity_Name asc
+					 </if>
+					  <if test="priceOrder != null and priceOrder != ''">
+					 	order  by Wfx_price  ${priceOrder} ,commodity_Name asc
+					 </if>
+	</select>
+	  <select id="queryCommodityOrderCount" parameterType="com.yougou.wfx.commodity.model.CommodityStyleOrderEntity" resultType="int">
+    	select count(1) from (
+		select * from(
+							select 
+							 s.commodity_Name,s.no,s.cat_No,s.brand_No,s.brand_name,s.Wfx_commodity_no,s.Wfx_price
+							,s.wfx_Cost_Price,s.style_no,s.years,s.Is_wfx_commodity,s.Is_onsale,s.sale_quantity,s.Add_wfx_time,
+							(select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id) as stock
+							from tbl_commodity_style s  
+							<if test="catId != null and catId != ''">
+					    	,tbl_wfx_commodity_sale_cat cat,
+							tbl_wfx_commodity_sale_cat_rela r,
+							tbl_commodity_catb2c 2c
+							</if>
+							where 
+							<if test="catId != null and catId != ''">
+				                cat.id = r.sale_cat_id 
+				               	and 2c.id=r.base_cat_id  
+				               	and 2c.no=s.cat_no
+								and cat.parent_id = #{catId,jdbcType=VARCHAR} and
+						   </if>
+							 	s.Is_onsale=1
+								and s.Is_wfx_commodity=1
+								and (select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id)<![CDATA[>]]> 0
+								<if test="catNoList != null and catNoList.size > 0">
+							        	and	s.cat_No in
+								         <foreach collection="catNoList" item="catNo" index="index"    separator=","   open="(" close=")">  
+							                #{catNo}
+							         	</foreach>  
+							    </if>
+								<if test="brandNoList != null and brandNoList.size > 0">
+							        	and	s.brand_No in
+								         <foreach collection="brandNoList" item="bn" index="index"    separator=","   open="(" close=")">  
+							                #{bn}
+							         	</foreach>  
+							    </if>
+							     <if test="sizeNoList != null and sizeNoList.size()  > 0">
+							        	and  s.id in(select DISTINCT y.commodity_id  from tbl_commodity_product y where y.size_no in
+								         <foreach collection="sizeNoList" item="sizeNo" index="index"    separator=","   open="(" close=")">  
+							                #{sizeNo}
+							         	</foreach> 
+							         	 ) 
+							    </if>
+							     <if test="specNameList != null and specNameList.size()  > 0">
+							        	and s.Spec_Name in
+								         <foreach collection="specNameList" item="specName" index="index"    separator=","   open="(" close=")">  
+							                #{specName}
+							         	</foreach>  
+							    </if>
+							     <if test="propValueNolist != null and propValueNolist.size()  > 0">
+							        	and  s.id in(select DISTINCT commodity_id from tbl_commodity_extend_prop  where prop_value_no  in  
+								         <foreach collection="propValueNolist" item="propValueNo" index="index"    separator=","   open="(" close=")">  
+							                #{propValueNo}
+							         	</foreach> 
+							         	 ) 
+							    </if>
+							    <if test="priceMap != null">
+							     	and 
+									 <foreach item="item" collection="priceMap.entrySet()" separator="or" open="(" close=")">
+										 			<if test="item.value!=null">
+													 (  	  
+													 	 s.Wfx_price <![CDATA[>=]]> #{item.key,jdbcType=INTEGER}
+													 	 and 
+													 	 s.Wfx_price <![CDATA[<=]]> #{item.value,jdbcType=INTEGER}
+													 )
+													 
+													</if>		       
+									 </foreach>
+									
+							     </if>
+							    <if test="brandNo != null and brandNo != ''">
+									and s.brand_No=#{brandNo,jdbcType=VARCHAR}
+								</if> 
+								
+							) as e 
+							group by e.style_no,e.cat_no,e.brand_no,e.years) b
+
+				 
+	</select>
+	
+	<select id="getPropByCommodityId" parameterType="java.lang.String" resultMap="propMap">
+		select DISTINCT p.prop_item_no,p.prop_item_name,p.prop_value_no,p.prop_value from 
+		tbl_commodity_extend_prop p,tbl_commodity_extend_prop_item m,
+		tbl_commodity_extend_prop_value e
+		where p.prop_item_no=m.prop_item_no and p.prop_value_no=e.prop_value_no
+		and m.prop_type=1 and p.commodity_id=#{_parameter}
+		and p.delete_flag=1
+	</select>
+	
+	  <select id="getBrandInfo" parameterType="com.yougou.wfx.commodity.model.CommodityStyleFilterEntity" resultMap="commodityProp">
+    	select e.brand_No,e.brand_name
+					from(
+					select
+					s.brand_No,s.brand_name
+					from tbl_commodity_style s  
+					    <if test="catId != null and catId != ''">
+					    	,tbl_wfx_commodity_sale_cat cat,
+							tbl_wfx_commodity_sale_cat_rela r,
+							tbl_commodity_catb2c 2c
+						</if>
+						where 
+		               <if test="catId != null and catId != ''">
+			                cat.id = r.sale_cat_id 
+			               	and 2c.id=r.base_cat_id  
+			               	and 2c.no=s.cat_no
+							and cat.parent_id = #{catId,jdbcType=VARCHAR} and
+					   </if>
+            	
+						 s.Is_onsale=1
+						and s.Is_wfx_commodity=1
+						and (select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id)<![CDATA[>]]> 0
+						
+					) as e 
+					group by e.brand_no
+    	
+	</select>
+	  <select id="getCatInfo" parameterType="com.yougou.wfx.commodity.model.CommodityStyleFilterEntity" resultMap="commodityProp">
+    	 select e.cat_No,e.cat_name
+					from(
+					select 
+					s.commodity_Name,s.no,s.cat_No,s.brand_No,s.cat_name,s.Wfx_commodity_no,s.Wfx_price
+			,s.wfx_Cost_Price,s.style_no,s.years,s.Is_wfx_commodity,s.Is_onsale,s.sale_quantity,s.Add_wfx_time
+					    from tbl_commodity_style s 
+					        
+						<if test="catId != null and catId != ''">
+					    	,tbl_wfx_commodity_sale_cat cat,
+							tbl_wfx_commodity_sale_cat_rela r,
+							tbl_commodity_catb2c 2c
+						</if>
+						where 
+						<if test="catId != null and catId != ''">
+			                cat.id = r.sale_cat_id 
+			               	and 2c.id=r.base_cat_id  
+			               	and 2c.no=s.cat_no
+							and cat.parent_id = #{catId,jdbcType=VARCHAR} and
+					   </if>
+						
+						 s.Is_onsale=1
+						and (select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id)<![CDATA[>]]> 0
+						<if test="brandNo != null and brandNo != ''">
+							and s.brand_No=#{brandNo,jdbcType=VARCHAR}
+						</if>
+						and s.Is_wfx_commodity=1
+						order by s.wfx_price
+					) as e 
+					group by e.cat_No
+    	 
+	</select>
+	  <select id="getPriceInfo" parameterType="com.yougou.wfx.commodity.model.CommodityStyleFilterEntity" resultMap="commodityProp">
+    	 select Wfx_price as min_price from (
+					select 
+					s.commodity_Name,s.no,s.cat_No,s.brand_No,s.cat_name,s.Wfx_commodity_no,s.Wfx_price
+			,s.wfx_Cost_Price,s.style_no,s.years,s.Is_wfx_commodity,s.Is_onsale,s.sale_quantity,s.Add_wfx_time
+					from tbl_commodity_style s     
+						<if test="catId != null and catId != ''">
+					    	,tbl_wfx_commodity_sale_cat cat,
+							tbl_wfx_commodity_sale_cat_rela r,
+							tbl_commodity_catb2c 2c
+						</if>
+						where 
+						<if test="catId != null and catId != ''">
+			                cat.id = r.sale_cat_id 
+			               	and 2c.id=r.base_cat_id  
+			               	and 2c.no=s.cat_no
+							and cat.parent_id = #{catId,jdbcType=VARCHAR} and
+					   </if>
+            		
+						and s.Is_onsale=1
+						and s.Is_wfx_commodity=1
+						and (select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id)<![CDATA[>]]> 0
+						
+						<if test="brandNo != null and brandNo != ''">
+							and s.brand_No=#{brandNo,jdbcType=VARCHAR}
+						</if>
+				) as b ORDER BY Wfx_price
+	</select>
+	  <select id="getSizeInfo" parameterType="com.yougou.wfx.commodity.model.CommodityStyleFilterEntity" resultMap="commodityProp">
+    	 
+					select  size_no,
+  						size_name
+					from tbl_commodity_style s   ,tbl_commodity_product t    
+						<if test="catId != null and catId != ''">
+					    	,tbl_wfx_commodity_sale_cat cat,
+							tbl_wfx_commodity_sale_cat_rela r,
+							tbl_commodity_catb2c 2c
+						</if>
+						where 
+						<if test="catId != null and catId != ''">
+			                cat.id = r.sale_cat_id 
+			               	and 2c.id=r.base_cat_id  
+			               	and 2c.no=s.cat_no
+							and cat.parent_id = #{catId,jdbcType=VARCHAR} and
+					   </if>
+					    s.Is_onsale=1
+						and s.Is_wfx_commodity=1
+						and (select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id)<![CDATA[>]]> 0
+						
+						<if test="brandNo != null and brandNo != ''">
+							and s.brand_No=#{brandNo,jdbcType=VARCHAR}
+						</if>
+						and t.commodity_id= s.id
+						GROUP BY  size_no
+	</select>
+	  <select id="getSpecInfo" parameterType="com.yougou.wfx.commodity.model.CommodityStyleFilterEntity" resultMap="commodityProp">
+    	 		select  spec_name,supplier_code
+					from tbl_commodity_style s ,tbl_commodity_product t    
+						<if test="catId != null and catId != ''">
+					    	,tbl_wfx_commodity_sale_cat cat,
+							tbl_wfx_commodity_sale_cat_rela r,
+							tbl_commodity_catb2c 2c
+						</if>
+						where 
+						<if test="catId != null and catId != ''">
+			                cat.id = r.sale_cat_id 
+			               	and 2c.id=r.base_cat_id  
+			               	and 2c.no=s.cat_no
+							and cat.parent_id = #{catId,jdbcType=VARCHAR} and
+					   </if>
+					   s.Is_onsale=1
+						and s.Is_wfx_commodity=1
+						and (select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id)<![CDATA[>]]> 0
+						<if test="brandNo != null and brandNo != ''">
+							and s.brand_No=#{brandNo,jdbcType=VARCHAR}
+						</if>
+						
+						and t.commodity_id= s.id
+			GROUP BY  spec_name
+
+    	 
+	</select>
+	  <select id="getPropInfo" parameterType="com.yougou.wfx.commodity.model.CommodityStyleFilterEntity" resultMap="commodityProp">
+    	 		select  prop_value_no,prop_value
+					from tbl_commodity_style s  ,tbl_commodity_extend_prop t    
+						<if test="catId != null and catId != ''">
+					    	,tbl_wfx_commodity_sale_cat cat,
+							tbl_wfx_commodity_sale_cat_rela r,
+							tbl_commodity_catb2c 2c
+						</if>
+						where 
+						<if test="catId != null and catId != ''">
+			                cat.id = r.sale_cat_id 
+			               	and 2c.id=r.base_cat_id  
+			               	and 2c.no=s.cat_no
+							and cat.parent_id = #{catId,jdbcType=VARCHAR} and
+					   </if>
+					    s.Is_onsale=1
+						and s.Is_wfx_commodity=1
+						and (select SUM(COALESCE(inventory_num,0) - COALESCE(prestore_inventory_num,0)) from tbl_commodity_product p where p.commodity_id=s.id)<![CDATA[>]]> 0
+						<if test="brandNo != null and brandNo != ''">
+							and s.brand_No=#{brandNo,jdbcType=VARCHAR}
+						</if>
+						
+						and t.commodity_id= s.id
+						and t.delete_flag=1
+						and t.prop_item_name=#{propItemName,jdbcType=VARCHAR}
+					GROUP BY  prop_value_no
+	</select>
+	
+	
+	  <select id="getPictureUrl" resultType="java.lang.String" parameterType="java.lang.String">
+   			SELECT c.chart_content
+				FROM tbl_commodity_style s
+				INNER JOIN tbl_commodity_size_chart c
+					ON s.size_chart_id=c.id
+				where s.no=#{no,jdbcType=VARCHAR}
+				and  c.del_flag=1
+    		
+     </select>
+     
+     
+	<select id="queryCommodityList" resultMap="CommodityStyle" parameterType="java.util.List">
+   			SELECT s.commodity_name,s.id,s.supplier_code,s.no
+				FROM tbl_commodity_style s
+			where s.is_wfx_commodity = 1 and s.delete_flag = 1
+			<if test="listSupplierCode != null ">
+			and s.supplier_code in
+			<foreach collection="listSupplierCode" item="item" index="index" open="(" close=")" separator=",">  
+        	 #{item}
+         	</foreach>	
+			</if>
+    		<if test="listCommodityId != null ">
+			and s.id in
+			<foreach collection="listCommodityId" item="item" index="index" open="(" close=")" separator=",">  
+        	 #{item}
+         	</foreach>	
+			</if>
+     </select>
+</mapper>

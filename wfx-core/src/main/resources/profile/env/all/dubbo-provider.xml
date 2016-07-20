@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+						   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	 					   http://code.alibabatech.com/schema/dubbo	
+	 					   http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+	default-lazy-init="true">
+
+	<description>Dubbo Provider配置</description>
+	
+	<!-- 系统级别api -->
+	
+	<dubbo:service interface="com.yougou.wfx.system.api.IWFXSystemApi" version="1.0" ref="wfxSystemApi" timeout="10000" protocol="dubbo"/>
+	<!-- 文件上传api -->
+	<dubbo:service interface="com.yougou.wfx.system.api.IFileUploadApi" version="1.0" ref="fileUploadApi" timeout="60000" protocol="hessian"/>
+	
+	<!-- 分销包api -->
+	<dubbo:service interface="com.yougou.wfx.commodity.api.background.IBagBackgroundApi" version="1.0" ref="bagBackgroundApiImpl" timeout="60000" protocol="dubbo"/>
+	<!-- 基础分类后台Api -->
+	<dubbo:service interface="com.yougou.wfx.commodity.api.background.ICommodityCatb2cBackgroundApi" version="1.0" ref="commodityCatb2cBackgroundApiImpl" timeout="60000" protocol="dubbo"/>
+	<!-- 基础分类前台Api -->
+	<dubbo:service interface="com.yougou.wfx.commodity.api.front.ICommodityCatb2cFrontApi" version="1.0" ref="commodityCatb2cFrontApiImpl" timeout="10000" protocol="dubbo"/>
+	<!-- 销售分类后台Api -->
+	<dubbo:service interface="com.yougou.wfx.cms.api.background.ICommoditySaleCatBackgroundApi" version="1.0" ref="commoditySaleCatBackgroundApiImpl" timeout="60000" protocol="dubbo"/>
+	<!-- 销售分类前台Api -->
+	<dubbo:service interface="com.yougou.wfx.cms.api.front.ICommoditySaleCatFrontApi" version="1.0" ref="commoditySaleCatFrontApiImpl" timeout="10000" protocol="dubbo"/>
+	<!-- 订单前台Api -->
+	<dubbo:service interface="com.yougou.wfx.order.api.background.IOrderBackgroundApi" version="1.0" ref="orderBackgroundApiImpl" timeout="60000" protocol="dubbo"/>
+	<!-- 订单后台Api -->
+	<dubbo:service interface="com.yougou.wfx.order.api.front.IOrderFrontApi" version="1.0" ref="orderFrontApiImpl" timeout="100000" protocol="dubbo"/>
+	<!-- 子订单Api -->
+	<dubbo:service interface="com.yougou.wfx.order.api.background.IOrderDetailBackgroundApi" version="1.0" ref="orderDetailBackgroundApiImpl" timeout="10000" protocol="dubbo"/>
+	
+	<!-- 品牌 backgroundApi -->
+	<dubbo:service interface="com.yougou.wfx.commodity.api.background.ICommodityBrandBackgroundApi" version="1.0" ref="commodityBrandBackgroundApiImpl" timeout="60000" protocol="dubbo"/>
+	<dubbo:service interface="com.yougou.wfx.commodity.api.front.ICommodityBrandFrontApi" version="1.0" ref="commodityBrandFrontApiImpl" timeout="10000" protocol="dubbo"/>
+	
+    <!-- 普通会员列表api -->
+	<!-- backgroundApi -->
+	<dubbo:service interface="com.yougou.wfx.member.api.background.IMemberProfileBackgroundApi" version="1.0" ref="memberProfileBackgroundApiImpl" timeout="60000" protocol="dubbo"/>
+	<!-- 会员操作日志api -->
+	<dubbo:service interface="com.yougou.wfx.member.api.background.IMemberActionLogBackgroundApi" version="1.0" ref="memberActionLogBackgroundApiImpl" timeout="60000" protocol="dubbo"/>
+	
+	<!-- 供货商api -->
+	<dubbo:service interface="com.yougou.wfx.user.api.background.ISupplierBackgroundApi" version="1.0" ref="supplierBackgroundApiImpl" timeout="60000" protocol="dubbo"/>
+
+	<!-- 用户后台Api -->
+	<dubbo:service interface="com.yougou.wfx.member.api.background.IMemberAccountBackgroundApi" version="1.0" ref="memberAccountBackgroundApiImpl" timeout="60000" protocol="dubbo"/> 
+	<!-- 用户前台Api -->
+	<dubbo:service interface="com.yougou.wfx.member.api.front.IMemberAccountFrontApi" version="1.0" ref="memberAccountFrontApiImpl" timeout="10000" protocol="dubbo"/> 
+	<!-- 收货地址前台Api -->
+	<dubbo:service interface="com.yougou.wfx.member.api.front.IMemberAddressFrontApi" version="1.0" ref="memberAddressFrontApiImpl" timeout="10000" protocol="dubbo"/> 
+	
+	<!-- 货品后台Api -->
+	
+	
+	
+	<!-- 分销商后台Api-->
+	<dubbo:service interface="com.yougou.wfx.seller.api.background.ISellerInfoBackgroundApi" version="1.0" ref="sellerInfoBackgroundApiImpl" timeout="60000" /> 
+	<dubbo:service interface="com.yougou.wfx.seller.api.background.ISellerAuthorizeBackgroundApi" version="1.0" ref="sellerAuthorizeBackgroundApiImpl" timeout="60000" /> 
+	<dubbo:service interface="com.yougou.wfx.seller.api.background.ISellerBankBackgroundApi" version="1.0" ref="sellerBankBackgroundApiImpl" timeout="60000" />
+	
+	<!-- 系统配置Api -->
+	<dubbo:service interface="com.yougou.wfx.basicset.api.background.ISysConfigBackgroundApi" version="1.0" ref="sysConfigBackgroundApiImpl" timeout="60000" protocol="dubbo"/>
+	<!-- 分销商前台Api -->
+	<dubbo:service interface="com.yougou.wfx.seller.api.front.ISellerInfoFrontApi" version="1.0" ref="sellerInfoFrontApiImpl" timeout="10000" /> 
+	<!-- 销售分类与基础分类关系Api -->
+	<dubbo:service interface="com.yougou.wfx.cms.api.background.ICommoditySaleCatRelaBackgroundApi" version="1.0" ref="commoditySaleCatRelaBackgroundApiImpl" timeout="60000" protocol="dubbo"/>
+	<!-- 地址 -->
+	<dubbo:service interface="com.yougou.wfx.aftersale.api.background.ISupplierAddressBackgroundApi" version="1.0" ref="supplierAddressBackgroundApiImpl" timeout="60000" protocol="dubbo"/>
+	<!-- 收藏 -->
+	
+	<!-- 售后服务-->
+	
+	<!-- 会员APi -->
+	<dubbo:service interface="com.yougou.wfx.member.api.front.IMemberActionLogFrontApi" version="1.0" ref="memberActionLogFrontApiImpl" timeout="10000" />
+	
+	<!-- 会员登录 -->
+	
+	<!-- 会员常用银行 -->
+
+	<!--  店铺后台 Api -->
+	<dubbo:service interface="com.yougou.wfx.shop.api.background.IShopBackgroundApi" version="1.0" ref="shopBackgroundApiImpl" timeout="60000" />
+	
+	
+	<!-- 财务管理 -->
+	<!-- 分销商账户信息服务管理 -->
+    <dubbo:service interface="com.yougou.wfx.finance.api.background.IFinSellerInfoBackgroundApi" version="1.0" ref="finSellerInfoBackgroundApiImpl" timeout="60000" protocol="dubbo"/>
+	<!-- 分销商账户明细信息服务管理 -->
+	<dubbo:service interface="com.yougou.wfx.finance.api.background.IFinSellerInfoDetailBackgroundApi" version="1.0" ref="finSellerInfoDetailBackgroundApiImpl" timeout="60000" protocol="dubbo"/>
+	<!-- 分销商账户提现申请管理 -->
+	<dubbo:service interface="com.yougou.wfx.finance.api.background.IFinSellerAccountWithdrawBackgroundApi" version="1.0" ref="finSellerAccountWithdrawBackgroundApiImpl" timeout="60000" protocol="dubbo"/>
+	<!-- 分销商账户信息前台API -->
+	<dubbo:service interface="com.yougou.wfx.finance.api.front.IFinSellerInfoFrontApi" version="1.0" ref="finSellerInfoFrontApiImpl" timeout="10000" protocol="dubbo"/>
+	<!-- 分销商账户交易明细信息前台API -->
+	<dubbo:service interface="com.yougou.wfx.finance.api.front.IFinSellerInfoDetailFrontApi" version="1.0" ref="finSellerInfoDetailFrontApiImpl" timeout="10000" protocol="dubbo"/>
+	<!-- 分销商账户提现前台API -->
+	<dubbo:service interface="com.yougou.wfx.finance.api.front.IFinSellerAccountWithdrawFrontApi" version="1.0" ref="finSellerAccountWithdrawFrontApiImpl" timeout="10000" protocol="dubbo"/>
+	
+	<!-- 佣金设置 -->
+	<dubbo:service interface="com.yougou.wfx.finance.api.front.ICommissionPercentFrontApi" version="1.0" ref="commissionPercentFrontApiImpl" timeout="10000" />
+	<dubbo:service interface="com.yougou.wfx.finance.api.background.ICommissionPercentBackgroundApi" version="1.0" ref="commissionPercentBackgroundApiImpl" timeout="60000" />
+	<dubbo:service interface="com.yougou.wfx.finance.api.background.ICommissionDetailBackgroundApi" version="1.0" ref="commissionDetailBackgroundApiImpl" timeout="60000" />
+	<dubbo:service interface="com.yougou.wfx.finance.api.front.ICommissionDetailFrontApi" version="1.0" ref="commissionDetailFrontApiImpl" timeout="10000" />
+	
+	<!-- 财务收款信息后台Api -->
+    <dubbo:service interface="com.yougou.wfx.finance.api.background.IFinAlreadyIncomeBackgroundApi" version="1.0" ref="finAlreadyIncomeBackgroundApiImpl" timeout="60000" protocol="dubbo"/>
+    <!-- 财务退款信息后台Api -->
+    <dubbo:service interface="com.yougou.wfx.finance.api.background.IFinReturnDebtBackgroundApi" version="1.0" ref="finReturnDebtBackgroundApiImpl" timeout="60000" protocol="dubbo" />
+	<dubbo:service interface="com.yougou.wfx.finance.api.background.IFinRefundBackgroundApi" version="1.0" ref="finRefundBackgroundApiImpl" timeout="60000" protocol="dubbo" />
+	<!-- 财务退款日志后台Api -->
+    <dubbo:service interface="com.yougou.wfx.finance.api.background.IFinReturnDebtLogBackgroundApi" version="1.0" ref="finReturnDebtLogBackgroundApiImpl" timeout="60000" protocol="dubbo" />
+
+	<!-- 模块操作日志 -->
+	<!-- backgroundApi -->
+	<dubbo:service interface="com.yougou.wfx.commodity.api.background.ISysLogBackgroundApi" version="1.0" ref="sysLogBackgroundApiImpl" timeout="60000" />
+	
+	<!-- 售后列表api -->
+	<!-- backgroundApi -->
+	<dubbo:service interface="com.yougou.wfx.aftersale.api.background.IOrderRefundBackgroundApi" version="1.0" ref="orderRefundBackgroundApiImpl" timeout="60000" />
+		<dubbo:service interface="com.yougou.wfx.aftersale.api.front.IAfterSaleFrontApi" version="1.0" ref="afterSaleFrontApiImpl" timeout="10000" />
+	
+	<!-- 轮播图后台Api -->
+	<dubbo:service interface="com.yougou.wfx.cms.api.background.ICarouselFigureBackgroundApi" version="1.0" ref="carouselFigureBackgroundApiImpl" timeout="60000" />
+	<!-- 品牌分类关系api -->
+	<dubbo:service interface="com.yougou.wfx.commodity.api.background.ICommodityBrandCatb2cBackgroundApi" version="1.0" ref="commodityBrandCatb2cBackgroundApiImpl" timeout="60000" protocol="dubbo"/>
+			
+	<!-- 商品库Api -->
+	<dubbo:service interface="com.yougou.wfx.commodity.api.background.ICommodityStyleBackgroundApi" version="1.0" ref="commodityStyleBackgroundApiImpl" timeout="60000" protocol="dubbo"/> 
+	<dubbo:service interface="com.yougou.wfx.commodity.api.front.ICommodityStyleFrontApi" version="1.0" ref="commodityStyleFrontApiImpl" timeout="10000" protocol="dubbo"/>
+	<!-- 货口api -->
+	<dubbo:service interface="com.yougou.wfx.commodity.api.background.ICommodityProductBackgroundApi" version="1.0" ref="commodityProductBackgroundApiImpl" timeout="60000" protocol="dubbo"/> 
+	
+	<!-- 订单/售后日志后台Api -->
+	<dubbo:service interface="com.yougou.wfx.order.api.background.IOrderLogBackgroundApi" version="1.0" ref="orderLogBackgroundApiImpl" timeout="60000" protocol="dubbo"/>
+	
+	<!-- OrderRemarkapi -->
+	<!-- backgroundApi -->
+	<dubbo:service interface="com.yougou.wfx.order.api.background.IOrderRemarkBackgroundApi" version="1.0" ref="orderRemarkBackgroundApiImpl" timeout="10000" />
+	<!-- frontApi -->
+	<dubbo:service interface="com.yougou.wfx.order.api.front.IOrderRemarkFrontApi" version="1.0" ref="orderRemarkFrontApiImpl" timeout="10000" />
+	
+	
+	<!-- SystemmgAreaapi -->
+	<dubbo:service interface="com.yougou.wfx.basicset.api.background.ISystemmgAreaBackgroundApi" version="1.0" ref="systemmgAreaBackgroundApiImpl" timeout="60000" protocol="dubbo"/>	
+	<!-- 店铺前台API -->
+	<dubbo:service interface="com.yougou.wfx.shop.api.front.IShopFrontApi" version="1.0" ref="shopFrontApiImpl" timeout="10000" protocol="dubbo"/>
+	
+	<!-- goodsMarketFrontApiImpl -->
+	<dubbo:service interface="com.yougou.wfx.cms.api.front.IGoodsMarketFrontApi" version="1.0" ref="goodsMarketFrontApiImpl" timeout="10000" protocol="dubbo"/>
+	<!-- 文章后台api -->
+	<dubbo:service interface="com.yougou.wfx.discover.api.background.IDiscoverArticleBackgroundApi" version="1.0" ref="discoverArticleBackgroundApiImpl" timeout="10000" protocol="dubbo"/>
+	<!-- 发现模块轮播图 -->
+	<dubbo:service interface="com.yougou.wfx.discover.api.background.IDiscoverCarouselFigureBackgroundApi" version="1.0" ref="discoverCarouselFigureBackgroundApiImpl" timeout="10000" protocol="dubbo"/>
+	
+	<!-- 发现文章 -->
+	<dubbo:service interface="com.yougou.wfx.discover.api.front.IDiscoverArticleFrontApi" version="1.0" ref="discoverArticleFrontApiImpl" timeout="10000" />
+	<dubbo:service interface="com.yougou.wfx.discover.api.front.IDiscoverCarouselFigureFrontApi" version="1.0" ref="discoverCarouselFigureFrontApiImpl" timeout="10000" />
+	<dubbo:service interface="com.yougou.wfx.discover.api.front.IDiscoverChannelFrontApi" version="1.0" ref="discoverChannelFrontApiImpl" timeout="10000" />
+	
+	
+	<dubbo:service interface="com.yougou.wfx.basicset.api.front.ISystemmgAreaFrontApi" version="1.0" ref="systemmgAreaFrontApiImpl" timeout="10000" protocol="dubbo"/>
+	
+	<dubbo:service interface="com.yougou.wfx.order.api.front.IShoppingcartFrontApi" version="1.0" ref="shoppingcartFrontApiImpl" timeout="10000" protocol="dubbo"/>
+	
+	<!-- ==============商品Api============== -->
+	<dubbo:reference id="commodityBaseApiService" interface="com.yougou.pc.api.ICommodityBaseApiService"
+		timeout="60000" version="1.2" protocol="dubbo" />
+		
+	<!-- 提供给第三方平台的dubbo接口 -->
+	<dubbo:service interface="com.yougou.wfx.outside.api.IOrderForOutSideApi" version="1.0" ref="orderForOutSideApiImpl" timeout="60000" protocol="dubbo"/>
+	<dubbo:service interface="com.yougou.wfx.outside.api.ILogisticsForOutSideApi" version="1.0" ref="logisticsForOutSideApiImpl" timeout="60000" protocol="dubbo"/>
+	
+	<dubbo:service interface="com.yougou.wfx.outside.api.ICommodityForOutSideApi" version="1.0" ref="commodityForOutSideApiImpl" timeout="60000" protocol="dubbo"/>
+	<!-- 支付 -->
+	<dubbo:reference id="payApi" interface="com.yougou.pay.api.IPayApi" version="1.0" check="false" protocol="dubbo"/>
+	<!-- app版本 -->
+	<dubbo:service interface="com.yougou.wfx.basicset.api.background.IAppVersionBackgroundApi" version="1.0" ref="appVersionBackgroundApiImpl" timeout="60000" protocol="dubbo"/>
+	<dubbo:service interface="com.yougou.wfx.basicset.api.front.IVersionManageFrontApi" version="1.0" ref="versionManageFrontApiImpl" timeout="10000" protocol="dubbo"/>
+
+	<!-- 频道Api -->
+	<dubbo:service interface="com.yougou.wfx.discover.api.background.IDiscoverChannelBackgroundApi" version="1.0" ref="discoverChannelBackgroundApiImpl" timeout="10000" />
+	
+	<dubbo:service interface="com.yougou.wfx.discover.api.background.IDiscoverLogBackgroundApi" version="1.0" ref="discoverLogBackgroundApiImpl" timeout="10000" />
+	<!-- 公告Api -->
+	<dubbo:service interface="com.yougou.wfx.notice.api.background.INoticeBackgroundApi" version="1.0" ref="noticeBackgroundApiImpl" timeout="10000" protocol="dubbo"/>
+	<dubbo:service interface="com.yougou.wfx.notice.api.front.INoticeFrontApi" version="1.0" ref="noticeFrontApiImpl" timeout="10000" protocol="dubbo"/>
+	<!-- 商品皮质 -->
+	<dubbo:service interface="com.yougou.wfx.commodity.api.background.ICommodityCortexBackgroundApi" version="1.0" ref="commodityCortexBackgroundApiImpl" timeout="10000" protocol="dubbo"/>
+	<dubbo:service interface="com.yougou.wfx.commodity.api.front.ICommodityCortexFrontApi" version="1.0" ref="commodityCortexFrontApiImpl" timeout="10000" protocol="dubbo"/>
+	<!-- 轮播图 -->
+	<dubbo:service interface="com.yougou.wfx.cms.api.front.ICarouselFigureFrontApi" version="1.0" ref="carouselFigureFrontApiImpl" timeout="10000" protocol="dubbo"/>
+	<!-- 访客 -->
+	<dubbo:service interface="com.yougou.wfx.visitor.api.front.IVisitorFrontApi" version="1.0" ref="visitorFrontApiImpl" timeout="10000" protocol="dubbo"/>
+	<!-- 同步库存 -->
+	<dubbo:reference id="thirdPartyCommodityService"      interface="com.yougou.outside.api.IThirdPartyCommodityService" timeout="300000" check="false" version="1.0.6" protocol="dubbo"/>
+	</beans>

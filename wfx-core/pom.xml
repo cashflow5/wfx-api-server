@@ -1,0 +1,495 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.yougou</groupId>
+  <artifactId>wfx-core</artifactId>
+  <packaging>war</packaging>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>wfx-core</name>
+  
+  <properties>
+  	<api.version>1.0.0-SNAPSHOT</api.version>
+  	<dubbo.version>2.5.3</dubbo.version>
+  	<spring.version>3.2.7.RELEASE</spring.version>
+	<mybatis.version>3.1.1</mybatis.version>
+	<mybatis.spring.version>1.1.1.1</mybatis.spring.version>
+	<ibatis3.spring.version>1.0.0</ibatis3.spring.version>
+	<tomcat-jdbc.version>7.0.54</tomcat-jdbc.version>
+	<jdbc.driver.version>5.1.34</jdbc.driver.version>
+	<logback.version>1.1.2</logback.version>
+	<commons-lang3.version>3.3.2</commons-lang3.version>
+	<jackson.version>2.4.0</jackson.version>
+	<gson.version>2.2.2</gson.version>
+	<aspectj.version>1.7.4</aspectj.version>
+	<slf4j.version>1.7.7</slf4j.version>
+	<commons-collections.version>3.2.1</commons-collections.version>
+	<junit.version>4.11</junit.version>
+	<assertj.version>1.6.1</assertj.version>
+	<spring.amqp.version>1.1.3.RELEASE</spring.amqp.version>
+	<!-- Plugin的属性定义 -->
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<joda-time.version>2.3</joda-time.version>
+	<zkclient.version>0.1</zkclient.version>
+  </properties>
+  
+  <dependencies>
+  	<dependency>
+		<groupId>com.yougou</groupId>
+		<artifactId>wfx-api</artifactId>
+		<version>${api.version}</version>
+	</dependency>
+	
+    <dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>4.11</version>
+		<scope>test</scope>
+	</dependency>
+	
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>3.0.1</version>
+		<scope>provided</scope>
+	</dependency>
+	
+	<dependency>
+		<groupId>c3p0</groupId>
+		<artifactId>c3p0</artifactId>
+		<version>0.9.1.2</version>
+	</dependency>
+	<dependency>
+		<groupId>com.yougou</groupId>
+		<artifactId>yougou-tools-common</artifactId>
+		<version>1.1.3</version>
+	</dependency>
+	<!-- 商品系统api 敏感词过滤 -->
+	<dependency>
+		<groupId>com.yougou.pc</groupId>
+		<artifactId>pc-api</artifactId>
+		<version>2.9.1</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>com.alibaba</groupId>
+		<artifactId>dubbo</artifactId>
+		<version>${dubbo.version}</version>
+		<exclusions>
+			<exclusion>
+				<artifactId>commons-logging</artifactId>
+				<groupId>commons-logging</groupId>
+			</exclusion>
+			<exclusion>
+				<artifactId>spring</artifactId>
+				<groupId>org.springframework</groupId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	<dependency>
+        <groupId>com.caucho</groupId>
+        <artifactId>hessian</artifactId>
+		<version>4.0.7</version>
+    </dependency>
+	
+	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis-spring</artifactId>
+		<version>${mybatis.spring.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis</artifactId>
+		<version>${mybatis.version}</version>
+	</dependency>
+	
+	<!-- connection pool -->
+	<dependency>
+		<groupId>org.apache.tomcat</groupId>
+		<artifactId>tomcat-jdbc</artifactId>
+		<version>${tomcat-jdbc.version}</version>
+		<scope>runtime</scope>
+	</dependency>
+
+	<!-- jdbc driver -->
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>${jdbc.driver.version}</version>
+		<scope>runtime</scope>
+	</dependency>
+
+	<!-- spring support begin -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-jdbc</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context-support</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-web</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+
+	<!-- spring-data -->
+	<dependency>
+		<groupId>org.springframework.data</groupId>
+		<artifactId>spring-data-redis</artifactId>
+		<version>1.0.2.RELEASE</version>
+		<exclusions>
+			<exclusion>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			<exclusion>
+				<artifactId>spring-context</artifactId>
+				<groupId>org.springframework</groupId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	
+	<dependency>
+		<groupId>net.sf.json-lib</groupId>
+		<artifactId>json-lib</artifactId>
+		<version>2.1</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>net.sf.ezmorph</groupId>
+		<artifactId>ezmorph</artifactId>
+		<version>1.0.6</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>commons-beanutils</groupId>
+		<artifactId>commons-beanutils</artifactId>
+		<version>1.8.3</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.codehaus.jackson</groupId>
+		<artifactId>jackson-mapper-asl</artifactId>
+		<version>1.9.9</version>
+	</dependency>
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId>
+		<version>${jackson.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.fasterxml.jackson.module</groupId>
+		<artifactId>jackson-module-jaxb-annotations</artifactId>
+		<version>${jackson.version}</version>
+	</dependency>
+
+	<dependency>
+		<groupId>com.google.code.gson</groupId>
+		<artifactId>gson</artifactId>
+		<version>${gson.version}</version>
+	</dependency>
+
+	<!-- LOGGING begin -->
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-api</artifactId>
+		<version>${slf4j.version}</version>
+	</dependency>
+
+	<!-- 代码直接调用log4j会被桥接到slf4j -->
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>log4j-over-slf4j</artifactId>
+		<version>${slf4j.version}</version>
+		<scope>runtime</scope>
+	</dependency>
+	<!-- 代码直接调用common-logging会被桥接到slf4j -->
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>jcl-over-slf4j</artifactId>
+		<version>${slf4j.version}</version>
+		<scope>runtime</scope>
+	</dependency>
+	<!-- 代码直接调用java.util.logging会被桥接到slf4j -->
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>jul-to-slf4j</artifactId>
+		<version>${slf4j.version}</version>
+		<scope>runtime</scope>
+	</dependency>
+
+	<dependency>
+		<groupId>com.googlecode.log4jdbc</groupId>
+		<artifactId>log4jdbc</artifactId>
+		<version>1.2</version>
+		<scope>runtime</scope>
+	</dependency>
+
+	<!-- GENERAL UTILS begin -->
+	<dependency>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>commons-lang3</artifactId>
+		<version>${commons-lang3.version}</version>
+	</dependency>
+	
+	<!-- spring aop -->
+	<dependency>
+		<groupId>org.aspectj</groupId>
+		<artifactId>aspectjrt</artifactId>
+		<version>${aspectj.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.aspectj</groupId>
+		<artifactId>aspectjweaver</artifactId>
+		<version>${aspectj.version}</version>
+		<scope>runtime</scope>
+	</dependency>
+	<dependency>
+		<groupId>cglib</groupId>
+		<artifactId>cglib-nodep</artifactId>
+		<version>2.2</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>commons-collections</groupId>
+		<artifactId>commons-collections</artifactId>
+		<version>${commons-collections.version}</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.assertj</groupId>
+		<artifactId>assertj-core</artifactId>
+		<version>${assertj.version}</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-test</artifactId>
+		<version>${spring.version}</version>
+		<scope>test</scope>
+	</dependency>
+	
+	<!-- joda time -->
+    <dependency>
+	  <groupId>joda-time</groupId>
+	  <artifactId>joda-time</artifactId>
+	  <version>2.7</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>com.google.zxing</groupId>
+		<artifactId>core</artifactId>
+		<version>2.3.0</version>
+	</dependency>
+	
+	<!-- spring-integration -->
+	<dependency>
+		<groupId>org.springframework.integration</groupId>
+		<artifactId>spring-integration-core</artifactId>
+		<version>3.0.6.RELEASE</version>
+		<exclusions>
+			<exclusion>
+				<artifactId>spring-aop</artifactId>
+				<groupId>org.springframework</groupId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.integration</groupId>
+		<artifactId>spring-integration-ftp</artifactId>
+		<version>3.0.6.RELEASE</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.integration</groupId>
+		<artifactId>spring-integration-file</artifactId>
+		<version>3.0.6.RELEASE</version>
+	</dependency>
+	<dependency>
+		<groupId>commons-fileupload</groupId>
+		<artifactId>commons-fileupload</artifactId>
+		<version>1.2.2</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>com.yougou</groupId>
+		<artifactId>yougou-tools-dao</artifactId>
+		<version>1.0.4</version>
+		<exclusions>
+			<exclusion>
+				<artifactId>yougou-tools-cache</artifactId>
+				<groupId>com.yougou</groupId>
+			</exclusion>
+			<exclusion>
+				<artifactId>spring-orm</artifactId>
+				<groupId>org.springframework</groupId>
+			</exclusion>
+			<exclusion>
+				<artifactId>commons-beanutils</artifactId>
+				<groupId>commons-beanutils</groupId>
+			</exclusion>
+			<exclusion>
+				<artifactId>mybatis</artifactId>
+				<groupId>org.mybatis</groupId>
+			</exclusion>
+			<exclusion>
+				<artifactId>mybatis-spring</artifactId>
+				<groupId>org.mybatis</groupId>
+			</exclusion>
+			<exclusion>
+				<artifactId>slf4j-api</artifactId>
+				<groupId>org.slf4j</groupId>
+			</exclusion>
+			<exclusion>
+				<artifactId>commons-lang</artifactId>
+				<groupId>commons-lang</groupId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+	
+	<dependency>
+		<groupId>com.github.sgroschupf</groupId>
+		<artifactId>zkclient</artifactId>
+		<version>${zkclient.version}</version>
+	</dependency>
+	
+	<!-- alibaba fastjson -->
+	<dependency>
+		<groupId>com.alibaba</groupId>
+		<artifactId>fastjson</artifactId>
+		<version>1.1.41</version>
+	</dependency>
+  	<dependency>
+		<groupId>com.google.guava</groupId>
+		<artifactId>guava</artifactId>
+		<version>17.0</version>
+	</dependency>
+	
+	<!-- Rabbit MQ -->
+	<dependency>
+		<groupId>org.springframework.amqp</groupId>
+		<artifactId>spring-amqp</artifactId>
+		<version>${spring.amqp.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.amqp</groupId>
+		<artifactId>spring-rabbit</artifactId>
+		<version>${spring.amqp.version}</version>
+	</dependency>
+	
+	<!-- oval 
+	<dependency>
+		<groupId>net.sf.oval</groupId>
+		<artifactId>oval</artifactId>
+		<version>1.84</version>
+	</dependency>-->
+	<dependency>
+	 <groupId>net.sf.oval</groupId>
+	 	<artifactId>oval</artifactId>
+	  	<version>1.85-wfx</version>
+	</dependency>
+	
+	<!-- 优购用户中心Api（含短信、邮件、物流等接口） -->
+	<dependency>
+		<groupId>com.yougou</groupId>
+		<artifactId>yougou-member-api</artifactId>
+		<version>2.0.9-SNAPSHOT</version>			
+	</dependency>
+	
+	<!-- 优购支付接口 -->
+	<dependency>
+		<groupId>com.yougou</groupId>
+		<artifactId>yougou-pay-api</artifactId>
+		<version>1.5.6-SNAPSHOT</version>
+	</dependency>
+</dependencies>
+  
+  <build>
+	<finalName>wfx-api-server</finalName>
+	<!-- 确保打包的程序包含xml等配置文件 -->
+	<resources>
+		<resource>
+			<directory>src/main/java</directory>
+			<includes>
+				<include>**/*Mapper.xml</include>
+			</includes>
+		</resource>
+		<resource>
+			<directory>src/main/resources</directory>
+			<includes>
+				<include>**/*.xml</include>
+				<include>**/*.properties</include>
+			</includes>
+		</resource>
+	</resources>
+		
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.1</version>
+			<configuration>
+				<source>1.6</source>
+				<target>1.6</target>
+				<encoding>UTF8</encoding>
+			</configuration>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<configuration>
+				<argLine>-Xmx512m -XX:PermSize=512m -XX:MaxPermSize=256m</argLine>
+				<testFailureIgnore>true</testFailureIgnore>
+				<additionalClasspathElements>
+					<additionalClasspathElement>
+						${basedir}/target/test-classes
+					</additionalClasspathElement>
+				</additionalClasspathElements>
+				<includes>
+					<include>**/*Test.java</include>
+				</includes>
+				<excludes>
+					<exclude>**/TestConstants.java</exclude>
+				</excludes>
+				<forkMode>once</forkMode>
+			</configuration>
+		</plugin>
+		
+		<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>8.1.0.RC5</version>
+				<configuration>
+					<!-- <scanIntervalSeconds>10</scanIntervalSeconds> -->
+						<!-- 注释掉scanIntervalSeconds 可以是实现热部署， -->
+					<contextXml>src/test/java/jetty-contexts.xml</contextXml>
+						<!-- jetty-contexts.xml用以加快项目启动速度 -->
+					<webApp>
+						<contextPath>/</contextPath>
+					</webApp>
+					<connectors>
+						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+							<port>8090</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>5.1.10</version>
+					</dependency>
+					<dependency>
+						<artifactId>netty</artifactId>
+						<groupId>org.jboss.netty</groupId>
+						<version>3.2.5.Final</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		
+	</plugins>
+  </build>
+</project>

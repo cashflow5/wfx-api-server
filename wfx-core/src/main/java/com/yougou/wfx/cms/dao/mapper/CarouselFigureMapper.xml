@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.cms.dao.CarouselFigureMapper">
+    <resultMap id="CmsCarouselFigure" type="com.yougou.wfx.cms.model.CarouselFigureEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="name" column="name" jdbcType="VARCHAR"/>
+    	<result property="linkUrl" column="link_url" jdbcType="VARCHAR"/>
+    	<result property="picUrl" column="pic_url" jdbcType="VARCHAR"/>
+    	<result property="sortNo" column="sort_no" jdbcType="INTEGER"/>
+    	<result property="status" column="status" jdbcType="TINYINT"/>
+    	<result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="deleteFlag" column="delete_flag" jdbcType="TINYINT"/>
+    	<result property="type" column="type" jdbcType="VARCHAR"/>
+    	<result property="redirectType" column="redirect_type" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,name,link_url,pic_url,sort_no,status,update_user,update_time,create_time,delete_flag,type,redirect_type
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="name != null and name != ''">
+        	and name = #{name,jdbcType=VARCHAR}
+	        </if>
+	        <if test="type != null and type != ''">
+        	and type = #{type,jdbcType=VARCHAR}
+	        </if>
+	        <if test="redirectType != null and redirectType != ''">
+        	and redirect_type = #{redirectType,jdbcType=VARCHAR}
+	        </if>
+			<if test="linkUrl != null and linkUrl != ''">
+        	and link_url = #{linkUrl,jdbcType=VARCHAR}
+	        </if>
+			<if test="picUrl != null and picUrl != ''">
+        	and pic_url = #{picUrl,jdbcType=VARCHAR}
+	        </if>
+			<if test="sortNo != null and sortNo !=0">
+        	and sort_no = #{sortNo,jdbcType=INTEGER}
+	        </if>
+			<if test="status != null and status !=0">
+        	and status = #{status,jdbcType=TINYINT}
+	        </if>
+			<if test="updateUser != null and updateUser != ''">
+        	and update_user = #{updateUser,jdbcType=VARCHAR}
+	        </if>
+			<if test="updateTime != null">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="createTime != null">
+        	and create_time = #{createTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="deleteFlag != null and deleteFlag !=0">
+        	and delete_flag = #{deleteFlag,jdbcType=TINYINT}
+	        </if>
+    </sql>
+    
+    <sql id="set">
+			
+			<if test="name != null and name != ''">
+        	name = #{name,jdbcType=VARCHAR},
+	        </if>
+	        <if test="type != null and type != ''">
+        	type = #{type,jdbcType=VARCHAR},
+	        </if>
+	        <if test="redirectType != null">
+        	redirect_type = #{redirectType,jdbcType=VARCHAR},
+	        </if>
+			<if test="linkUrl != null and linkUrl != '' ">
+        	link_url = #{linkUrl,jdbcType=VARCHAR},
+	        </if>
+			<if test="picUrl != null and picUrl != ''">
+        	pic_url = #{picUrl,jdbcType=VARCHAR},
+	        </if>
+			<if test="sortNo != null and sortNo >0 ">
+        	sort_no = #{sortNo,jdbcType=INTEGER},
+	        </if>
+			<if test="status != null and status >0 ">
+        	status = #{status,jdbcType=TINYINT},
+	        </if>
+			<if test="updateUser != null and updateUser != '' ">
+        	update_user = #{updateUser,jdbcType=VARCHAR},
+	        </if>
+			<if test="updateTime != null ">
+        	update_time =  #{updateTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="createTime != null ">
+        	create_time =  #{createTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="deleteFlag != null and deleteFlag >0 ">
+        	delete_flag = #{deleteFlag,jdbcType=TINYINT}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="CmsCarouselFigure" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_cms_carousel_figure
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.cms.model.CarouselFigureEntity" resultMap="CmsCarouselFigure">
+        select <include refid="Base_Column_List"/> from tbl_wfx_cms_carousel_figure where delete_flag = 2
+        <include refid="where" />
+        order by sort_no desc
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.cms.model.CarouselFigureEntity" resultType="int">
+        select count(1) from tbl_wfx_cms_carousel_figure where delete_flag = 2
+        <include refid="where" />
+    </select>
+    
+     <select id="findByPage"  resultMap="CmsCarouselFigure">
+        select <include refid="Base_Column_List"/> from tbl_wfx_cms_carousel_figure where 1=1 
+        <include refid="where" />
+         order by sort_no desc
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.cms.model.CarouselFigureEntity">
+        insert into tbl_wfx_cms_carousel_figure (<include refid="Base_Column_List" />)
+        values (
+         #{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR}, #{linkUrl,jdbcType=VARCHAR},#{picUrl,jdbcType=VARCHAR},#{sortNo,jdbcType=TINYINT},#{status,jdbcType=TINYINT},#{updateUser,jdbcType=VARCHAR},#{updateTime,jdbcType=TIMESTAMP},#{createTime,jdbcType=TIMESTAMP},#{deleteFlag,jdbcType=TINYINT},#{type,jdbcType=VARCHAR},#{redirectType,jdbcType=VARCHAR}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_cms_carousel_figure
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.cms.model.CarouselFigureEntity" >
+        update tbl_wfx_cms_carousel_figure
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <resultMap type="java.util.HashMap" id="limitInfoMap">
+    	<result property="maxSortNo" column="maxSortNo" jdbcType="INTEGER"/>
+    	<result property="counts" column="counts" jdbcType="INTEGER"/>
+    </resultMap>
+    
+     <select id="getLimitInfo"  resultMap="limitInfoMap" parameterType="java.lang.String">
+        select max(sort_no) maxSortNo, count(*) counts from tbl_wfx_cms_carousel_figure where delete_flag = 2   and type= #{type,jdbcType=VARCHAR}
+    </select>
+</mapper>

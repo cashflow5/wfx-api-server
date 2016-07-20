@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.order.dao.OrderLogMapper">
+    <resultMap id="OrderLog" type="com.yougou.wfx.order.model.OrderLogEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="orderNo" column="order_no" jdbcType="VARCHAR"/>
+    	<result property="orderDetailNo" column="order_detail_no" jdbcType="VARCHAR"/>
+    	<result property="rejectedNo" column="rejected_no" jdbcType="VARCHAR"/>
+    	<result property="optUser" column="opt_user" jdbcType="VARCHAR"/>
+    	<result property="optType" column="opt_type" jdbcType="INTEGER"/>
+    	<result property="optBelong" column="opt_belong" jdbcType="TINYINT"/>
+    	<result property="logInfo" column="log_info" jdbcType="VARCHAR"/>
+    	<result property="type" column="type" jdbcType="TINYINT"/>
+    	<result property="logType" column="log_type" jdbcType="TINYINT"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="optResult" column="opt_result" jdbcType="TINYINT"/>
+    	<result property="showType" column="show_type" jdbcType="TINYINT"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,order_no,order_detail_no,rejected_no,opt_user,opt_type,opt_belong,log_info,type,log_type,update_time,create_time,opt_result,show_type
+    </sql>
+    
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="orderNo != null and orderNo != ''">
+        	and order_no = #{orderNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="orderDetailNo != null and orderDetailNo != ''">
+        	and order_detail_no = #{orderDetailNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="rejectedNo != null and rejectedNo != ''">
+        	and rejected_no = #{rejectedNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="optUser != null and optUser != ''">
+        	and opt_user = #{optUser,jdbcType=VARCHAR}
+	        </if>
+			<if test="optType != null and optType != 0">
+        	and opt_type = #{optType,jdbcType=VARCHAR}
+	        </if>
+			<if test="optBelong != null and optBelong != 0">
+        	and opt_belong = #{optBelong,jdbcType=TINYINT}
+	        </if>
+			<if test="logInfo != null">
+        	and log_info = #{logInfo,jdbcType=VARCHAR}
+	        </if>
+			<if test="type != null and type != 0">
+        	and type = #{type,jdbcType=TINYINT}
+	        </if>
+			<if test="logType != null and logType != 0">
+        	and log_type = #{logType,jdbcType=TINYINT}
+	        </if>
+			<if test="updateTime != null">
+        	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="createTime != null">
+        	and create_time = #{createTime,jdbcType=TIMESTAMP}
+	        </if>
+			<if test="optResult != null and optResult != 0">
+        	and opt_result = #{optResult,jdbcType=TINYINT}
+	        </if>
+			<if test="showType != null and showType != 0">
+        	and show_type = #{showType,jdbcType=TINYINT}
+	        </if>
+    </sql>
+    
+    <sql id="set">
+			
+			<if test="orderNo != null">
+        	order_no = #{orderNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="orderDetailNo != null">
+        	order_detail_no = #{orderDetailNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="rejectedNo != null">
+        	rejected_no = #{rejectedNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="optUser != null">
+        	opt_user = #{optUser,jdbcType=VARCHAR},
+	        </if>
+			<if test="optType != null">
+        	opt_type = #{optType,jdbcType=VARCHAR},
+	        </if>
+			<if test="optBelong != null and optBelong != 0">
+        	opt_belong = #{optBelong,jdbcType=TINYINT},
+	        </if>
+			<if test="logInfo != null">
+        	log_info = #{logInfo,jdbcType=VARCHAR},
+	        </if>
+			<if test="type != null and type != 0">
+        	type = #{type,jdbcType=TINYINT},
+	        </if>
+			<if test="logType != null and logType != 0">
+        	log_type = #{logType,jdbcType=TINYINT},
+	        </if>
+			<if test="updateTime != null">
+        	update_time = #{updateTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="createTime != null">
+        	create_time = #{createTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="optResult != null and optResult != 0">
+        	opt_result = #{optResult,jdbcType=TINYINT},
+	        </if>
+			<if test="showType != null and showType != 0">
+        	show_type = #{showType,jdbcType=TINYINT}
+	        </if>
+    </sql>
+    
+    <select id="getById" resultMap="OrderLog" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_order_log
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.order.model.OrderLogEntity" resultMap="OrderLog">
+        select <include refid="Base_Column_List"/> from tbl_wfx_order_log where 1=1 
+        <include refid="where" />
+        order by create_time desc
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.order.model.OrderLogEntity" resultType="int">
+        select count(1) from tbl_wfx_order_log where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="queryList" parameterType="com.yougou.wfx.order.model.OrderLogEntity" resultMap="OrderLog">
+        select <include refid="Base_Column_List"/> from tbl_wfx_order_log where 1=1 
+        <include refid="where" />
+         order by create_time desc
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.order.model.OrderLogEntity">
+        insert into tbl_wfx_order_log (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=VARCHAR},#{orderNo,jdbcType=VARCHAR},#{orderDetailNo,jdbcType=VARCHAR},#{rejectedNo,jdbcType=VARCHAR},#{optUser,jdbcType=VARCHAR},#{optType,jdbcType=VARCHAR},#{optBelong,jdbcType=TINYINT},#{logInfo,jdbcType=VARCHAR},#{type,jdbcType=TINYINT},#{logType,jdbcType=TINYINT},#{updateTime,jdbcType=TIMESTAMP},#{createTime,jdbcType=TIMESTAMP},#{optResult,jdbcType=TINYINT},#{showType,jdbcType=TINYINT}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_order_log
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.order.model.OrderLogEntity" >
+        update tbl_wfx_order_log
+        <set>
+      	<include refid="set" />
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

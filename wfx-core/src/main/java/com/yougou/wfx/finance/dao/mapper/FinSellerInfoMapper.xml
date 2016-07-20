@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.finance.dao.FinSellerInfoMapper">
+    <resultMap id="FinSellerInfo" type="com.yougou.wfx.finance.model.FinSellerInfoEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="shopName" column="shop_name" jdbcType="VARCHAR"/>
+    	<result property="shopCode" column="shop_code" jdbcType="VARCHAR"/>
+    	<result property="sellerAccount" column="seller_account" jdbcType="VARCHAR"/>
+    	<result property="sellerName" column="seller_name" jdbcType="VARCHAR"/>
+    	<result property="registerTime" column="register_time" jdbcType="TIMESTAMP"/>
+    	<result property="latelyTransactionTime" column="lately_transaction_time" jdbcType="TIMESTAMP"/>
+    	<result property="accountBalance" column="account_balance" jdbcType="DOUBLE"/>
+    	<result property="cashedTotalAmount" column="cashed_total_amount" jdbcType="DOUBLE"/>
+    	<result property="cashingTotalAmount" column="cashing_total_amount" jdbcType="DOUBLE"/>
+    	<result property="commissionTotalAmount" column="commission_total_amount" jdbcType="DOUBLE"/>
+    	<result property="commissionNextTotalAmount" column="commission_next_total_amount" jdbcType="DOUBLE"/>
+    	<result property="commissionAllTotalAmount" column="commission_all_total_amount" jdbcType="DOUBLE"/>
+    	<result property="lockVersion" column="lock_version" jdbcType="INTEGER"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,shop_name,shop_code,seller_account,seller_name,register_time,lately_transaction_time,account_balance,cashed_total_amount,
+		cashing_total_amount,commission_total_amount,commission_next_total_amount,commission_all_total_amount,lock_version
+    </sql>
+    
+    <sql id="where">
+		<if test="id != null and id != ''">
+       	and id = #{id,jdbcType=VARCHAR}
+        </if>
+		<if test="shopName != null and shopName != ''">
+       	and shop_name LIKE "%"#{shopName,jdbcType=VARCHAR}"%"
+        </if>
+        <if test="shopCode != null and shopCode != ''">
+       	and shop_code = #{shopCode,jdbcType=VARCHAR}
+        </if>
+		<if test="sellerAccount != null and sellerAccount != '' ">
+       	and seller_account LIKE CONCAT('%',#{sellerAccount,jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="sellerName != null and sellerName != '' ">
+       	and seller_name LIKE CONCAT('%',#{sellerName,jdbcType=VARCHAR},'%') 
+        </if>
+        <if test="amountCheckFlag != null and amountCheckFlag =='TRUE'">
+        and account_balance >0 
+        </if>
+    </sql>
+    
+    <sql id="set">
+		<if test="shopName != null and shopName != '' ">
+       	shop_name = #{shopName,jdbcType=VARCHAR},
+        </if>
+        <if test="shopCode != null and shopCode != ''">
+       	shop_code = #{shopCode,jdbcType=VARCHAR},
+        </if>
+		<if test="sellerAccount != null and sellerAccount != '' ">
+       	seller_account = #{sellerAccount,jdbcType=VARCHAR},
+        </if>
+        <if test="sellerName != null and sellerName != '' ">
+       	seller_name = #{sellerName,jdbcType=VARCHAR},
+        </if>
+		<if test="registerTime != null">
+       	register_time = #{registerTime,jdbcType=TIMESTAMP},
+        </if>
+		<if test="latelyTransactionTime != null">
+       	lately_transaction_time = #{latelyTransactionTime,jdbcType=TIMESTAMP},
+        </if>
+		<if test="accountBalance != null">
+       	account_balance = #{accountBalance,jdbcType=DOUBLE}
+        </if>
+    </sql>
+    
+    <sql id="amountSet">
+       <if test="latelyTransactionTime != null">
+           lately_transaction_time =  #{latelyTransactionTime},
+       </if>
+       <if test="cashedTotalAmount !=null ">
+           cashed_total_amount = #{cashedTotalAmount,jdbcType=DOUBLE},
+       </if>
+       <if test="cashingTotalAmount != null ">
+           cashing_total_amount = #{cashingTotalAmount,jdbcType=DOUBLE},
+       </if>
+       <if test="commissionTotalAmount != null ">
+           commission_total_amount = #{commissionTotalAmount,jdbcType=DOUBLE},
+       </if>
+       <if test="commissionNextTotalAmount != null ">
+           commission_next_total_amount = #{commissionNextTotalAmount,jdbcType=DOUBLE},
+       </if>
+       <if test="commissionAllTotalAmount != null ">
+           commission_all_total_amount = #{commissionAllTotalAmount,jdbcType=DOUBLE},
+       </if>
+       <if test="accountBalance != null">
+    	   account_balance = #{accountBalance,jdbcType=DOUBLE},
+       </if>
+       <if test="lockVersion != null ">
+           lock_version = lock_version+1
+       </if>
+    </sql>
+    
+    <select id="getById" resultMap="FinSellerInfo" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from tbl_wfx_fin_seller_info
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.finance.model.FinSellerInfoEntity" resultMap="FinSellerInfo">
+        select * from tbl_wfx_fin_seller_info where 1=1 
+        <include refid="where" />
+        ORDER BY register_time DESC  
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.finance.model.FinSellerInfoEntity" resultType="int">
+        select count(1) from tbl_wfx_fin_seller_info where 1=1 
+        <include refid="where" />
+    </select>
+   
+    <insert id="insert" parameterType="com.yougou.wfx.finance.model.FinSellerInfoEntity">
+        insert into tbl_wfx_fin_seller_info (id,shop_name,shop_code,seller_account,seller_name,register_time,lately_transaction_time,account_balance)
+        values (
+        #{id,jdbcType=VARCHAR},#{shopName,jdbcType=VARCHAR},#{shopCode,jdbcType=VARCHAR},#{sellerAccount,jdbcType=VARCHAR},#{sellerName,jdbcType=VARCHAR},#{registerTime,jdbcType=TIMESTAMP},#{latelyTransactionTime,jdbcType=TIMESTAMP},#{accountBalance,jdbcType=DOUBLE}
+        )
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_fin_seller_info
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.finance.model.FinSellerInfoEntity" >
+        update tbl_wfx_fin_seller_info
+        <trim prefix="SET" suffixOverrides=",">
+      		<include refid="set" />
+        </trim>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <update id="updateSeller" parameterType="com.yougou.wfx.finance.model.FinSellerInfoEntity">
+    	update tbl_wfx_fin_seller_info
+        <trim prefix="SET" suffixOverrides=",">
+      		<if test="shopName != null and shopName != '' ">
+	       	shop_name = #{shopName,jdbcType=VARCHAR},
+	        </if>
+	        <if test="shopCode != null and shopCode != '' ">
+	       	shop_code = #{shopCode,jdbcType=VARCHAR},
+	        </if>
+			<if test="sellerAccount != null and sellerAccount != '' ">
+	       	seller_account = #{sellerAccount,jdbcType=VARCHAR},
+	        </if>
+	        <if test="sellerName != null and sellerName != '' ">
+	       	seller_name = #{sellerName,jdbcType=VARCHAR}
+	        </if>
+        </trim>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    
+    <update id="changeSellerAmount" parameterType="com.yougou.wfx.finance.model.FinSellerInfoEntity" >
+        update tbl_wfx_fin_seller_info
+        <trim prefix="SET" suffixOverrides=",">
+      		<include refid="amountSet" />
+        </trim>
+        where id = #{id,jdbcType=VARCHAR}
+        and lock_version = #{lockVersion}
+    </update>
+    
+    <select id="querySubSellers" useCache="true" resultMap="FinSellerInfo" parameterType="java.util.List">
+     select * from tbl_wfx_fin_seller_info where 1=1 
+     and id in(   
+      <foreach collection="list" item="item" index="index" separator="," >
+	       #{item}
+	  </foreach>)
+    </select>
+    
+    <!-- 根据条件查询所有分销商的资金汇总（账户余额，佣金收益，已提现金额，提现中金额） -->
+    <select id="queryAccountSummary" parameterType="com.yougou.wfx.finance.model.FinSellerInfoEntity" resultType="java.util.Map">
+    	select 
+    		SUM(IFNULL(account_balance, 0)) accountBalance, 
+    		SUM(IFNULL(cashed_total_amount, 0)) cashedTotalAmount, 
+    		SUM(IFNULL(cashing_total_amount, 0)) cashingTotalAmount, 
+    		SUM(IFNULL(commission_all_total_amount, 0)) commissionAllTotalAmount
+   		from tbl_wfx_fin_seller_info
+   		where 1 = 1
+   		<include refid="where" />
+    </select>
+    
+</mapper>

@@ -1,0 +1,874 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yougou.wfx.aftersale.dao.OrderRefundMapper">
+    <resultMap id="OrderRefund" type="com.yougou.wfx.aftersale.model.OrderRefundEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="refundNo" column="refund_no" jdbcType="VARCHAR"/>
+    	<result property="orderId" column="order_id" jdbcType="VARCHAR"/>
+    	<result property="orderDetailId" column="order_detail_id" jdbcType="VARCHAR"/>
+    	<result property="prodId" column="prod_id" jdbcType="VARCHAR"/>
+    	<result property="prodName" column="prod_name" jdbcType="VARCHAR"/>
+    	<result property="buyerLoginName" column="buyer_login_name" jdbcType="VARCHAR"/>
+    	<result property="sellerId" column="seller_id" jdbcType="VARCHAR"/>
+    	<result property="shopId" column="shop_id" jdbcType="VARCHAR"/>
+    	<result property="shopName" column="shop_name" jdbcType="VARCHAR"/>
+    	<result property="shopCode" column="shop_code" jdbcType="VARCHAR"/>
+    	<result property="totalFee" column="total_fee" jdbcType="DECIMAL"/>
+    	<result property="refundFee" column="refund_fee" jdbcType="DECIMAL"/>
+    	<result property="payment" column="payment" jdbcType="DECIMAL"/>
+    	<result property="status" column="status" jdbcType="VARCHAR"/>
+    	<result property="goodStatus" column="good_status" jdbcType="VARCHAR"/>
+    	<result property="companyName" column="company_name" jdbcType="VARCHAR"/>
+    	<result property="sid" column="sid" jdbcType="VARCHAR"/>
+    	<result property="reason" column="reason" jdbcType="VARCHAR"/>
+    	<result property="description" column="description" jdbcType="VARCHAR"/>
+    	<result property="hasGoodReturn" column="has_good_return" jdbcType="VARCHAR"/>
+    	<result property="orderStatus" column="order_status" jdbcType="VARCHAR"/>
+    	<result property="syncStatus" column="sync_status" jdbcType="VARCHAR"/>
+    	<result property="syncRemark" column="sync_remark" jdbcType="VARCHAR"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    	<result property="existTimeout" column="exist_timeout" jdbcType="VARCHAR"/>
+    	<result property="timeout" column="timeout" jdbcType="TIMESTAMP"/>
+    	<result property="refundPhase" column="refund_phase" jdbcType="VARCHAR"/>
+    	<result property="refundVersion" column="refund_version" jdbcType="VARCHAR"/>
+    	<result property="attribute" column="attribute" jdbcType="VARCHAR"/>
+    	<result property="refundType" column="refund_type" jdbcType="VARCHAR"/>
+    	<result property="proNum" column="pro_num" jdbcType="INTEGER"/>
+    	<result property="supplierName" column="supplier_name" jdbcType="VARCHAR"/>
+    	<result property="payTime" column="pay_time" jdbcType="TIMESTAMP"/>
+    	<result property="isAfterReceived" column="is_after_received" jdbcType="VARCHAR"/>
+    	<result property="sizeNo" column="size_no" jdbcType="VARCHAR"/>
+    	<result property="picSmall" column="pic_small" jdbcType="VARCHAR"/>
+    	<result property="commodityName" column="commodity_name" jdbcType="VARCHAR"/>
+    	<result property="specName" column="spec_name" jdbcType="VARCHAR"/>
+    	<result property="wfxCommodityNo" column="Wfx_commodity_no" jdbcType="VARCHAR"/>
+    	<result property="commissionLevel1" column="commission_level1" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel1Percent" column="commission_level1_percent" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel2" column="commission_level2" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel2Percent" column="commission_level2_percent" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel3" column="commission_level3" jdbcType="DECIMAL"/>
+    	<result property="commissionLevel3Percent" column="commission_level3_percent" jdbcType="DECIMAL"/>
+    	<result property="buyNum" column="buy_num" jdbcType="INTEGER"/>
+    	<result property="wfxPrice" column="wfx_price" jdbcType="DECIMAL"/>
+    	<result property="thirdPartyCode" column="third_party_code" jdbcType="VARCHAR"/>
+    	<result property="wfxOrderNo" column="wfx_order_no" jdbcType="VARCHAR"/>
+    	<result property="denyReason" column="deny_reason" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <resultMap id="BaseOrderRefund" type="com.yougou.wfx.aftersale.model.OrderRefundEntity">
+    	<result property="id" column="id" jdbcType="VARCHAR"/>
+    	<result property="refundNo" column="refund_no" jdbcType="VARCHAR"/>
+    	<result property="orderId" column="order_id" jdbcType="VARCHAR"/>
+    	<result property="orderDetailId" column="order_detail_id" jdbcType="VARCHAR"/>
+    	<result property="prodId" column="prod_id" jdbcType="VARCHAR"/>
+    	<result property="prodName" column="prod_name" jdbcType="VARCHAR"/>
+    	<result property="buyerLoginName" column="buyer_login_name" jdbcType="VARCHAR"/>
+    	<result property="sellerId" column="seller_id" jdbcType="VARCHAR"/>
+    	<result property="shopId" column="shop_id" jdbcType="VARCHAR"/>
+    	<result property="shopName" column="shop_name" jdbcType="VARCHAR"/>
+    	<result property="shopCode" column="shop_code" jdbcType="VARCHAR"/>
+    	<result property="totalFee" column="total_fee" jdbcType="DECIMAL"/>
+    	<result property="refundFee" column="refund_fee" jdbcType="DECIMAL"/>
+    	<result property="payment" column="payment" jdbcType="DECIMAL"/>
+    	<result property="status" column="status" jdbcType="VARCHAR"/>
+    	<result property="goodStatus" column="good_status" jdbcType="VARCHAR"/>
+    	<result property="companyName" column="company_name" jdbcType="VARCHAR"/>
+    	<result property="sid" column="sid" jdbcType="VARCHAR"/>
+    	<result property="reason" column="reason" jdbcType="VARCHAR"/>
+    	<result property="description" column="description" jdbcType="VARCHAR"/>
+    	<result property="hasGoodReturn" column="has_good_return" jdbcType="VARCHAR"/>
+    	<result property="orderStatus" column="order_status" jdbcType="VARCHAR"/>
+    	<result property="syncStatus" column="sync_status" jdbcType="VARCHAR"/>
+    	<result property="syncRemark" column="sync_remark" jdbcType="VARCHAR"/>
+    	<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    	<result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    	<result property="existTimeout" column="exist_timeout" jdbcType="VARCHAR"/>
+    	<result property="timeout" column="timeout" jdbcType="TIMESTAMP"/>
+    	<result property="refundPhase" column="refund_phase" jdbcType="VARCHAR"/>
+    	<result property="refundVersion" column="refund_version" jdbcType="VARCHAR"/>
+    	<result property="attribute" column="attribute" jdbcType="VARCHAR"/>
+    	<result property="refundType" column="refund_type" jdbcType="VARCHAR"/>
+    	<result property="proNum" column="pro_num" jdbcType="INTEGER"/>
+    	<result property="supplierName" column="supplier_name" jdbcType="VARCHAR"/>
+    	<result property="payTime" column="pay_time" jdbcType="TIMESTAMP"/>
+    	<result property="isAfterReceived" column="is_after_received" jdbcType="VARCHAR"/>
+    	<result property="denyReason" column="deny_reason" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <resultMap id="returnEntity" type="com.yougou.wfx.aftersale.dto.RefundSatistics">
+    	<result property="orderDetailId" column="order_detail_id" jdbcType="VARCHAR"/>
+    	<result property="returnNum" column="returnNum" jdbcType="INTEGER"/>
+    	<result property="returnFee" column="returnFee" jdbcType="DECIMAL"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+		id,refund_no,order_id,order_detail_id,prod_id,prod_name,buyer_login_name,seller_id,shop_id,shop_name,shop_code,total_fee,refund_fee,payment,status,good_status,company_name,sid,reason,description,has_good_return,order_status,sync_status,sync_remark,create_time,update_time,exist_timeout,timeout,refund_phase,refund_version,attribute,refund_type,pro_num,supplier_name,pay_time,is_after_received
+    </sql>
+    <sql id="Third_Column_List" >
+		r.id,r.refund_no,r.order_id,r.order_detail_id,r.prod_id,r.prod_name,r.buyer_login_name,r.seller_id,r.shop_id,r.shop_name,r.shop_code,r.total_fee,r.refund_fee,r.payment,r.status,r.good_status,r.company_name,r.sid,r.reason,r.description,r.has_good_return,r.order_status,r.sync_status,r.sync_remark,r.create_time,r.update_time,r.exist_timeout,r.timeout,r.refund_phase,r.refund_version,r.attribute,r.refund_type,r.pro_num,r.supplier_name,r.pay_time,r.is_after_received
+    </sql>
+    <sql id ="CZ_Column_List">
+    			r.id,
+		r.refund_no,
+		r.order_detail_id,
+		r.buyer_login_name,
+		r.refund_fee,
+		r.payment,
+		r.`STATUS`,
+		r.reason,
+		r.description,
+		r.has_good_return,
+		r.create_time,
+		r.refund_type,
+		r.pro_num,
+		r.supplier_name,
+		r.pay_time,
+		r.is_after_received,
+		r.company_name,
+		r.sid,
+		r.deny_reason,
+		o.id as order_id,
+		o.wfx_order_no,
+		o.`status` AS order_status,
+		o.shop_id,
+		o.shop_name,
+		o.shop_code,
+		o.total_fee,
+		d.commission_level1,
+		d.commission_level1_percent,
+		d.commission_level2,
+		d.commission_level2_percent,
+		d.commission_level3,
+		d.commission_level3_percent,
+		d.num AS buy_num,
+		d.prod_spec AS attribute,
+		p.size_no,
+		p.third_party_code,
+		s.pic_small,
+		s.commodity_name,
+		s.spec_name,
+		s.Wfx_commodity_no,
+		s.wfx_price
+    </sql>
+    <sql id="where">
+			<if test="id != null and id != ''">
+        	and r.id = #{id,jdbcType=VARCHAR}
+	        </if>
+			<if test="refundNo != null and refundNo != ''">
+        	and r.refund_no = #{refundNo,jdbcType=VARCHAR}
+	        </if>
+			<if test="orderId != null and orderId != ''">
+        	and r.order_id = #{orderId,jdbcType=VARCHAR}
+	        </if>
+			<if test="orderDetailId != null and orderDetailId != ''">
+        	and r.order_detail_id = #{orderDetailId,jdbcType=VARCHAR}
+	        </if>
+			<if test="status != null and status != ''">
+        	and r.status = #{status,jdbcType=VARCHAR}
+	        </if>
+			<if test="shopName != null and shopName != ''">
+        	and r.shop_name = #{shopName,jdbcType=VARCHAR}
+	        </if>
+	        <if test="supplierName != null and supplierName != ''">
+        	and r.supplier_name like '${supplierName}%' 
+	        </if>
+			<if test="refundType != null and refundType != ''">
+        	and r.refund_type = #{refundType,jdbcType=VARCHAR}
+	        </if>
+			<if test="payTimeStart != null and payTimeStart != ''">
+        	and r.pay_time <![CDATA[>=]]> #{payTimeStart,jdbcType=VARCHAR}
+	        </if>
+	        <if test="payTimeEnd != null and payTimeEnd != ''">
+        	and r.pay_time  <![CDATA[<=]]> #{payTimeEnd,jdbcType=VARCHAR}
+	        </if>
+	        <if test="createTimeStart != null and createTimeStart != ''">
+        	and r.create_time <![CDATA[>=]]> #{createTimeStart,jdbcType=VARCHAR}
+	        </if>
+	        <if test="createTimeEnd != null and createTimeEnd != ''">
+        	and r.create_time <![CDATA[<=]]> #{createTimeEnd,jdbcType=VARCHAR}
+	        </if>
+			<if test="isAfterReceived != null and isAfterReceived != ''">
+        	and r.is_after_received = #{isAfterReceived,jdbcType=VARCHAR}
+	        </if>
+	        
+	       <if test="orderStatus != null and orderStatus != ''">
+        	and o.status = #{orderStatus,jdbcType=VARCHAR}
+	        </if>
+	         <if test="wfxOrderNo != null and wfxOrderNo != ''">
+        	and o.wfx_order_no = #{wfxOrderNo,jdbcType=VARCHAR}
+	        </if>
+    </sql>
+    
+    <sql id="baseWhere">
+		<if test="id != null and id != ''">
+       	and id = #{id,jdbcType=VARCHAR}
+        </if>
+		<if test="refundNo != null and refundNo != ''">
+       	and refund_no = #{refundNo,jdbcType=VARCHAR}
+        </if>
+		<if test="orderId != null and orderId != ''">
+       	and order_id = #{orderId,jdbcType=VARCHAR}
+        </if>
+		<if test="orderDetailId != null and orderDetailId != ''">
+       	and order_detail_id = #{orderDetailId,jdbcType=VARCHAR}
+        </if>
+		<if test="prodId != null and prodId != ''">
+       	and prod_id = #{prodId,jdbcType=VARCHAR}
+        </if>
+		<if test="prodName != null and prodName != ''">
+       	and prod_name = #{prodName,jdbcType=VARCHAR}
+        </if>
+		<if test="buyerLoginName != null and buyerLoginName != ''">
+       	and buyer_login_name = #{buyerLoginName,jdbcType=VARCHAR}
+        </if>
+		<if test="sellerId != null and sellerId != ''">
+       	and seller_id = #{sellerId,jdbcType=VARCHAR}
+        </if>
+		<if test="shopId != null and shopId != ''">
+       	and shop_id = #{shopId,jdbcType=VARCHAR}
+        </if>
+		<if test="shopName != null and shopName != ''">
+       	and shop_name = #{shopName,jdbcType=VARCHAR}
+        </if>
+		<if test="totalFee != null">
+       	and total_fee = #{totalFee,jdbcType=DECIMAL}
+        </if>
+		<if test="refundFee != null">
+       	and refund_fee = #{refundFee,jdbcType=DECIMAL}
+        </if>
+		<if test="payment != null">
+       	and payment = #{payment,jdbcType=DECIMAL}
+        </if>
+		<if test="status != null and status != ''">
+       	and status = #{status,jdbcType=VARCHAR}
+        </if>
+		<if test="goodStatus != null and goodStatus != ''">
+       	and good_status = #{goodStatus,jdbcType=VARCHAR}
+        </if>
+		<if test="companyName != null and companyName != ''">
+       	and company_name = #{companyName,jdbcType=VARCHAR}
+        </if>
+		<if test="sid != null and sid != ''">
+       	and sid = #{sid,jdbcType=VARCHAR}
+        </if>
+		<if test="reason != null and reason != ''">
+       	and reason = #{reason,jdbcType=VARCHAR}
+        </if>
+		<if test="description != null and description != ''">
+       	and description = #{description,jdbcType=VARCHAR}
+        </if>
+		<if test="hasGoodReturn != null and hasGoodReturn != ''">
+       	and has_good_return = #{hasGoodReturn,jdbcType=VARCHAR}
+        </if>
+		<if test="orderStatus != null and orderStatus != ''">
+       	and order_status = #{orderStatus,jdbcType=VARCHAR}
+        </if>
+		<if test="syncStatus != null and syncStatus != ''">
+       	and sync_status = #{syncStatus,jdbcType=VARCHAR}
+        </if>
+		<if test="syncRemark != null and syncRemark != ''">
+       	and sync_remark = #{syncRemark,jdbcType=VARCHAR}
+        </if>
+		<if test="createTime != null">
+       	and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+		<if test="updateTime != null">
+       	and update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+		<if test="existTimeout != null and existTimeout != ''">
+       	and exist_timeout = #{existTimeout,jdbcType=VARCHAR}
+        </if>
+		<if test="timeout != null">
+       	and timeout = #{timeout,jdbcType=TIMESTAMP}
+        </if>
+		<if test="refundPhase != null and refundPhase != ''">
+       	and refund_phase = #{refundPhase,jdbcType=VARCHAR}
+        </if>
+		<if test="refundVersion != null and refundVersion != ''">
+       	and refund_version = #{refundVersion,jdbcType=VARCHAR}
+        </if>
+		<if test="attribute != null and attribute != ''">
+       	and attribute = #{attribute,jdbcType=VARCHAR}
+        </if>
+		<if test="refundType != null and refundType != ''">
+       	and refund_type = #{refundType,jdbcType=VARCHAR}
+        </if>
+		<if test="proNum != null and proNum != 0">
+       	and pro_num = #{proNum,jdbcType=INTEGER}
+        </if>
+		<if test="supplierName != null and supplierName != ''">
+       	and supplier_name = #{supplierName,jdbcType=VARCHAR}
+        </if>
+		<if test="payTime != null">
+       	and pay_time = #{payTime,jdbcType=TIMESTAMP}
+        </if>
+		<if test="isAfterReceived != null and isAfterReceived != ''">
+       	and is_after_received = #{isAfterReceived,jdbcType=VARCHAR}
+        </if>
+		<if test="denyReason != null and denyReason != ''">
+       	and deny_reason = #{denyReason,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    
+     <sql id="thirdWhere">
+		<if test="status != null and status != ''">
+       	and r.status = #{status,jdbcType=VARCHAR}
+        </if>
+		<if test="buyerId != null and buyerId != ''">
+       	and o.buyer_id = #{buyerId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    
+    <sql id="set">
+			<if test="id != null and id!='' ">
+        	id = #{id,jdbcType=VARCHAR},
+	        </if>
+			<if test="refundNo != null and refundNo != '' ">
+        	refund_no = #{refundNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="orderId != null and orderId!='' ">
+        	order_id = #{orderId,jdbcType=VARCHAR},
+	        </if>
+			<if test="orderDetailId != null and orderDetailId != '' ">
+        	order_detail_id = #{orderDetailId,jdbcType=VARCHAR},
+	        </if>
+			<if test="prodId != null and prodId != ''">
+        	prod_id = #{prodId,jdbcType=VARCHAR},
+	        </if>
+			<if test="prodName != null and prodName != ''">
+        	prod_name = #{prodName,jdbcType=VARCHAR},
+	        </if>
+			<if test="buyerLoginName != null and buyerLoginName != ''">
+        	buyer_login_name = #{buyerLoginName,jdbcType=VARCHAR},
+	        </if>
+			<if test="sellerId != null and sellerId != ''">
+        	seller_id = #{sellerId,jdbcType=VARCHAR},
+	        </if>
+			<if test="shopId != null and shopId != ''">
+        	shop_id = #{shopId,jdbcType=VARCHAR},
+	        </if>
+			<if test="shopName != null and shopName != ''">
+        	shop_name = #{shopName,jdbcType=VARCHAR},
+	        </if>
+			<if test="totalFee != null ">
+        	total_fee = #{totalFee,jdbcType=DECIMAL},
+	        </if>
+			<if test="refundFee != null ">
+        	refund_fee = #{refundFee,jdbcType=DECIMAL},
+	        </if>
+			<if test="payment != null ">
+        	payment = #{payment,jdbcType=DECIMAL},
+	        </if>
+			<if test="status != null and status != ''">
+        	status = #{status,jdbcType=VARCHAR},
+	        </if>
+			<if test="goodStatus != null and  goodStatus!= ''">
+        	good_status = #{goodStatus,jdbcType=VARCHAR},
+	        </if>
+			<if test="companyName != null and companyName != ''">
+        	company_name = #{companyName,jdbcType=VARCHAR},
+	        </if>
+			<if test="sid != null and  sid!= ''">
+        	sid = #{sid,jdbcType=VARCHAR},
+	        </if>
+			<if test="reason != null and reason != ''">
+        	reason = #{reason,jdbcType=VARCHAR},
+	        </if>
+			<if test="description != null and description != ''">
+        	description = #{description,jdbcType=VARCHAR},
+	        </if>
+			<if test="hasGoodReturn != null and  hasGoodReturn!= ''">
+        	has_good_return = #{hasGoodReturn,jdbcType=VARCHAR},
+	        </if>
+			<if test="orderStatus != null and orderStatus  != ''">
+        	order_status = #{orderStatus,jdbcType=VARCHAR},
+	        </if>
+			<if test="syncStatus != null and syncStatus != ''">
+        	sync_status = #{syncStatus,jdbcType=VARCHAR},
+	        </if>
+			<if test="syncRemark != null and  syncRemark!= ''">
+        	sync_remark = #{syncRemark,jdbcType=VARCHAR},
+	        </if>
+			<if test="createTime != null ">
+        	create_time = #{createTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="updateTime != null ">
+        	update_time = #{updateTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="existTimeout != null and existTimeout != ''">
+        	exist_timeout = #{existTimeout,jdbcType=VARCHAR},
+	        </if>
+			<if test="timeout != null ">
+        	timeout = #{timeout,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="refundPhase != null and  refundPhase!= ''">
+        	refund_phase = #{refundPhase,jdbcType=VARCHAR},
+	        </if>
+			<if test="refundVersion != null and refundVersion != ''">
+        	refund_version = #{refundVersion,jdbcType=VARCHAR},
+	        </if>
+			<if test="attribute != null and attribute != ''">
+        	attribute = #{attribute,jdbcType=VARCHAR},
+	        </if>
+			<if test="refundType != null and refundType != ''">
+        	refund_type = #{refundType,jdbcType=VARCHAR},
+	        </if>
+			<if test="proNum != null and proNum!=0 ">
+        	pro_num = #{proNum,jdbcType=INTEGER},
+	        </if>
+			<if test="supplierName != null and  supplierName!= ''">
+        	supplier_name = #{supplierName,jdbcType=VARCHAR},
+	        </if>
+			<if test="payTime != null ">
+        	pay_time = #{payTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="isAfterReceived != null and  isAfterReceived!= ''">
+        	is_after_received = #{isAfterReceived,jdbcType=VARCHAR}
+	        </if>
+			<if test="denyReason != null and  denyReason!= ''">
+        	deny_reason = #{denyReason,jdbcType=VARCHAR}
+	        </if>
+	        
+	        
+    </sql>
+    
+    <select id="getById" resultMap="OrderRefund" parameterType="java.lang.String">
+       SELECT
+		<include refid="Base_Column_List"/>
+	   FROM tbl_wfx_order_refund r
+        where r.id = #{id,jdbcType=VARCHAR}
+    </select>
+    
+      <select id="getRefundItem" resultMap="OrderRefund">
+       SELECT
+			<include refid="CZ_Column_List"/>
+		FROM
+			tbl_wfx_order_refund r
+		LEFT JOIN tbl_wfx_order_detail d ON d.id = r.order_detail_id
+		LEFT JOIN tbl_wfx_order o ON o.id = d.order_id
+		LEFT JOIN tbl_commodity_product p ON r.prod_id = p.id
+		LEFT JOIN tbl_commodity_style s ON s.id = p.commodity_id
+	        where r.order_id = #{orderId,jdbcType=VARCHAR} and r.prod_id = #{prodId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="getDetailByRefundNo" resultMap="OrderRefund" parameterType="java.lang.String">
+       SELECT
+		<include refid="CZ_Column_List"/>
+	FROM
+		tbl_wfx_order_refund r
+	LEFT JOIN tbl_wfx_order_detail d ON d.id = r.order_detail_id
+	LEFT JOIN tbl_wfx_order o ON o.id = d.order_id
+	LEFT JOIN tbl_commodity_product p ON r.prod_id = p.id
+	LEFT JOIN tbl_commodity_style s ON s.id = p.commodity_id
+        where r.refund_no = #{refundNo,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findPage" parameterType="com.yougou.wfx.aftersale.model.OrderRefundEntity" resultMap="OrderRefund">
+        SELECT
+	<include refid="CZ_Column_List"/>
+	FROM
+		tbl_wfx_order_refund r
+	left join tbl_wfx_order_detail d on d.id=r.order_detail_id
+	LEFT JOIN tbl_wfx_order o ON o.id = d.order_id
+	LEFT JOIN tbl_commodity_product p ON r.prod_id = p.id
+	LEFT JOIN tbl_commodity_style s ON s.id = p.commodity_id
+	WHERE
+		1 = 1 
+        <include refid="where" />
+        order by r.create_time desc
+    </select>
+    
+    <select id="findPageCount" parameterType="com.yougou.wfx.aftersale.model.OrderRefundEntity" resultType="int">
+        select count(1) 
+FROM
+	tbl_wfx_order_refund r
+LEFT JOIN tbl_wfx_order o ON r.order_id = o.id
+LEFT JOIN tbl_commodity_product p ON r.prod_id = p.id
+LEFT JOIN tbl_commodity_style s ON s.id = p.commodity_id
+WHERE
+	1 = 1
+        <include refid="where" />
+    </select>
+    
+    <select id="queryList" parameterType="com.yougou.wfx.aftersale.model.OrderRefundEntity" resultMap="OrderRefund">
+	    SELECT <include refid="Base_Column_List"/> 
+	    FROM tbl_wfx_order_refund where 1=1
+	    <include refid="baseWhere" />
+    </select>
+    
+    <select id="queryAfterSalePage" parameterType="com.yougou.wfx.aftersale.model.OrderRefundEntity" resultMap="BaseOrderRefund">
+	    SELECT <include refid="Third_Column_List"/> 
+	     FROM tbl_wfx_order_refund r left join tbl_wfx_order o on r.order_id= o.id
+	    where 1=1
+	    <include refid="thirdWhere" />
+	    order by r.create_time desc
+    </select>
+    
+    <select id="queryAfterSaleCount" parameterType="com.yougou.wfx.aftersale.model.OrderRefundEntity" resultType="int">
+	    SELECT count(1) 
+	     FROM tbl_wfx_order_refund r left join tbl_wfx_order o on r.order_id= o.id
+	    where 1=1
+	    <include refid="thirdWhere" />
+    </select>
+    
+    <insert id="insert" parameterType="com.yougou.wfx.aftersale.model.OrderRefundEntity">
+        insert into tbl_wfx_order_refund (<include refid="Base_Column_List" />)
+        values (
+        id = #{id,jdbcType=VARCHAR},
+        refund_no = #{refundNo,jdbcType=VARCHAR},
+        order_id = #{orderId,jdbcType=VARCHAR},
+        order_detail_id = #{orderDetailId,jdbcType=VARCHAR},
+        prod_id = #{prodId,jdbcType=VARCHAR},
+        prod_name = #{prodName,jdbcType=VARCHAR},
+        buyer_login_name = #{buyerLoginName,jdbcType=VARCHAR},
+        seller_id = #{sellerId,jdbcType=VARCHAR},
+        shop_id = #{shopId,jdbcType=VARCHAR},
+        shop_name = #{shopName,jdbcType=VARCHAR},
+        shop_code = #{shopCode,jdbcType=VARCHAR},
+        total_fee = #{totalFee,jdbcType=DECIMAL},
+        refund_fee = #{refundFee,jdbcType=DECIMAL},
+        payment = #{payment,jdbcType=DECIMAL},
+        status = #{status,jdbcType=VARCHAR},
+        good_status = #{goodStatus,jdbcType=VARCHAR},
+        company_name = #{companyName,jdbcType=VARCHAR},
+        sid = #{sid,jdbcType=VARCHAR},
+        reason = #{reason,jdbcType=VARCHAR},
+        description = #{description,jdbcType=VARCHAR},
+        has_good_return = #{hasGoodReturn,jdbcType=VARCHAR},
+        order_status = #{orderStatus,jdbcType=VARCHAR},
+        sync_status = #{syncStatus,jdbcType=VARCHAR},
+        sync_remark = #{syncRemark,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        exist_timeout = #{existTimeout,jdbcType=VARCHAR},
+        timeout = #{timeout,jdbcType=TIMESTAMP},
+        refund_phase = #{refundPhase,jdbcType=VARCHAR},
+        refund_version = #{refundVersion,jdbcType=VARCHAR},
+        attribute = #{attribute,jdbcType=VARCHAR},
+        refund_type = #{refundType,jdbcType=VARCHAR},
+        pro_num = #{proNum,jdbcType=INTEGER},
+        supplier_name = #{supplierName,jdbcType=VARCHAR},
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+        is_after_received = #{isAfterReceived,jdbcType=VARCHAR}
+        )
+    </insert>
+    
+    <insert id="insertSelective" parameterType="com.yougou.wfx.aftersale.model.OrderRefundEntity" >
+  insert into tbl_wfx_order_refund 
+    	 <trim prefix="(" suffix=")" suffixOverrides="," >
+      		<if test="id != null ">
+        	id ,
+	        </if>
+			<if test="refundNo != null and  refundNo!= '' ">
+        	refund_no ,
+	        </if>
+			<if test="orderId != null and  orderId!= ''">
+        	order_id ,
+	        </if>
+			<if test="orderDetailId != null and  orderDetailId!= '' ">
+        	order_detail_id,
+	        </if>
+			<if test="prodId != null and  prodId!= ''">
+        	prod_id,
+	        </if>
+			<if test="prodName != null and  prodName!= ''">
+        	prod_name ,
+	        </if>
+			<if test="buyerLoginName != null and  buyerLoginName!= ''">
+        	buyer_login_name,
+	        </if>
+			<if test="sellerId != null and sellerId != ''">
+        	seller_id,
+	        </if>
+			<if test="shopId != null and  shopId!= ''">
+        	shop_id ,
+	        </if>
+			<if test="shopName != null and shopName != ''">
+        	shop_name ,
+	        </if>
+	        <if test="shopCode != null and shopCode != ''">
+	        shop_code,
+	        </if>
+			<if test="totalFee != null ">
+        	total_fee,
+	        </if>
+			<if test="refundFee != null ">
+        	refund_fee,
+	        </if>
+			<if test="payment != null ">
+        	payment,
+	        </if>
+			<if test="status != null and status !=''">
+        	status,
+	        </if>
+			<if test="goodStatus != null and goodStatus!=''">
+        	good_status,
+	        </if>
+			<if test="companyName != null and companyName!='' ">
+        	company_name,
+	        </if>
+			<if test="sid != null and sid!=''">
+        	sid ,
+	        </if>
+			<if test="reason != null and reason!=''">
+        	reason ,
+	        </if>
+			<if test="description != null and description != ''">
+        	description ,
+	        </if>
+			<if test="hasGoodReturn != null and hasGoodReturn != ''">
+        	has_good_return ,
+	        </if>
+			<if test="orderStatus != null and orderStatus != ''">
+        	order_status,
+	        </if>
+			<if test="syncStatus != null and syncStatus != ''">
+        	sync_status,
+	        </if>
+			<if test="syncRemark != null and syncRemark != ''">
+        	sync_remark,
+	        </if>
+			<if test="createTime != null ">
+        	create_time ,
+	        </if>
+			<if test="updateTime != null ">
+        	update_time,
+	        </if>
+			<if test="existTimeout != null and existTimeout != ''">
+        	exist_timeout,
+	        </if>
+			<if test="timeout != null ">
+        	timeout ,
+	        </if>
+			<if test="refundPhase != null and refundPhase != ''">
+        	refund_phase ,
+	        </if>
+			<if test="refundVersion != null and refundVersion != ''">
+        	refund_version ,
+	        </if>
+			<if test="attribute != null and attribute != ''">
+        	attribute,
+	        </if>
+			<if test="refundType != null and refundType != ''">
+        	refund_type ,
+	        </if>
+			<if test="proNum != null and proNum!=0 ">
+        	pro_num ,
+	        </if>
+			<if test="supplierName != null and supplierName != ''">
+        	supplier_name ,
+	        </if>
+			<if test="payTime != null ">
+        	pay_time,
+	        </if>
+			<if test="isAfterReceived != null and isAfterReceived != ''">
+        	is_after_received
+	        </if>
+     
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	      <if test="id != null" >
+	        #{id,jdbcType=VARCHAR},
+	      </if>
+			<if test="refundNo != null and refundNo != ''">
+        	#{refundNo,jdbcType=VARCHAR},
+	        </if>
+			<if test="orderId != null and orderId != ''">
+        	 #{orderId,jdbcType=VARCHAR},
+	        </if>
+			<if test="orderDetailId != null and orderDetailId != ''">
+        	 #{orderDetailId,jdbcType=VARCHAR},
+	        </if>
+			<if test="prodId != null and prodId != ''">
+        	#{prodId,jdbcType=VARCHAR},
+	        </if>
+			<if test="prodName != null and prodName != ''">
+        	 #{prodName,jdbcType=VARCHAR},
+	        </if>
+			<if test="buyerLoginName != null and buyerLoginName != ''">
+        	 #{buyerLoginName,jdbcType=VARCHAR},
+	        </if>
+			<if test="sellerId != null and sellerId != ''">
+        	 #{sellerId,jdbcType=VARCHAR},
+	        </if>
+			<if test="shopId != null and shopId != ''">
+        	 #{shopId,jdbcType=VARCHAR},
+	        </if>
+			<if test="shopName != null and shopName != ''">
+        	 #{shopName,jdbcType=VARCHAR},
+	        </if>
+	        <if test="shopCode != null and shopCode != ''">
+	        #{shopCode,jdbcType=VARCHAR},
+	        </if>
+			<if test="totalFee != null">
+        	 #{totalFee,jdbcType=DECIMAL},
+	        </if>
+			<if test="refundFee != null">
+        	#{refundFee,jdbcType=DECIMAL},
+	        </if>
+			<if test="payment != null">
+        	 #{payment,jdbcType=DECIMAL},
+	        </if>
+			<if test="status != null and status != ''">
+        	#{status,jdbcType=VARCHAR},
+	        </if>
+			<if test="goodStatus != null and goodStatus != ''">
+        	#{goodStatus,jdbcType=VARCHAR},
+	        </if>
+			<if test="companyName != null and companyName != ''">
+        	 #{companyName,jdbcType=VARCHAR},
+	        </if>
+			<if test="sid != null and sid != ''">
+        	#{sid,jdbcType=VARCHAR},
+	        </if>
+			<if test="reason != null and reason != ''">
+        	#{reason,jdbcType=VARCHAR},
+	        </if>
+			<if test="description != null and description != ''">
+        	 #{description,jdbcType=VARCHAR},
+	        </if>
+			<if test="hasGoodReturn != null and hasGoodReturn != ''">
+        	 #{hasGoodReturn,jdbcType=VARCHAR},
+	        </if>
+			<if test="orderStatus != null and orderStatus != ''">
+        	 #{orderStatus,jdbcType=VARCHAR},
+	        </if>
+			<if test="syncStatus != null and syncStatus != ''">
+        	 #{syncStatus,jdbcType=VARCHAR},
+	        </if>
+			<if test="syncRemark != null and syncRemark != ''">
+        	 #{syncRemark,jdbcType=VARCHAR},
+	        </if>
+			<if test="createTime != null">
+        	#{createTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="updateTime != null">
+        	#{updateTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="existTimeout != null and existTimeout != ''">
+        	 #{existTimeout,jdbcType=VARCHAR},
+	        </if>
+			<if test="timeout != null">
+        	 #{timeout,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="refundPhase != null and refundPhase != ''">
+        	 #{refundPhase,jdbcType=VARCHAR},
+	        </if>
+			<if test="refundVersion != null and refundVersion != ''">
+        	#{refundVersion,jdbcType=VARCHAR},
+	        </if>
+			<if test="attribute != null and attribute != ''">
+        	#{attribute,jdbcType=VARCHAR},
+	        </if>
+			<if test="refundType != null and refundType != ''">
+        	#{refundType,jdbcType=VARCHAR},
+	        </if>
+			<if test="proNum != null and proNum!=0">
+        	#{proNum,jdbcType=INTEGER},
+	        </if>
+			<if test="supplierName != null and supplierName != ''">
+        	#{supplierName,jdbcType=VARCHAR},
+	        </if>
+			<if test="payTime != null">
+        	#{payTime,jdbcType=TIMESTAMP},
+	        </if>
+			<if test="isAfterReceived != null and isAfterReceived != ''">
+        	#{isAfterReceived,jdbcType=VARCHAR}
+	        </if>
+        </trim>
+    
+    </insert>
+    
+    <delete id="remove" parameterType="java.lang.String" >
+        delete from tbl_wfx_order_refund
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="update" parameterType="com.yougou.wfx.aftersale.model.OrderRefundEntity" >
+        update tbl_wfx_order_refund
+        <set>
+      	<include refid="set" />
+        </set>
+         <if test="id != null and id!='' ">
+        where id = #{id,jdbcType=VARCHAR}
+        </if>
+         <if test="!(id != null and id!='') and ( refundNo != null and refundNo!='')">
+          where refund_no = #{refundNo,jdbcType=VARCHAR}
+         </if>
+    </update>
+    
+    <select id="refundSatistics" parameterType="com.yougou.wfx.aftersale.dto.RefundSatistics" resultMap="returnEntity">
+       select order_detail_id,sum(pro_num) returnNum,sum(refund_fee) returnFee  
+       from tbl_wfx_order_refund where 1=1
+	   <if test="paramMap != null">
+	   and status in
+	   <foreach collection="paramMap.statusList" item="item" index="index" 
+	   	open="(" separator="," close=")">
+	   #{item}
+	   </foreach>
+	   </if>
+	   <if test="orderDetailId != null and orderDetailId != ''">
+       and order_detail_id = #{orderDetailId,jdbcType=VARCHAR}
+       </if>
+    </select>
+    
+     <select id="getRefundRecordHandling" resultMap="OrderRefund">
+       SELECT
+			<include refid="CZ_Column_List"/>
+		FROM
+			tbl_wfx_order_refund r
+		LEFT JOIN tbl_wfx_order_detail d ON d.id = r.order_detail_id
+		LEFT JOIN tbl_wfx_order o ON o.id = d.order_id
+		LEFT JOIN tbl_commodity_product p ON r.prod_id = p.id
+		LEFT JOIN tbl_commodity_style s ON s.id = p.commodity_id
+	        where r.order_detail_id = #{orderDetailId,jdbcType=VARCHAR} and r.status in (
+	        'APPLYING','PENDING_DELIVERD','REJECT_REFUND','UNDER_REFUND')
+    </select>
+    
+     <select id="getRefundRecordHistory" resultMap="OrderRefund">
+       SELECT
+			<include refid="CZ_Column_List"/>
+		FROM
+			tbl_wfx_order_refund r
+		LEFT JOIN tbl_wfx_order_detail d ON d.id = r.order_detail_id
+		LEFT JOIN tbl_wfx_order o ON o.id = d.order_id
+		LEFT JOIN tbl_commodity_product p ON r.prod_id = p.id
+		LEFT JOIN tbl_commodity_style s ON s.id = p.commodity_id
+	        where r.order_detail_id = #{orderDetailId,jdbcType=VARCHAR} and r.status is not null
+	        order by r.create_time desc
+    </select>
+    
+    <select id="getListForTimeOutCloseRefund" resultMap="OrderRefund">
+    	select <include refid="Base_Column_List"/> from tbl_wfx_order_refund 
+		where status='REJECT_REFUND' and DATEDIFF(#{curDate,jdbcType=TIMESTAMP},update_time) <![CDATA[>=]]> #{day,jdbcType=INTEGER}
+    </select>
+    
+    <update id="timeOutCloseRefund" >
+		update tbl_wfx_order_refund 
+		set status='CLOSE_REFUND',update_time= #{curDate,jdbcType=TIMESTAMP} ,attribute='TimeOutAutoClosed'
+		where status='REJECT_REFUND' and DATEDIFF(#{curDate,jdbcType=TIMESTAMP},update_time) <![CDATA[>=]]> #{day,jdbcType=INTEGER}
+    </update>
+    
+    <select id="queryBackNumByOrderDetailId" resultType="java.lang.Integer">
+	    select sum(pro_num) as returnNum
+	    from tbl_wfx_order_refund 
+		where   status ='SUCCESS_REFUND'
+		and order_detail_id = #{orderDetailId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="queryOnlyRefundNotInConsign" resultMap="OrderRefund">
+        SELECT
+			t1.*
+		FROM
+			tbl_wfx_order_refund t1
+		LEFT JOIN tbl_wfx_order_consign_detail t2 ON t1.order_detail_id = t2.order_detail_id
+		WHERE
+			t1.refund_type = 'ONLY_REFUND'
+		AND t1.status in ('APPLYING','UNDER_REFUND')
+		AND t2.id IS NULL
+		<if test="orderDetailId != null and orderDetailId!='' ">
+		AND t1.order_detail_id = #{orderDetailId,jdbcType=VARCHAR}
+		</if>
+    </select>
+</mapper>
